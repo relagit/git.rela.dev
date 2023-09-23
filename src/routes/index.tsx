@@ -2,9 +2,9 @@ import { createSignal, onMount } from "solid-js";
 
 import Header from "~/components/Header";
 import Button from "~/components/Button";
+import Icon from "~/components/Icon";
 
 import "./index.scss";
-import Icon from "~/components/Icon";
 
 export default () => {
     const [innerWidth, setInnerWidth] = createSignal(0);
