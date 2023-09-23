@@ -1,0 +1,177 @@
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
+    gap: 50px;
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-inline: 15%;
+
+        &__header {
+            text-align: center;
+            font-size: 80px;
+            font-weight: 700;
+            line-height: 150%;
+            background: linear-gradient(180deg, var(--base-black) 0%, var(--base-dark-grey) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            @media screen and (max-width: 768px) {
+                font-size: 60px;
+            }
+        }
+
+        &__subheader {
+            color: var(--base-grey);
+            text-align: center;
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 36px;
+
+            @media screen and (max-width: 768px) {
+                font-size: 22px;
+                line-height: 28px;
+            }
+        }
+
+        &__buttons {
+            margin-top: 24px;
+            display: flex;
+            gap: 16px;
+        }
+    }
+
+    &__images {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        height: 60vw;
+
+        &__blob-one {
+            z-index: -1;
+            width: 63vw;
+            height: 63vw;
+            rotate: 198deg;
+            position: absolute;
+            inset: 0;
+            left: -70vw;
+            top: -12vw;
+
+            opacity: 0.6;
+        }
+
+        &__blob-two {
+            z-index: -1;
+            width: 82vw;
+            height: 70vw;
+            rotate: 24deg;
+            position: absolute;
+            inset: 0;
+            left: -32vw;
+            top: -6vw;
+
+            opacity: 0.6;
+        }
+
+        &__client {
+            z-index: 1;
+            position: absolute;
+            inset: 0;
+            left: 50%;
+            width: 80vw;
+            border-radius: 0.5vw;
+            border: 1.2px solid var(--base-light-grey);
+            backdrop-filter: blur(50px);
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.4);
+
+            transition: width 0.8s ease-in-out, top 0.8s ease-in-out;
+
+            &.shrink {
+                width: 54vw;
+                top: 7.5vw;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                border-color: #5b5d60;
+                background-color: rgba(21, 21, 21, 0.4);
+            }
+        }
+
+        &__laptop {
+            z-index: 0;
+            width: 75vw;
+            position: absolute;
+            inset: 0;
+            left: 50%;
+            transform: translateX(-50%);
+
+            transition: width 0.8s ease-in-out;
+
+            &.shrink {
+                width: 80vw;
+            }
+        }
+    }
+}
+
+.features {
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(32vw, 1fr));
+    padding-inline: 15%;
+    gap: 50px;
+
+    &__feature {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        min-height: 230px;
+        padding: 32px;
+        flex-direction: column;
+        gap: 16px;
+        border-radius: 8px;
+        background: var(--base-lighter-grey);
+
+        &__title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            svg {
+                width: 24px;
+                height: 24px;
+                fill: var(--base-black);
+            }
+
+            &__header {
+                color: var(--base-black);
+                font-size: 24px;
+                font-weight: 600;
+                line-height: 150%;
+            }
+        }
+
+        &__text {
+            color: var(--base-dark-grey);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 150%;
+
+            a {
+                color: var(--color-blue-500);
+                text-decoration: none;
+
+                &:hover {
+                    color: var(--color-blue-600);
+                }
+            }
+        }
+    }
+}

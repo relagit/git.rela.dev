@@ -1,0 +1,85 @@
+import { Transition } from "solid-transition-group";
+import { Accessor, Show } from "solid-js";
+
+import Icon from "./Icon";
+
+import "./header.scss";
+
+export default (props: { top: Accessor<number>; innerWidth: Accessor<number> }) => {
+    return (
+        <Transition
+            onEnter={(el, done) => {
+                console.log("enter", window.innerWidth < 600 ? "0px" : "20px");
+
+                el.animate([{ top: "-60px" }, { top: window.innerWidth < 600 ? "0px" : "20px" }], {
+                    duration: 600,
+                    easing: "cubic-bezier(0.25, 1.7, 0.8, 0.8)",
+                }).finished.then(() => {
+                    done();
+                });
+            }}
+            onExit={(el, done) => {
+                el.animate([{ top: window.innerWidth < 600 ? "0px" : "20px" }, { top: "-60px" }], {
+                    duration: 200,
+                    easing: "ease-in",
+                }).finished.then(() => {
+                    done();
+                });
+            }}
+        >
+            <Show when={props.top() > 200 + props.innerWidth() / 4}>
+                <header class="header">
+                    <div class="header__group">
+                        <a href="/" class="header__group__link">
+                            <svg width="24" height="24" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_132_52)">
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M148.5 129H186.5V257.289C205.036 245.805 229.165 240 257.5 240C284.741 240 300.379 233.414 309.447 224.184C318.575 214.893 324.5 199.416 324.5 174V129H362.5V174C362.5 204.584 355.425 231.607 336.553 250.816C317.621 270.086 290.259 278 257.5 278C230.273 278 212.42 284.484 201.793 292.897C191.628 300.944 186.5 311.935 186.5 325.5V382.131H148.5V129Z"
+                                        fill="currentColor"
+                                    />
+                                    <mask id="mask0_132_52" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="194" y="256" width="168" height="126">
+                                        <path
+                                            d="M342 256.207C320.474 277.5 290.485 285.707 256.5 285.707C230.519 285.707 214.742 291.902 206.069 298.768C198.063 305.107 194 313.58 194 324.707V381.838H362V256L342 256.207Z"
+                                            fill="black"
+                                        />
+                                    </mask>
+                                    <g mask="url(#mask0_132_52)">
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M262.631 322.386C253.529 314.494 243.477 300.204 243 283.5L281 283C281.023 283.796 281.346 288.318 287.525 293.676C292.487 297.978 298.614 301.949 306.304 306.931C308.512 308.362 310.848 309.876 313.323 311.506C332.619 324.21 362 344.692 362 382H324C324 367.308 313.381 357.04 292.427 343.244C290.689 342.1 288.846 340.909 286.939 339.677C278.937 334.508 269.814 328.615 262.631 322.386Z"
+                                            fill="currentColor"
+                                            fill-opacity="0.6"
+                                        />
+                                    </g>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_132_52">
+                                        <rect width="214" height="253.131" fill="white" transform="translate(149 129)" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </a>
+                        <a href="/features" class="header__group__link">
+                            Features
+                        </a>
+                        <a href="/download" class="header__group__link">
+                            Download
+                        </a>
+                        <a href="/enterprise" class="header__group__link">
+                            Enterprise
+                        </a>
+                    </div>
+                    <div class="header__group">
+                        <a href="/redirect/github" class="header__group__link" target="_blank">
+                            GitHub
+                            <Icon name="link-external" />
+                        </a>
+                    </div>
+                </header>
+            </Show>
+        </Transition>
+    );
+};
