@@ -30,7 +30,7 @@ export default (props: { top: Accessor<number>; innerWidth: Accessor<number> }) 
             <Show when={props.top() > 200 + props.innerWidth() / 4}>
                 <header class="header">
                     <div class="header__group">
-                        <a href="/" class="header__group__link">
+                        <a aria-label="Home" href="/" class="header__group__link">
                             <svg width="24" height="24" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_132_52)">
                                     <path

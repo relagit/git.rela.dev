@@ -1,5 +1,3 @@
-@use "./primitives";
-
 @import "https://rsms.me/inter/inter.css";
 
 :root {
@@ -26,7 +24,7 @@
     --color-blue-200: #b1d6fb;
     --color-blue-300: #78b9f9;
     --color-blue-400: #59a7f5;
-    --color-blue-500: #1c84ec;
+    --color-blue-500: #1f73c7; // #1c84ec
     --color-blue-600: #1c78d4;
     --color-blue-700: #1b6aba;
     --color-blue-800: #115eaa;
