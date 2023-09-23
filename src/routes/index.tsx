@@ -92,7 +92,7 @@ export default () => {
                         <Icon name="code" />
                         <h3 class="features__feature__title__header">Open Source</h3>
                     </div>
-                    <p class="features__feature__text">RelaGit is built on transparency, trust, and the collective wisdom of the our developer community.</p>
+                    <p class="features__feature__text">RelaGit is built on transparency, trust, and the collective wisdom of our developer community.</p>
                 </div>
                 <div class="features__feature">
                     <div class="features__feature__title">
