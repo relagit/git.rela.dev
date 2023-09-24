@@ -1,10 +1,16 @@
 // @refresh reload
-import { Suspense } from "solid-js";
 import { A, Body, ErrorBoundary, FileRoutes, Head, Html, Link, Meta, Routes, Scripts, Title } from "solid-start";
+import { Suspense, onMount } from "solid-js";
+
+import { inject } from "@vercel/analytics";
 
 import "./root.scss";
 
 export default () => {
+    onMount(() => {
+        inject();
+    });
+
     return (
         <Html lang="en">
             <Head>

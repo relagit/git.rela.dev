@@ -6,6 +6,7 @@ specifiers:
   '@solidjs/router': ^0.8.3
   '@types/node': ^18.17.5
   '@types/primer__octicons': ^19.6.0
+  '@vercel/analytics': ^1.0.2
   esbuild: ^0.14.54
   postcss: ^8.4.28
   sass: ^1.67.0
@@ -28,6 +29,7 @@ devDependencies:
   '@primer/octicons': 19.8.0
   '@types/node': 18.17.18
   '@types/primer__octicons': 19.6.0
+  '@vercel/analytics': 1.0.2
   esbuild: 0.14.54
   postcss: 8.4.30
   solid-start-node: 0.3.5_eiskx64wyarfeuuv2fxhtgrt5a
@@ -1754,6 +1756,10 @@ packages:
 
   /@types/resolve/1.20.2:
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
+
+  /@vercel/analytics/1.0.2:
+    resolution: {integrity: sha512-BZFxVrv24VbNNl5xMxqUojQIegEeXMI6rX3rg1uVLYUEXsuKNBSAEQf4BWEcjQDp/8aYJOj6m8V4PUA3x/cxgg==}
+    dev: true
 
   /@vercel/nft/0.22.6:
     resolution: {integrity: sha512-gTsFnnT4mGxodr4AUlW3/urY+8JKKB452LwF3m477RFUJTAaDmcz2JqFuInzvdybYIeyIv1sSONEJxsxnbQ5JQ==}
