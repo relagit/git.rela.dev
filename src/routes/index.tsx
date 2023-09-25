@@ -68,41 +68,98 @@ export default () => {
             </div>
             <div class="features">
                 <div class="features__feature">
-                    <div class="features__feature__title">
-                        <Icon name="cpu" />
-                        <h3 class="features__feature__title__header">Speedy</h3>
+                    <div class="features__feature__text">
+                        <h3 class="features__feature__text__heading">Creativity is the limit.</h3>
+                        <h4 class="features__feature__text__subheading">Create simple programmatic workflows to automate actions and awesome tasks.</h4>
                     </div>
-                    <p class="features__feature__text">RelaGit is built with next-generation tooling and a custom built in-house git wrapper to deliver the best possible experience.</p>
+                    <div class="features__feature__image creativity">
+                        <div class="images">
+                            <img src="/assets/landing/workflow-code.png" alt="Workflow Code" class="code" />
+                            <img src="/assets/landing/workflow-card.png" alt="Workflow Card" class="card" />
+                        </div>
+                    </div>
                 </div>
                 <div class="features__feature">
-                    <div class="features__feature__title">
-                        <Icon name="paper-airplane" />
-                        <h3 class="features__feature__title__header">Elegantly... Elegant</h3>
+                    <div class="features__feature__text">
+                        <h3 class="features__feature__text__heading">Fundamentally familiar.</h3>
+                        <h4 class="features__feature__text__subheading">We've observed and built off of common layouts, patterns, and actions to deliver an intuitive experience.</h4>
                     </div>
-                    <p class="features__feature__text">
-                        We use{" "}
-                        <a href="https://macromates.com/manual/en/language_grammars" target="_blank" rel="noopener noreferrer">
-                            TextMate
-                        </a>{" "}
-                        based highlighting and a combined diff preview to present your changes in a wonderfully digestible manner.
-                    </p>
+                    <div class="features__feature__image familiar">
+                        <img src="/assets/landing/familiar-diff.png" alt="Familiar Diff" class="diff" />
+                        <img src="/assets/landing/commit-window.png" alt="RelaGit Window" class="window" />
+                    </div>
                 </div>
                 <div class="features__feature">
-                    <div class="features__feature__title">
-                        <Icon name="code" />
-                        <h3 class="features__feature__title__header">Open Source</h3>
+                    <div class="features__feature__text">
+                        <h3 class="features__feature__text__heading">And so much more...</h3>
                     </div>
-                    <p class="features__feature__text">RelaGit is built on transparency, trust, and the collective wisdom of our developer community.</p>
+                    <div class="features__feature__bento">
+                        <div class="features__feature__bento__card speedy">
+                            <div class="features__feature__bento__card__text">
+                                <div class="features__feature__bento__card__text__icon">
+                                    <Icon name="cpu" />
+                                </div>
+                                <h4 class="features__feature__bento__card__text__heading">Speedy</h4>
+                                <p class="features__feature__bento__card__text__details">
+                                    RelaGit is built with next-generation tooling and a custom built in-house git wrapper to deliver the best possible experience.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="features__feature__bento__card two open">
+                            <img src="/assets/landing/open.png" alt="Open Source" aria-hidden="true" class="features__feature__bento__card__decoration" />
+
+                            <div class="features__feature__bento__card__text">
+                                <div class="features__feature__bento__card__text__icon">
+                                    <Icon name="project-roadmap" />
+                                </div>
+                                <h4 class="features__feature__bento__card__text__heading">Completely Open</h4>
+                                <p class="features__feature__bento__card__text__details">RelaGit is built on transparency, trust, and the collective wisdom of our open-source developer community.</p>
+                            </div>
+                        </div>
+                        <div class="features__feature__bento__card two github">
+                            <div class="features__feature__bento__card__text">
+                                <div class="features__feature__bento__card__text__icon">
+                                    <Icon name="mark-github" />
+                                </div>
+                                <h4 class="features__feature__bento__card__text__heading">GitHub Integration</h4>
+                                <p class="features__feature__bento__card__text__details">Import repositories and interact with GitHub straight from your Git client.</p>
+                            </div>
+                            <img src="/assets/landing/github.png" alt="Github Integration" aria-hidden="true" class="features__feature__bento__card__decoration" />
+                        </div>
+                        <div class="features__feature__bento__card speedy">
+                            <div class="features__feature__bento__card__text">
+                                <div class="features__feature__bento__card__text__icon">
+                                    <Icon name="paper-airplane" />
+                                </div>
+                                <h4 class="features__feature__bento__card__text__heading">Elegantly... Elegant</h4>
+                                <p class="features__feature__bento__card__text__details">
+                                    We use TextMate based highlighting and a combined diff preview to present your changes in a wonderfully digestible manner.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="features__feature">
-                    <div class="features__feature__title">
-                        <Icon name="table" />
-                        <h3 class="features__feature__title__header">Fits Your Workflow</h3>
+                    <div class="features__feature__text">
+                        <h3 class="features__feature__text__heading">Ready to level up?</h3>
+                        <h4 class="features__feature__text__subheading">Choose an option below.</h4>
                     </div>
-                    <p class="features__feature__text">Whatever your style, RelaGit molds itself to you, because we know that the best tools are the ones that fit like a glove.</p>
+                    <div class="features__feature__buttons">
+                        <div class="download">
+                            <Button type="brand" href="/download" size="large">
+                                Download v0.0.0
+                            </Button>
+                            <p>MacOS 11+ / Windows 10 / Linux</p>
+                        </div>
+                        <div class="source">
+                            <Button type="outline" href="/redirect/github" size="large">
+                                Source Code on GitHub
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div style="height: 100vh"></div>
+            <div style="height: 15vh" />
         </>
     );
 };
