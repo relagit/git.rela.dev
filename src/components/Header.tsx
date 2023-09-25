@@ -9,19 +9,21 @@ export default (props: { top: Accessor<number>; innerWidth: Accessor<number> }) 
     return (
         <Transition
             onEnter={(el, done) => {
-                console.log("enter", window.innerWidth < 600 ? "0px" : "20px");
+                const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
                 el.animate([{ top: "-60px" }, { top: window.innerWidth < 600 ? "0px" : "20px" }], {
                     duration: 600,
-                    easing: "cubic-bezier(0.25, 1.7, 0.8, 0.8)",
+                    easing: reducedMotion ? "ease" : "cubic-bezier(0.25, 1.7, 0.8, 0.8)",
                 }).finished.then(() => {
                     done();
                 });
             }}
             onExit={(el, done) => {
+                const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
                 el.animate([{ top: window.innerWidth < 600 ? "0px" : "20px" }, { top: "-60px" }], {
                     duration: 200,
-                    easing: "ease-in",
+                    easing: reducedMotion ? "ease" : "ease-in",
                 }).finished.then(() => {
                     done();
                 });

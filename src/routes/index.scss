@@ -103,6 +103,11 @@
                 border-color: #5b5d6099;
                 background-color: rgba(21, 21, 21, 0.4);
             }
+
+            @media (prefers-reduced-motion: reduce) {
+                width: 54vw;
+                top: 7.5vw;
+            }
         }
 
         &__laptop {
@@ -116,6 +121,10 @@
             transition: width 0.8s ease-in-out;
 
             &.shrink {
+                width: 80vw;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
                 width: 80vw;
             }
         }
