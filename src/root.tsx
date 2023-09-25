@@ -26,14 +26,14 @@ export default () => {
 
                 <Meta property="og:title" content="RelaGit" />
                 <Meta property="og:description" content="RelaGit is a next-generation git client that is build to empower the development workflow." />
-                <Meta property="og:image" content="hhttps://rela.dev/assets/projects/client-preview.png" />
+                <Meta property="og:image" content="https://git.rela.dev/assets/opengraph.png" />
                 <Meta property="og:url" content="https://git.rela.dev" />
                 <Meta property="og:type" content="website" />
 
                 <Meta name="twitter:card" content="summary_large_image" />
                 <Meta name="twitter:title" content="RelaGit" />
                 <Meta name="twitter:description" content="RelaGit is a next-generation git client that is build to empower the development workflow." />
-                <Meta name="twitter:image" content="https://rela.dev/assets/projects/client-preview.png" />
+                <Meta name="twitter:image" content="https://git.rela.dev/assets/opengraph.png" />
                 <Meta name="twitter:url" content="https://git.rela.dev" />
             </Head>
             <Body>
