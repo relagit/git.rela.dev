@@ -62,7 +62,7 @@ export default (props: { top: Accessor<number>; innerWidth: Accessor<number> }) 
                                 </defs>
                             </svg>
                         </a>
-                        <a href="/features" class="header__group__link">
+                        <a href="/#features" class="header__group__link">
                             Features
                         </a>
                         <a href="/download" class="header__group__link">

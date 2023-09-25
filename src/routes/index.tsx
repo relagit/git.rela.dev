@@ -66,7 +66,7 @@ export default () => {
                     <img class="hero__images__blob-two" alt="blob" src="/assets/blur-two.svg" />
                 </div>
             </div>
-            <div class="features">
+            <div class="features" id="features">
                 <div class="features__feature">
                     <div class="features__feature__text">
                         <h3 class="features__feature__text__heading">Creativity is the limit.</h3>
