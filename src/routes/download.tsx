@@ -25,30 +25,30 @@ export default () => {
     return (
         <>
             <Header top={() => 1000} innerWidth={innerWidth} />
-            <div class="download">
-                <div class="download__text">
-                    <h1 class="download__text__heading">Nothing here yet!</h1>
-                    <h2 class="download__text__subheading">You're too early! We haven't released anything yet.</h2>
+            <div class="download-page">
+                <div class="download-page__text">
+                    <h1 class="download-page__text__heading">Nothing here yet!</h1>
+                    <h2 class="download-page__text__subheading">You're too early! We haven't released anything yet.</h2>
                 </div>
-                {/* <div class="download__text">
-                    <h1 class="download__text__heading">You just levelled up!</h1>
-                    <h2 class="download__text__subheading">Downloading RelaGit is just the beginning...</h2>
+                {/* <div class="download-page__text">
+                    <h1 class="download-page__text__heading">You just levelled up!</h1>
+                    <h2 class="download-page__text__subheading">Downloading RelaGit is just the beginning...</h2>
                 </div>
-                <div class="download__steps">
-                    <a class="download__steps__step" href="/redirect/workflows">
-                        <div class="download__steps__step__text">Browse the awesome community made workflows.</div>
+                <div class="download-page__steps">
+                    <a class="download-page__steps__step" href="/redirect/workflows">
+                        <div class="download-page__steps__step__text">Browse the awesome community made workflows.</div>
                         <Icon name="arrow-right" />
                     </a>
-                    <a class="download__steps__step" href="/redirect/themes">
-                        <div class="download__steps__step__text">Find a theme that fits your style.</div>
+                    <a class="download-page__steps__step" href="/redirect/themes">
+                        <div class="download-page__steps__step__text">Find a theme that fits your style.</div>
                         <Icon name="paintbrush" />
                     </a>
-                    <a class="download__steps__step" href="/docs">
-                        <div class="download__steps__step__text">Read up on how to develop your own addons.</div>
+                    <a class="download-page__steps__step" href="/docs">
+                        <div class="download-page__steps__step__text">Read up on how to develop your own addons.</div>
                         <Icon name="book" />
                     </a>
                 </div>
-                <a download href="#" class="download__link">
+                <a download href="#" class="download-page__link">
                     Didn't download?
                 </a> */}
             </div>

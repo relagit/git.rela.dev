@@ -123,12 +123,16 @@ html {
     background-color: var(--base-white);
     color: var(--base-black);
     font-family: var(--font-primary);
-    overflow-x: hidden;
-    scroll-behavior: smooth;
+    overflow: hidden;
 }
 
 body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
     width: 100vw;
+    height: 100vh;
+    height: 100svh;
 }
 
 button,
