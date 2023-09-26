@@ -160,7 +160,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            align-self: stretch;
             position: relative;
             overflow: hidden;
 
@@ -340,7 +339,6 @@
                     display: flex;
                     flex-direction: column;
                     gap: 8px;
-                    align-self: stretch;
                     height: fit-content;
 
                     &__icon {
