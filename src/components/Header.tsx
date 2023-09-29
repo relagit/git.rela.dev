@@ -70,8 +70,8 @@ export default (props: { top: Accessor<number>; innerWidth: Accessor<number> }) 
                         <a href="/download" class="header__group__link">
                             Download
                         </a>
-                        <a href="/enterprise" class="header__group__link">
-                            Enterprise
+                        <a href="/docs" class="header__group__link">
+                            Docs
                         </a>
                     </div>
                     <div class="header__group">
