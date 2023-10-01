@@ -20,6 +20,8 @@ export default () => {
         window.addEventListener("resize", () => {
             setInnerWidth(window.innerWidth);
         });
+
+        (document.querySelector("a.download-page__link") as HTMLAnchorElement)?.["click"]();
     });
 
     return (
@@ -48,8 +50,8 @@ export default () => {
                         <Icon name="book" />
                     </a>
                 </div>
-                <a download href="#" class="download-page__link">
-                    Didn't download?
+                <a href="https://github.com/relagit/relagit/releases/latest" class="download-page__link" target="_blank" rel="noopener noreferrer">
+                    Didn't open?
                 </a> */}
             </div>
             <img src="/assets/landing/decorations.png" aria-hidden="true" alt="decorations" class="decorations" />
