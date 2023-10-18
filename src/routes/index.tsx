@@ -1,6 +1,7 @@
 import { createSignal, onMount } from "solid-js";
 
 import Header from "~/components/Header";
+import Footer from "~/components/Footer";
 import Button from "~/components/Button";
 import Icon from "~/components/Icon";
 
@@ -9,6 +10,7 @@ import "./index.scss";
 export default () => {
     const [innerWidth, setInnerWidth] = createSignal(0);
     const [top, setTop] = createSignal(0);
+    const [os, setOS] = createSignal<"mac" | "windows" | "linux">("mac");
 
     onMount(() => {
         setTop(window.scrollY);
@@ -21,10 +23,20 @@ export default () => {
         window.addEventListener("resize", () => {
             setInnerWidth(window.innerWidth);
         });
+
+        const userAgent = window.navigator.userAgent.toLowerCase();
+
+        if (userAgent.includes("win")) {
+            setOS("windows");
+        } else if (userAgent.includes("mac")) {
+            setOS("mac");
+        } else if (userAgent.includes("linux")) {
+            setOS("linux");
+        }
     });
 
     return (
-        <>
+        <main class="index">
             <Header top={top} innerWidth={innerWidth} />
             <div class="hero">
                 <div class="hero__text">
@@ -139,27 +151,24 @@ export default () => {
                         </div>
                     </div>
                 </div>
-                <div class="features__feature">
-                    <div class="features__feature__text">
-                        <h3 class="features__feature__text__heading">Ready to level up?</h3>
-                        <h4 class="features__feature__text__subheading">Choose an option below.</h4>
-                    </div>
-                    <div class="features__feature__buttons">
-                        <div class="download">
-                            <Button type="brand" href="/download" size="large">
-                                Download v0.0.0
-                            </Button>
-                            <p>MacOS 11+ / Windows 10 / Linux</p>
+                <div class="cta-banner">
+                    <div class="features__feature">
+                        <div class="features__feature__text">
+                            <h3 class="features__feature__text__heading">Ready to level up?</h3>
                         </div>
-                        <div class="source">
-                            <Button type="outline" href="/redirect/github" size="large">
-                                Source Code on GitHub
-                            </Button>
+                        <div class="features__feature__buttons">
+                            <div class="download">
+                                <Button type="brand" href="/download" size="large">
+                                    Download v0.0.0
+                                </Button>
+                                <p>{os() === "mac" ? "MacOS 11+ required." : os() === "windows" ? "Windows 10+ required." : ""}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div style="height: 15vh" />
-        </>
+
+            <Footer />
+        </main>
     );
 };

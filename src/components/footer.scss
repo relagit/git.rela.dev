@@ -1,0 +1,49 @@
+.footer {
+    display: flex;
+    width: 100%;
+    padding: 5rem 7.5rem;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10rem;
+    border-top: 1px solid var(--base-light-grey);
+
+    @media screen and (max-width: 1000px) {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    &__col {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        & > svg {
+            color: var(--base-dark-grey);
+            margin-bottom: 0.5rem;
+        }
+
+        &__header {
+            font-weight: 500;
+            color: var(--base-black);
+            margin-bottom: 0.5rem;
+        }
+
+        &__item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--base-dark-grey);
+            transition: color 0.2s ease-in-out;
+            text-decoration: none;
+
+            svg {
+                width: 14px;
+                height: 14px;
+            }
+
+            &[href]:hover {
+                color: var(--base-black);
+            }
+        }
+    }
+}

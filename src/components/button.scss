@@ -16,20 +16,19 @@
 
     &.large {
         display: flex;
-        padding: 20px 24px;
+        padding: 20px 30px;
         justify-content: center;
         align-items: center;
         gap: 8px;
-        border-radius: 50px;
+        border-radius: 8px;
         text-align: center;
         font-size: 18px;
         font-weight: 500;
         line-height: 20px;
         letter-spacing: -0.036px;
-
-        &.brand {
-            background: var(--color-blue-500-old);
-        }
+        background: var(--base-black) !important;
+        color: var(--base-white) !important;
+        box-shadow: 2px 2px 25px 0px rgba(242, 171, 169, 0.65);
     }
 
     &.brand {
