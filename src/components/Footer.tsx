@@ -39,7 +39,7 @@ export default () => {
             </div>
             <div class="footer__col">
                 <div class="footer__col__header">Product</div>
-                <a href="/" class="footer__col__item">
+                <a href="/download" class="footer__col__item">
                     Download
                 </a>
                 <a href="/docs" class="footer__col__item">
@@ -51,32 +51,32 @@ export default () => {
             </div>
             <div class="footer__col">
                 <div class="footer__col__header">Company</div>
-                <a href="/" class="footer__col__item">
+                <a href="https://rela.dev/mission" class="footer__col__item">
                     Mission
                 </a>
-                <a href="/" class="footer__col__item">
+                <a href="https://rela.dev/oss" class="footer__col__item">
                     Open Source
                 </a>
-                <a href="/" class="footer__col__item">
+                <a href="/press" download target="_blank" class="footer__col__item">
                     Press Kit
                     <Icon name="link-external" />
                 </a>
-                <a href="/" class="footer__col__item">
+                <a href="https://rela.dev" target="_blank" class="footer__col__item">
                     Website
                     <Icon name="link-external" />
                 </a>
             </div>
             <div class="footer__col">
                 <div class="footer__col__header">Social</div>
-                <a href="/" class="footer__col__item">
+                <a href="/" target="_blank" class="footer__col__item">
                     Product Hunt
                     <Icon name="link-external" />
                 </a>
-                <a href="/" class="footer__col__item">
+                <a href="/" target="_blank" class="footer__col__item">
                     Dribble
                     <Icon name="link-external" />
                 </a>
-                <a href="/" class="footer__col__item">
+                <a href="/" target="_blank" class="footer__col__item">
                     Figma
                     <Icon name="link-external" />
                 </a>
