@@ -10,6 +10,11 @@
 
     transition: background 0.2s ease-in-out;
 
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+
     &:hover {
         background: rgba(0, 0, 0, 0.1);
     }
@@ -19,7 +24,7 @@
         padding: 20px 30px;
         justify-content: center;
         align-items: center;
-        gap: 8px;
+        gap: 12px;
         border-radius: 8px;
         text-align: center;
         font-size: 18px;

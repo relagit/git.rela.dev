@@ -10,7 +10,7 @@ export default (props: { size?: "default" | "large"; type: "brand" | "outline" |
             {props.children}
         </a>
     ) : (
-        <button onClick={props.onClick} class={cn(props.class, "button", props.type, props.disabled && "disabled", props.size)}>
+        <button onClick={props.onClick} class={cn(props.class, "button", props.type, props.disabled && "disabled", props.size)} disabled={props.disabled}>
             {props.children}
         </button>
     );
