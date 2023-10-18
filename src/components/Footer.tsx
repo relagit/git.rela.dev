@@ -73,7 +73,7 @@ export default () => {
                     <Icon name="link-external" />
                 </a>
                 <a href="/" target="_blank" class="footer__col__item">
-                    Dribble
+                    Dribbble
                     <Icon name="link-external" />
                 </a>
                 <a href="/" target="_blank" class="footer__col__item">
