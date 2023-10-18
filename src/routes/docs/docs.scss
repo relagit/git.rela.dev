@@ -101,6 +101,9 @@
 .sidebar {
     width: 350px;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     position: fixed;
     padding: 24px;
     background: var(--material-secondary);
@@ -110,24 +113,21 @@
         display: flex;
         align-items: center;
         gap: 1rem;
-        margin-bottom: 1rem;
         padding: 8px 16px;
         border-radius: 4px;
         cursor: pointer;
-        background: var(--base-lighter-grey);
-        border: 1px solid var(--base-lighter-grey);
         color: var(--base-grey);
         text-decoration: none;
         transition: all 0.2s ease-in-out;
 
         &:hover {
-            background: var(--color-blue-500-a3);
-            color: white;
+            color: var(--base-black);
         }
 
         &-active {
-            background: var(--color-blue-500-a3);
-            color: white;
+            background-color: var(--base-lighter-grey);
+            border: 1px solid var(--base-light-grey);
+            color: var(--base-black);
         }
     }
 
