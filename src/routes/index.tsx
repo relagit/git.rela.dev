@@ -166,7 +166,7 @@ export default () => {
                                     <Icon name="download" />
                                     Download v{env.version}
                                 </Button>
-                                <p>{os() === "mac" ? "MacOS 11+ required." : os() === "windows" ? "Windows 10+ required." : ""}</p>
+                                <p>{os() === "mac" ? "MacOS 10.12+ required." : os() === "windows" ? "Windows 10+ required." : ""}</p>
                             </div>
                         </div>
                     </div>
