@@ -5,10 +5,12 @@ import Footer from "~/components/Footer";
 import Button from "~/components/Button";
 import Icon from "~/components/Icon";
 
+import { tagname } from "./api/release";
+
 import "./index.scss";
 
 const env = {
-    version: "0.3.0",
+    version: await tagname(),
 };
 
 export default () => {
@@ -48,7 +50,7 @@ export default () => {
                     <h2 class="hero__text__subheader">The git client that lets you decide how your work gets done.</h2>
                     <div class="hero__text__buttons">
                         <Button type="brand" href="/download">
-                            Download v{env.version}
+                            Download {env.version}
                             <Icon name="download" />
                         </Button>
                     </div>
@@ -164,7 +166,7 @@ export default () => {
                             <div class="download">
                                 <Button type="brand" href="/download" size="large">
                                     <Icon name="download" />
-                                    Download v{env.version}
+                                    Download {env.version}
                                 </Button>
                                 <p>{os() === "mac" ? "MacOS 10.12+ required." : os() === "windows" ? "Windows 10+ required." : ""}</p>
                             </div>
