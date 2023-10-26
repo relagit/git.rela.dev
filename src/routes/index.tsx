@@ -9,18 +9,19 @@ import { tagname } from "./api/release";
 
 import "./index.scss";
 
-const env = {
-    version: await tagname(),
-};
-
 export default () => {
     const [innerWidth, setInnerWidth] = createSignal(0);
     const [top, setTop] = createSignal(0);
     const [os, setOS] = createSignal<"mac" | "windows" | "linux">("mac");
+    const [tag, setTag] = createSignal("v0.0.0");
 
     onMount(() => {
         setTop(window.scrollY);
         setInnerWidth(window.innerWidth);
+
+        tagname().then((tagname) => {
+            setTag(tagname);
+        });
 
         window.addEventListener("scroll", () => {
             setTop(window.scrollY);
@@ -50,7 +51,7 @@ export default () => {
                     <h2 class="hero__text__subheader">The git client that lets you decide how your work gets done.</h2>
                     <div class="hero__text__buttons">
                         <Button type="brand" href="/download">
-                            Download {env.version}
+                            Download {tag()}
                             <Icon name="download" />
                         </Button>
                     </div>
@@ -166,7 +167,7 @@ export default () => {
                             <div class="download">
                                 <Button type="brand" href="/download" size="large">
                                     <Icon name="download" />
-                                    Download {env.version}
+                                    Download {tag()}
                                 </Button>
                                 <p>{os() === "mac" ? "MacOS 10.12+ required." : os() === "windows" ? "Windows 10+ required." : ""}</p>
                             </div>
