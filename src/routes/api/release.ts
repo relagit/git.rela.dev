@@ -14,13 +14,3 @@ export const GET = async () => {
         published: release.published_at,
     });
 };
-
-export const tagname = async () => {
-    release = await fetch("https://api.github.com/repos/relagit/relagit/releases/latest", {
-        headers: {
-            Authorization: `token ${process.env.GITHUB_TOKEN}`,
-        },
-    }).then((res) => res.json());
-
-    return release.tag_name;
-};

@@ -5,8 +5,6 @@ import Footer from "~/components/Footer";
 import Button from "~/components/Button";
 import Icon from "~/components/Icon";
 
-import { tagname } from "./api/release";
-
 import "./index.scss";
 
 export default () => {
@@ -19,8 +17,8 @@ export default () => {
         setTop(window.scrollY);
         setInnerWidth(window.innerWidth);
 
-        tagname().then((tagname) => {
-            setTag(tagname);
+        fetch(new URL("/api/release", location.href)).then(async (res) => {
+            setTag((await res.json()).tag);
         });
 
         window.addEventListener("scroll", () => {
