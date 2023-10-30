@@ -10,7 +10,7 @@ import "./index.scss";
 export default () => {
     const [innerWidth, setInnerWidth] = createSignal(0);
     const [top, setTop] = createSignal(0);
-    const [os, setOS] = createSignal<"mac" | "windows" | "linux">("mac");
+    const [os, setOS] = createSignal<"mac" | "windows" | "linux" | "mobile">("mac");
     const [tag, setTag] = createSignal("v0.0.0");
 
     onMount(() => {
@@ -30,6 +30,10 @@ export default () => {
         });
 
         const userAgent = window.navigator.userAgent.toLowerCase();
+
+        if (userAgent.includes("iPhone") || userAgent.includes("iPad") || userAgent.includes("android")) {
+            setOS("mobile");
+        }
 
         if (userAgent.includes("win")) {
             setOS("windows");
@@ -167,7 +171,7 @@ export default () => {
                                     <Icon name="download" />
                                     Download {tag()}
                                 </Button>
-                                <p>{os() === "mac" ? "MacOS 10.12+ required." : os() === "windows" ? "Windows 10+ required." : ""}</p>
+                                <>{os() === "mac" ? "MacOS 10.12+ required." : os() === "windows" ? "Windows 10+ required." : os() === "mobile" ? "Only available on desktop." : ""}</>
                             </div>
                         </div>
                     </div>
