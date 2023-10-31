@@ -46,6 +46,7 @@ export default () => {
 
     return (
         <main class="index">
+            <Header static />
             <Header top={top} innerWidth={innerWidth} />
             <div class="hero">
                 <div class="hero__text">
