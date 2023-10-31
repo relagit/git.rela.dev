@@ -29,7 +29,7 @@ export default () => {
             <Header top={() => 1000} innerWidth={innerWidth} />
             <div class="download-page">
                 <div class="download-page__text">
-                    <h1 class="download-page__text__heading">Nothing here yet!</h1>
+                    <h1 class="download-page__text__heading">Nothing here.</h1>
                     <h2 class="download-page__text__subheading">You're too early! We haven't released anything yet.</h2>
                 </div>
                 {/* <div class="download-page__text">
