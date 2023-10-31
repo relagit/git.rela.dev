@@ -83,8 +83,8 @@ export default () => {
                             src="/assets/laptop-light.png"
                         />
                     </picture>
-                    <img class="hero__images__blob-one" alt="blob" src="/assets/blur-one.svg" />
-                    <img class="hero__images__blob-two" alt="blob" src="/assets/blur-two.svg" />
+                    <img class="hero__images__blob-one" alt="blob" src="/assets/blur-one.png" />
+                    <img class="hero__images__blob-two" alt="blob" src="/assets/blur-two.png" />
                 </div>
             </div>
             <div class="features" id="features">
@@ -171,7 +171,7 @@ export default () => {
                                     <Icon name="download" />
                                     Download {tag()}
                                 </Button>
-                                <>{os() === "mac" ? "MacOS 10.12+ required." : os() === "windows" ? "Windows 10+ required." : os() === "mobile" ? "Only available on desktop." : ""}</>
+                                <p>{os() === "mac" ? "MacOS 10.12+ required." : os() === "windows" ? "Windows 10+ required." : os() === "mobile" ? "Only available on desktop." : ""}</p>
                             </div>
                         </div>
                     </div>
