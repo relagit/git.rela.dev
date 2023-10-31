@@ -23,7 +23,7 @@ main.index {
         background: linear-gradient(90deg, #75565c 0%, #26103e 100.55%);
 
         @media (prefers-color-scheme: light) {
-            background: linear-gradient(90deg, #e0b8c0 0%, #a689c6 100.55%);
+            background: radial-gradient(70% 1000% at 50% 50%, #e0b8c0 0%, #a689c6 100%);
         }
     }
 
