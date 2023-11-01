@@ -119,6 +119,7 @@ main.index {
             inset: 0;
             left: 50%;
             width: 80vw;
+            height: 52vw;
             border-radius: 0.5vw;
             border: 1.2px solid var(--base-light-grey);
             backdrop-filter: blur(50px);
@@ -126,11 +127,12 @@ main.index {
             transform: translateX(-50%);
             background-color: rgba(255, 255, 255, 0.4);
 
-            transition: width 0.8s ease-in-out, top 0.8s ease-in-out;
+            transition: width 0.8s ease-in-out, height 0.8s ease-in-out, top 0.8s ease-in-out;
 
             &.shrink {
                 width: 54vw;
                 top: 7.5vw;
+                height: 35vw;
             }
 
             @media (prefers-color-scheme: dark) {
@@ -145,6 +147,7 @@ main.index {
         }
 
         &__laptop {
+            height: 49vw;
             z-index: 0;
             width: 75vw;
             position: absolute;
@@ -152,10 +155,11 @@ main.index {
             left: 50%;
             transform: translateX(-50%);
 
-            transition: width 0.8s ease-in-out;
+            transition: width 0.8s ease-in-out, height 0.8s ease-in-out;
 
             &.shrink {
                 width: 80vw;
+                height: 52vw;
             }
 
             @media (prefers-reduced-motion: reduce) {

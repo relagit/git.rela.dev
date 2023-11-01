@@ -6,6 +6,7 @@ import Button from "~/components/Button";
 import Icon from "~/components/Icon";
 
 import "./index.scss";
+import Image from "~/components/Image";
 
 export default () => {
     const [innerWidth, setInnerWidth] = createSignal(0);
@@ -60,30 +61,24 @@ export default () => {
                     </div>
                 </div>
                 <div class="hero__images">
-                    <picture>
-                        <source media="(prefers-color-scheme: dark)" srcset="/assets/dark.png" />
-                        <source media="(prefers-color-scheme: light)" srcset="/assets/light.png" />
-                        <img
-                            classList={{
-                                hero__images__client: true,
-                                shrink: top() > 150,
-                            }}
-                            alt="RelaGit client"
-                            src="/assets/light.png"
-                        />
-                    </picture>
-                    <picture>
-                        <source media="(prefers-color-scheme: dark)" srcset="/assets/laptop-dark.png" />
-                        <source media="(prefers-color-scheme: light)" srcset="/assets/laptop-light.png" />
-                        <img
-                            classList={{
-                                hero__images__laptop: true,
-                                shrink: top() > 150,
-                            }}
-                            alt="Laptop"
-                            src="/assets/laptop-light.png"
-                        />
-                    </picture>
+                    <Image
+                        classList={{
+                            hero__images__client: true,
+                            shrink: top() > 150,
+                        }}
+                        light="/assets/light.png"
+                        dark="/assets/dark.png"
+                        alt="RelaGit client"
+                    />
+                    <Image
+                        classList={{
+                            hero__images__laptop: true,
+                            shrink: top() > 150,
+                        }}
+                        light="/assets/laptop-light.png"
+                        dark="/assets/laptop-dark.png"
+                        alt="Laptop"
+                    />
                     <img class="hero__images__blob-one" alt="blob" src="/assets/blur-one.png" />
                     <img class="hero__images__blob-two" alt="blob" src="/assets/blur-two.png" />
                 </div>
