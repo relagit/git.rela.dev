@@ -71,6 +71,11 @@ main.index {
                 font-size: 22px;
                 line-height: 28px;
             }
+
+            @media screen and (max-width: 480px) {
+                font-size: 18px;
+                line-height: 24px;
+            }
         }
 
         &__buttons {
@@ -176,6 +181,14 @@ main.index {
     gap: 120px;
     width: 100vw;
 
+    @media screen and (max-width: 1100px) {
+        gap: 80px;
+    }
+
+    @media screen and (max-width: 700px) {
+        gap: 40px;
+    }
+
     &__feature {
         display: flex;
         width: 100%;
@@ -259,7 +272,6 @@ main.index {
 
                     @media screen and (max-width: 800px) {
                         width: 80%;
-                        top: auto;
                         bottom: 0;
                     }
 
@@ -320,6 +332,12 @@ main.index {
 
                 .features__feature__bento__card {
                     grid-column: span 2;
+                }
+            }
+
+            @media screen and (max-width: 480px) {
+                .features__feature__bento__card {
+                    display: none;
                 }
             }
 
@@ -428,6 +446,14 @@ main.index {
                 font-size: 52px;
                 font-weight: 590;
                 line-height: 120%;
+
+                @media screen and (max-width: 768px) {
+                    font-size: 40px;
+                }
+
+                @media screen and (max-width: 480px) {
+                    font-size: 28px;
+                }
             }
 
             &__subheading {
@@ -437,6 +463,16 @@ main.index {
                 font-weight: 400;
                 line-height: 28px;
                 max-width: 650px;
+
+                @media screen and (max-width: 768px) {
+                    font-size: 18px;
+                    line-height: 24px;
+                }
+
+                @media screen and (max-width: 480px) {
+                    font-size: 16px;
+                    line-height: 20px;
+                }
             }
         }
 

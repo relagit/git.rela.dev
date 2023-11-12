@@ -12,6 +12,10 @@
         gap: 2rem;
     }
 
+    @media screen and (max-width: 600px) {
+        padding: 5rem 2rem;
+    }
+
     &__col {
         display: flex;
         flex-direction: column;
