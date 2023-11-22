@@ -50,7 +50,7 @@ export default () => {
                 </a>
             </div>
             <div class="footer__col">
-                <div class="footer__col__header">Company</div>
+                <div class="footer__col__header">Organisation</div>
                 <a href="https://rela.dev/mission" class="footer__col__item">
                     Mission
                 </a>
