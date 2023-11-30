@@ -7,6 +7,7 @@ import "./download.scss";
 
 export default () => {
     const [innerWidth, setInnerWidth] = createSignal(0);
+    const [os, setOS] = createSignal<"mac" | "windows" | "linux" | "mobile">("mac");
     const [top, setTop] = createSignal(0);
 
     onMount(() => {
@@ -21,7 +22,34 @@ export default () => {
             setInnerWidth(window.innerWidth);
         });
 
-        (document.querySelector("a.download-page__link") as HTMLAnchorElement)?.["click"]();
+        const userAgent = window.navigator.userAgent.toLowerCase();
+
+        if (userAgent.includes("iPhone") || userAgent.includes("iPad") || userAgent.includes("android")) {
+            setOS("mobile");
+        }
+
+        if (userAgent.includes("win")) {
+            setOS("windows");
+        } else if (userAgent.includes("mac")) {
+            setOS("mac");
+        } else if (userAgent.includes("linux")) {
+            setOS("linux");
+        }
+
+        switch (os()) {
+            case "mac":
+                window.location.href = "https://github.com/relagit/relagit/releases/latest/download/RelaGit-mac.dmg";
+
+                break;
+            case "windows":
+                window.location.href = "https://github.com/relagit/relagit/releases/latest/download/RelaGit-win.zip";
+
+                break;
+            case "linux":
+                window.location.href = "https://github.com/relagit/relagit/releases/latest";
+
+                break;
+        }
     });
 
     return (
