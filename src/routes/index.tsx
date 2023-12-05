@@ -51,14 +51,13 @@ export default () => {
             <Header top={top} innerWidth={innerWidth} />
             <div class="hero">
                 <div class="hero__text">
-                    <h1 class="hero__text__header">RelaGit</h1>
-                    <h2 class="hero__text__subheader">The git client that lets you decide how your work gets done.</h2>
-                    <div class="hero__text__buttons">
+                    <h1 class="hero__text__header">The elegant solution to graphical version control. Built by developers, for developers.</h1>
+                    {/* <div class="hero__text__buttons">
                         <Button type="brand" href="/download">
                             Download {tag()}
                             <Icon name="download" />
                         </Button>
-                    </div>
+                    </div> */}
                 </div>
                 <div class="hero__images">
                     <Image

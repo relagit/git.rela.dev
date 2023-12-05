@@ -21,10 +21,11 @@ type Article = {
 export default () => {
     const params = useParams();
 
-    const [post, setPost] = createSignal<Article | null>(null);
+    const [posts, setPosts] = createSignal<Record<string, Article>>();
     const [done, setDone] = createSignal(false);
     const [innerWidth, setInnerWidth] = createSignal(0);
     const [top, setTop] = createSignal(0);
+    const [page, setPage] = createSignal(params.page);
 
     onMount(() => {
         setTop(window.scrollY);
@@ -46,9 +47,10 @@ export default () => {
             // @ts-ignore
             const post: Post = await postFn();
 
-            if (post.meta.slug === params.page) {
-                setPost(post);
-            }
+            setPosts({
+                ...posts(),
+                [post.meta.slug]: post,
+            });
 
             if (i === Object.keys(docs).length - 1) {
                 setDone(true);
@@ -72,15 +74,25 @@ export default () => {
             default: () => (
                 <For each={items}>
                     {(item) => (
-                        <a
+                        <button
                             classList={{
                                 sidebar__item: true,
-                                "sidebar__item-active": item.meta.slug === params.page,
+                                "sidebar__item-active": item.meta.slug === page(),
                             }}
-                            href={`/docs/${item.meta.slug}`}
+                            onClick={(e) => {
+                                setPage(item.meta.slug);
+
+                                e.target.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "center",
+                                    inline: "nearest",
+                                });
+
+                                window.history.pushState({}, "", `/docs/${item.meta.slug}`);
+                            }}
                         >
                             {item.meta.title}
-                        </a>
+                        </button>
                     )}
                 </For>
             ),
@@ -89,17 +101,15 @@ export default () => {
 
     return (
         <>
-            <Title>{post()?.meta.title}</Title>
-            <Meta name="description" content={post()?.meta.description} />
-            <Meta name="og:title" content={post()?.meta.title} />
-            <Meta name="og:description" content={post()?.meta.description} />
+            <Title>{posts()?.[page()]?.meta.title}</Title>
+            <Meta name="description" content={posts()?.[page()]?.meta.description} />
+            <Meta name="og:title" content={posts()?.[page()]?.meta.title} />
+            <Meta name="og:description" content={posts()?.[page()]?.meta.description} />
             <Meta name="og:type" content="article" />
-
-            <Meta name="twitter:title" content={post()?.meta.title} />
-            <Meta name="twitter:description" content={post()?.meta.description} />
-
+            <Meta name="twitter:title" content={posts()?.[page()]?.meta.title} />
+            <Meta name="twitter:description" content={posts()?.[page()]?.meta.description} />
             <Show
-                when={post()}
+                when={posts()?.[page()]}
                 fallback={
                     <Show when={done()} fallback={<div>Loading...</div>}>
                         {fourOFour()}
@@ -107,22 +117,25 @@ export default () => {
                 }
             >
                 <aside class="sidebar">
-                    <Docs />
+                    <div class="items">
+                        <div class="spacer"></div>
+                        <Docs />
+                    </div>
                 </aside>
                 <div class="post">
                     <div class="post__content">
                         <span class="byline">
                             Updated on{" "}
-                            {post()?.meta.date.toLocaleString("en-US", {
+                            {posts()?.[page()]?.meta.date.toLocaleString("en-US", {
                                 year: "numeric",
                                 month: "long",
                                 day: "numeric",
                             })}
                         </span>
-                        <h1 class="title">{post()?.meta.title}</h1>
-                        <h2 class="description">{post()?.meta.description}</h2>
+                        <h1 class="title">{posts()?.[page()]?.meta.title}</h1>
+                        <h2 class="description">{posts()?.[page()]?.meta.description}</h2>
 
-                        <div class="markdown-body"> {post()?.default}</div>
+                        <div class="markdown-body"> {posts()?.[page()]?.default}</div>
                     </div>
                 </div>
             </Show>
