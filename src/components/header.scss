@@ -42,6 +42,10 @@
         width: 100%;
         height: fit-content;
 
+        .header__group {
+            gap: 32px;
+        }
+
         @media screen and (max-width: 768px) {
             padding: 24px 80px;
         }
