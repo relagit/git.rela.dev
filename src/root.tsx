@@ -2,6 +2,7 @@
 import { A, Body, ErrorBoundary, FileRoutes, Head, Html, Link, Meta, Routes, Scripts, Title } from "solid-start";
 import { Suspense, onMount } from "solid-js";
 
+import { injectSpeedInsights } from "@vercel/speed-insights";
 import { inject } from "@vercel/analytics";
 
 import "./root.scss";
@@ -9,6 +10,8 @@ import "./root.scss";
 export default () => {
     onMount(() => {
         inject();
+
+        injectSpeedInsights({});
     });
 
     return (

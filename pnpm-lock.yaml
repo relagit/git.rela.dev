@@ -14,6 +14,9 @@ dependencies:
   '@stefanprobst/remark-shiki':
     specifier: ^2.2.1
     version: 2.2.1(shiki@0.14.4)
+  '@vercel/speed-insights':
+    specifier: ^1.0.0
+    version: 1.0.0
   sass:
     specifier: ^1.67.0
     version: 1.67.0
@@ -1949,6 +1952,11 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
+
+  /@vercel/speed-insights@1.0.0:
+    resolution: {integrity: sha512-5blmCVGGPn+3BqwBPb1jc3OnzRozNuLgJVr7xH6XjxCTvocs7z/Bml7lo+JzLKUXR1Q35qI/PlEllmNbZmP9Ew==}
+    requiresBuild: true
+    dev: false
 
   /@wooorm/starry-night@2.2.0:
     resolution: {integrity: sha512-xdLlogQa6A0F0RYt5mLq/+IPSfTAIh2wq8T1wwkBgS67mHPP2BSMruUs5xV7czvQgPmTSaAetyyHXZrINPY88Q==}
