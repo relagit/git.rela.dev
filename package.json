@@ -32,7 +32,7 @@
     },
     "dependencies": {
         "@solidjs/meta": "^0.29.1",
-        "@solidjs/router": "^0.10.1",
+        "@solidjs/router": "^0.8.4",
         "@stefanprobst/remark-shiki": "^2.2.1",
         "@vercel/speed-insights": "^1.0.0",
         "sass": "^1.69.5",
