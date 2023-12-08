@@ -1,25 +1,20 @@
 import { For, Show, createResource } from "solid-js";
 
-// import { createStarryNight, common } from "@wooorm/starry-night";
-import { toHtml } from "hast-util-to-html";
+import * as shiki from "shiki";
 
 import "./codeblock.scss";
 
-export interface CodeblockProps {
+interface CodeblockProps {
     code: string;
     language?: string;
     filename?: string;
 }
 
-const makeScope = (lang: string) => {
-    return `source.${lang}`;
-};
-
 const trim = (str: string) => {
     return str.replace(/^[\s\n]+|[\s\n]+$/g, "");
 };
 
-let highlighter: null | any = null;
+let highlighter: shiki.Highlighter | null = null;
 
 const icons = {
     ts: (
@@ -51,17 +46,19 @@ const icons = {
 };
 
 export default (props: CodeblockProps) => {
-    // const [code] = createResource(async () => {
-    //     if (!props.language) {
-    //         return props.code;
-    //     }
+    const [code] = createResource(async () => {
+        if (!props.language) {
+            return props.code;
+        }
 
-    //     if (!highlighter) {
-    //         highlighter = await createStarryNight(common);
-    //     }
+        if (!highlighter) {
+            highlighter = await shiki.getHighlighter({
+                theme: "css-variables",
+            });
+        }
 
-    //     return highlighter.highlight(trim(props.code), makeScope(props.language));
-    // });
+        return highlighter.codeToHtml(props.code, props.language);
+    });
 
     return (
         <div class="codeblock">
@@ -82,20 +79,9 @@ export default (props: CodeblockProps) => {
                 </div>
             </Show>
             <div class="codeblock-content">
-                <Show when={false} fallback={<div class="codeblock-content-inner">{trim(props.code)}</div>}>
-                    {" "}
-                    {/* <div class="codeblock-content-lines">
-                        <For
-                            each={(typeof code() === "string"
-                                ? trim(code())
-                                : toHtml(
-                                      code() || {
-                                          type: "root",
-                                          children: [],
-                                      }
-                                  )
-                            ).split("\n")}
-                        >
+                <Show when={code()} fallback={<div class="codeblock-content-inner">{trim(props.code)}</div>}>
+                    <div class="codeblock-content-lines">
+                        <For each={code()?.split("\n")}>
                             {(_, i) => (
                                 <>
                                     <span class="codeblock-content-line">{i() + 1}</span>
@@ -103,20 +89,8 @@ export default (props: CodeblockProps) => {
                                 </>
                             )}
                         </For>
-                    </div> */}
-                    {/* <div
-                        class="codeblock-content-inner"
-                        innerHTML={
-                            typeof code() === "string"
-                                ? trim(code())
-                                : toHtml(
-                                      code() || {
-                                          type: "root",
-                                          children: [],
-                                      }
-                                  )
-                        }
-                    ></div> */}
+                    </div>
+                    <div class="codeblock-content-inner" innerHTML={code()}></div>
                 </Show>
             </div>
         </div>
