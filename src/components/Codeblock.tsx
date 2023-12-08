@@ -1,4 +1,4 @@
-import { For, Show, Suspense, createResource } from "solid-js";
+import { For, Show, createResource } from "solid-js";
 
 import { createStarryNight, common } from "@wooorm/starry-night";
 import { toHtml } from "hast-util-to-html";
@@ -82,7 +82,7 @@ export default (props: CodeblockProps) => {
                 </div>
             </Show>
             <div class="codeblock-content">
-                <Suspense fallback={<div class="codeblock-content-inner">{trim(props.code)}</div>}>
+                <Show when={props.code} fallback={<div class="codeblock-content-inner">{trim(props.code)}</div>}>
                     <div class="codeblock-content-lines">
                         <For
                             each={(typeof code() === "string"
@@ -116,7 +116,7 @@ export default (props: CodeblockProps) => {
                                   )
                         }
                     ></div>
-                </Suspense>
+                </Show>
             </div>
         </div>
     );
