@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: flex-start;
     gap: 10rem;
-    border-top: 1px solid var(--base-light-grey);
+    border-top: 1px solid rgb(255, 255, 255, 0.2);
 
     @media screen and (max-width: 1000px) {
         flex-direction: column;
@@ -22,13 +22,13 @@
         gap: 0.5rem;
 
         & > svg {
-            color: var(--base-dark-grey);
+            color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
             margin-bottom: 0.5rem;
         }
 
         &__header {
             font-weight: 500;
-            color: var(--base-black);
+            color: #fff;
             margin-bottom: 0.5rem;
         }
 
@@ -36,7 +36,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--base-dark-grey);
+
+            color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
             transition: color 0.2s ease-in-out;
             text-decoration: none;
 
@@ -46,7 +47,7 @@
             }
 
             &[href]:hover {
-                color: var(--base-black);
+                color: #fff;
             }
         }
     }

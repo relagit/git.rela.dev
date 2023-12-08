@@ -43,7 +43,7 @@ export default () => {
                     Download
                 </a>
                 <a href="/docs" class="footer__col__item">
-                    API Docs
+                    Documentation
                 </a>
                 <a href="/redirect/github" target="_blank" class="footer__col__item">
                     GitHub <Icon name="link-external" />
@@ -51,11 +51,13 @@ export default () => {
             </div>
             <div class="footer__col">
                 <div class="footer__col__header">Organisation</div>
-                <a href="https://rela.dev/mission" class="footer__col__item">
+                <a href="https://rela.dev/mission" target="_blank" class="footer__col__item">
                     Mission
+                    <Icon name="link-external" />
                 </a>
-                <a href="https://rela.dev/oss" class="footer__col__item">
+                <a href="https://rela.dev/oss" target="_blank" class="footer__col__item">
                     Open Source
+                    <Icon name="link-external" />
                 </a>
                 <a href="/press" download target="_blank" class="footer__col__item">
                     Press Kit

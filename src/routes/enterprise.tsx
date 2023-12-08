@@ -1,7 +1,7 @@
 import { createSignal, onMount } from "solid-js";
 
 import Header from "~/components/Header";
-import Icon from "~/components/Icon";
+import Button from "~/components/Button";
 
 import "./subpage.scss";
 
@@ -35,33 +35,21 @@ export default () => {
         } else if (userAgent.includes("linux")) {
             setOS("linux");
         }
-
-        switch (os()) {
-            case "mac":
-                window.location.href = "https://github.com/relagit/relagit/releases/latest/download/RelaGit-mac.dmg";
-
-                break;
-            case "windows":
-                window.location.href = "https://github.com/relagit/relagit/releases/latest/download/RelaGit-win.zip";
-
-                break;
-            case "linux":
-                window.location.href = "https://github.com/relagit/relagit/releases/latest";
-
-                break;
-        }
     });
 
     return (
         <>
-            <Header top={() => 1000} innerWidth={innerWidth} />
+            <Header />
             <div class="sub-page">
                 <div class="sub-page__text">
-                    <h1 class="sub-page__text__heading">Nothing here.</h1>
-                    <h2 class="sub-page__text__subheading">You're too early! We haven't released anything yet.</h2>
+                    <h1 class="sub-page__text__heading">RelaGit Enterprise Program.</h1>
+                    <h2 class="sub-page__text__subheading">If you or your company are interested in using RelaGit in the workplace, consider paying for an Enterprise license.</h2>
+                </div>
+                <div class="sub-page__buttons">
+                    <Button disabled>Make an Inquiry</Button>
                 </div>
             </div>
-            <img src="/assets/landing/decorations.png" aria-hidden="true" alt="decorations" class="decorations" />
+            <img src="/assets/landing/beta-decorations.png" aria-hidden="true" alt="decorations" class="decorations" />
         </>
     );
 };

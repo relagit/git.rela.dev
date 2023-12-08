@@ -1,36 +1,69 @@
 .codeblock {
-    background-color: var(--material-secondary);
-    border-radius: 3px;
-    border: 1px solid var(--base-lighter-grey);
-    font-family: var(--font-mono);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
 
     .codeblock-header {
         display: flex;
-        gap: 1rem;
+        padding: 0.75rem 1rem;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        color: rgba(255, 255, 255, 0.6);
         font-size: 14px;
         font-weight: 400;
-        color: var(--base-grey);
-        opacity: 0.6;
+        line-height: 135%;
 
         .codeblock-filename {
-            font-weight: 600;
-        }
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
 
-        .codeblock-language {
-            font-weight: 400;
+            .codeblock-icon {
+                width: 16px;
+                height: 16px;
+                opacity: 0.7;
+            }
         }
     }
 
     .codeblock-content {
-        overflow: auto;
+        font-family: var(--font-mono);
+        display: flex;
+        padding: 16px 32px 32px 32px;
+        align-items: center;
+        gap: 24px;
+        background: rgba(255, 255, 255, 0.04);
+        width: 100%;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        font-size: 13px;
 
-        .codeblock-content-inner {
-            font-size: 14px;
-            white-space: break-spaces;
+        @media screen and (max-width: 600px) {
+            font-size: 12px;
+            padding: 16px;
+        }
+
+        &-lines {
+            color: #6a737d;
+            text-align: right;
+            font-weight: 400;
+            line-height: 130%;
+            white-space: pre;
+
+            @media screen and (max-width: 600px) {
+                display: none;
+            }
+        }
+
+        &-inner {
+            white-space: pre;
+            color: #ffffffc3;
         }
     }
 }

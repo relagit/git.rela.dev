@@ -5,20 +5,20 @@
         "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", "Lucida Console", Monaco, monospace;
 
-    --base-white: #ffffff;
-    --base-black: #000000;
-    --base-dark-grey: #25292e;
+    --base-white: #000000;
+    --base-black: #ffffff;
+    --base-dark-grey: #bec2c7;
     --base-grey: #656d76;
-    --base-light-grey: #d0d7de;
-    --base-lighter-grey: #d0d7de66;
+    --base-light-grey: #2a2a2a;
+    --base-lighter-grey: #2a2a2a66;
 
-    --material-bg: #ffffff;
-    --material-primary: #ffffff;
-    --material-secondary: #fafbfc;
-    --material-tertiary: #f6f8fa;
-    --material-quaternary: #f1f2f4;
-    --material-quinary: #e7ebee;
-    --material-senary: #e1e4e8;
+    --material-bg: #000000;
+    --material-primary: #141515;
+    --material-secondary: #1b1c1c;
+    --material-tertiary: #1a1b1c;
+    --material-quaternary: #191a1b;
+    --material-quinary: #18191a;
+    --material-senary: #171819;
 
     --color-blue-100: #e6f2fe;
     --color-blue-200: #b1d6fb;
@@ -102,23 +102,6 @@
     --color-cyan-700: #1bbae0;
     --color-cyan-800: #15aae0;
     --color-cyan-900: #1390e0;
-
-    @media (prefers-color-scheme: dark) {
-        --base-white: #000000;
-        --base-black: #ffffff;
-        --base-dark-grey: #bec2c7;
-        --base-grey: #656d76;
-        --base-light-grey: #2a2a2a;
-        --base-lighter-grey: #2a2a2a66;
-
-        --material-bg: #000000;
-        --material-primary: #141515;
-        --material-secondary: #1b1c1c;
-        --material-tertiary: #1a1b1c;
-        --material-quaternary: #191a1b;
-        --material-quinary: #18191a;
-        --material-senary: #171819;
-    }
 }
 
 html {
@@ -128,6 +111,7 @@ html {
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
+    color-scheme: dark;
     width: 100vw;
 }
 

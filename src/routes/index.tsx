@@ -1,12 +1,21 @@
 import { createSignal, onMount } from "solid-js";
 
+import Codeblock from "~/components/Codeblock";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import Button from "~/components/Button";
+import Logo from "~/components/Logo";
 import Icon from "~/components/Icon";
 
 import "./index.scss";
-import Image from "~/components/Image";
+
+declare module "solid-js" {
+    namespace JSX {
+        interface Directives {
+            highlightOnScroll: boolean;
+        }
+    }
+}
 
 export default () => {
     const [innerWidth, setInnerWidth] = createSignal(0);
@@ -45,134 +54,178 @@ export default () => {
         }
     });
 
+    const highlightOnScroll = (element: HTMLElement) => {
+        const observer = new IntersectionObserver(
+            ([e]) => {
+                if (e.isIntersecting) {
+                    element.classList.add("highlighted");
+                } else {
+                    element.classList.remove("highlighted");
+                }
+            },
+            { threshold: [0.5] }
+        );
+
+        observer.observe(element);
+
+        return () => {
+            observer.disconnect();
+        };
+    };
+
     return (
         <main class="index">
             <Header static />
-            <Header top={top} innerWidth={innerWidth} />
-            <div class="hero">
-                <div class="hero__text">
-                    <h1 class="hero__text__header">The elegant solution to graphical version control. Built by developers, for developers.</h1>
-                    {/* <div class="hero__text__buttons">
-                        <Button type="brand" href="/download">
-                            Download {tag()}
-                            <Icon name="download" />
-                        </Button>
-                    </div> */}
+            <h1 class="hero-text" use:highlightOnScroll>
+                <span class="hero-text-highlight">The elegant solution to graphical version control.</span>
+                <br /> <span>Built by developers, for developers.</span>
+            </h1>
+            <div class="window-container">
+                <div class="window" use:highlightOnScroll></div>
+                <img src="/assets/blur.png" width="140vw" height="40vw" alt="objectBlur" class="object" />
+            </div>
+            <div class="separator" />
+            <div class="feature" use:highlightOnScroll>
+                <div class="feature-text">
+                    <h2 class="feature-text-header">Creativity is the limit.</h2>
+                    <p class="feature-text-paragraph">
+                        Create dynamic programmatic workflows to automate actions and perform awesome tasks. <br />
+                        <br /> Use modern and familiar syntax alongside a type-safe api.
+                    </p>
+                    <a href="/workflows" target="_blank" class="feature-text-button">
+                        Browse Workflows
+                        <Icon name="arrow-up-right" />
+                    </a>
                 </div>
-                <div class="hero__images">
-                    <Image
-                        classList={{
-                            hero__images__client: true,
-                            shrink: top() > 150,
-                        }}
-                        light="/assets/light.png"
-                        dark="/assets/dark.png"
-                        alt="RelaGit client"
-                    />
-                    <Image
-                        classList={{
-                            hero__images__laptop: true,
-                            shrink: top() > 150,
-                        }}
-                        light="/assets/laptop-light.png"
-                        dark="/assets/laptop-dark.png"
-                        alt="Laptop"
-                    />
-                    <img class="hero__images__blob-one" alt="blob" src="/assets/blur-one.png" />
-                    <img class="hero__images__blob-two" alt="blob" src="/assets/blur-two.png" />
+                <Codeblock
+                    code={`import { Workflow, context } from "relagit:actions";
+
+export default new Workflow({
+  on: "commit", 
+  name: "Sign build Artifacts", 
+  description: "Signs the local binaries...", 
+  steps: [ 
+    { 
+      name: "scan", 
+      run: async (_, ...params) => { 
+        // Do something awesome
+      }
+    },
+  ],
+});`}
+                    language="ts"
+                    filename=".relagit/workflows/action.ts"
+                />
+            </div>
+            <div class="feature" use:highlightOnScroll>
+                <div class="feature-window">
+                    <div class="feature-window-sidebar">
+                        <div class="feature-window-sidebar-header"></div>
+                    </div>
+                    <div class="feature-window-header"></div>
+                </div>
+                <div class="feature-text">
+                    <h2 class="feature-text-header">Recognisably Yours.</h2>
+                    <p class="feature-text-paragraph">Re-imagine the look of the client, either through careful creation of a theme, or use of a community-made one.</p>
+                    <a href="/styles" target="_blank" class="feature-text-button">
+                        Browse Styles
+                        <Icon name="arrow-up-right" />
+                    </a>
                 </div>
             </div>
-            <div class="features" id="features">
-                <div class="features__feature">
-                    <div class="features__feature__text">
-                        <h3 class="features__feature__text__heading">Creativity is the limit.</h3>
-                        <h4 class="features__feature__text__subheading">Create simple programmatic workflows to automate actions and awesome tasks.</h4>
+            <div class="separator" />
+            <div class="feature-grid" use:highlightOnScroll>
+                <div class="feature-grid-item">
+                    <div class="feature-grid-item-text">
+                        <div class="feature-grid-item-text-label">
+                            <Icon name="stopwatch" />
+                            Speedy
+                        </div>
+                        <div class="feature-grid-item-text-paragraph">
+                            <span class="highlight">Designed to move at your speed.</span> Next generation tooling enables lightning fast UI updates and commands.
+                        </div>
                     </div>
-                    <div class="features__feature__image creativity">
-                        <div class="images">
-                            <img src="/assets/landing/workflow-code.png" alt="Workflow Code" class="code" />
-                            <img src="/assets/landing/workflow-card.png" alt="Workflow Card" class="card" />
+                    <div class="feature-grid-item-graphic speed">
+                        <div class="box">
+                            <Icon name="git-merge" />
+                        </div>
+                        <div class="line"></div>
+                        <div class="box">
+                            <Logo />
+                        </div>
+                        <div class="line"></div>
+                        <div class="box highlight">
+                            <Icon name="person" />
                         </div>
                     </div>
                 </div>
-                <div class="features__feature">
-                    <div class="features__feature__text">
-                        <h3 class="features__feature__text__heading">Fundamentally familiar.</h3>
-                        <h4 class="features__feature__text__subheading">We've observed and built off of common layouts, patterns, and actions to deliver an intuitive experience.</h4>
+                <div class="feature-grid-item">
+                    <div class="feature-grid-item-text">
+                        <div class="feature-grid-item-text-label">
+                            <Icon name="code" />
+                            Open Source
+                        </div>
+                        <div class="feature-grid-item-text-paragraph">
+                            <span class="highlight">Community fueled.</span> Built with input and opinion from developers and users.
+                        </div>
                     </div>
-                    <div class="features__feature__image familiar">
-                        <img src="/assets/landing/familiar-diff.png" alt="Familiar Diff" class="diff" />
-                        <img src="/assets/landing/commit-window.png" alt="RelaGit Window" class="window" />
-                    </div>
-                </div>
-                <div class="features__feature">
-                    <div class="features__feature__text">
-                        <h3 class="features__feature__text__heading">And so much more...</h3>
-                    </div>
-                    <div class="features__feature__bento">
-                        <div class="features__feature__bento__card speedy">
-                            <div class="features__feature__bento__card__text">
-                                <div class="features__feature__bento__card__text__icon">
-                                    <Icon name="cpu" />
-                                </div>
-                                <h4 class="features__feature__bento__card__text__heading">Speedy</h4>
-                                <p class="features__feature__bento__card__text__details">
-                                    RelaGit is built with next-generation tooling and a custom built in-house git wrapper to deliver the best possible experience.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="features__feature__bento__card two open">
-                            <img src="/assets/landing/open.png" alt="Open Source" aria-hidden="true" class="features__feature__bento__card__decoration" />
-
-                            <div class="features__feature__bento__card__text">
-                                <div class="features__feature__bento__card__text__icon">
-                                    <Icon name="project-roadmap" />
-                                </div>
-                                <h4 class="features__feature__bento__card__text__heading">Completely Open</h4>
-                                <p class="features__feature__bento__card__text__details">RelaGit is built on transparency, trust, and the collective wisdom of our open-source developer community.</p>
-                            </div>
-                        </div>
-                        <div class="features__feature__bento__card two github">
-                            <div class="features__feature__bento__card__text">
-                                <div class="features__feature__bento__card__text__icon">
-                                    <Icon name="mark-github" />
-                                </div>
-                                <h4 class="features__feature__bento__card__text__heading">GitHub Integration</h4>
-                                <p class="features__feature__bento__card__text__details">Import repositories and interact with GitHub straight from your Git client.</p>
-                            </div>
-                            <img src="/assets/landing/github.png" alt="Github Integration" aria-hidden="true" class="features__feature__bento__card__decoration" />
-                        </div>
-                        <div class="features__feature__bento__card speedy">
-                            <div class="features__feature__bento__card__text">
-                                <div class="features__feature__bento__card__text__icon">
-                                    <Icon name="paper-airplane" />
-                                </div>
-                                <h4 class="features__feature__bento__card__text__heading">Elegantly... Elegant</h4>
-                                <p class="features__feature__bento__card__text__details">
-                                    We use TextMate based highlighting and a combined diff preview to present your changes in a wonderfully digestible manner.
-                                </p>
-                            </div>
-                        </div>
+                    <div class="feature-grid-item-graphic open">
+                        <div class="message">Can we make the label more specific here?</div>
+                        <div class="message you">I agree, we're trying to be more open about the git terminology.</div>
+                        <div class="message">I would suggest “fetch” instead of “update”.</div>
+                        <div class="message you">Sounds good 👍</div>
                     </div>
                 </div>
-                <div class="cta-banner">
-                    <div class="features__feature">
-                        <div class="features__feature__text">
-                            <h3 class="features__feature__text__heading">Ready to level up?</h3>
+                <div class="feature-grid-item">
+                    <div class="feature-grid-item-text">
+                        <div class="feature-grid-item-text-label">
+                            <Icon name="mark-github" />
+                            GitHub Integration
                         </div>
-                        <div class="features__feature__buttons">
-                            <div class="download">
-                                <Button type="brand" href="/download" size="large">
-                                    <Icon name="download" />
-                                    Download {tag()}
-                                </Button>
-                                <p>{os() === "mac" ? "MacOS 10.12+ required." : os() === "windows" ? "Windows 10+ required." : os() === "mobile" ? "Only available on desktop." : ""}</p>
-                            </div>
+                        <div class="feature-grid-item-text-paragraph">
+                            <span class="highlight">Your favourite developer platform.</span> Directly integrated into the experience.
                         </div>
                     </div>
+                    <img class="feature-grid-item-graphic github" src="/assets/vercel-next.png" alt="GitHub Graphic" />
+                </div>
+                <div class="feature-grid-item">
+                    <div class="feature-grid-item-text">
+                        <div class="feature-grid-item-text-label">
+                            <Icon name="flame" />
+                            Elegantly Elegant
+                        </div>
+                        <div class="feature-grid-item-text-paragraph">
+                            <span class="highlight">Pixel perfect interface crafted for seamless navigation.</span> Blending form and function with beautiful design.
+                        </div>
+                    </div>
+                    <img class="feature-grid-item-graphic design" src="/assets/elegant.png" alt="Elegance Graphic" />
                 </div>
             </div>
+            <div class="separator"></div>
+            <div class="feature download">
+                <div class="feature-text download">
+                    <h2 class="feature-text-header">Sound Good?</h2>
+                    <p class="feature-text-paragraph">Grab the latest version of RelaGit for your platform.</p>
+                    <a
+                        class="feature-text-button"
+                        href={(() => {
+                            switch (os()) {
+                                case "mac":
+                                    return "https://github.com/relagit/relagit/releases/latest/download/RelaGit-mac.dmg";
+                                case "windows":
+                                    return "https://github.com/relagit/relagit/releases/latest/download/RelaGit-win.zip";
+                                case "linux":
+                                    return "https://github.com/relagit/relagit/releases/latest";
+                            }
 
+                            return "/download";
+                        })()}
+                    >
+                        Download
+                        <Icon name="download" />
+                    </a>
+                </div>
+            </div>
             <Footer />
         </main>
     );
