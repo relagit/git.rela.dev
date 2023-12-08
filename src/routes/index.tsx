@@ -62,7 +62,7 @@ export default () => {
                     element.classList.remove("highlighted");
                 }
             },
-            { threshold: [0.6] }
+            { threshold: [0.65] }
         );
 
         observer.observe(element);
