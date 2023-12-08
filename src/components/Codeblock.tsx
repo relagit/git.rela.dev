@@ -1,8 +1,11 @@
 import { For, Show, createResource } from "solid-js";
 
+import * as oniguruma from "vscode-oniguruma";
 import * as shiki from "shiki";
 
 import "./codeblock.scss";
+
+oniguruma.loadWASM;
 
 interface CodeblockProps {
     code: string;
