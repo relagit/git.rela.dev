@@ -82,7 +82,7 @@ export default (props: CodeblockProps) => {
                 </div>
             </Show>
             <div class="codeblock-content">
-                <Show when={props.code} fallback={<div class="codeblock-content-inner">{trim(props.code)}</div>}>
+                <Show when={code()} fallback={<div class="codeblock-content-inner">{trim(props.code)}</div>}>
                     <div class="codeblock-content-lines">
                         <For
                             each={(typeof code() === "string"
