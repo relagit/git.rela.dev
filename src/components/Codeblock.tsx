@@ -69,7 +69,7 @@ export default (props: CodeblockProps) => {
                 <div class="codeblock-header">
                     <Show when={props.filename}>
                         <div class="codeblock-filename">
-                            <Show when={icons.hasOwnProperty(props.language || "")}>
+                            <Show when={icons[props.language as keyof typeof icons]}>
                                 <div class="codeblock-icon">{icons[(props.language || "") as keyof typeof icons]}</div>
                             </Show>
 
