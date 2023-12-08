@@ -1,6 +1,5 @@
 import { createSignal, onMount } from "solid-js";
 
-import Codeblock from "~/components/Codeblock";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import Button from "~/components/Button";
@@ -97,25 +96,7 @@ export default () => {
                         <Icon name="arrow-up-right" />
                     </a>
                 </div>
-                <Codeblock
-                    code={`import { Workflow, context } from "relagit:actions";
-
-export default new Workflow({
-  on: "commit", 
-  name: "Sign build Artifacts", 
-  description: "Signs the local binaries...", 
-  steps: [ 
-    { 
-      name: "scan", 
-      run: async (_, ...params) => { 
-        // Do something awesome
-      }
-    },
-  ],
-});`}
-                    language="ts"
-                    filename=".relagit/workflows/action.ts"
-                />
+                <img src="/assets/landing/codeblock.png" alt="code" />
             </div>
             <div class="feature" use:highlightOnScroll>
                 <div class="feature-window">

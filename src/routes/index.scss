@@ -179,8 +179,9 @@ main.index {
             opacity: 1;
         }
 
-        .codeblock {
+        img {
             width: 55%;
+            pointer-events: none;
         }
 
         &-grid {
