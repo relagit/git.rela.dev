@@ -1,6 +1,6 @@
 import { For, Show, createResource } from "solid-js";
 
-import { createStarryNight, common } from "@wooorm/starry-night";
+// import { createStarryNight, common } from "@wooorm/starry-night";
 import { toHtml } from "hast-util-to-html";
 
 import "./codeblock.scss";
@@ -51,17 +51,17 @@ const icons = {
 };
 
 export default (props: CodeblockProps) => {
-    const [code] = createResource(async () => {
-        if (!props.language) {
-            return props.code;
-        }
+    // const [code] = createResource(async () => {
+    //     if (!props.language) {
+    //         return props.code;
+    //     }
 
-        if (!highlighter) {
-            highlighter = await createStarryNight(common);
-        }
+    //     if (!highlighter) {
+    //         highlighter = await createStarryNight(common);
+    //     }
 
-        return highlighter.highlight(trim(props.code), makeScope(props.language));
-    });
+    //     return highlighter.highlight(trim(props.code), makeScope(props.language));
+    // });
 
     return (
         <div class="codeblock">
@@ -82,8 +82,9 @@ export default (props: CodeblockProps) => {
                 </div>
             </Show>
             <div class="codeblock-content">
-                <Show when={code()} fallback={<div class="codeblock-content-inner">{trim(props.code)}</div>}>
-                    <div class="codeblock-content-lines">
+                <Show when={false} fallback={<div class="codeblock-content-inner">{trim(props.code)}</div>}>
+                    {" "}
+                    {/* <div class="codeblock-content-lines">
                         <For
                             each={(typeof code() === "string"
                                 ? trim(code())
@@ -102,8 +103,8 @@ export default (props: CodeblockProps) => {
                                 </>
                             )}
                         </For>
-                    </div>
-                    <div
+                    </div> */}
+                    {/* <div
                         class="codeblock-content-inner"
                         innerHTML={
                             typeof code() === "string"
@@ -115,7 +116,7 @@ export default (props: CodeblockProps) => {
                                       }
                                   )
                         }
-                    ></div>
+                    ></div> */}
                 </Show>
             </div>
         </div>
