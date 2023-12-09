@@ -51,7 +51,8 @@ main.index {
             font-size: 1.2rem;
         }
 
-        &.highlighted {
+        &.highlighted,
+        &:hover {
             opacity: 1;
         }
 
@@ -89,8 +90,8 @@ main.index {
             height: 52vw;
         }
 
-        &:hover,
-        &.highlighted {
+        &.highlighted,
+        &:hover {
             transform: perspective(75em) rotateX(0deg);
 
             &::after {
@@ -175,7 +176,8 @@ main.index {
             padding: 0 2rem;
         }
 
-        &.highlighted {
+        &.highlighted,
+        &:hover {
             opacity: 1;
         }
 
@@ -195,7 +197,8 @@ main.index {
             transition: opacity 500ms ease-in-out;
             opacity: 0.6;
 
-            &.highlighted {
+            &.highlighted,
+            &:hover {
                 opacity: 1;
             }
 
