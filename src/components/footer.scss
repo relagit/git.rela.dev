@@ -7,19 +7,41 @@
     gap: 10rem;
     border-top: 1px solid rgb(255, 255, 255, 0.2);
 
-    @media screen and (max-width: 1000px) {
-        flex-direction: column;
+    @media screen and (max-width: 1100px) {
+        display: grid;
+        gap: 4rem;
+        grid-template-areas: "copy copy copy" "col1 col2 col3";
+    }
+
+    @media screen and (max-width: 720px) {
         gap: 2rem;
     }
 
-    @media screen and (max-width: 600px) {
-        padding: 5rem 2rem;
+    @media screen and (max-width: 650px) {
+        grid-template-areas: "copy copy" "col1 col2" "col3 _";
+        padding-inline: 3rem;
     }
 
     &__col {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+
+        &:nth-child(1) {
+            grid-area: copy;
+        }
+
+        &:nth-child(2) {
+            grid-area: col1;
+        }
+
+        &:nth-child(3) {
+            grid-area: col2;
+        }
+
+        &:nth-child(4) {
+            grid-area: col3;
+        }
 
         & > svg {
             color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
