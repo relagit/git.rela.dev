@@ -1,4 +1,4 @@
-import { createSignal, onMount } from "solid-js";
+import { Show, createSignal, onMount } from "solid-js";
 
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
@@ -21,6 +21,10 @@ export default () => {
     const [top, setTop] = createSignal(0);
     const [os, setOS] = createSignal<"mac" | "windows" | "linux" | "mobile">("mac");
     const [tag, setTag] = createSignal("v0.0.0");
+
+    const [sentError, setSentError] = createSignal(false);
+    const [sentSignup, setSentSignup] = createSignal(false);
+    const [waitlistEmail, setWaitlistEmail] = createSignal("");
 
     onMount(() => {
         setTop(window.scrollY);
@@ -182,29 +186,64 @@ export default () => {
                     <img class="feature-grid-item-graphic design" src="/assets/elegant.png" alt="Elegance Graphic" />
                 </div>
             </div>
-            <div class="separator"></div>
             <div class="feature download">
                 <div class="feature-text download">
                     <h2 class="feature-text-header">Sound Good?</h2>
-                    <p class="feature-text-paragraph">Grab the latest version of RelaGit for your platform.</p>
-                    <a
-                        class="feature-text-button"
-                        href={(() => {
-                            switch (os()) {
-                                case "mac":
-                                    return "https://github.com/relagit/relagit/releases/latest/download/RelaGit-mac.dmg";
-                                case "windows":
-                                    return "https://github.com/relagit/relagit/releases/latest/download/RelaGit-win.zip";
-                                case "linux":
-                                    return "https://github.com/relagit/relagit/releases/latest";
-                            }
+                    <p class="feature-text-paragraph">Put your name on our waiting list so we can notify you when RelaGit goes into beta testing.</p>
+                    <div classList={{ "feature-text-input": true, error: sentError(), disabled: sentSignup() }}>
+                        <input
+                            type="email"
+                            role="textbox"
+                            placeholder={(() => {
+                                const names = ["alan.turing", "linus.torvalds", "tim.berners-lee", "elizabeth.feinler"];
 
-                            return "/download";
-                        })()}
-                    >
-                        Download
-                        <Icon name="download" />
-                    </a>
+                                return `${names[Math.floor(Math.random() * names.length)]}@example.dev`;
+                            })()}
+                            value={waitlistEmail()}
+                            onInput={(e) => setWaitlistEmail(e.currentTarget.value.trim())}
+                        />
+                        <button
+                            aria-label="Join Waitlist"
+                            disabled={!waitlistEmail() || sentSignup()}
+                            classList={{
+                                "feature-text-input-button": true,
+                                success: sentSignup(),
+                                error: sentError(),
+                            }}
+                            onClick={async () => {
+                                if (!waitlistEmail().includes("@")) {
+                                    alert("Please enter a valid email address.");
+                                    return;
+                                }
+
+                                const res = await fetch(new URL("/api/waitlist/register", location.href), {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify({
+                                        email: waitlistEmail(),
+                                    }),
+                                });
+
+                                const json = await res.json();
+
+                                if (json.type === "success") {
+                                    setSentSignup(true);
+                                } else if (json.type === "error") {
+                                    alert(json.message);
+
+                                    setSentError(true);
+                                }
+                            }}
+                        >
+                            <Show when={!sentSignup()} fallback={<Icon name="check" />}>
+                                <Show when={!sentError()} fallback={<Icon name="x" />}>
+                                    <Icon name="paper-airplane" />
+                                </Show>
+                            </Show>
+                        </button>
+                    </div>
                 </div>
             </div>
             <Footer />
