@@ -20,7 +20,10 @@ export default () => {
                 <Title>RelaGit</Title>
                 <Meta name="description" content="The elegant solution to graphical version control. Built by developers, for developers." />
                 <Meta charset="utf-8" />
-                <Meta name="keywords" content="git, version control, graphical, gui, relagit, rela, rela.dev, rela git, rela git, rela-git, rela-git" />
+                <Meta
+                    name="keywords"
+                    content="git, github, gitlab, git workflow, git management, git productivity, git tools, git desktop, git desktop app, git desktop application, git desktop client, git desktop software, git desktop tool, git desktop tools, git desktop utility, relagit"
+                />
                 <Meta name="viewport" content="width=device-width, initial-scale=1" />
                 <Link rel="icon" href="https://rela.dev/assets/relagit-light.svg" />
 
