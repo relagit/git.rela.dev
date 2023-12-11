@@ -29,9 +29,10 @@ export const POST: ApiHandler = async ({ request }) => {
     const { data, error } = await supabase.from("waitlist").insert({ email });
 
     if (error) {
+        const knownError = error.message.includes("waitlist_email_key") ? "Email already registered" : null;
         return json({
             type: "error",
-            message: error.message,
+            message: knownError || error.message,
         });
     }
 
