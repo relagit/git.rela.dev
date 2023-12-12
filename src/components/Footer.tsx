@@ -45,7 +45,7 @@ export default () => {
                 <a href="/docs" class="footer__col__item">
                     Documentation
                 </a>
-                <a href="/redirect/github" target="_blank" class="footer__col__item">
+                <a aria-disabled="true" href="/redirect/github" target="_blank" class="footer__col__item disabled">
                     GitHub <Icon name="link-external" />
                 </a>
             </div>

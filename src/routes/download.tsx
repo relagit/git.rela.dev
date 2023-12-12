@@ -36,6 +36,8 @@ export default () => {
             setOS("linux");
         }
 
+        return;
+
         switch (os()) {
             case "mac":
                 window.location.href = "https://github.com/relagit/relagit/releases/latest/download/RelaGit-mac.dmg";

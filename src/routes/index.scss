@@ -154,17 +154,83 @@ main.index {
         transition: opacity 500ms ease-in-out;
         opacity: 0.6;
 
+        &.sponsor {
+            .feature-sponsors {
+                display: flex;
+                width: 60%;
+                gap: 2rem;
+                flex-wrap: wrap;
+
+                @media screen and (max-width: 1000px) {
+                    width: 100%;
+                    padding-inline: 1rem;
+                }
+
+                .sponsor {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 0.8rem;
+                    text-decoration: none;
+
+                    &.add {
+                        .pfp {
+                            background: rgba(255, 55, 95, 0.2);
+                            color: #ff375f;
+
+                            svg {
+                                width: 2rem;
+                                height: 2rem;
+                            }
+                        }
+
+                        .sponsor-name {
+                            color: #ff375f;
+                        }
+                    }
+
+                    .pfp {
+                        width: 7.5rem;
+                        height: 7.5rem;
+                        display: flex;
+                        flex-shrink: 0;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 7.5rem;
+                        background: rgba(255, 255, 255, 0.2);
+
+                        @media screen and (max-width: 1000px) {
+                            width: 6rem;
+                            height: 6rem;
+                            border-radius: 6rem;
+                        }
+
+                        @media screen and (max-width: 600px) {
+                            width: 5rem;
+                            height: 5rem;
+                            border-radius: 5rem;
+                        }
+                    }
+
+                    &-name {
+                        color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+                        font-size: 0.75rem;
+                        font-weight: 500;
+                        line-height: 130%;
+                    }
+                }
+            }
+        }
+
         &.download {
             opacity: 1 !important;
             padding-block: 9rem;
             border-top: 1px solid rgba(255, 255, 255, 0.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            background: linear-gradient(0deg, rgba(10, 132, 255, 0.2) 0%, rgba(10, 132, 255, 0) 100%);
-            margin-bottom: -9rem;
+            background: linear-gradient(90deg, rgba(10, 132, 255, 0.2) 0%, rgba(10, 132, 255, 0) 100%);
 
             @media screen and (max-width: 1000px) {
                 padding-block: 6rem;
-                margin-bottom: -6rem;
             }
         }
 

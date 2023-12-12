@@ -43,19 +43,20 @@ export default (props: { top?: Accessor<number>; innerWidth?: Accessor<number>; 
                 </a>
                 <a href="/download" class="header__group__link">
                     Download
+                    <div class="tag">Coming Soon</div>
                 </a>
                 <a href="/enterprise" class="header__group__link">
                     Enterprise
                 </a>
-                <a href="/workflows" class="header__group__link disabled">
+                <a aria-disabled="true" href="/workflows" class="header__group__link disabled">
                     Workflows
                 </a>
-                <a href="/styles" class="header__group__link disabled">
+                <a aria-disabled="true" href="/styles" class="header__group__link disabled">
                     Styles
                 </a>
             </div>
             <div class="header__group">
-                <a href="/redirect/github" class="header__group__link" target="_blank">
+                <a aria-disabled="true" href="/redirect/github" class="header__group__link disabled" target="_blank">
                     <Icon name="mark-github" />
                     GitHub
                 </a>

@@ -1,4 +1,4 @@
-import { Show, createSignal, onMount } from "solid-js";
+import { For, Show, createSignal, onMount } from "solid-js";
 
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
@@ -15,6 +15,25 @@ declare module "solid-js" {
         }
     }
 }
+
+const sponsors = [
+    {
+        name: "domi-btnr",
+        githubIcon: "https://avatars.githubusercontent.com/u/50876016?v=4",
+    },
+    {
+        name: "voidfill",
+        githubIcon: "https://avatars.githubusercontent.com/u/71205200?v=4",
+    },
+    {
+        name: "Overimagine1",
+        githubIcon: "https://avatars.githubusercontent.com/u/79660414?v=4",
+    },
+    {
+        name: "evmoreno",
+        githubIcon: "https://avatars.githubusercontent.com/u/19178120?v=4",
+    },
+];
 
 export default () => {
     const [innerWidth, setInnerWidth] = createSignal(0);
@@ -244,6 +263,28 @@ export default () => {
                             </Show>
                         </button>
                     </div>
+                </div>
+            </div>
+            <div class="feature sponsor" use:highlightOnScroll>
+                <div class="feature-sponsors">
+                    <For each={sponsors}>
+                        {(sponsor) => (
+                            <a class="sponsor" href={`https://github.com/${sponsor.name}`} target="_blank">
+                                <img class="pfp" src={sponsor.githubIcon} alt={`${sponsor.name}'s profile picture`} />
+                                <div class="sponsor-name">{sponsor.name}</div>
+                            </a>
+                        )}
+                    </For>
+                    <a href="/redirect/sponsor" class="sponsor add">
+                        <div class="pfp">
+                            <Icon name="plus" />
+                        </div>
+                        <div class="sponsor-name">Become a sponsor</div>
+                    </a>
+                </div>
+                <div class="feature-text">
+                    <h2 class="feature-text-header">Brought to you by.</h2>
+                    <p class="feature-text-paragraph">These wonderful individuals have sponsored or are sponsoring the organisation or its members.</p>
                 </div>
             </div>
             <Footer />
