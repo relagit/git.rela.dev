@@ -43,7 +43,10 @@ export default (props: { top?: Accessor<number>; innerWidth?: Accessor<number>; 
                 </a>
                 <a href="/download" class="header__group__link">
                     Download
-                    <div class="tag">Coming Soon</div>
+                    <div class="tag">
+                        <Icon name="stopwatch" />
+                        Coming Soon
+                    </div>
                 </a>
                 <a href="/enterprise" class="header__group__link">
                     Enterprise
