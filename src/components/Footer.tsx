@@ -74,7 +74,7 @@ export default () => {
                     Product Hunt
                     <Icon name="link-external" />
                 </a>
-                <a href="/" target="_blank" class="footer__col__item">
+                <a href="https://dribbble.com/TheCommieAxolotl" target="_blank" class="footer__col__item">
                     Dribbble
                     <Icon name="link-external" />
                 </a>
