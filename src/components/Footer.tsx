@@ -70,7 +70,7 @@ export default () => {
             </div>
             <div class="footer__col">
                 <div class="footer__col__header">Social</div>
-                <a href="/" target="_blank" class="footer__col__item">
+                <a href="https://www.producthunt.com/products/relagit" target="_blank" class="footer__col__item">
                     Product Hunt
                     <Icon name="link-external" />
                 </a>
