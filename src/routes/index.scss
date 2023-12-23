@@ -56,6 +56,11 @@ main.index {
             opacity: 1;
         }
 
+        &-badges {
+            margin-top: 16px;
+            margin-bottom: -60px;
+        }
+
         &-highlight {
             animation: brighten 1000ms ease-in-out forwards 500ms;
         }
