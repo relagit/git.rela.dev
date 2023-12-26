@@ -102,19 +102,10 @@ export default () => {
                 <span class="hero-text-highlight">The elegant solution to graphical version control.</span>
                 <br /> <span>Built by developers, for developers.</span>
                 <div class="hero-text-badges">
-                    {/* <a href="https://www.producthunt.com/posts/relagit?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-relagit" target="_blank">
+                    <a href="https://www.producthunt.com/posts/relagit?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-relagit" target="_blank">
                         <img
                             src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=430977&theme=dark"
                             alt="RelaGit - The elegant solution to graphical version control | Product Hunt"
-                            style="width: 250px; height: 54px;"
-                            width="250"
-                            height="54"
-                        />
-                    </a> */}
-                    <a href="https://www.producthunt.com/products/relagit/reviews?utm_source=badge-product_review&utm_medium=badge&utm_souce=badge-relagit" target="_blank">
-                        <img
-                            src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=564822&theme=dark"
-                            alt="RelaGit - The elegant solution to graphical version control. | Product Hunt"
                             style="width: 250px; height: 54px;"
                             width="250"
                             height="54"
