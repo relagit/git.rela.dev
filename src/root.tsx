@@ -17,6 +17,7 @@ export default () => {
     return (
         <Html lang="en">
             <Head>
+                <script defer src="https://eu.umami.is/script.js" data-website-id="2cbb5a7f-ca34-49cd-8c74-03a9509e9964"></script>
                 <Title>RelaGit</Title>
                 <Meta name="description" content="The elegant solution to graphical version control. Built by developers, for developers." />
                 <Meta charset="utf-8" />
