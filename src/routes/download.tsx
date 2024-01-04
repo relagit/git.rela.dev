@@ -7,7 +7,7 @@ import "./subpage.scss";
 
 export default () => {
     const [innerWidth, setInnerWidth] = createSignal(0);
-    const [os, setOS] = createSignal<"mac" | "windows" | "linux" | "mobile">("mac");
+    const [os, setOS] = createSignal<"mac" | "windows" | "linux" | "mobile" | "mac-arm">("mac");
     const [top, setTop] = createSignal(0);
 
     onMount(() => {
@@ -40,7 +40,11 @@ export default () => {
 
         switch (os()) {
             case "mac":
-                window.location.href = "https://github.com/relagit/relagit/releases/latest/download/RelaGit-mac.dmg";
+                window.location.href = "https://github.com/relagit/relagit/releases/latest/download/RelaGit-mac-x64.dmg";
+
+                break;
+            case "mac-arm":
+                window.location.href = "https://github.com/relagit/relagit/releases/latest/download/RelaGit-mac-arm64.dmg";
 
                 break;
             case "windows":
