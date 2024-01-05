@@ -1,4 +1,4 @@
-import { For, Show, createSignal } from "solid-js";
+import { For, Show, createSignal, onMount } from "solid-js";
 import Icon, { ProductHunt } from "./Icon";
 import "./footer.scss";
 
@@ -25,6 +25,13 @@ export default () => {
     const [sentError, setSentError] = createSignal(false);
     const [sentSignup, setSentSignup] = createSignal(false);
     const [waitlistEmail, setWaitlistEmail] = createSignal("");
+    const [input, setInput] = createSignal<HTMLInputElement>();
+
+    onMount(() => {
+        setTimeout(() => {
+            input()?.style.setProperty("background-size", "auto 16px !important");
+        }, 10);
+    });
 
     return (
         <footer class="footer">
@@ -142,6 +149,7 @@ export default () => {
                 </div>
                 <div class="footer-item-input">
                     <input
+                        ref={setInput}
                         type="email"
                         placeholder={["tim.berners-lee", "elizabeth.feinler"][Math.floor(Math.random() * 2)] + "@rela.dev"}
                         value={waitlistEmail()}
