@@ -4,9 +4,10 @@ import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import Button from "~/components/Button";
 import Logo from "~/components/Logo";
-import Icon from "~/components/Icon";
+import Icon, { ProductHunt } from "~/components/Icon";
 
 import "./index.scss";
+import server$ from "solid-start/server";
 
 declare module "solid-js" {
     namespace JSX {
@@ -35,11 +36,20 @@ const sponsors = [
     },
 ];
 
+let _upvoteCount = 0; // value will be used for ssr
+
+server$(() =>
+    fetch("https://producthunt.com/posts/430977").then(async (res) => {
+        _upvoteCount = (await res.text()).match(/Upvoted?(?:<!-- --> <!-- -->)?(\d+)/)?.[1] ?? 0;
+    })
+)();
+
 export default () => {
     const [innerWidth, setInnerWidth] = createSignal(0);
     const [top, setTop] = createSignal(0);
     const [os, setOS] = createSignal<"mac" | "windows" | "linux" | "mobile">("mac");
     const [tag, setTag] = createSignal("v0.0.0");
+    const [upvoteCount, setUpvoteCount] = createSignal(_upvoteCount);
 
     const [sentError, setSentError] = createSignal(false);
     const [sentSignup, setSentSignup] = createSignal(false);
@@ -48,6 +58,17 @@ export default () => {
     onMount(() => {
         setTop(window.scrollY);
         setInnerWidth(window.innerWidth);
+
+        // server$(async () => {
+        //     const res = await fetch("https://producthunt.com/posts/relagit");
+
+        //     const count = (await res.text()).match(/Upvoted?(?:<!-- --> <!-- -->)?(\d+)/)?.[1] ?? 0;
+
+        //     return count;
+        // })().then((res) => {
+        //     setUpvoteCount(res);
+        //     _upvoteCount = res;
+        // });
 
         fetch(new URL("/api/release", location.href)).then(async (res) => {
             setTag((await res.json()).tag);
@@ -102,14 +123,17 @@ export default () => {
                 <span class="hero-text-highlight">The elegant solution to graphical version control.</span>
                 <br /> <span>Built by developers, for developers.</span>
                 <div class="hero-text-badges">
-                    <a href="https://www.producthunt.com/products/relagit?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-relagit" target="_blank">
-                        <img
-                            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=430977&theme=dark"
-                            alt="Product Hunt"
-                            style="width: 250px; height: 54px;"
-                            width="250"
-                            height="54"
-                        />
+                    <a class="hero-text-badges-badge" href="https://producthunt.com/posts/relagit" target="_blank">
+                        <div class="hero-text-badges-badge-text">
+                            <ProductHunt />
+                            ProductHunt
+                        </div>
+                        <div class="hero-text-badges-badge-icon">
+                            <Icon name="triangle-up" />
+                            <Show when={upvoteCount() > 0}>
+                                <div>{upvoteCount()}</div>
+                            </Show>
+                        </div>
                     </a>
                 </div>
             </h1>
@@ -121,10 +145,7 @@ export default () => {
             <div class="feature" use:highlightOnScroll>
                 <div class="feature-text">
                     <h2 class="feature-text-header">Creativity is the limit.</h2>
-                    <p class="feature-text-paragraph">
-                        Create dynamic programmatic workflows to automate actions and perform awesome tasks. <br />
-                        <br /> Use modern and familiar syntax alongside a type-safe api.
-                    </p>
+                    <p class="feature-text-paragraph">Create dynamic programmatic workflows to automate actions and perform awesome tasks. Use modern and familiar syntax alongside a type-safe api.</p>
                     <a href="/workflows" target="_blank" class="feature-text-button">
                         Browse Workflows
                         <Icon name="arrow-up-right" />

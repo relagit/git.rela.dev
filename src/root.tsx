@@ -19,6 +19,7 @@ export default () => {
             <Head>
                 <script defer src="https://eu.umami.is/script.js" data-website-id="2cbb5a7f-ca34-49cd-8c74-03a9509e9964"></script>
                 <Title>RelaGit</Title>
+                <link rel="preload" href="https://rsms.me/inter/inter.css" as="style" />
                 <Meta name="description" content="The elegant solution to graphical version control. Built by developers, for developers." />
                 <Meta charset="utf-8" />
                 <Meta
@@ -28,7 +29,7 @@ export default () => {
                 <Meta name="viewport" content="width=device-width, initial-scale=1" />
                 <Link rel="icon" href="https://rela.dev/assets/relagit-light.svg" />
 
-                <Meta name="theme-color" content="#1c84ec" />
+                <Meta name="theme-color" content="#000" />
                 <Meta name="msapplication-navbutton-color" content="#1c84ec" />
                 <Meta name="apple-mobile-web-app-status-bar-style" content="#1c84ec" />
 

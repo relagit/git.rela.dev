@@ -58,7 +58,58 @@ main.index {
 
         &-badges {
             margin-top: 16px;
-            margin-bottom: -60px;
+            margin-bottom: -40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &-badge {
+                display: flex;
+                padding: 8px 16px;
+                justify-content: center;
+                align-items: center;
+                gap: 16px;
+                border-radius: 50px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 100%), rgba(255, 255, 255, 0.05);
+                text-decoration: none;
+                color: #969696;
+                text-align: center;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 120%;
+                width: fit-content;
+                transition: background 0.2s ease-out;
+
+                &:hover {
+                    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%), rgba(255, 255, 255, 0.1);
+                }
+
+                &-text {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+
+                    svg {
+                        width: 14px;
+                        height: 14px;
+                    }
+                }
+
+                &-icon {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 8px;
+                    line-height: 10px;
+
+                    svg {
+                        margin-inline: -4px;
+                    }
+                }
+            }
         }
 
         &-highlight {
@@ -132,15 +183,17 @@ main.index {
             .object {
                 position: absolute;
                 z-index: -1;
-                width: 80vw;
-                height: 40vw;
+                width: 140vw;
+                height: 60vw;
                 transform: translateX(-50%);
                 left: 50%;
                 bottom: 0;
+                top: -9vw;
 
                 @media screen and (max-width: 1000px) {
-                    width: 100vw;
-                    height: 50vw;
+                    width: 166vw;
+                    height: 83vw;
+                    top: -23vw;
                 }
             }
         }
