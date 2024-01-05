@@ -129,10 +129,10 @@ export default () => {
                             ProductHunt
                         </div>
                         <div class="hero-text-badges-badge-icon">
-                            <Icon name="triangle-up" />
                             <Show when={upvoteCount() > 0}>
                                 <div>{upvoteCount()}</div>
                             </Show>
+                            <Icon name="triangle-up" />
                         </div>
                     </a>
                 </div>

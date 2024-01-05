@@ -108,6 +108,16 @@ main.index {
                     svg {
                         margin-inline: -4px;
                     }
+
+                    div {
+                        order: 2;
+                        margin-top: -4px;
+
+                        // doing this to get around lack of :has support
+                        + span svg {
+                            margin-top: -4px;
+                        }
+                    }
                 }
             }
         }
