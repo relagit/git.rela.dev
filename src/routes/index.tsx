@@ -4,10 +4,10 @@ import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import Button from "~/components/Button";
 import Logo from "~/components/Logo";
+import server$ from "solid-start/server";
 import Icon, { ProductHunt } from "~/components/Icon";
 
 import "./index.scss";
-import server$ from "solid-start/server";
 
 declare module "solid-js" {
     namespace JSX {
@@ -16,25 +16,6 @@ declare module "solid-js" {
         }
     }
 }
-
-const sponsors = [
-    {
-        name: "domi-btnr",
-        githubIcon: "https://avatars.githubusercontent.com/u/50876016?v=4",
-    },
-    {
-        name: "voidfill",
-        githubIcon: "https://avatars.githubusercontent.com/u/71205200?v=4",
-    },
-    {
-        name: "Overimagine1",
-        githubIcon: "https://avatars.githubusercontent.com/u/79660414?v=4",
-    },
-    {
-        name: "evmoreno",
-        githubIcon: "https://avatars.githubusercontent.com/u/19178120?v=4",
-    },
-];
 
 let _upvoteCount = 0; // value will be used for ssr
 
@@ -59,16 +40,16 @@ export default () => {
         setTop(window.scrollY);
         setInnerWidth(window.innerWidth);
 
-        // server$(async () => {
-        //     const res = await fetch("https://producthunt.com/posts/relagit");
+        server$(async () => {
+            const res = await fetch("https://producthunt.com/posts/relagit");
 
-        //     const count = (await res.text()).match(/Upvoted?(?:<!-- --> <!-- -->)?(\d+)/)?.[1] ?? 0;
+            const count = (await res.text()).match(/Upvoted?(?:<!-- --> <!-- -->)?(\d+)/)?.[1] ?? 0;
 
-        //     return count;
-        // })().then((res) => {
-        //     setUpvoteCount(res);
-        //     _upvoteCount = res;
-        // });
+            return count;
+        })().then((res) => {
+            setUpvoteCount(res);
+            _upvoteCount = res;
+        });
 
         fetch(new URL("/api/release", location.href)).then(async (res) => {
             setTag((await res.json()).tag);
@@ -237,88 +218,39 @@ export default () => {
                     <img class="feature-grid-item-graphic design" src="/assets/elegant.png" alt="Elegance Graphic" />
                 </div>
             </div>
-            <div class="feature download">
-                <div class="feature-text download">
-                    <h2 class="feature-text-header">Sound Good?</h2>
-                    <p class="feature-text-paragraph">Put your name on our waiting list so we can notify you when RelaGit goes into beta testing.</p>
-                    <div classList={{ "feature-text-input": true, error: sentError(), disabled: sentSignup() }}>
-                        <input
-                            type="email"
-                            role="textbox"
-                            placeholder={(() => {
-                                const names = ["alan.turing", "linus.torvalds", "tim.berners-lee", "elizabeth.feinler"];
+            <h1 class="hero-text inline" use:highlightOnScroll>
+                <span class="hero-text-highlight">Convinced?</span>
+                <div class="hero-text-badges">
+                    {/* <a class="hero-text-badges-badge highlight disabled" href="/download" aria-disabled target="_blank">
+                        <div class="hero-text-badges-badge-text">Download</div>
+                        <div class="hero-text-badges-badge-icon">
+                            <Icon name="download" />
+                        </div>
+                    </a> */}
+                    <a
+                        class="hero-text-badges-badge highlight"
+                        href="#waitlist"
+                        onClick={(e) => {
+                            e.preventDefault();
 
-                                return `${names[Math.floor(Math.random() * names.length)]}@example.dev`;
-                            })()}
-                            value={waitlistEmail()}
-                            onInput={(e) => setWaitlistEmail(e.currentTarget.value.trim())}
-                        />
-                        <button
-                            aria-label="Join Waitlist"
-                            disabled={!waitlistEmail() || sentSignup()}
-                            classList={{
-                                "feature-text-input-button": true,
-                                success: sentSignup(),
-                                error: sentError(),
-                            }}
-                            onClick={async () => {
-                                if (!waitlistEmail().includes("@")) {
-                                    alert("Please enter a valid email address.");
-                                    return;
-                                }
+                            const waitlist = document.getElementById("waitlist");
 
-                                const res = await fetch(new URL("/api/waitlist/register", location.href), {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                    },
-                                    body: JSON.stringify({
-                                        email: waitlistEmail(),
-                                    }),
+                            if (waitlist) {
+                                waitlist.scrollIntoView({
+                                    behavior: "smooth",
                                 });
 
-                                const json = await res.json();
-
-                                if (json.type === "success") {
-                                    setSentSignup(true);
-                                } else if (json.type === "error") {
-                                    alert(json.message);
-
-                                    setSentError(true);
-                                }
-                            }}
-                        >
-                            <Show when={!sentSignup()} fallback={<Icon name="check" />}>
-                                <Show when={!sentError()} fallback={<Icon name="x" />}>
-                                    <Icon name="paper-airplane" />
-                                </Show>
-                            </Show>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="feature sponsor" use:highlightOnScroll>
-                <div class="feature-sponsors">
-                    <For each={sponsors}>
-                        {(sponsor) => (
-                            <a class="sponsor" href={`https://github.com/${sponsor.name}`} target="_blank">
-                                <img class="pfp" src={sponsor.githubIcon} alt={`${sponsor.name}'s profile picture`} />
-                                <div class="sponsor-name">{sponsor.name}</div>
-                            </a>
-                        )}
-                    </For>
-                    <a href="/redirect/sponsor" class="sponsor add">
-                        <div class="pfp">
-                            <Icon name="plus" />
+                                waitlist.focus();
+                            }
+                        }}
+                    >
+                        <div class="hero-text-badges-badge-text">Get Notified</div>
+                        <div class="hero-text-badges-badge-icon">
+                            <Icon name="bell" />
                         </div>
-                        <div class="sponsor-name">Become a sponsor</div>
                     </a>
                 </div>
-                <div class="feature-text">
-                    <h2 class="feature-text-header">Brought to you by.</h2>
-                    <p class="feature-text-paragraph">These wonderful individuals have sponsored or are sponsoring the organisation or its members.</p>
-                </div>
-            </div>
+            </h1>
             <Footer />
         </main>
     );

@@ -10,7 +10,6 @@
 main.index {
     display: flex;
     width: 100%;
-    padding-bottom: 25px;
     flex-direction: column;
     align-items: center;
     gap: 9rem;
@@ -30,6 +29,14 @@ main.index {
         opacity: 0.6;
         max-width: 80vw;
         text-wrap: balance;
+
+        &.inline {
+            padding-top: 0;
+
+            .hero-text-badges {
+                margin-bottom: 0;
+            }
+        }
 
         @media screen and (max-width: 1000px) {
             padding-top: 8rem;
@@ -58,6 +65,7 @@ main.index {
 
         &-badges {
             margin-top: 16px;
+            gap: 16px;
             margin-bottom: -40px;
             display: flex;
             align-items: center;
@@ -65,13 +73,13 @@ main.index {
 
             &-badge {
                 display: flex;
-                padding: 8px 16px;
+                padding: 10px 20px;
                 justify-content: center;
                 align-items: center;
                 gap: 16px;
                 border-radius: 50px;
                 border: 1px solid rgba(255, 255, 255, 0.2);
-                background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 100%), rgba(255, 255, 255, 0.05);
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 100%);
                 text-decoration: none;
                 color: #969696;
                 text-align: center;
@@ -80,10 +88,24 @@ main.index {
                 font-weight: 400;
                 line-height: 120%;
                 width: fit-content;
-                transition: background 0.2s ease-out;
+                transition: background-image 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+                &.disabled {
+                    opacity: 0.4 !important;
+                    pointer-events: none !important;
+                }
+
+                &.highlight {
+                    border-color: rgba(10, 132, 255, 0.2);
+                    background: linear-gradient(180deg, rgba(10, 132, 255, 0.12) 0%, rgba(10, 132, 255, 0.02) 100%);
+
+                    &:hover {
+                        background: linear-gradient(180deg, rgba(10, 132, 255, 0.14) 0%, rgba(10, 132, 255, 0.04) 100%);
+                    }
+                }
 
                 &:hover {
-                    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%), rgba(255, 255, 255, 0.1);
+                    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
                 }
 
                 &-text {
@@ -225,75 +247,6 @@ main.index {
         gap: 72px;
         transition: opacity 500ms ease-in-out;
         opacity: 0.6;
-
-        &.sponsor {
-            .feature-sponsors {
-                display: flex;
-                width: 60%;
-                gap: 2rem;
-                flex-wrap: wrap;
-
-                @media screen and (max-width: 1000px) {
-                    width: 100%;
-                    padding-inline: 1rem;
-                }
-
-                .sponsor {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 0.8rem;
-                    text-decoration: none;
-
-                    &.add {
-                        .pfp {
-                            background: rgba(255, 55, 95, 0.2);
-                            color: #ff375f;
-
-                            svg {
-                                width: 2rem;
-                                height: 2rem;
-                            }
-                        }
-
-                        .sponsor-name {
-                            color: #ff375f;
-                        }
-                    }
-
-                    .pfp {
-                        width: 7.5rem;
-                        height: 7.5rem;
-                        display: flex;
-                        flex-shrink: 0;
-                        align-items: center;
-                        justify-content: center;
-                        border-radius: 7.5rem;
-                        background: rgba(255, 255, 255, 0.2);
-
-                        @media screen and (max-width: 1000px) {
-                            width: 6rem;
-                            height: 6rem;
-                            border-radius: 6rem;
-                        }
-
-                        @media screen and (max-width: 600px) {
-                            width: 5rem;
-                            height: 5rem;
-                            border-radius: 5rem;
-                        }
-                    }
-
-                    &-name {
-                        color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
-                        font-size: 0.75rem;
-                        font-weight: 500;
-                        line-height: 130%;
-                    }
-                }
-            }
-        }
 
         &.download {
             opacity: 1 !important;
@@ -653,59 +606,6 @@ main.index {
 
                 &:hover::after {
                     width: 100% !important;
-                }
-            }
-
-            &-input {
-                margin-top: auto;
-                display: flex;
-                padding: 16px 24px;
-                align-items: center;
-                gap: 16px;
-                width: 100%;
-                border-radius: 4px;
-                background: var(--text-vibrant-primary-dark, #fff);
-                position: relative;
-                color: var(--color-base-black, #000);
-                font-size: 16px;
-                font-weight: 500;
-                line-height: 130%;
-                text-decoration: none;
-
-                &.disabled {
-                    opacity: 0.6;
-                    pointer-events: none;
-                }
-
-                input {
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                    background: transparent;
-                    color: var(--color-base-black, #000);
-                    font-size: 16px;
-                    font-weight: 500;
-                    line-height: 130%;
-                    outline: none;
-                }
-
-                button {
-                    cursor: pointer;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 2rem;
-                    height: 2rem;
-                    background: none;
-                    color: black;
-
-                    &.success {
-                        color: #2a613a;
-                    }
-
-                    &.error {
-                        color: #f95252;
-                    }
                 }
             }
         }

@@ -19,6 +19,9 @@
     --material-quinary: #18191a;
     --material-senary: #171819;
 
+    --color-secondary-vibrant: color-mix(in lch, rgba(127, 127, 127, 0.5), #c2c2c2);
+    --fill-secondary-vibrant: color-mix(in lch, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.85));
+
     --color-blue-100: #e6f2fe;
     --color-blue-200: #b1d6fb;
     --color-blue-300: #78b9f9;
