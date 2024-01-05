@@ -11,6 +11,10 @@
         padding-inline: 120px;
     }
 
+    @media screen and (max-width: 683px) {
+        padding-inline: 48px;
+    }
+
     &-group {
         display: flex;
         justify-content: space-between;
