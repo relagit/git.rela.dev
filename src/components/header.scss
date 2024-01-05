@@ -53,6 +53,10 @@
         }
     }
 
+    @media screen and (max-width: 568px) {
+        padding-inline: 16px;
+    }
+
     &.static {
         position: fixed;
         background: none;
