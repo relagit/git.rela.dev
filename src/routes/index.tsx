@@ -104,10 +104,10 @@ export default () => {
                 <span class="hero-text-highlight">The elegant solution to graphical version control.</span>
                 <br /> <span>Built by developers, for developers.</span>
                 <div class="hero-text-badges">
-                    <a class="hero-text-badges-badge" href="https://producthunt.com/posts/relagit" target="_blank">
+                    <a class="hero-text-badges-badge" href="https://producthunt.com/products/relagit" target="_blank">
                         <div class="hero-text-badges-badge-text">
                             <ProductHunt />
-                            ProductHunt
+                            Be Notified
                         </div>
                         <div class="hero-text-badges-badge-icon">
                             <Show when={upvoteCount() > 0}>
