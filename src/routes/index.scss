@@ -216,7 +216,7 @@ main.index {
                 position: absolute;
                 z-index: -1;
                 width: 140vw;
-                height: 60vw;
+                height: auto;
                 transform: translateX(-50%);
                 left: 50%;
                 bottom: 0;
@@ -224,7 +224,6 @@ main.index {
 
                 @media screen and (max-width: 1000px) {
                     width: 166vw;
-                    height: 83vw;
                     top: -23vw;
                 }
             }
