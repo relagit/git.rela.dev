@@ -88,7 +88,11 @@
         }
 
         @media screen and (max-width: 480px) {
-            padding: 16px 40px;
+            padding: 24px 40px;
+        }
+
+        @media screen and (max-width: 420px) {
+            padding: 24px 20px;
         }
     }
 
