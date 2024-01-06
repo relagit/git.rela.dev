@@ -104,10 +104,32 @@ export default () => {
                 <span class="hero-text-highlight">The elegant solution to graphical version control.</span>
                 <br /> <span>Built by developers, for developers.</span>
                 <div class="hero-text-badges">
+                    <a
+                        class="hero-text-badges-badge highlight"
+                        href="#waitlist"
+                        onClick={(e) => {
+                            e.preventDefault();
+
+                            const waitlist = document.getElementById("waitlist");
+
+                            if (waitlist) {
+                                waitlist.scrollIntoView({
+                                    behavior: "smooth",
+                                });
+
+                                waitlist.focus();
+                            }
+                        }}
+                    >
+                        <div class="hero-text-badges-badge-text">Get Notified</div>
+                        <div class="hero-text-badges-badge-icon">
+                            <Icon name="bell" />
+                        </div>
+                    </a>
                     <a class="hero-text-badges-badge" href="https://producthunt.com/products/relagit" target="_blank">
                         <div class="hero-text-badges-badge-text">
                             <ProductHunt />
-                            Be Notified
+                            Show Interest
                         </div>
                         <div class="hero-text-badges-badge-icon">
                             <Show when={upvoteCount() > 0}>
