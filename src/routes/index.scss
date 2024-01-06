@@ -71,6 +71,10 @@ main.index {
             align-items: center;
             justify-content: center;
 
+            @media screen and (max-width: 576px) {
+                flex-direction: column;
+            }
+
             &-badge {
                 display: flex;
                 padding: 10px 20px;
@@ -89,6 +93,10 @@ main.index {
                 line-height: 120%;
                 width: fit-content;
                 transition: background-image 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+                @media screen and (max-width: 756px) {
+                    font-size: 14px;
+                }
 
                 &.disabled {
                     opacity: 0.4 !important;
