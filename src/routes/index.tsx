@@ -19,11 +19,15 @@ declare module "solid-js" {
 
 let _upvoteCount = 0; // value will be used for ssr
 
-server$(() =>
-    fetch("https://producthunt.com/posts/430977").then(async (res) => {
-        _upvoteCount = (await res.text()).match(/Upvoted?(?:<!-- --> <!-- -->)?(\d+)/)?.[1] ?? 0;
-    })
-)();
+server$(() => {
+    try {
+        fetch("https://producthunt.com/posts/430977").then(async (res) => {
+            if (res.ok) _upvoteCount = (await res.text()).match(/Upvoted?(?:<!-- --> <!-- -->)?(\d+)/)?.[1] ?? 0;
+        });
+    } catch (e) {
+        console.log(e);
+    }
+})();
 
 export default () => {
     const [innerWidth, setInnerWidth] = createSignal(0);
@@ -37,11 +41,17 @@ export default () => {
         setInnerWidth(window.innerWidth);
 
         server$(async () => {
-            const res = await fetch("https://producthunt.com/posts/relagit");
+            try {
+                const res = await fetch("https://producthunt.com/posts/relagit");
 
-            const count = (await res.text()).match(/Upvoted?(?:<!-- --> <!-- -->)?(\d+)/)?.[1] ?? 0;
+                if (!res.ok) return;
 
-            return count;
+                const count = (await res.text()).match(/Upvoted?(?:<!-- --> <!-- -->)?(\d+)/)?.[1] ?? 0;
+
+                return count;
+            } catch (e) {
+                console.log(e);
+            }
         })().then((res) => {
             setUpvoteCount(res);
             _upvoteCount = res;
