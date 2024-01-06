@@ -32,10 +32,6 @@ export default () => {
     const [tag, setTag] = createSignal("v0.0.0");
     const [upvoteCount, setUpvoteCount] = createSignal(_upvoteCount);
 
-    const [sentError, setSentError] = createSignal(false);
-    const [sentSignup, setSentSignup] = createSignal(false);
-    const [waitlistEmail, setWaitlistEmail] = createSignal("");
-
     onMount(() => {
         setTop(window.scrollY);
         setInnerWidth(window.innerWidth);
