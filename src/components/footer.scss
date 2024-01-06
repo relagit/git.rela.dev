@@ -72,8 +72,21 @@
                 width: 8px;
                 height: 8px;
                 border-radius: 50px;
-                background: var(--color-green-300);
-                box-shadow: 0px 0px 20px 2px var(--color-green-500);
+
+                &.operational {
+                    background: var(--color-green-300);
+                    box-shadow: 0px 0px 20px 2px var(--color-green-500);
+                }
+
+                &.degraded {
+                    background: var(--color-orange-300);
+                    box-shadow: 0px 0px 20px 2px var(--color-orange-500);
+                }
+
+                &.offline {
+                    background: var(--color-red-300);
+                    box-shadow: 0px 0px 20px 2px var(--color-red-500);
+                }
             }
 
             .status-text {

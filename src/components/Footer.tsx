@@ -26,8 +26,27 @@ export default () => {
     const [sentSignup, setSentSignup] = createSignal(false);
     const [waitlistEmail, setWaitlistEmail] = createSignal("");
     const [input, setInput] = createSignal<HTMLInputElement>();
+    const [status, setStatus] = createSignal<"operational" | "degraded" | "offline">("operational");
 
     onMount(() => {
+        fetch("https://status.rela.dev/status-page-api/overview/0e9b8a2d-cfcd-4306-b481-757cc462d49b", { method: "POST" }).then(async (res) => {
+            const data = await res.json();
+
+            if (!data) return;
+
+            const offline = data.monitorStatusTimelines.find((monitor: any) => monitor.monitorStatus.name === "Offline");
+            const degraded = data.monitorStatusTimelines.find((monitor: any) => monitor.monitorStatus.name === "Degraded");
+            const operational = data.monitorStatusTimelines.find((monitor: any) => monitor.monitorStatus.name === "Operational");
+
+            if (offline) {
+                setStatus("offline");
+            } else if (degraded) {
+                setStatus("degraded");
+            } else if (operational) {
+                setStatus("operational");
+            }
+        });
+
         setTimeout(() => {
             input()?.style.setProperty("background-size", "auto 16px !important");
         }, 10);
@@ -203,9 +222,10 @@ export default () => {
             <div class="footer-sep"></div>
             <div class="footer-item last">
                 <a class="footer-item-status" href="https://status.rela.dev" target="_blank">
-                    <div class="status-dot online"></div>
+                    <div classList={{ "status-dot": true, [status()]: true }}></div>
                     <div class="status-text">
-                        All systems normal. <Icon name="arrow-up-right" />
+                        {status() === "operational" ? "All systems normal." : status() === "degraded" ? "Some systems degraded." : "One or more systems offline."}
+                        <Icon name="arrow-up-right" />
                     </div>
                 </a>
                 <div class="footer-item-cpy">
