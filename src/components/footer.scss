@@ -60,6 +60,13 @@
             display: flex;
             align-items: center;
             gap: 16px;
+            color: var(--color-secondary-vibrant);
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+
+            &:hover {
+                color: var(--fill-secondary-vibrant);
+            }
 
             .status-dot {
                 width: 8px;
@@ -70,10 +77,12 @@
             }
 
             .status-text {
-                color: var(--color-secondary-vibrant);
                 font-size: 16px;
                 font-weight: 400;
                 line-height: 140%;
+                display: flex;
+                align-items: center;
+                gap: 4px;
             }
         }
 
@@ -294,7 +303,7 @@
         }
 
         &-header {
-            font-weight: 500;
+            font-weight: 400;
             color: #fff;
         }
 

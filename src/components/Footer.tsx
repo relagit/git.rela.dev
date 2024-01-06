@@ -202,10 +202,12 @@ export default () => {
             </div>
             <div class="footer-sep"></div>
             <div class="footer-item last">
-                <div class="footer-item-status">
+                <a class="footer-item-status" href="https://status.rela.dev" target="_blank">
                     <div class="status-dot online"></div>
-                    <div class="status-text">All systems normal.</div>
-                </div>
+                    <div class="status-text">
+                        All systems normal. <Icon name="arrow-up-right" />
+                    </div>
+                </a>
                 <div class="footer-item-cpy">
                     <span>&copy;</span>
                     <span>2023</span>
