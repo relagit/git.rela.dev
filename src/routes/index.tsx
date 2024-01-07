@@ -19,16 +19,6 @@ declare module "solid-js" {
 
 let _upvoteCount = 0; // value will be used for ssr
 
-server$(() => {
-    try {
-        fetch("https://producthunt.com/posts/430977").then(async (res) => {
-            if (res.ok) _upvoteCount = (await res.text()).match(/Upvoted?(?:<!-- --> <!-- -->)?(\d+)/)?.[1] ?? 0;
-        });
-    } catch (e) {
-        console.log(e);
-    }
-})();
-
 export default () => {
     const [innerWidth, setInnerWidth] = createSignal(0);
     const [top, setTop] = createSignal(0);
