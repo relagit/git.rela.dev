@@ -4,6 +4,10 @@ import "./footer.scss";
 
 const sponsors = [
     {
+        name: "42chompii",
+        githubIcon: "https://avatars.githubusercontent.com/u/109488630?v=4",
+    },
+    {
         name: "domi-btnr",
         githubIcon: "https://avatars.githubusercontent.com/u/50876016?v=4",
     },
