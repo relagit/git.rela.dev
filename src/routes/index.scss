@@ -13,6 +13,7 @@ main.index {
     flex-direction: column;
     align-items: center;
     gap: 9rem;
+    background: radial-gradient(1500px 1500px at 50% 100vh, rgba(166, 137, 217, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 
     @media screen and (max-width: 1000px) {
         gap: 6rem;
