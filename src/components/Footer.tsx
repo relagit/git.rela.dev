@@ -19,6 +19,10 @@ const sponsors = [
         name: "evmoreno",
         githubIcon: "https://avatars.githubusercontent.com/u/19178120?v=4",
     },
+    {
+        name: "canadahonk",
+        githubIcon: "https://avatars.githubusercontent.com/u/19228318?v=4",
+    },
 ];
 
 export default () => {
