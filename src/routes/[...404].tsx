@@ -22,7 +22,7 @@ export default () => {
         <>
             <HttpStatusCode code={404} />
             <Title>404</Title>
-            <Header top={() => 700} innerWidth={innerWidth} />
+            <Header />
             <main class="sub-page">
                 <div class="sub-page__text">
                     <h1 class="sub-page__text__heading">404</h1>
@@ -37,7 +37,7 @@ export default () => {
                         Go Back
                     </Button>
                 </div>
-                <img src="/assets/landing/beta-decorations.png" aria-hidden="true" alt="decorations" class="decorations" />
+                <img loading="lazy" src="/assets/landing/beta-decorations.png" aria-hidden="true" alt="decorations" class="decorations" />
             </main>
         </>
     );

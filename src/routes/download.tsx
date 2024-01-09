@@ -60,14 +60,14 @@ export default () => {
 
     return (
         <>
-            <Header top={() => 1000} innerWidth={innerWidth} />
+            <Header />
             <div class="sub-page">
                 <div class="sub-page__text">
                     <h1 class="sub-page__text__heading">Nothing here.</h1>
                     <h2 class="sub-page__text__subheading">You're too early! We haven't released anything yet.</h2>
                 </div>
             </div>
-            <img src="/assets/landing/decorations.png" aria-hidden="true" alt="decorations" class="decorations" />
+            <img loading="lazy" src="/assets/landing/decorations.png" aria-hidden="true" alt="decorations" class="decorations" />
         </>
     );
 };

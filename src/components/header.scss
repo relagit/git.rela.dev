@@ -23,96 +23,64 @@
 }
 
 .header {
-    position: fixed;
     inset: 0;
     display: flex;
-    width: min(650px, 90%);
-    height: 50px;
-    padding: 12px 24px;
     justify-content: space-between;
-    background: linear-gradient(to top, #00000000, #000000);
     align-items: center;
     flex-shrink: 0;
-    left: 50%;
-    top: 20px;
-    transform: translateX(-50%);
     z-index: 9;
-
-    border-radius: 50px;
-    border: 1px solid #656d7663;
-    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(30px) saturate(2);
     -webkit-backdrop-filter: blur(30px) saturate(2);
 
     @media screen and (max-width: 600px) {
-        &:not(.static) {
-            display: none !important;
-        }
+        position: fixed !important;
+    }
 
-        &.static {
-            position: fixed !important;
+    position: fixed;
+    background: none;
+    border: none;
+
+    top: 0;
+    left: 0;
+    padding: 24px 120px;
+    transform: none;
+    width: 100%;
+    height: fit-content;
+
+    @media screen and (max-width: 810px) {
+        a:nth-child(4),
+        a:nth-child(5),
+        a:nth-child(6),
+        a:nth-child(7) {
+            display: none;
         }
     }
 
-    &.static {
-        position: fixed;
-        background: none;
-        border: none;
-        border-radius: 0;
-
-        top: 0;
-        left: 0;
-        padding: 24px 120px;
-        transform: none;
-        width: 100%;
-        height: fit-content;
-
-        .header__group {
-            gap: 32px;
-
-            @media screen and (max-width: 600px) {
-                gap: 16px;
-            }
-        }
-
-        @media screen and (max-width: 810px) {
-            a:nth-child(4),
-            a:nth-child(5),
-            a:nth-child(6),
-            a:nth-child(7) {
-                display: none;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            padding: 24px 60px;
-        }
-
-        @media screen and (max-width: 480px) {
-            padding: 24px 40px;
-        }
-
-        @media screen and (max-width: 420px) {
-            padding: 24px 20px;
-        }
+    @media screen and (max-width: 768px) {
+        padding: 24px 60px;
     }
 
-    @media screen and (max-width: 600px) {
-        width: 100vw;
-        transform: none;
-        left: 0;
-        border-radius: 0;
-        top: 0;
+    @media screen and (max-width: 480px) {
+        padding: 24px 40px;
+    }
+
+    @media screen and (max-width: 420px) {
+        padding: 24px 20px;
     }
 
     &__group {
         display: flex;
         justify-content: center;
-        gap: 16px;
+
+        gap: 32px;
 
         svg {
             width: 24px;
             height: 24px;
+        }
+
+        @media screen and (max-width: 600px) {
+            gap: 16px;
         }
 
         .icon {

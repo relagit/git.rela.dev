@@ -49,7 +49,7 @@ export default () => {
                     <Button disabled>Make an Inquiry</Button>
                 </div>
             </div>
-            <img src="/assets/landing/beta-decorations.png" aria-hidden="true" alt="decorations" class="decorations" />
+            <img loading="lazy" src="/assets/landing/beta-decorations.png" aria-hidden="true" alt="decorations" class="decorations" />
         </>
     );
 };

@@ -1,11 +1,8 @@
-import { Transition } from "solid-transition-group";
-import { Accessor, Show } from "solid-js";
-
 import Icon from "./Icon";
 
 import "./header.scss";
 
-export default (props: { top?: Accessor<number>; innerWidth?: Accessor<number>; static?: boolean }) => {
+export default () => {
     return (
         <header class="header static">
             <div class="header__group">

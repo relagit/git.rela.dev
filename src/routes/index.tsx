@@ -95,7 +95,7 @@ export default () => {
 
     return (
         <main class="index">
-            <Header static />
+            <Header />
             <h1 class="hero-text" use:highlightOnScroll>
                 <span class="hero-text-highlight">The elegant solution to graphical version control.</span>
                 <br /> <span>Built by developers, for developers.</span>
@@ -150,7 +150,7 @@ export default () => {
                         <Icon name="arrow-up-right" />
                     </a>
                 </div>
-                <img src="/assets/landing/codeblock.png" alt="code" />
+                <img loading="lazy" src="/assets/landing/codeblock.png" alt="code" />
             </div>
             <div class="feature" use:highlightOnScroll>
                 <div class="feature-window">
@@ -221,7 +221,7 @@ export default () => {
                             <span class="highlight">Your favourite developer platform.</span> Directly integrated into the experience.
                         </div>
                     </div>
-                    <img class="feature-grid-item-graphic github" src="/assets/vercel-next.png" alt="GitHub Graphic" />
+                    <img loading="lazy" class="feature-grid-item-graphic github" src="/assets/vercel-next.png" alt="GitHub Graphic" />
                 </div>
                 <div class="feature-grid-item">
                     <div class="feature-grid-item-text">
@@ -233,7 +233,7 @@ export default () => {
                             <span class="highlight">Pixel perfect interface crafted for seamless navigation.</span> Blending form and function with beautiful design.
                         </div>
                     </div>
-                    <img class="feature-grid-item-graphic design" src="/assets/elegant.png" alt="Elegance Graphic" />
+                    <img loading="lazy" class="feature-grid-item-graphic design" src="/assets/elegant.png" alt="Elegance Graphic" />
                 </div>
             </div>
             <h1 class="hero-text inline" use:highlightOnScroll>

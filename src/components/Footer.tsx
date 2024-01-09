@@ -157,7 +157,7 @@ export default () => {
                     <For each={sponsors}>
                         {(sponsor) => (
                             <a class="sponsor" href={`https://github.com/${sponsor.name}`} target="_blank">
-                                <img class="pfp" src={sponsor.githubIcon} alt={`${sponsor.name}'s profile picture`} />
+                                <img loading="lazy" class="pfp" src={sponsor.githubIcon} alt={`${sponsor.name}'s profile picture`} />
                             </a>
                         )}
                     </For>
