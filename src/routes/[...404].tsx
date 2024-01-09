@@ -37,7 +37,7 @@ export default () => {
                         Go Back
                     </Button>
                 </div>
-                <img loading="lazy" src="/assets/landing/beta-decorations.png" aria-hidden="true" alt="decorations" class="decorations" />
+                <img loading="lazy" src="/assets/landing/beta-decorations.png" aria-hidden="true" alt="Blurry background gradient blobs" class="decorations" />
             </main>
         </>
     );

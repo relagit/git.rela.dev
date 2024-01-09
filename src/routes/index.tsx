@@ -136,9 +136,9 @@ export default () => {
                     </a>
                 </div>
             </h1>
-            <div class="window-container">
+            <div class="window-container" aria-label="Image of RelaGit in the diff view, multple added lines and files.">
                 <div class="window" use:highlightOnScroll></div>
-                <img src="/assets/blur.png" width="140vw" height="40vw" alt="objectBlur" class="object" />
+                <img src="/assets/blur.png" width="140vw" height="40vw" alt="Blurry background gradient blobs" class="object" />
             </div>
             <div class="separator" />
             <div class="feature" use:highlightOnScroll>
@@ -150,7 +150,7 @@ export default () => {
                         <Icon name="arrow-up-right" />
                     </a>
                 </div>
-                <img loading="lazy" src="/assets/landing/codeblock.png" alt="code" />
+                <img loading="lazy" src="/assets/landing/codeblock.png" alt="Codeblock showing a workflow that runs on commits"></img>
             </div>
             <div class="feature" use:highlightOnScroll>
                 <div class="feature-window">
@@ -221,7 +221,7 @@ export default () => {
                             <span class="highlight">Your favourite developer platform.</span> Directly integrated into the experience.
                         </div>
                     </div>
-                    <img loading="lazy" class="feature-grid-item-graphic github" src="/assets/vercel-next.png" alt="GitHub Graphic" />
+                    <img loading="lazy" class="feature-grid-item-graphic github" src="/assets/vercel-next.png" alt="The GitHub vercel/next.js repository being cloned inside RelaGit" />
                 </div>
                 <div class="feature-grid-item">
                     <div class="feature-grid-item-text">
@@ -233,7 +233,12 @@ export default () => {
                             <span class="highlight">Pixel perfect interface crafted for seamless navigation.</span> Blending form and function with beautiful design.
                         </div>
                     </div>
-                    <img loading="lazy" class="feature-grid-item-graphic design" src="/assets/elegant.png" alt="Elegance Graphic" />
+                    <img
+                        loading="lazy"
+                        class="feature-grid-item-graphic design"
+                        src="/assets/elegant.png"
+                        alt="The Create or Add repository modal in RelaGit, with the curve of the window being emphasised"
+                    />
                 </div>
             </div>
             <h1 class="hero-text inline" use:highlightOnScroll>
