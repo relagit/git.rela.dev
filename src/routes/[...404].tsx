@@ -1,5 +1,6 @@
 import { HttpStatusCode } from "solid-start/server";
-import { createSignal, onMount } from "solid-js";
+import { Show } from "solid-js";
+import { isDev } from "solid-js/web";
 import { Title } from "solid-start";
 
 import Button from "~/components/Button";
@@ -7,25 +8,15 @@ import Header from "~/components/Header";
 
 import "./subpage.scss";
 
-export default () => {
-    const [innerWidth, setInnerWidth] = createSignal(0);
-
-    onMount(() => {
-        setInnerWidth(window.innerWidth);
-
-        window.addEventListener("resize", () => {
-            setInnerWidth(window.innerWidth);
-        });
-    });
-
+export default (props: { code?: number; error?: string | Error }) => {
     return (
         <>
-            <HttpStatusCode code={404} />
-            <Title>404</Title>
+            <HttpStatusCode code={props.code || 404} />
+            <Title>{props.code || 404}</Title>
             <Header />
             <main class="sub-page">
                 <div class="sub-page__text">
-                    <h1 class="sub-page__text__heading">404</h1>
+                    <h1 class="sub-page__text__heading">{props.code || 404}</h1>
                     <h2 class="sub-page__text__subheading">Are you sure there's meant to be something here? Try again or go back.</h2>
                 </div>
                 <div class="sub-page__buttons">

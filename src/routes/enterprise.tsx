@@ -6,22 +6,9 @@ import Button from "~/components/Button";
 import "./subpage.scss";
 
 export default () => {
-    const [innerWidth, setInnerWidth] = createSignal(0);
     const [os, setOS] = createSignal<"mac" | "windows" | "linux" | "mobile">("mac");
-    const [top, setTop] = createSignal(0);
 
     onMount(() => {
-        setTop(window.scrollY);
-        setInnerWidth(window.innerWidth);
-
-        window.addEventListener("scroll", () => {
-            setTop(window.scrollY);
-        });
-
-        window.addEventListener("resize", () => {
-            setInnerWidth(window.innerWidth);
-        });
-
         const userAgent = window.navigator.userAgent.toLowerCase();
 
         if (userAgent.includes("iPhone") || userAgent.includes("iPad") || userAgent.includes("android")) {

@@ -48,15 +48,18 @@ export default () => {
                 <a href="/enterprise" class="header__group__link">
                     Enterprise
                 </a>
-                <a aria-disabled="true" href="/workflows" class="header__group__link disabled">
+                <a href="/docs" class="header__group__link">
+                    Docs
+                </a>
+                <a tabIndex={0} aria-label="Browse Workflows" aria-disabled="true" href="/workflows" class="header__group__link disabled">
                     Workflows
                 </a>
-                <a aria-disabled="true" href="/styles" class="header__group__link disabled">
+                <a tabIndex={0} aria-label="Browse Styles" aria-disabled="true" href="/styles" class="header__group__link disabled">
                     Styles
                 </a>
             </div>
             <div class="header__group">
-                <a aria-disabled="true" href="/redirect/github" class="header__group__link disabled" target="_blank">
+                <a aria-disabled="true" href="/redirect/github" class="header__group__link disabled git" target="_blank">
                     <Icon name="mark-github" />
                     GitHub
                 </a>

@@ -183,6 +183,7 @@ export default () => {
                         onInput={(e) => setWaitlistEmail(e.currentTarget.value.trim())}
                     />
                     <button
+                        tabIndex={0}
                         aria-label="Join Waitlist"
                         disabled={!waitlistEmail() || sentSignup()}
                         classList={{

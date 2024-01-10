@@ -1,3 +1,19 @@
-export default (...classes: any[]) => {
-    return classes.filter(Boolean).join(" ");
+export default (...classes: (string | number | undefined | Record<string, boolean>)[]): string => {
+    return classes
+        .map((c) => {
+            if (typeof c === "string" || typeof c === "number") {
+                return c.toString();
+            }
+
+            if (typeof c === "object") {
+                return Object.entries(c)
+                    .filter(([, v]) => v)
+                    .map(([k]) => k)
+                    .join(" ");
+            }
+
+            return "";
+        })
+        .filter(Boolean)
+        .join(" ");
 };

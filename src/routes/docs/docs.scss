@@ -52,30 +52,21 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    padding: 0 0 30vh 150px;
+    padding: calc(72px + 4rem) 0 4rem 4rem;
+    scroll-behavior: smooth;
+    overflow-y: auto;
+    gap: 8px;
 
-    .items {
-        scroll-behavior: smooth;
-        overflow-y: auto;
-        scrollbar-width: none;
-        display: flex;
-        flex-direction: column;
-        position: relative;
+    .label {
+        color: var(--base-black);
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-top: 32px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
 
-        .spacer {
-            min-height: 260px;
-        }
-
-        &::after {
-            position: absolute;
-            content: "";
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 16.15%, rgba(0, 0, 0, 0) 83.85%, rgba(0, 0, 0, 0.2) 100%);
-            z-index: 9;
-            pointer-events: none;
+        &:first-child {
+            margin-top: 0;
         }
     }
 
@@ -83,11 +74,9 @@
         display: none;
     }
 
-    &__item {
+    .item {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        border-radius: 4px;
         cursor: pointer;
         width: 100%;
         color: var(--base-grey);
@@ -95,22 +84,14 @@
         transition: all 0.2s ease-out;
         margin-block: 0;
         background: none;
+        font-size: 14px;
 
-        &:hover,
-        &-active {
-            color: var(--base-black);
+        &:hover {
+            color: var(--color-blue-500);
         }
 
-        &-active {
-            margin-block: 2rem;
-
-            &:first-child {
-                margin-top: 0;
-            }
-
-            &:last-child {
-                margin-bottom: 0;
-            }
+        &.active {
+            color: var(--color-blue-500);
         }
     }
 
@@ -124,9 +105,10 @@
     padding: 8rem 20% 3rem 3rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
     font-size: 1rem;
     gap: 1rem;
+    min-height: 100vh;
+    height: fit-content;
 
     @media screen and (max-width: 768px) {
         padding: 2rem 5% 2rem 2rem;
@@ -138,11 +120,10 @@
 
     &__content {
         width: 100%;
-    }
-
-    .byline {
-        margin-bottom: 1.2rem;
-        color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
     }
 
     .title {
@@ -169,6 +150,29 @@
         font-weight: 400;
         margin-bottom: 2rem;
         border-bottom: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+    }
+
+    .byline {
+        color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: auto;
+        padding-top: 8px;
+
+        a {
+            color: inherit;
+            height: 16px;
+
+            svg {
+                height: 16px;
+                width: 16px;
+            }
+        }
     }
 }
 
@@ -177,7 +181,7 @@
     -webkit-text-size-adjust: 100%;
     margin: 0;
     color: var(--color-fg-default);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-family: var(--font-primary);
     font-size: 16px;
     line-height: 1.5;
     word-wrap: break-word;

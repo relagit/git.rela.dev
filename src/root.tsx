@@ -5,6 +5,8 @@ import { Suspense, onMount } from "solid-js";
 import { injectSpeedInsights } from "@vercel/speed-insights";
 import { inject } from "@vercel/analytics";
 
+import FourOhFour from "~/routes/[...404]";
+
 import "./root.scss";
 
 export default () => {
@@ -47,7 +49,7 @@ export default () => {
             </Head>
             <Body>
                 <Suspense>
-                    <ErrorBoundary>
+                    <ErrorBoundary fallback={(e, reset) => (e.toString().includes("Hydration") ? reset() : null, (<FourOhFour error={e} code={500} />))}>
                         <Routes>
                             <FileRoutes />
                         </Routes>

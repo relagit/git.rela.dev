@@ -2,7 +2,6 @@ import { For, Show, createSignal, onMount } from "solid-js";
 
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
-import Button from "~/components/Button";
 import Logo from "~/components/Logo";
 import server$ from "solid-start/server";
 import Icon, { ProductHunt } from "~/components/Icon";
@@ -20,16 +19,11 @@ declare module "solid-js" {
 let _upvoteCount = 0; // value will be used for ssr
 
 export default () => {
-    const [innerWidth, setInnerWidth] = createSignal(0);
-    const [top, setTop] = createSignal(0);
     const [os, setOS] = createSignal<"mac" | "windows" | "linux" | "mobile">("mac");
     const [tag, setTag] = createSignal("v0.0.0");
     const [upvoteCount, setUpvoteCount] = createSignal(_upvoteCount);
 
     onMount(() => {
-        setTop(window.scrollY);
-        setInnerWidth(window.innerWidth);
-
         server$(async () => {
             try {
                 const res = await fetch("https://producthunt.com/posts/relagit");
@@ -49,14 +43,6 @@ export default () => {
 
         fetch(new URL("/api/release", location.href)).then(async (res) => {
             setTag((await res.json()).tag);
-        });
-
-        window.addEventListener("scroll", () => {
-            setTop(window.scrollY);
-        });
-
-        window.addEventListener("resize", () => {
-            setInnerWidth(window.innerWidth);
         });
 
         const userAgent = window.navigator.userAgent.toLowerCase();
@@ -144,7 +130,7 @@ export default () => {
             <div class="feature" use:highlightOnScroll>
                 <div class="feature-text">
                     <h2 class="feature-text-header">Creativity is the limit.</h2>
-                    <p class="feature-text-paragraph">Create dynamic programmatic workflows to automate actions and perform awesome tasks. Use modern and familiar syntax alongside a type-safe api.</p>
+                    <p class="feature-text-paragraph">Create dynamic workflows to automate actions and perform awesome tasks when things happen in your repositories.</p>
                     <a href="/workflows" target="_blank" class="feature-text-button">
                         Browse Workflows
                         <Icon name="arrow-up-right" />
@@ -169,32 +155,20 @@ export default () => {
                 </div>
             </div>
             <div class="separator" />
-            <div class="feature-grid" use:highlightOnScroll>
-                <div class="feature-grid-item">
+            <div class="feature-grid">
+                <div use:highlightOnScroll class="feature-grid-item">
                     <div class="feature-grid-item-text">
                         <div class="feature-grid-item-text-label">
-                            <Icon name="stopwatch" />
-                            Speedy
+                            <Icon name="mark-github" />
+                            GitHub Integration
                         </div>
                         <div class="feature-grid-item-text-paragraph">
-                            <span class="highlight">Designed to move at your speed.</span> Next generation tooling enables lightning fast UI updates and commands.
+                            <span class="highlight">Your favourite developer platform.</span> Directly integrated into the experience.
                         </div>
                     </div>
-                    <div class="feature-grid-item-graphic speed">
-                        <div class="box">
-                            <Icon name="git-merge" />
-                        </div>
-                        <div class="line"></div>
-                        <div class="box">
-                            <Logo />
-                        </div>
-                        <div class="line"></div>
-                        <div class="box highlight">
-                            <Icon name="person" />
-                        </div>
-                    </div>
+                    <img loading="lazy" class="feature-grid-item-graphic github" src="/assets/vercel-next.png" alt="The GitHub vercel/next.js repository being cloned inside RelaGit" />
                 </div>
-                <div class="feature-grid-item">
+                <div use:highlightOnScroll class="feature-grid-item">
                     <div class="feature-grid-item-text">
                         <div class="feature-grid-item-text-label">
                             <Icon name="code" />
@@ -211,19 +185,48 @@ export default () => {
                         <div class="message you">Sounds good 👍</div>
                     </div>
                 </div>
-                <div class="feature-grid-item">
+                <div use:highlightOnScroll class="feature-grid-item full">
                     <div class="feature-grid-item-text">
                         <div class="feature-grid-item-text-label">
-                            <Icon name="mark-github" />
-                            GitHub Integration
+                            <Icon name="browser" />
+                            Contextual Popout <div class="feature-grid-item-text-label-badge">New</div>
                         </div>
                         <div class="feature-grid-item-text-paragraph">
-                            <span class="highlight">Your favourite developer platform.</span> Directly integrated into the experience.
+                            <span class="highlight">Goes anywhere you go.</span> Open out a native popout to view focused information about what you're working on.
                         </div>
                     </div>
-                    <img loading="lazy" class="feature-grid-item-graphic github" src="/assets/vercel-next.png" alt="The GitHub vercel/next.js repository being cloned inside RelaGit" />
+                    <img
+                        loading="lazy"
+                        class="feature-grid-item-graphic popout"
+                        src="/assets/popout.png"
+                        alt="A native popout window is open above a code editor. The popout shows modified files and commit history."
+                    />
                 </div>
-                <div class="feature-grid-item">
+                <div use:highlightOnScroll class="feature-grid-item">
+                    <div class="feature-grid-item-text">
+                        <div class="feature-grid-item-text-label">
+                            <Icon name="stopwatch" />
+                            Speedy
+                        </div>
+                        <div class="feature-grid-item-text-paragraph">
+                            <span class="highlight">Designed to move at your speed.</span> Next generation tooling enables lightning fast UI updates and performance.
+                        </div>
+                    </div>
+                    <div class="feature-grid-item-graphic speed">
+                        <div class="box">
+                            <Icon name="git-merge" />
+                        </div>
+                        <div class="line"></div>
+                        <div class="box">
+                            <Logo />
+                        </div>
+                        <div class="line"></div>
+                        <div class="box highlight">
+                            <Icon name="person" />
+                        </div>
+                    </div>
+                </div>
+                <div use:highlightOnScroll class="feature-grid-item">
                     <div class="feature-grid-item-text">
                         <div class="feature-grid-item-text-label">
                             <Icon name="flame" />

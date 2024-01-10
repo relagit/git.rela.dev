@@ -103,6 +103,12 @@
 
             transition: color 0.2s ease-in-out;
 
+            @media screen and (max-width: 600px) {
+                &.git {
+                    font-size: 0;
+                }
+            }
+
             &.disabled {
                 pointer-events: none;
                 opacity: 0.5;

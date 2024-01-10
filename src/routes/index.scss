@@ -39,16 +39,16 @@ main.index {
             }
         }
 
-        @media screen and (max-width: 1000px) {
-            padding-top: 8rem;
-            font-size: 2rem;
-        }
-
-        @media screen and (max-width: 800px) {
+        @media screen and (max-width: 1260px) {
             br {
                 display: none;
                 width: 0;
             }
+        }
+
+        @media screen and (max-width: 1000px) {
+            padding-top: 8rem;
+            font-size: 2rem;
         }
 
         @media screen and (max-width: 600px) {
@@ -302,20 +302,11 @@ main.index {
             gap: 1px;
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: opacity 500ms ease-in-out;
-            opacity: 0.6;
-
-            &.highlighted,
-            &:hover {
-                opacity: 1;
-            }
 
             @media screen and (max-width: 950px) {
                 width: calc(100% - 8rem);
                 margin: 0 4rem;
                 grid-template-columns: 1fr;
-
-                opacity: 1 !important;
             }
 
             @media screen and (max-width: 600px) {
@@ -349,6 +340,44 @@ main.index {
                 align-items: flex-start;
                 gap: 32px;
 
+                > * {
+                    opacity: 0.6;
+                    transition: opacity 500ms ease-in-out;
+                }
+
+                &.highlighted,
+                &:hover {
+                    > * {
+                        opacity: 1;
+                    }
+                }
+
+                @media screen and (max-width: 950px) {
+                    > * {
+                        opacity: 1 !important;
+                    }
+                }
+
+                &.full {
+                    grid-column-end: span 2;
+                    align-items: center;
+                    flex-direction: row;
+
+                    .feature-grid-item-text-paragraph .highlight {
+                        display: block;
+                    }
+
+                    @media screen and (max-width: 950px) {
+                        grid-column-end: auto;
+                        align-items: flex-start;
+                        flex-direction: column;
+
+                        .feature-grid-item-text-paragraph .highlight {
+                            display: inline;
+                        }
+                    }
+                }
+
                 @media screen and (max-width: 950px) {
                     padding: 32px;
                 }
@@ -360,6 +389,11 @@ main.index {
                 &-graphic {
                     pointer-events: none;
                     user-select: none;
+
+                    &.popout {
+                        width: 100%;
+                        height: auto;
+                    }
 
                     &.github,
                     &.design {
@@ -475,6 +509,20 @@ main.index {
                         svg {
                             height: 16px;
                             width: 16px;
+                        }
+
+                        &-badge {
+                            display: flex;
+                            padding: 6px 12px;
+                            justify-content: center;
+                            align-items: center;
+                            gap: 10px;
+                            border-radius: 20px;
+                            background: rgba(10, 132, 255, 0.2);
+                            color: var(--color-blue-500);
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 110%;
                         }
                     }
 
