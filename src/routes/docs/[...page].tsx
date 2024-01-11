@@ -86,76 +86,78 @@ export default () => {
     });
 
     return (
-        <Show
-            when={docs()}
-            fallback={
-                <div class="post-empty">
+        <>
+            <Title>RelaGit - {getPost(docs(), page())?.meta.title || "Documentation"}</Title>
+            <Meta name="description" content={getPost(docs(), page())?.meta.description} />
+            <Meta name="og:title" content={"RelaGit" + (getPost(docs(), page())?.meta.title || "Documentation")} />
+            <Meta name="og:description" content={getPost(docs(), page())?.meta.description} />
+            <Meta name="og:type" content="article" />
+            <Meta name="twitter:title" content={"RelaGit" + (getPost(docs(), page())?.meta.title || "Documentation")} />
+            <Meta name="twitter:description" content={getPost(docs(), page())?.meta.description} />
+            <Show
+                when={docs()}
+                fallback={
+                    <div class="post-empty">
+                        <Header />
+                        <aside class="sidebar">
+                            <div class="label empty"></div>
+                            <div class="item empty"></div>
+                            <div class="item empty"></div>
+                            <div class="item empty"></div>
+                        </aside>
+                        <div class="post">
+                            <div class="post__content">
+                                <h1 class="title empty"></h1>
+                                <h2 class="description empty"></h2>
+                                <div class="markdown-body">
+                                    {/* pick a random array length frmo 15-25 */}
+                                    <For each={Array.from({ length: Math.floor(Math.random() * 10) + 15 })}>
+                                        {() => (
+                                            // math.random but more focused towards higher numbers
+                                            <div class="empty" style={{ "--w": Math.random() }}></div>
+                                        )}
+                                    </For>
+                                </div>
+                            </div>
+                            <div class="byline empty"></div>
+                        </div>
+                    </div>
+                }
+            >
+                <Show when={getPost(docs(), page())} fallback={<FourOhFour />}>
                     <Header />
                     <aside class="sidebar">
-                        <div class="label empty"></div>
-                        <div class="item empty"></div>
-                        <div class="item empty"></div>
-                        <div class="item empty"></div>
+                        <Pages pages={docs()} page={page()} setPage={setPage} />
                     </aside>
                     <div class="post">
                         <div class="post__content">
-                            <h1 class="title empty"></h1>
-                            <h2 class="description empty"></h2>
+                            <h1 class="title">{getPost(docs(), page())?.meta.title}</h1>
+                            <h2 class="description">{getPost(docs(), page())?.meta.description}</h2>
                             <div class="markdown-body">
-                                {/* pick a random array length frmo 15-25 */}
-                                <For each={Array.from({ length: Math.floor(Math.random() * 10) + 15 })}>
-                                    {() => (
-                                        // math.random but more focused towards higher numbers
-                                        <div class="empty" style={{ "--w": Math.random() }}></div>
-                                    )}
-                                </For>
+                                <ErrorBoundary fallback="hi">
+                                    <Show when={getPost(docs(), page())?.default}>{getPost(docs(), page())?.default}</Show>
+                                </ErrorBoundary>
                             </div>
                         </div>
-                        <div class="byline empty"></div>
-                    </div>
-                </div>
-            }
-        >
-            <Title>{getPost(docs(), page())?.meta.title}</Title>
-            <Meta name="description" content={getPost(docs(), page())?.meta.description} />
-            <Meta name="og:title" content={getPost(docs(), page())?.meta.title} />
-            <Meta name="og:description" content={getPost(docs(), page())?.meta.description} />
-            <Meta name="og:type" content="article" />
-            <Meta name="twitter:title" content={getPost(docs(), page())?.meta.title} />
-            <Meta name="twitter:description" content={getPost(docs(), page())?.meta.description} />
-            <Show when={getPost(docs(), page())} fallback={<FourOhFour />}>
-                <Header />
-                <aside class="sidebar">
-                    <Pages pages={docs()} page={page()} setPage={setPage} />
-                </aside>
-                <div class="post">
-                    <div class="post__content">
-                        <h1 class="title">{getPost(docs(), page())?.meta.title}</h1>
-                        <h2 class="description">{getPost(docs(), page())?.meta.description}</h2>
-                        <div class="markdown-body">
-                            <ErrorBoundary fallback="hi">
-                                <Show when={getPost(docs(), page())?.default}>{getPost(docs(), page())?.default}</Show>
-                            </ErrorBoundary>
+                        <div class="byline">
+                            <span>
+                                Updated on{" "}
+                                {getPost(docs(), page())?.meta.date.toLocaleString("en-US", {
+                                    month: "long",
+                                    day: "numeric",
+                                    year: "numeric",
+                                })}
+                            </span>
+                            <a title="Edit on GitHub" href={`https://github.com/relagit/git.rela.dev/edit/main/src/data/docs/${params.page}.mdx`}>
+                                <Icon name="pencil" />
+                            </a>
+                            <a title="View on GitHub" href={`https://github.com/relagit/git.rela.dev/tree/main/src/data/docs/${params.page}.mdx`}>
+                                <Icon name="link-external" />
+                            </a>
                         </div>
                     </div>
-                    <div class="byline">
-                        <span>
-                            Updated on{" "}
-                            {getPost(docs(), page())?.meta.date.toLocaleString("en-US", {
-                                month: "long",
-                                day: "numeric",
-                                year: "numeric",
-                            })}
-                        </span>
-                        <a title="Edit on GitHub" href={`https://github.com/relagit/git.rela.dev/edit/main/src/data/docs/${params.page}.mdx`}>
-                            <Icon name="pencil" />
-                        </a>
-                        <a title="View on GitHub" href={`https://github.com/relagit/git.rela.dev/tree/main/src/data/docs/${params.page}.mdx`}>
-                            <Icon name="link-external" />
-                        </a>
-                    </div>
-                </div>
+                </Show>
             </Show>
-        </Show>
+        </>
     );
 };
