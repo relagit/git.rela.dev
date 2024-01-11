@@ -87,12 +87,12 @@ export default () => {
 
     return (
         <>
-            <Title>RelaGit - {getPost(docs(), page())?.meta.title || "Documentation"}</Title>
+            <Title>{"RelaGit - " + (getPost(docs(), page())?.meta.title || "Documentation")}</Title>
             <Meta name="description" content={getPost(docs(), page())?.meta.description} />
-            <Meta name="og:title" content={"RelaGit" + (getPost(docs(), page())?.meta.title || "Documentation")} />
+            <Meta name="og:title" content={"RelaGit - " + (getPost(docs(), page())?.meta.title || "Documentation")} />
             <Meta name="og:description" content={getPost(docs(), page())?.meta.description} />
             <Meta name="og:type" content="article" />
-            <Meta name="twitter:title" content={"RelaGit" + (getPost(docs(), page())?.meta.title || "Documentation")} />
+            <Meta name="twitter:title" content={"RelaGit - " + (getPost(docs(), page())?.meta.title || "Documentation")} />
             <Meta name="twitter:description" content={getPost(docs(), page())?.meta.description} />
             <Show
                 when={docs()}
