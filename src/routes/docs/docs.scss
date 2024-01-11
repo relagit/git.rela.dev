@@ -46,6 +46,37 @@
     --color-danger-fg: #f85149;
 }
 
+@keyframes skeletonBg {
+    0%,
+    100% {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+}
+
+.empty {
+    width: 100px;
+    height: 16px;
+    border-radius: 4px;
+    animation: skeletonBg 1.2s ease-in-out infinite;
+
+    &.byline {
+        width: 400px;
+    }
+
+    &.title {
+        height: 32px;
+        width: 200px;
+    }
+}
+
+.markdown-body .empty {
+    width: calc(300px + (200px * var(--w)));
+    margin-bottom: 4px;
+}
+
 .sidebar {
     width: 350px;
     height: 100vh;
@@ -111,7 +142,7 @@
     height: fit-content;
 
     @media screen and (max-width: 768px) {
-        padding: 2rem 5% 2rem 2rem;
+        padding: 7rem 5% 2rem 2rem;
     }
 
     @media screen and (max-width: 620px) {

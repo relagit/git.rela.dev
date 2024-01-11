@@ -9,7 +9,7 @@ import Header from "~/components/Header";
 import Icon from "~/components/Icon";
 import cn from "~/utils/cn";
 
-const pages = await _assemble();
+const pages = _assemble();
 
 const toName = (str: string) => {
     return str
@@ -18,7 +18,11 @@ const toName = (str: string) => {
         .join(" ");
 };
 
-const getPost = (slug: string): Article | null => {
+const getPost = (pages: Awaited<ReturnType<typeof _assemble>> | undefined, slug: string): Article | null => {
+    if (!pages) {
+        return null;
+    }
+
     const parts = slug.split("/");
 
     let post = pages;
@@ -34,7 +38,9 @@ const getPost = (slug: string): Article | null => {
     return post as unknown as Article;
 };
 
-const Pages = (props: { page: string; setPage: Setter<string>; pages: ArticleMap }) => {
+const Pages = (props: { page: string; setPage: Setter<string>; pages: ArticleMap | undefined }) => {
+    if (!props.pages) return null;
+
     return (
         <For each={Object.entries(props.pages).sort((a, b) => ((a[1] as Article).meta?.order || 0) - ((b[1] as Article).meta?.order || 0))}>
             {([slug, item]) => (
@@ -73,34 +79,69 @@ export default () => {
 
     const [page, setPage] = createSignal<string>(params.page);
 
+    const [docs, setDocs] = createSignal<ArticleMap>();
+
+    onMount(async () => {
+        setDocs(await pages);
+    });
+
     return (
-        <>
-            <Title>{getPost(page())?.meta.title}</Title>
-            <Meta name="description" content={getPost(page())?.meta.description} />
-            <Meta name="og:title" content={getPost(page())?.meta.title} />
-            <Meta name="og:description" content={getPost(page())?.meta.description} />
+        <Show
+            when={docs()}
+            fallback={
+                <div class="post-empty">
+                    <Header />
+                    <aside class="sidebar">
+                        <div class="label empty"></div>
+                        <div class="item empty"></div>
+                        <div class="item empty"></div>
+                        <div class="item empty"></div>
+                    </aside>
+                    <div class="post">
+                        <div class="post__content">
+                            <h1 class="title empty"></h1>
+                            <h2 class="description empty"></h2>
+                            <div class="markdown-body">
+                                {/* pick a random array length frmo 15-25 */}
+                                <For each={Array.from({ length: Math.floor(Math.random() * 10) + 15 })}>
+                                    {() => (
+                                        // math.random but more focused towards higher numbers
+                                        <div class="empty" style={{ "--w": Math.random() }}></div>
+                                    )}
+                                </For>
+                            </div>
+                        </div>
+                        <div class="byline empty"></div>
+                    </div>
+                </div>
+            }
+        >
+            <Title>{getPost(docs(), page())?.meta.title}</Title>
+            <Meta name="description" content={getPost(docs(), page())?.meta.description} />
+            <Meta name="og:title" content={getPost(docs(), page())?.meta.title} />
+            <Meta name="og:description" content={getPost(docs(), page())?.meta.description} />
             <Meta name="og:type" content="article" />
-            <Meta name="twitter:title" content={getPost(page())?.meta.title} />
-            <Meta name="twitter:description" content={getPost(page())?.meta.description} />
-            <Show when={getPost(page())} fallback={<FourOhFour />}>
+            <Meta name="twitter:title" content={getPost(docs(), page())?.meta.title} />
+            <Meta name="twitter:description" content={getPost(docs(), page())?.meta.description} />
+            <Show when={getPost(docs(), page())} fallback={<FourOhFour />}>
                 <Header />
                 <aside class="sidebar">
-                    <Pages pages={pages} page={page()} setPage={setPage} />
+                    <Pages pages={docs()} page={page()} setPage={setPage} />
                 </aside>
                 <div class="post">
                     <div class="post__content">
-                        <h1 class="title">{getPost(page())?.meta.title}</h1>
-                        <h2 class="description">{getPost(page())?.meta.description}</h2>
+                        <h1 class="title">{getPost(docs(), page())?.meta.title}</h1>
+                        <h2 class="description">{getPost(docs(), page())?.meta.description}</h2>
                         <div class="markdown-body">
                             <ErrorBoundary fallback="hi">
-                                <Show when={getPost(page())?.default}>{getPost(page())?.default}</Show>
+                                <Show when={getPost(docs(), page())?.default}>{getPost(docs(), page())?.default}</Show>
                             </ErrorBoundary>
                         </div>
                     </div>
                     <div class="byline">
                         <span>
                             Updated on{" "}
-                            {getPost(page())?.meta.date.toLocaleString("en-US", {
+                            {getPost(docs(), page())?.meta.date.toLocaleString("en-US", {
                                 month: "long",
                                 day: "numeric",
                                 year: "numeric",
@@ -115,6 +156,6 @@ export default () => {
                     </div>
                 </div>
             </Show>
-        </>
+        </Show>
     );
 };
