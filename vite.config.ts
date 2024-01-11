@@ -29,4 +29,11 @@ export default defineConfig({
             ssr: true,
         }),
     ],
+    build: {
+        rollupOptions: {
+            output: {
+                format: "es",
+            },
+        },
+    },
 });
