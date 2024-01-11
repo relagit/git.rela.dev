@@ -148,10 +148,10 @@ export default () => {
                                     year: "numeric",
                                 })}
                             </span>
-                            <a title="Edit on GitHub" href={`https://github.com/relagit/git.rela.dev/edit/main/src/data/docs/${params.page}.mdx`}>
+                            <a title="Edit on GitHub" target="_blank" href={`https://github.com/relagit/git.rela.dev/edit/main/src/data/docs/${params.page}.mdx`}>
                                 <Icon name="pencil" />
                             </a>
-                            <a title="View on GitHub" href={`https://github.com/relagit/git.rela.dev/tree/main/src/data/docs/${params.page}.mdx`}>
+                            <a title="View on GitHub" target="_blank" href={`https://github.com/relagit/git.rela.dev/tree/main/src/data/docs/${params.page}.mdx`}>
                                 <Icon name="link-external" />
                             </a>
                         </div>
