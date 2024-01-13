@@ -30,7 +30,12 @@ export type FlatArticleMap = {
 }[];
 
 const time = server$((path: string) => {
+    console.log(path, __dirname);
     if (!path) return "";
+
+    if (!fs.readFileSync(nodepath.join(__dirname, path))) {
+        return "";
+    }
 
     const minutes = fs.readFileSync(nodepath.join(__dirname, path)).toString().split("\n").length / 200;
 
