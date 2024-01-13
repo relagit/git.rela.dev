@@ -1,0 +1,3 @@
+[submodule "public/_assets"]
+	path = public/_assets
+	url = https://github.com/relagit/assets
