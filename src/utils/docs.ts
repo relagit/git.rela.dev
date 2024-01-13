@@ -30,7 +30,7 @@ export type FlatArticleMap = {
 }[];
 
 const time = server$((path: string) => {
-    console.log(path, __dirname);
+    console.log(path, __dirname, fs.readdirSync(__dirname));
     if (!path) return "";
 
     if (!fs.existsSync(nodepath.join(__dirname, path))) {
