@@ -175,7 +175,7 @@ export default () => {
                     <div class="post-empty">
                         <Header />
                         <aside class="sidebar">
-                            <For each={Array.from({ length: Math.floor(Math.random() * 4) })}>
+                            <For each={Array.from({ length: Math.ceil(Math.random() * 4) })}>
                                 {() => (
                                     <>
                                         <div class="label empty"></div>
