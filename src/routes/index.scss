@@ -1,9 +1,9 @@
 @keyframes brighten {
     0% {
-        color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+        color: var(--color-secondary, rgba(255, 255, 255, 0.55));
     }
     100% {
-        color: #fff;
+        color: var(--white);
     }
 }
 
@@ -25,7 +25,7 @@ main.index {
         font-size: 3rem;
         font-weight: 400;
         line-height: normal;
-        color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+        color: var(--color-secondary, rgba(255, 255, 255, 0.55));
         transition: opacity 500ms ease-in-out;
         opacity: 0.6;
         max-width: 80vw;
@@ -413,7 +413,7 @@ main.index {
                             padding: 0.75rem 1rem;
                             align-items: flex-start;
                             gap: 0.625rem;
-                            color: #fff;
+                            color: var(--white);
                             font-size: 1rem;
                             font-weight: 400;
                             line-height: 120%;
@@ -498,7 +498,7 @@ main.index {
                         justify-content: center;
                         align-items: center;
                         gap: 16px;
-                        color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+                        color: var(--color-secondary, rgba(255, 255, 255, 0.55));
                         font-size: 1.2rem;
                         font-weight: 400;
 
@@ -531,7 +531,7 @@ main.index {
                             color: var(--text-primary-dark, rgba(255, 255, 255, 0.85));
                         }
 
-                        color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+                        color: var(--color-secondary, rgba(255, 255, 255, 0.55));
                         font-size: 1.75rem;
                         font-weight: 400;
                         line-height: 2rem;
@@ -605,7 +605,7 @@ main.index {
             }
 
             &-header {
-                color: #fff;
+                color: var(--white);
                 font-size: 50px;
                 font-weight: 400;
                 line-height: 130%;
@@ -620,7 +620,7 @@ main.index {
             }
 
             &-paragraph {
-                color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+                color: var(--color-secondary, rgba(255, 255, 255, 0.55));
                 font-size: 20px;
                 font-weight: 400;
                 line-height: 130%;

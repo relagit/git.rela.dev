@@ -95,7 +95,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+            color: var(--color-secondary);
             text-align: center;
             font-size: 14px;
             font-weight: 400;
@@ -115,7 +115,7 @@
             }
 
             &:hover {
-                color: var(--base-black);
+                color: var(--white);
             }
         }
     }

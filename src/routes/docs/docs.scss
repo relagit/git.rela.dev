@@ -101,7 +101,7 @@
     .label {
         cursor: pointer;
         background: none;
-        color: var(--base-black);
+        color: var(--white);
         font-size: 0.875rem;
         padding: 10px 0;
         margin-top: 48px;
@@ -120,7 +120,7 @@
         }
 
         &:is(nav nav *) {
-            color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+            color: var(--color-secondary, rgba(255, 255, 255, 0.55));
         }
     }
 
@@ -133,7 +133,7 @@
         align-items: center;
         cursor: pointer;
         width: calc(100% + 8px);
-        color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+        color: var(--color-secondary, rgba(255, 255, 255, 0.55));
         text-decoration: none;
         transition: all 0.2s ease-out;
         margin-block: 0;
@@ -192,7 +192,7 @@
     }
 
     .title {
-        color: var(--base-black);
+        color: var(--white);
         font-size: 3rem;
         font-weight: 700;
         margin-top: 0;
@@ -212,7 +212,7 @@
         }
 
         .read-time {
-            color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+            color: var(--color-secondary, rgba(255, 255, 255, 0.55));
             font-size: 1rem;
             font-weight: 400;
             display: flex;
@@ -222,7 +222,7 @@
     }
 
     .description {
-        color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+        color: var(--color-secondary, rgba(255, 255, 255, 0.55));
         font-size: 1rem;
         font-weight: 400;
         margin-bottom: 2rem;
@@ -234,7 +234,7 @@
     }
 
     .byline {
-        color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+        color: var(--color-secondary, rgba(255, 255, 255, 0.55));
         display: flex;
         align-items: center;
         gap: 8px;

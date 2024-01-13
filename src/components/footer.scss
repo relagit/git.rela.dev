@@ -325,7 +325,7 @@
 
         &-header {
             font-weight: 400;
-            color: #fff;
+            color: var(--white);
         }
 
         &-item {
@@ -352,7 +352,7 @@
             }
 
             &[href]:hover {
-                color: #fff;
+                color: var(--white);
             }
         }
     }
