@@ -9,7 +9,7 @@ const pages = import.meta.glob("../data/docs/**/*.(mdx|md)");
 const __dirname = nodepath.dirname(new URL(import.meta.url).pathname);
 
 export type Article = {
-    default: JSX.Element;
+    body: JSX.Element;
     meta: {
         readTime: string;
         order: number;
@@ -56,14 +56,14 @@ export default server$(async (): Promise<ArticleMap> => {
             }
 
             const article: Article = {
-                default: body.default,
+                body: body.default,
                 meta: {
                     readTime: time(fs.readFileSync(nodepath.join(__dirname, path)).toString().split("\n").length / 200),
-                    order: body.meta.order,
-                    title: body.meta.title,
+                    order: body.frontmatter.order,
+                    title: body.frontmatter.title,
                     slug: slug || "",
-                    description: body.meta.description,
-                    date: new Date(body.meta.date).toLocaleString("en-US", {
+                    description: body.frontmatter.description,
+                    date: new Date(body.frontmatter.date).toLocaleString("en-US", {
                         month: "long",
                         day: "numeric",
                         year: "numeric",

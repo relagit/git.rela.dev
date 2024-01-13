@@ -187,7 +187,7 @@ export default () => {
                             <h2 class="description">{getPost(docs(), page())?.meta.description}</h2>
                             <div class="markdown-body">
                                 <ErrorBoundary fallback="hi">
-                                    <Show when={getPost(docs(), page())?.default}>{getPost(docs(), page())?.default}</Show>
+                                    <Show when={getPost(docs(), page())?.body}>{getPost(docs(), page())?.body}</Show>
                                 </ErrorBoundary>
                             </div>
                         </div>

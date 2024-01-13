@@ -1,6 +1,6 @@
 import vercel from "solid-start-vercel";
 import solid from "solid-start/vite";
-import { defineConfig } from "vite";
+import { PluginOption, defineConfig } from "vite";
 
 import withShiki from "@stefanprobst/remark-shiki";
 import * as shiki from "shiki";
@@ -22,7 +22,7 @@ export default defineConfig({
                 remarkPlugins: [remarkGfm, [withShiki, { highlighter: await shiki.getHighlighter({ theme: "css-variables" }) }]],
             }),
             enforce: "pre",
-        },
+        } as PluginOption,
         solid({
             extensions: [".mdx", ".md"],
             adapter: vercel(),
