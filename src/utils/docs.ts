@@ -33,7 +33,7 @@ const time = server$((path: string) => {
     console.log(path, __dirname);
     if (!path) return "";
 
-    if (!fs.readFileSync(nodepath.join(__dirname, path))) {
+    if (!fs.existsSync(nodepath.join(__dirname, path))) {
         return "";
     }
 
