@@ -192,14 +192,7 @@ export default () => {
                             </div>
                         </div>
                         <div class="byline">
-                            <span>
-                                Updated on{" "}
-                                {getPost(docs(), page())?.meta.date.toLocaleString("en-US", {
-                                    month: "long",
-                                    day: "numeric",
-                                    year: "numeric",
-                                })}
-                            </span>
+                            <span>Updated on {getPost(docs(), page())?.meta.date}</span>
                             <a title="Edit on GitHub" target="_blank" href={`https://github.com/relagit/git.rela.dev/edit/main/src/data/docs/${params.page}.mdx`}>
                                 <Icon name="pencil" />
                             </a>

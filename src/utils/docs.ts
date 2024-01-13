@@ -16,7 +16,7 @@ export type Article = {
         title: string;
         slug: string;
         description: string;
-        date: Date;
+        date: string;
     };
 };
 
@@ -63,7 +63,11 @@ export default server$(async (): Promise<ArticleMap> => {
                     title: body.meta.title,
                     slug: slug || "",
                     description: body.meta.description,
-                    date: new Date(body.meta.date),
+                    date: new Date(body.meta.date).toLocaleString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                    }),
                 },
             };
 
