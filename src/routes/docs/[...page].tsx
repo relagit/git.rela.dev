@@ -1,5 +1,5 @@
 import { Meta, Title, useParams } from "solid-start";
-import { createSignal, ErrorBoundary, For, JSX, lazy, onCleanup, onMount, Setter, Show } from "solid-js";
+import { createEffect, createSignal, ErrorBoundary, For, JSX, lazy, onCleanup, onMount, Setter, Show } from "solid-js";
 
 import FourOhFour from "~/routes/[...404]";
 import _assemble, { flat, type Article, type ArticleMap } from "~/utils/docs";
@@ -16,6 +16,20 @@ const toName = (str: string) => {
         .split("-")
         .map((word) => word[0].toUpperCase() + word.slice(1))
         .join(" ");
+};
+
+const time = (mins: number) => {
+    console.log(mins);
+
+    if (mins < 1) {
+        return `${Math.ceil(mins * 60)} sec`;
+    }
+
+    if (mins > 60) {
+        return `${Math.floor(mins / 60)} hr`;
+    }
+
+    return `${Math.ceil(mins)} min`;
 };
 
 const getPost = (pages: Awaited<ReturnType<typeof _assemble>> | undefined, slug: string): Article | null => {
@@ -86,8 +100,8 @@ const Pages = (props: { docs: ArticleMap | undefined; page: string; setPage: Set
 export default () => {
     const params = useParams();
 
+    const [innerText, setInnerText] = createSignal<number | null>(null);
     const [page, setPage] = createSignal<string>(params.page);
-
     const [docs, setDocs] = createSignal<ArticleMap>();
 
     const listener = (e: KeyboardEvent) => {
@@ -103,9 +117,19 @@ export default () => {
     onMount(async () => {
         setDocs(await pages);
 
-        console.log(getPost(docs(), page()));
-
         window.onkeydown = listener;
+    });
+
+    createEffect(() => {
+        console.log(page());
+
+        page();
+
+        setTimeout(() => {
+            console.log("setting", document.querySelector<HTMLElement>(".markdown-body")?.innerText.split(" ").length || null);
+
+            setInnerText(document.querySelector<HTMLElement>(".markdown-body")?.innerText.split(" ").length || null);
+        }, 100);
     });
 
     const next = () => {
@@ -190,15 +214,15 @@ export default () => {
                                 {getPost(docs(), page())?.meta.title}
                                 <div class="read-time">
                                     <Icon name="clock" />
-                                    {getPost(docs(), page())?.meta.readTime}
+                                    {time((innerText() || 0) / 200)}
                                 </div>
                             </h1>
                             <h2 class="description">{getPost(docs(), page())?.meta.description}</h2>
-                            <div class="markdown-body">
-                                <ErrorBoundary fallback={"error"}>
-                                    <Show when={getPost(docs(), page())?.body}>{getPost(docs(), page())?.body}</Show>
-                                </ErrorBoundary>
-                            </div>
+                            <Show when={getPost(docs(), page())?.body}>
+                                <div class="markdown-body">
+                                    <ErrorBoundary fallback={"error"}>{getPost(docs(), page())?.body}</ErrorBoundary>
+                                </div>
+                            </Show>
                         </div>
                         <div class="byline">
                             <span>Updated on {getPost(docs(), page())?.meta.date}</span>

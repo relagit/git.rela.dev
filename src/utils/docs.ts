@@ -1,17 +1,10 @@
 import { JSX } from "solid-js";
-import server$ from "solid-start/server";
 
-import fs from "fs";
-import nodepath from "path";
-
-const pages = import.meta.glob("../data/docs/**/*.(mdx|md)");
-
-const __dirname = nodepath.dirname(new URL(import.meta.url).pathname);
+const pages = import.meta.glob("../data/docs/**/*.(mdx|md)", {});
 
 export type Article = {
     body: JSX.Element;
     meta: {
-        readTime: string;
         order: number;
         title: string;
         slug: string;
@@ -28,27 +21,6 @@ export type FlatArticleMap = {
     slug: string;
     meta: Article["meta"];
 }[];
-
-const time = server$((path: string) => {
-    console.log(path, __dirname, fs.readdirSync(__dirname));
-    if (!path) return "";
-
-    if (!fs.existsSync(nodepath.join(__dirname, path))) {
-        return "";
-    }
-
-    const minutes = fs.readFileSync(nodepath.join(__dirname, path)).toString().split("\n").length / 200;
-
-    if (minutes > 60) {
-        return Math.round(minutes / 60) + " hr";
-    }
-
-    if (minutes < 1) {
-        return Math.round(minutes * 60) + " sec";
-    }
-
-    return Math.round(minutes) + " min";
-});
 
 const PRE_SLUG = /\d-/g;
 
@@ -67,7 +39,6 @@ export default async (): Promise<ArticleMap> => {
             const article: Article = {
                 body: body.default,
                 meta: {
-                    readTime: await time(path),
                     order: body.frontmatter.order,
                     title: body.frontmatter.title,
                     slug: slug || "",
