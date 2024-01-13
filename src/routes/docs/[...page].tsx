@@ -38,14 +38,16 @@ const getPost = (pages: Awaited<ReturnType<typeof _assemble>> | undefined, slug:
     return post as unknown as Article;
 };
 
-const Pages = (props: { page: string; setPage: Setter<string>; pages: ArticleMap | undefined }) => {
+const Pages = (props: { docs: ArticleMap | undefined; page: string; setPage: Setter<string>; pages: ArticleMap | undefined }) => {
     if (!props.pages) return null;
 
     return (
         <nav>
             <For each={Object.entries(props.pages).sort((a, b) => ((a[1] as Article).meta?.order || 0) - ((b[1] as Article).meta?.order || 0))}>
-                {([slug, item]) => (
-                    <>
+                {([slug, item]) => {
+                    const [expanded, setExpanded] = createSignal<boolean>(!!props.docs?.[slug]);
+
+                    return (
                         <Show
                             when={typeof item === "object" && !item.meta}
                             fallback={
@@ -66,14 +68,16 @@ const Pages = (props: { page: string; setPage: Setter<string>; pages: ArticleMap
                                 </>
                             }
                         >
-                            <div class="label">
+                            <button class="label" onClick={() => setExpanded(!expanded())}>
                                 {toName(slug)}
-                                <Icon name="chevron-down" />
-                            </div>
-                            <Pages pages={item as ArticleMap} page={props.page} setPage={props.setPage} />
+                                <Icon name={expanded() ? "chevron-down" : "chevron-left"} />
+                            </button>
+                            <Show when={expanded()}>
+                                <Pages docs={props.docs} pages={item as ArticleMap} page={props.page} setPage={props.setPage} />
+                            </Show>
                         </Show>
-                    </>
-                )}
+                    );
+                }}
             </For>
         </nav>
     );
@@ -178,7 +182,7 @@ export default () => {
                 <Show when={getPost(docs(), page())} fallback={<FourOhFour />}>
                     <Header />
                     <aside class="sidebar">
-                        <Pages pages={docs()} page={page()} setPage={setPage} />
+                        <Pages docs={docs()} pages={docs()} page={page()} setPage={setPage} />
                     </aside>
                     <div class="post">
                         <div class="post__content">

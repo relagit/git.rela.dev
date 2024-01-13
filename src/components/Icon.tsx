@@ -12,23 +12,24 @@ export interface IIconProps {
     variant?: 12 | 16 | 24;
     className?: string;
     size?: number;
-    style?: JSX.HTMLAttributes<HTMLSpanElement>["style"];
+    style?: string;
 }
 
 export default (props: IIconProps) => {
     return (
         <span
-            style={props.style}
             class={`icon ${props.className || ""}`}
             innerHTML={
                 props.variant
-                    ? `<svg width=${props.size || props.variant} height=${props.size || props.variant} viewBox="0 0 ${props.size || props.variant} ${
+                    ? `<svg style="${props.style}" width=${props.size || props.variant} height=${props.size || props.variant} viewBox="0 0 ${props.size || props.variant} ${
                           props.size || props.variant
                       }" fill="none" xmlns="http://www.w3.org/2000/svg">
                         ${octicons[props.name].heights[props.variant]?.path}
                     </svg>`
                     : octicons[props.name].toSVG({
                           width: props.size || props.variant || 16,
+                          // @ts-expect-error - guh
+                          style: props.style,
                       })
             }
         ></span>

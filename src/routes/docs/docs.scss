@@ -99,6 +99,8 @@
     }
 
     .label {
+        cursor: pointer;
+        background: none;
         color: var(--base-black);
         font-size: 0.875rem;
         padding: 10px 0;
@@ -107,6 +109,10 @@
         align-items: center;
         gap: 8px;
         justify-content: space-between;
+
+        svg {
+            transition: 0.2s ease-out;
+        }
 
         &:first-child,
         &:is(nav nav *) {
