@@ -66,7 +66,10 @@ const Pages = (props: { page: string; setPage: Setter<string>; pages: ArticleMap
                                 </>
                             }
                         >
-                            <div class="label">{toName(slug)}</div>
+                            <div class="label">
+                                {toName(slug)}
+                                <Icon name="chevron-down" />
+                            </div>
                             <Pages pages={item as ArticleMap} page={props.page} setPage={props.setPage} />
                         </Show>
                     </>
@@ -95,6 +98,8 @@ export default () => {
 
     onMount(async () => {
         setDocs(await pages);
+
+        console.log(getPost(docs(), page()));
 
         window.onkeydown = listener;
     });
@@ -186,7 +191,7 @@ export default () => {
                             </h1>
                             <h2 class="description">{getPost(docs(), page())?.meta.description}</h2>
                             <div class="markdown-body">
-                                <ErrorBoundary fallback="hi">
+                                <ErrorBoundary fallback={"error"}>
                                     <Show when={getPost(docs(), page())?.body}>{getPost(docs(), page())?.body}</Show>
                                 </ErrorBoundary>
                             </div>
@@ -202,7 +207,7 @@ export default () => {
                             <div class="nav-buttons">
                                 <button
                                     class="nav-button"
-                                    title="Previous Page"
+                                    title={flat(docs())[flat(docs()).findIndex((post) => post.slug === page()) - 1]?.meta.title || "Previous Page"}
                                     onClick={prev}
                                     disabled={(() => {
                                         const arr = flat(docs());
@@ -214,7 +219,7 @@ export default () => {
                                 </button>
                                 <button
                                     class="nav-button"
-                                    title="Next Page"
+                                    title={flat(docs())[flat(docs()).findIndex((post) => post.slug === page()) + 1]?.meta.title || "Next Page"}
                                     onClick={next}
                                     disabled={(() => {
                                         const arr = flat(docs());

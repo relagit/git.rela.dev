@@ -29,7 +29,11 @@ export type FlatArticleMap = {
     meta: Article["meta"];
 }[];
 
-const time = (minutes: number) => {
+const time = server$((path: string) => {
+    if (!path) return "";
+
+    const minutes = fs.readFileSync(nodepath.join(__dirname, path)).toString().split("\n").length / 200;
+
     if (minutes > 60) {
         return Math.round(minutes / 60) + " hr";
     }
@@ -39,11 +43,11 @@ const time = (minutes: number) => {
     }
 
     return Math.round(minutes) + " min";
-};
+});
 
 const PRE_SLUG = /\d-/g;
 
-export default server$(async (): Promise<ArticleMap> => {
+export default async (): Promise<ArticleMap> => {
     const articles: ArticleMap = {};
 
     for (const path in pages) {
@@ -58,7 +62,7 @@ export default server$(async (): Promise<ArticleMap> => {
             const article: Article = {
                 body: body.default,
                 meta: {
-                    readTime: time(fs.readFileSync(nodepath.join(__dirname, path)).toString().split("\n").length / 200),
+                    readTime: await time(path),
                     order: body.frontmatter.order,
                     title: body.frontmatter.title,
                     slug: slug || "",
@@ -95,7 +99,7 @@ export default server$(async (): Promise<ArticleMap> => {
     }
 
     return articles;
-});
+};
 
 export const flat = (docs: ArticleMap | undefined, parent?: string): FlatArticleMap => {
     if (!docs) {

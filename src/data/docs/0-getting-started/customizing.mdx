@@ -6,3 +6,15 @@ export const frontmatter = {
 };
 
 Nothing yet :/
+
+```tsx
+import { Workflow } from "relagit:workflows";
+
+export default new Workflow({
+    name: "My Workflow",
+    description: "This is my workflow",
+    commit(_, repository) {
+        console.log("Committing to repository", repository);
+    },
+});
+```
