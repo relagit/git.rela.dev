@@ -1,10 +1,17 @@
 import { JSX } from "solid-js";
+import server$ from "solid-start/server";
 
-const pages = import.meta.glob("../../data/docs/**/*.(mdx|md)");
+import fs from "fs";
+import nodepath from "path";
+
+const pages = import.meta.glob("../data/docs/**/*.(mdx|md)");
+
+const __dirname = nodepath.dirname(new URL(import.meta.url).pathname);
 
 export type Article = {
     default: JSX.Element;
     meta: {
+        readTime: string;
         order: number;
         title: string;
         slug: string;
@@ -22,9 +29,21 @@ export type FlatArticleMap = {
     meta: Article["meta"];
 }[];
 
+const time = (minutes: number) => {
+    if (minutes > 60) {
+        return Math.round(minutes / 60) + " hr";
+    }
+
+    if (minutes < 1) {
+        return Math.round(minutes * 60) + " sec";
+    }
+
+    return Math.round(minutes) + " min";
+};
+
 const PRE_SLUG = /\d-/g;
 
-export default async (): Promise<ArticleMap> => {
+export default server$(async (): Promise<ArticleMap> => {
     const articles: ArticleMap = {};
 
     for (const path in pages) {
@@ -39,6 +58,7 @@ export default async (): Promise<ArticleMap> => {
             const article: Article = {
                 default: body.default,
                 meta: {
+                    readTime: time(fs.readFileSync(nodepath.join(__dirname, path)).toString().split("\n").length / 200),
                     order: body.meta.order,
                     title: body.meta.title,
                     slug: slug || "",
@@ -71,7 +91,7 @@ export default async (): Promise<ArticleMap> => {
     }
 
     return articles;
-};
+});
 
 export const flat = (docs: ArticleMap | undefined, parent?: string): FlatArticleMap => {
     if (!docs) {

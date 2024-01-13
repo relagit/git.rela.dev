@@ -2,7 +2,7 @@ import { Meta, Title, useParams } from "solid-start";
 import { createSignal, ErrorBoundary, For, JSX, lazy, onCleanup, onMount, Setter, Show } from "solid-js";
 
 import FourOhFour from "~/routes/[...404]";
-import _assemble, { flat, type Article, type ArticleMap } from "./_assemble";
+import _assemble, { flat, type Article, type ArticleMap } from "~/utils/docs";
 
 import "./docs.scss";
 import Header from "~/components/Header";
@@ -142,18 +142,14 @@ export default () => {
                     <div class="post-empty">
                         <Header />
                         <aside class="sidebar">
-                            <div class="label empty"></div>
-                            <div class="item empty"></div>
-                            <div class="item empty"></div>
-                            <div class="item empty"></div>
-                            <div class="label empty"></div>
-                            <div class="item empty"></div>
-                            <div class="item empty"></div>
-                            <div class="label empty"></div>
-                            <div class="item empty"></div>
-                            <div class="item empty"></div>
-                            <div class="item empty"></div>
-                            <div class="item empty"></div>
+                            <For each={Array.from({ length: Math.floor(Math.random() * 4) })}>
+                                {() => (
+                                    <>
+                                        <div class="label empty"></div>
+                                        <For each={Array.from({ length: Math.floor(Math.random() * 4) + 1 })}>{() => <div class="item empty" />}</For>
+                                    </>
+                                )}
+                            </For>
                         </aside>
                         <div class="post">
                             <div class="post__content">
@@ -162,10 +158,10 @@ export default () => {
                                 <div class="markdown-body">
                                     {/* pick a random array length frmo 15-25 */}
                                     <For each={Array.from({ length: Math.floor(Math.random() * 10) + 15 })}>
-                                        {() => (
+                                        {() =>
                                             // math.random but more focused towards higher numbers
-                                            <div class="empty" style={{ "--w": Math.random() }}></div>
-                                        )}
+                                            Math.random() > 0.1 ? <div class="empty" style={{ "--w": Math.random() }}></div> : <br />
+                                        }
                                     </For>
                                 </div>
                             </div>
@@ -181,7 +177,13 @@ export default () => {
                     </aside>
                     <div class="post">
                         <div class="post__content">
-                            <h1 class="title">{getPost(docs(), page())?.meta.title}</h1>
+                            <h1 class="title">
+                                {getPost(docs(), page())?.meta.title}
+                                <div class="read-time">
+                                    <Icon name="clock" />
+                                    {getPost(docs(), page())?.meta.readTime}
+                                </div>
+                            </h1>
                             <h2 class="description">{getPost(docs(), page())?.meta.description}</h2>
                             <div class="markdown-body">
                                 <ErrorBoundary fallback="hi">

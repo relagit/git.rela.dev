@@ -67,7 +67,7 @@
     }
 
     &.title {
-        height: 32px;
+        height: 48px;
         width: 200px;
     }
 }
@@ -96,9 +96,8 @@
     .label {
         color: var(--base-black);
         font-size: 0.875rem;
-        font-weight: 500;
         margin-top: 48px;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
 
         &:not(.empty, :first-child) {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -184,6 +183,9 @@
         margin-bottom: 1.2rem;
         padding-bottom: 0;
         border-bottom: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
         @media screen and (max-width: 768px) {
             font-size: 2rem;
@@ -191,6 +193,15 @@
 
         @media screen and (max-width: 480px) {
             font-size: 1.5rem;
+        }
+
+        .read-time {
+            color: var(--text-secondary-dark, rgba(255, 255, 255, 0.55));
+            font-size: 1rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
     }
 
