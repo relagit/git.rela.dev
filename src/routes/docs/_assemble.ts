@@ -17,6 +17,11 @@ export type ArticleMap = {
     [slug: string]: ArticleMap | Article;
 };
 
+export type FlatArticleMap = {
+    slug: string;
+    meta: Article["meta"];
+}[];
+
 const PRE_SLUG = /\d-/g;
 
 export default async (): Promise<ArticleMap> => {
@@ -66,4 +71,27 @@ export default async (): Promise<ArticleMap> => {
     }
 
     return articles;
+};
+
+export const flat = (docs: ArticleMap | undefined, parent?: string): FlatArticleMap => {
+    if (!docs) {
+        return [];
+    }
+
+    const flatDocs: FlatArticleMap = [];
+
+    for (const slug in docs) {
+        const doc = docs[slug];
+
+        if (typeof doc === "object" && doc["meta"]) {
+            flatDocs.push({
+                slug: (parent ? `${parent}/` : "") + slug,
+                meta: (doc as Article).meta,
+            });
+        } else {
+            flatDocs.push(...flat(doc as ArticleMap, (parent ? `${parent}/` : "") + slug).sort((a, b) => a.meta.order - b.meta.order));
+        }
+    }
+
+    return flatDocs;
 };

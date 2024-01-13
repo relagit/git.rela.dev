@@ -1,8 +1,8 @@
 import { Meta, Title, useParams } from "solid-start";
-import { createSignal, ErrorBoundary, For, JSX, lazy, onMount, Setter, Show } from "solid-js";
+import { createSignal, ErrorBoundary, For, JSX, lazy, onCleanup, onMount, Setter, Show } from "solid-js";
 
 import FourOhFour from "~/routes/[...404]";
-import _assemble, { type Article, type ArticleMap } from "./_assemble";
+import _assemble, { flat, type Article, type ArticleMap } from "./_assemble";
 
 import "./docs.scss";
 import Header from "~/components/Header";
@@ -42,35 +42,37 @@ const Pages = (props: { page: string; setPage: Setter<string>; pages: ArticleMap
     if (!props.pages) return null;
 
     return (
-        <For each={Object.entries(props.pages).sort((a, b) => ((a[1] as Article).meta?.order || 0) - ((b[1] as Article).meta?.order || 0))}>
-            {([slug, item]) => (
-                <>
-                    <Show
-                        when={typeof item === "object" && !item.meta}
-                        fallback={
-                            <>
-                                <a
-                                    href={`/docs/${(item as Article).meta.slug}`}
-                                    class={cn("item", { active: props.page === (item as Article).meta.slug })}
-                                    onClick={(e) => {
-                                        e.preventDefault();
+        <nav>
+            <For each={Object.entries(props.pages).sort((a, b) => ((a[1] as Article).meta?.order || 0) - ((b[1] as Article).meta?.order || 0))}>
+                {([slug, item]) => (
+                    <>
+                        <Show
+                            when={typeof item === "object" && !item.meta}
+                            fallback={
+                                <>
+                                    <a
+                                        href={`/docs/${(item as Article).meta.slug}`}
+                                        class={cn("item", { active: props.page === (item as Article).meta.slug })}
+                                        onClick={(e) => {
+                                            e.preventDefault();
 
-                                        props.setPage((item as Article).meta.slug);
+                                            props.setPage((item as Article).meta.slug);
 
-                                        history.pushState({}, "", `/docs/${(item as Article).meta.slug}`);
-                                    }}
-                                >
-                                    {(item as Article).meta.title}
-                                </a>
-                            </>
-                        }
-                    >
-                        <div class="label">{toName(slug)}</div>
-                        <Pages pages={item as ArticleMap} page={props.page} setPage={props.setPage} />
-                    </Show>
-                </>
-            )}
-        </For>
+                                            history.pushState({}, "", `/docs/${(item as Article).meta.slug}`);
+                                        }}
+                                    >
+                                        {(item as Article).meta.title}
+                                    </a>
+                                </>
+                            }
+                        >
+                            <div class="label">{toName(slug)}</div>
+                            <Pages pages={item as ArticleMap} page={props.page} setPage={props.setPage} />
+                        </Show>
+                    </>
+                )}
+            </For>
+        </nav>
     );
 };
 
@@ -81,9 +83,49 @@ export default () => {
 
     const [docs, setDocs] = createSignal<ArticleMap>();
 
+    const listener = (e: KeyboardEvent) => {
+        if (e.key === "ArrowRight") {
+            next();
+        }
+
+        if (e.key === "ArrowLeft") {
+            prev();
+        }
+    };
+
     onMount(async () => {
         setDocs(await pages);
+
+        window.onkeydown = listener;
     });
+
+    const next = () => {
+        const arr = flat(docs());
+
+        const index = arr.findIndex((post) => post.slug === page());
+
+        if (index === arr.length - 1) {
+            return;
+        }
+
+        setPage(arr[index + 1].slug);
+
+        history.pushState({}, "", `/docs/${arr[index + 1].slug}`);
+    };
+
+    const prev = () => {
+        const arr = flat(docs());
+
+        const index = arr.findIndex((post) => post.slug === page());
+
+        if (index === 0) {
+            return;
+        }
+
+        setPage(arr[index - 1].slug);
+
+        history.pushState({}, "", `/docs/${arr[index - 1].slug}`);
+    };
 
     return (
         <>
@@ -101,6 +143,14 @@ export default () => {
                         <Header />
                         <aside class="sidebar">
                             <div class="label empty"></div>
+                            <div class="item empty"></div>
+                            <div class="item empty"></div>
+                            <div class="item empty"></div>
+                            <div class="label empty"></div>
+                            <div class="item empty"></div>
+                            <div class="item empty"></div>
+                            <div class="label empty"></div>
+                            <div class="item empty"></div>
                             <div class="item empty"></div>
                             <div class="item empty"></div>
                             <div class="item empty"></div>
@@ -154,6 +204,32 @@ export default () => {
                             <a title="View on GitHub" target="_blank" href={`https://github.com/relagit/git.rela.dev/tree/main/src/data/docs/${params.page}.mdx`}>
                                 <Icon name="link-external" />
                             </a>
+                            <div class="nav-buttons">
+                                <button
+                                    class="nav-button"
+                                    title="Previous Page"
+                                    onClick={prev}
+                                    disabled={(() => {
+                                        const arr = flat(docs());
+
+                                        return arr[0].slug === page();
+                                    })()}
+                                >
+                                    <Icon name="arrow-left" />
+                                </button>
+                                <button
+                                    class="nav-button"
+                                    title="Next Page"
+                                    onClick={next}
+                                    disabled={(() => {
+                                        const arr = flat(docs());
+
+                                        return arr[arr.length - 1].slug === page();
+                                    })()}
+                                >
+                                    <Icon name="arrow-right" />
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </Show>
