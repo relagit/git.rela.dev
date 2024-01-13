@@ -29,7 +29,7 @@ export default () => {
                     content="git, github, gitlab, git workflow, git management, git productivity, git tools, git desktop, git desktop app, git desktop application, git desktop client, git desktop software, git desktop tool, git desktop tools, git desktop utility, relagit"
                 />
                 <Meta name="viewport" content="width=device-width, initial-scale=1" />
-                <Link rel="icon" href="https://rela.dev/assets/relagit-light.svg" />
+                <Link rel="icon" href="/assets/favicon.svg" />
 
                 <Meta name="theme-color" content="#000" />
                 <Meta name="msapplication-navbutton-color" content="#1c84ec" />
