@@ -32,7 +32,7 @@ export default (props: LogoImageProps) => {
                     </button>
                 </Show>
             </div>
-            <img src={props.dark && props.light ? props[theme()] : props.light || props.dark} alt={props.alt} />
+            <img loading="lazy" src={props.dark && props.light ? props[theme()] : props.light || props.dark} alt={props.alt} />
         </figure>
     );
 };
