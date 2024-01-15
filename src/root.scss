@@ -1,7 +1,10 @@
+@use "./fonts.scss" as *;
+
 @import "https://rsms.me/inter/inter.css";
 
 :root {
     --font-primary: InterVariable, Inter, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+    --font-body: "Geist Variable", "Geist", var(--font-primary);
     --font-mono: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", "Lucida Console", Monaco, monospace;
 
     --white: #fff;
@@ -110,9 +113,14 @@ html {
     overflow-y: auto;
     scrollbar-gutter: stable;
     scroll-behavior: smooth;
+    scrollbar-width: thin;
     color-scheme: dark;
     width: 100vw;
     font-feature-settings: "ss03" 1, "liga" 1, "calt" 1, "case" 1;
+
+    &:has(.post) {
+        scrollbar-color: #646464 #000;
+    }
 }
 
 body {

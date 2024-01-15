@@ -214,7 +214,7 @@ export default () => {
                                 {getPost(docs(), page())?.meta.title}
                                 <div class="read-time">
                                     <Icon name="clock" />
-                                    {time((innerText() || 0) / 200)}
+                                    {time((innerText() || 0) / 125)}
                                 </div>
                             </h1>
                             <h2 class="description">{getPost(docs(), page())?.meta.description}</h2>

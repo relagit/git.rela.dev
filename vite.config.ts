@@ -10,6 +10,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import mdx from "@mdx-js/rollup";
+import headings from "rehype-autolink-headings";
 
 export default defineConfig({
     plugins: [
@@ -18,7 +19,7 @@ export default defineConfig({
                 jsx: true,
                 jsxImportSource: "solid-js",
                 providerImportSource: "solid-mdx",
-                rehypePlugins: [rehypeSlug, rehypeImgFigure, [rehypeRaw, { passThrough: nodeTypes }]],
+                rehypePlugins: [rehypeSlug, rehypeImgFigure, [rehypeRaw, { passThrough: nodeTypes }], [headings, { behavior: "wrap" }]],
                 remarkPlugins: [remarkGfm, [withShiki, { highlighter: await shiki.getHighlighter({ theme: "css-variables" }) }]],
             }),
             enforce: "pre",

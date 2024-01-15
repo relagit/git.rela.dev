@@ -130,7 +130,7 @@ export default () => {
                         <a href="https://rela.dev/oss" target="_blank" class="footer-col-item">
                             Open Source
                         </a>
-                        <a href="/press" download target="_blank" class="footer-col-item">
+                        <a href="/docs/press/branding" target="_blank" class="footer-col-item">
                             Press Kit
                         </a>
                         <a href="https://rela.dev" target="_blank" class="footer-col-item">
