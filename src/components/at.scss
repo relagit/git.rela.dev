@@ -1,0 +1,42 @@
+/*
+<img src={user()!.avatar_url} alt={user()!.name} />
+<div class="at-hover__info">
+    <div class="at-hover__info__name">{user()!.name}</div>
+    <div class="at-hover__info__bio">{user()!.bio}</div>
+</div>
+*/
+
+.at-hover {
+    position: absolute;
+    z-index: 2;
+    translate: 0 calc(-100% - 2em);
+    background: #1e1e1e;
+    padding: 1em;
+    border-radius: 4px;
+    display: flex;
+    gap: 1rem;
+    width: 400px;
+    font-family: var(--font-primary);
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        &__name {
+            color: var(--white);
+        }
+
+        &__bio {
+            color: var(--color-secondary);
+            font-size: 0.9rem;
+            line-height: 1.2rem;
+        }
+    }
+
+    img {
+        width: 3em;
+        height: 3em;
+        border-radius: 50%;
+    }
+}
