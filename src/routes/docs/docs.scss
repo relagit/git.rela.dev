@@ -1,3 +1,5 @@
+@use "./markdown";
+
 .markdown-body {
     color-scheme: dark;
     --shiki-token-comment: #8b949e;
@@ -155,7 +157,7 @@
 
 .post {
     margin-left: 350px;
-    padding: 8rem 3rem 3rem 3rem;
+    padding: 6.5rem 3rem 3rem 3rem;
     display: flex;
     flex-direction: column;
     font-size: 1rem;
@@ -166,7 +168,7 @@
     --color-secondary: rgb(161, 161, 161);
 
     @media screen and (max-width: 768px) {
-        padding: 7rem 2rem 2rem 2rem;
+        padding: 6rem 2rem 2rem 2rem;
     }
 
     @media screen and (max-width: 620px) {
@@ -231,6 +233,10 @@
         margin-top: auto;
         padding-top: 8px;
 
+        @media screen and (max-width: 768px) {
+            font-size: 0.8rem;
+        }
+
         a {
             color: inherit;
             height: 16px;
@@ -272,103 +278,5 @@
                 }
             }
         }
-    }
-}
-
-// GUH
-
-.markdown-body {
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    margin: 0;
-    color: var(--color-secondary);
-    font-family: var(--font-body);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.25;
-    word-wrap: break-word;
-
-    h1 {
-        color: red;
-
-        &:before {
-            content: "-- H1, NO A11Y --";
-        }
-    }
-
-    h2,
-    h3 {
-        color: var(--color-primary);
-        font-weight: 500;
-        margin-block: 2.5em 1em;
-        position: relative;
-        width: fit-content;
-        font-family: var(--font-primary);
-
-        a {
-            text-decoration: none;
-            color: inherit;
-
-            &::after {
-                content: "";
-                display: block;
-                width: 0;
-                background: var(--color-primary);
-                position: absolute;
-                height: 2px;
-                bottom: 0;
-                transition: width 0.2s ease-out;
-            }
-
-            &:hover::after {
-                width: 100%;
-            }
-
-            &::before {
-                opacity: 0.4;
-                display: inline-block;
-                margin-right: 0.8em;
-                font-size: 0.7em;
-                font-family: var(--font-body);
-            }
-        }
-    }
-
-    h2 {
-        font-size: 1.5rem;
-        font-weight: 1.75rem;
-
-        a:before {
-            content: "## ";
-        }
-    }
-
-    h3 {
-        font-size: 1.25rem;
-        font-weight: 1.5rem;
-
-        a:before {
-            content: "### ";
-        }
-    }
-
-    p {
-        font-size: 1rem;
-        line-height: 1.5rem;
-        letter-spacing: normal;
-        font-weight: 400;
-    }
-
-    > * + * {
-        margin-top: 1rem;
-    }
-
-    pre {
-        font-size: 0.8rem;
-        padding: 1rem;
-        border-radius: 6px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        overflow-x: auto;
     }
 }

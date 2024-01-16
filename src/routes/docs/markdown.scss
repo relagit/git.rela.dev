@@ -1,0 +1,155 @@
+.markdown-body {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+    color: var(--color-secondary);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.25;
+    word-wrap: break-word;
+
+    h1 {
+        color: red;
+
+        &:before {
+            content: "-- H1, NO A11Y --";
+        }
+    }
+
+    h2,
+    h3 {
+        color: var(--color-primary);
+        font-weight: 500;
+        position: relative;
+        width: fit-content;
+        margin-block: 2em 1em;
+        font-family: var(--font-primary);
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+
+            &::after {
+                content: "";
+                display: block;
+                width: 0;
+                background: var(--color-primary);
+                position: absolute;
+                height: 2px;
+                bottom: 0;
+                transition: width 0.2s ease-out;
+            }
+
+            &:hover::after {
+                width: 100%;
+            }
+
+            &::before {
+                opacity: 0.4;
+                display: inline-block;
+                margin-right: 0.8em;
+                font-size: 0.7em;
+                font-family: var(--font-body);
+            }
+        }
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 1.75rem;
+
+        a:before {
+            content: "## ";
+        }
+    }
+
+    h3 {
+        font-size: 1.25rem;
+        font-weight: 1.5rem;
+
+        a:before {
+            content: "### ";
+        }
+    }
+
+    p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+        letter-spacing: normal;
+        font-weight: 400;
+    }
+
+    > * + * {
+        margin-top: 1rem;
+    }
+
+    pre {
+        font-size: 0.8rem;
+        padding: 1rem;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow-x: auto;
+    }
+
+    figure {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgb(255 255 255 / 20%);
+
+        figcaption {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            padding: 1rem 2rem;
+            background: rgb(255 255 255 / 10%);
+            color: rgb(255 255 255 / 50%);
+
+            @media screen and (max-width: 768px) {
+                padding: 1rem;
+            }
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+
+    a {
+        color: var(--color-blue-400);
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+
+        &::after {
+            content: "";
+            display: block;
+            width: 0;
+            background: var(--color-blue-400);
+            position: absolute;
+            height: 1px;
+            bottom: 2px;
+            z-index: -1;
+            transition: width 0.2s ease-out;
+        }
+
+        &:hover::after {
+            width: 100%;
+        }
+    }
+
+    strong,
+    b {
+        font-weight: 500;
+        color: var(--color-primary);
+    }
+}
