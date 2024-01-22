@@ -173,11 +173,12 @@
         }
 
         &-title {
+            font-family: var(--font-primary);
             color: var(--color, var(--color-blue-400));
             display: flex;
             align-items: center;
             gap: 8px;
-            font-weight: 600 !important;
+            font-weight: 500 !important;
         }
         &-tip {
             --color: var(--color-green-400);
