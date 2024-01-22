@@ -152,4 +152,57 @@
         font-weight: 500;
         color: var(--color-primary);
     }
+
+    .markdown-alert {
+        padding: 0 1.25em;
+        margin-bottom: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        position: relative;
+
+        &::before {
+            content: "";
+            width: 0.25em;
+            border-radius: 10px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--color, var(--color-blue-400));
+        }
+
+        &-title {
+            color: var(--color, var(--color-blue-400));
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600 !important;
+        }
+        &-tip {
+            --color: var(--color-green-400);
+        }
+
+        &-note {
+            --color: var(--color-blue-400);
+        }
+
+        &-important {
+            --color: var(--color-red-400);
+        }
+
+        &-warning {
+            --color: var(--color-orange-400);
+        }
+    }
+
+    kbd {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+        padding: 0.1em 0.4em;
+        font-size: 0.9em;
+        font-family: var(--font-mono);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--color-secondary);
+    }
 }
