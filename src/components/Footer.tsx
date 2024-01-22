@@ -104,10 +104,10 @@ export default () => {
                         </span>
                     </div>
                     <div class="footer-col-logos">
-                        <a href="/redirect/github">
+                        <a href="/redirect/github" aria-label="GitHub">
                             <Icon name="mark-github" />
                         </a>
-                        <a href="/redirect/producthunt">
+                        <a href="/redirect/producthunt" aria-label="Product Hunt">
                             <ProductHunt />
                         </a>
                     </div>
@@ -161,7 +161,7 @@ export default () => {
                             </a>
                         )}
                     </For>
-                    <a href="/redirect/sponsor" class="sponsor add">
+                    <a href="/redirect/sponsor" class="sponsor add" aria-label="Become a sponsor">
                         <div class="pfp">
                             <Icon name="plus" />
                         </div>
