@@ -124,7 +124,7 @@ export default () => {
             </h1>
             <div class="window-container" aria-label="Image of RelaGit in the diff view, multple added lines and files.">
                 <div class="window" use:highlightOnScroll></div>
-                <img src="/assets/blur.png" width="140vw" height="40vw" alt="Blurry background gradient blobs" class="object" />
+                <img src="/assets/landing/blur.png" width="140vw" height="40vw" alt="Blurry background gradient blobs" class="object" />
             </div>
             <div class="separator" />
             <div class="feature" use:highlightOnScroll>
@@ -166,7 +166,7 @@ export default () => {
                             <span class="highlight">Your favourite developer platform.</span> Directly integrated into the experience.
                         </div>
                     </div>
-                    <img loading="lazy" class="feature-grid-item-graphic github" src="/assets/vercel-next.png" alt="The GitHub vercel/next.js repository being cloned inside RelaGit" />
+                    <img loading="lazy" class="feature-grid-item-graphic github" src="/assets/landing/vercel-next.png" alt="The GitHub vercel/next.js repository being cloned inside RelaGit" />
                 </div>
                 <div use:highlightOnScroll class="feature-grid-item">
                     <div class="feature-grid-item-text">
@@ -198,7 +198,7 @@ export default () => {
                     <img
                         loading="lazy"
                         class="feature-grid-item-graphic popout"
-                        src="/assets/popout.png"
+                        src="/assets/landing/popout.png"
                         alt="A native popout window is open above a code editor. The popout shows modified files and commit history."
                     />
                 </div>
@@ -239,7 +239,7 @@ export default () => {
                     <img
                         loading="lazy"
                         class="feature-grid-item-graphic design"
-                        src="/assets/elegant.png"
+                        src="/assets/landing/elegant.png"
                         alt="The Create or Add repository modal in RelaGit, with the curve of the window being emphasised"
                     />
                 </div>
