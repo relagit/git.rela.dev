@@ -54,7 +54,7 @@ export default () => {
                     <h2 class="sub-page__text__subheading">You're too early! We haven't released anything yet.</h2>
                 </div>
             </div>
-            <img loading="lazy" src="/assets/landing/decorations.png" aria-hidden="true" alt="Blurry background gradient blobs" class="decorations" />
+            <img loading="lazy" src="/assets/landing/decorations.webp" aria-hidden="true" alt="Blurry background gradient blobs" class="decorations" />
         </>
     );
 };

@@ -36,7 +36,7 @@ export default () => {
                     <Button disabled>Make an Inquiry</Button>
                 </div>
             </div>
-            <img loading="lazy" src="/assets/landing/beta-decorations.png" aria-hidden="true" alt="Blurry background gradient blobs" class="decorations" />
+            <img loading="lazy" src="/assets/landing/beta-decorations.webp" aria-hidden="true" alt="Blurry background gradient blobs" class="decorations" />
         </>
     );
 };

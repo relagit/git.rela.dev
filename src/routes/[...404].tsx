@@ -28,7 +28,7 @@ export default (props: { code?: number; error?: string | Error }) => {
                         Go Back
                     </Button>
                 </div>
-                <img loading="lazy" src="/assets/landing/beta-decorations.png" aria-hidden="true" alt="Blurry background gradient blobs" class="decorations" />
+                <img loading="lazy" src="/assets/landing/beta-decorations.webp" aria-hidden="true" alt="Blurry background gradient blobs" class="decorations" />
             </main>
         </>
     );
