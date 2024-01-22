@@ -28,7 +28,7 @@ export default () => {
                     name="keywords"
                     content="git, github, gitlab, git workflow, git management, git productivity, git tools, git desktop, git desktop app, git desktop application, git desktop client, git desktop software, git desktop tool, git desktop tools, git desktop utility, relagit"
                 />
-                <Link rel="icon" href="/assets/favicon.svg" />
+                <Link rel="icon" href="https://git.rela.dev/assets/favicon.svg" />
 
                 <Meta name="viewport" content="width=device-width, initial-scale=1" />
                 <Meta name="theme-color" content="#000" />
