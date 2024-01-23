@@ -381,6 +381,7 @@ main.index {
 
                 @media screen and (max-width: 950px) {
                     padding: 32px;
+                    height: auto; // safari moment
                 }
 
                 @media screen and (max-width: 600px) {
