@@ -1,5 +1,5 @@
 import { For, Show, createSignal, onMount } from "solid-js";
-import Icon, { ProductHunt } from "./Icon";
+import Icon, { ProductHunt, Twitter } from "./Icon";
 import "./footer.scss";
 
 const sponsors = [
@@ -109,6 +109,9 @@ export default () => {
                         </a>
                         <a href="/redirect/producthunt" aria-label="Product Hunt">
                             <ProductHunt />
+                        </a>
+                        <a href="/redirect/twitter" aria-label="X (Twitter)">
+                            <Twitter />
                         </a>
                     </div>
                 </div>
