@@ -7,6 +7,7 @@ import server$ from "solid-start/server";
 import Icon, { ProductHunt } from "~/components/Icon";
 
 import "./index.scss";
+import { renderDate } from "~/utils/time";
 
 declare module "solid-js" {
     namespace JSX {
@@ -82,6 +83,32 @@ export default () => {
     return (
         <main class="index">
             <Header />
+            <div class="hero-banner">
+                <div class="hero-banner-text">
+                    <p>✨</p> <p>RelaGit Public Beta</p> <div class="sep"></div>
+                    <p style="width: 80px; color: var(--fill-secondary-vibrant);">{renderDate(new Date("2024-02-10T00:00:00.000Z").getTime())()}</p>
+                </div>
+                <div class="hero-banner-sep"></div>
+                <a
+                    class="hero-banner-text"
+                    href="#waitlist"
+                    onClick={(e) => {
+                        e.preventDefault();
+
+                        const waitlist = document.getElementById("waitlist");
+
+                        if (waitlist) {
+                            waitlist.scrollIntoView({
+                                behavior: "smooth",
+                            });
+
+                            waitlist.focus();
+                        }
+                    }}
+                >
+                    Get Notified
+                </a>
+            </div>
             <h1 class="hero-text" use:highlightOnScroll>
                 <span class="hero-text-highlight">The elegant solution to graphical version control.</span>
                 <br /> <span>Built by developers, for developers.</span>

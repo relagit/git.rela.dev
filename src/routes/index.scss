@@ -19,6 +19,85 @@ main.index {
         gap: 6rem;
     }
 
+    .hero-banner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px;
+        border: 1px solid #0a84ff;
+        background: rgba(10, 132, 255, 0.1);
+        position: absolute;
+        top: 5rem;
+        height: 42px;
+        overflow: hidden;
+
+        @media screen and (max-width: 600px) {
+            flex-direction: column;
+            height: fit-content;
+            border-radius: 8px;
+
+            .hero-banner-sep {
+                width: 100%;
+                height: 1px;
+                flex-shrink: 0;
+            }
+
+            .hero-banner-text {
+                padding-inline: 16px;
+                padding-block: 8px;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+
+                [style] {
+                    margin-inline-start: 16px;
+                    text-align: end;
+                }
+            }
+
+            .sep {
+                display: none;
+            }
+        }
+
+        &-text {
+            padding-inline: 32px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+
+            &[style] {
+                font-size: 14px;
+            }
+
+            .sep {
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background: #0a84ff99;
+                flex-shrink: 0;
+            }
+        }
+
+        &-sep {
+            height: 100%;
+            width: 1px;
+            background: #0a84ff;
+        }
+
+        a {
+            color: #0a84ff;
+            text-decoration: none;
+
+            &:hover {
+                background: rgba(10, 132, 255, 0.1);
+            }
+        }
+    }
+
     .hero-text {
         padding-top: 10rem;
         text-align: center;
@@ -47,11 +126,12 @@ main.index {
         }
 
         @media screen and (max-width: 1000px) {
-            padding-top: 8rem;
+            padding-top: 8.5rem;
             font-size: 2rem;
         }
 
         @media screen and (max-width: 600px) {
+            padding-top: 11rem;
             font-size: 1.5rem;
         }
 
