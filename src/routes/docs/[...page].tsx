@@ -189,7 +189,6 @@ export default () => {
                                 <h1 class="title empty"></h1>
                                 <h2 class="description empty"></h2>
                                 <div class="markdown-body">
-                                    {/* pick a random array length frmo 15-25 */}
                                     <For each={Array.from({ length: Math.floor(Math.random() * 10) + 15 })}>
                                         {() =>
                                             // math.random but more focused towards higher numbers

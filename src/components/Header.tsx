@@ -43,7 +43,7 @@ export default () => {
                     Download
                     <div class="tag">
                         <Icon name="stopwatch" />
-                        <p style="width: 50px">{renderDate(new Date("2024-02-10T00:00:00.000Z").getTime())()}</p>
+                        <p style="width: 54px">{renderDate(new Date("2024-02-10T00:00:00.000Z").getTime())()}</p>
                     </div>
                 </a>
                 <a href="/enterprise" class="header__group__link">
