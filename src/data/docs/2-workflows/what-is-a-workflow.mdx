@@ -1,0 +1,38 @@
+export const frontmatter = {
+    order: 1,
+    title: "What is a Workflow?",
+    date: "1/24/2024",
+    description: "Learn what a workflow is and how it can help you become more productive.",
+};
+
+You can think of a workflow as a plugin or extension to what RelaGit can do. A workflow can be anything from a script that runs a few commands when you commit your changes to a [Discord RPC client](https://github.com/relagit/discord-rpc) that shows your current repo and file in Discord.
+
+## Installing Community Workflows
+
+Workflows can be installed through the [npm](https://npmjs.com) package manager. To install a workflow, start with the following command:
+
+```bash
+npm install -g <workflow-package>
+```
+
+You then need to locate where the package is installed. You can do this by running the following command:
+
+```bash
+npm root -g # /Users/username/.nvm/versions/node/v20.9.0/lib/node_modules
+```
+
+Once you have the path to the global node modules, you can then navigate to the `~/.relagit` folder and locate `external.json`. If this file doesn't exist, run RelaGit once and it will be created for you.
+
+You now can add something like the following to the `external.json` file:
+
+```json
+["/Users/username/.nvm/versions/node/v20.9.0/lib/node_modules/<package-name>"]
+```
+
+When you next launch RelaGit, it will use this file to load the workflows from the specified path.
+
+> [!TIP]
+> {""}
+> To avoid having to find your npm root, you can `npm init -y` and install inside of `.relagit` instead of globally. This will allow you to simply place _only_ the package name in the `external.json` file.
+
+## Creating a Workflow
