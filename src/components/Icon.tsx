@@ -1,5 +1,4 @@
 import octicons from "@primer/octicons";
-import { Show, JSX } from "solid-js";
 
 import "./icon.scss";
 
