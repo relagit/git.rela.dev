@@ -9,6 +9,10 @@ You can think of a workflow as a plugin or extension to what RelaGit can do. A w
 
 ## Installing Community Workflows
 
+> [!TIP]
+> {""}
+> To avoid having to find your npm root, you can `npm init -y` and install inside of `.relagit` instead of globally. This will allow you to simply place _only_ the package name in the `external.json` file.
+
 Workflows can be installed through the [npm](https://npmjs.com) package manager. To install a workflow, start with the following command:
 
 ```bash
@@ -26,13 +30,13 @@ Once you have the path to the global node modules, you can then navigate to the 
 You now can add something like the following to the `external.json` file:
 
 ```json
+// if you installed the workflow globally
 ["/Users/username/.nvm/versions/node/v20.9.0/lib/node_modules/<package-name>"]
+
+// if you installed the workflow in .relagit
+["<package-name>"]
 ```
 
 When you next launch RelaGit, it will use this file to load the workflows from the specified path.
-
-> [!TIP]
-> {""}
-> To avoid having to find your npm root, you can `npm init -y` and install inside of `.relagit` instead of globally. This will allow you to simply place _only_ the package name in the `external.json` file.
 
 ## Creating a Workflow
