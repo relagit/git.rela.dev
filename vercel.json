@@ -1,0 +1,22 @@
+{
+    "headers": [
+        {
+            "source": "/assets/(.*)",
+            "headers": [
+                {
+                    "key": "x-robots-tag",
+                    "value": "noindex"
+                }
+            ]
+        },
+        {
+            "source": "/_assets/(.*)",
+            "headers": [
+                {
+                    "key": "x-robots-tag",
+                    "value": "noindex"
+                }
+            ]
+        }
+    ]
+}
