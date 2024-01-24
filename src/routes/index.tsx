@@ -86,7 +86,7 @@ export default () => {
             <div class="hero-banner">
                 <div class="hero-banner-text">
                     <p>✨</p> <p>RelaGit Public Beta</p> <div class="sep"></div>
-                    <p style="width: 80px; color: var(--fill-secondary-vibrant);">{renderDate(new Date("2024-02-10T00:00:00.000Z").getTime())()}</p>
+                    <p style="width: 80px; color: var(--fill-secondary-vibrant);">{renderDate(new Date("Sat Feb 10 2024 0:00:00 PST").getTime())()}</p>
                 </div>
                 <div class="hero-banner-sep"></div>
                 <a
