@@ -1,0 +1,54 @@
+export const frontmatter = {
+    order: 2,
+    title: "Installing Workflows",
+    date: "1/25/2024",
+    description: "How to install local and remote workflows.",
+};
+
+Workflows can come from a number of places, they could be cloned from GitHub, installed from npm, or created locally. This guide will walk you through the process of installing workflows from each of these sources.
+
+## Installing From the Filesystem
+
+### From npm
+
+> [!TIP]
+> {""}
+> To avoid having to find your npm root, you can `npm init -y` and install inside of `.relagit` instead of globally. This will allow you to simply place _only_ the package name in the `external.json` file.
+
+Workflows can be installed through the [npm](https://npmjs.com) package manager. To install a workflow, start with the following command:
+
+```bash
+npm install -g <workflow-package>
+```
+
+You then need to locate where the package is installed. You can do this by running the following command:
+
+```bash
+npm root -g # /Users/username/.nvm/versions/node/v20.9.0/lib/node_modules
+```
+
+Once you have the path to the global node modules, you can then navigate to the `~/.relagit` folder and locate `external.json`. If this file doesn't exist, run RelaGit once and it will be created for you.
+
+You now can add something like the following to the `external.json` file:
+
+```json
+// if you installed the workflow globally
+["/Users/username/.nvm/versions/node/v20.9.0/lib/node_modules/<package-name>"]
+
+// if you installed the workflow in .relagit
+["<package-name>"]
+```
+
+When you next launch RelaGit, it will use this file to load the workflows from the specified path.
+
+### From a Git Repository
+
+Workflows can also be cloned from a git repository. Start by opening RelaGit and Navigating to the Clone Repository modal. Either login through GitHub and select one of your own repositories, or press "URL" and enter the URL of the repository you want to clone.
+
+Once the repository has been added, you can right-click on it in the Repository switcher and the "Use as Workflow" item should be enabled. Once you click this, you will be prompted to reload RelaGit. Once you do, the workflow will be loaded and you can start using it.
+
+## Locally Created Workflows
+
+Workflows can also be created locally. To do this, you need to simply create a `<plugin>.ts` file in the `~/.relagit/workflows` folder.
+
+Read more in the next section about how to create workflows.
