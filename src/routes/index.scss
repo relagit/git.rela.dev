@@ -7,6 +7,22 @@
     }
 }
 
+.cta-button {
+    width: 100%;
+    flex-shrink: 0;
+
+    &.secondary {
+        border: 1px solid #fff;
+        color: var(--color-secondary);
+        background: transparent;
+        font-weight: 350;
+
+        &::after {
+            background: #ffffff1a;
+        }
+    }
+}
+
 main.index {
     display: flex;
     width: 100%;
@@ -29,7 +45,14 @@ main.index {
         position: absolute;
         top: 5rem;
         height: 42px;
-        overflow: hidden;
+
+        &-confetti {
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            pointer-events: none;
+            z-index: 99;
+        }
 
         @media screen and (max-width: 600px) {
             flex-direction: column;

@@ -1,3 +1,4 @@
+import { createConfetti } from "@neoconfetti/solid";
 import { For, Show, createSignal, onMount } from "solid-js";
 
 import Header from "~/components/Header";
@@ -8,6 +9,9 @@ import Icon, { ProductHunt } from "~/components/Icon";
 
 import "./index.scss";
 import { renderDate } from "~/utils/time";
+import Button from "~/components/Button";
+
+const { confetti } = createConfetti(); // THIS VARIABLE IS USED BY THE use:confetti DIRECTIVE, DO NOT REMOVE IT
 
 declare module "solid-js" {
     namespace JSX {
@@ -23,6 +27,9 @@ export default () => {
     const [os, setOS] = createSignal<"mac" | "windows" | "linux" | "mobile">("mac");
     const [tag, setTag] = createSignal("v0.0.0");
     const [upvoteCount, setUpvoteCount] = createSignal(_upvoteCount);
+
+    const isReleased = Date.now() > new Date("Sat Feb 10 2024 0:00:00 PST").getTime();
+    // const isReleased = true;
 
     onMount(() => {
         server$(async () => {
@@ -84,57 +91,108 @@ export default () => {
         <main class="index">
             <Header />
             <div class="hero-banner">
+                <Show when={isReleased}>
+                    <div
+                        class="hero-banner-confetti"
+                        use:confetti={{
+                            particleCount: 100,
+                            particleSize: 4,
+                            force: 0.7,
+                            colors: [
+                                "var(--color-blue-500)",
+                                "var(--color-green-500)",
+                                "var(--color-yellow-500)",
+                                "var(--color-red-500)",
+                                "var(--color-purple-500)",
+                                "var(--color-pink-500)",
+                                "var(--color-orange-500)",
+                                "var(--color-cyan-500)",
+                            ],
+                        }}
+                    ></div>
+                </Show>
                 <div class="hero-banner-text">
-                    <p>✨</p> <p>RelaGit Public Beta</p> <div class="sep"></div>
-                    <p style="width: 80px; color: var(--fill-secondary-vibrant);">{renderDate(new Date("Sat Feb 10 2024 0:00:00 PST").getTime())()}</p>
+                    <Show
+                        when={isReleased}
+                        fallback={
+                            <>
+                                <p>✨</p> <p>RelaGit Public Beta</p>
+                                <div class="sep"></div>
+                                <p style="width: 80px; color: var(--fill-secondary-vibrant);">{renderDate(new Date("Sat Feb 10 2024 0:00:00 PST").getTime())()}</p>
+                            </>
+                        }
+                    >
+                        <p>✨</p> <p>RelaGit Public Beta now available</p>
+                    </Show>
                 </div>
                 <div class="hero-banner-sep"></div>
-                <a
-                    class="hero-banner-text"
-                    href="#waitlist"
-                    onClick={(e) => {
-                        e.preventDefault();
+                <Show
+                    when={isReleased}
+                    fallback={
+                        <a
+                            class="hero-banner-text"
+                            href="#waitlist"
+                            onClick={(e) => {
+                                e.preventDefault();
 
-                        const waitlist = document.getElementById("waitlist");
+                                const waitlist = document.getElementById("waitlist");
 
-                        if (waitlist) {
-                            waitlist.scrollIntoView({
-                                behavior: "smooth",
-                            });
+                                if (waitlist) {
+                                    waitlist.scrollIntoView({
+                                        behavior: "smooth",
+                                    });
 
-                            waitlist.focus();
-                        }
-                    }}
+                                    waitlist.focus();
+                                }
+                            }}
+                        >
+                            Get Notified
+                        </a>
+                    }
                 >
-                    Get Notified
-                </a>
+                    <a class="hero-banner-text" href="/download">
+                        Download
+                    </a>
+                </Show>
             </div>
             <h1 class="hero-text" use:highlightOnScroll>
                 <span class="hero-text-highlight">The elegant solution to graphical version control.</span>
                 <br /> <span>Built by developers, for developers.</span>
                 <div class="hero-text-badges">
-                    <a
-                        class="hero-text-badges-badge highlight"
-                        href="#waitlist"
-                        onClick={(e) => {
-                            e.preventDefault();
+                    <Show
+                        when={isReleased}
+                        fallback={
+                            <a
+                                class="hero-text-badges-badge highlight"
+                                href="#waitlist"
+                                onClick={(e) => {
+                                    e.preventDefault();
 
-                            const waitlist = document.getElementById("waitlist");
+                                    const waitlist = document.getElementById("waitlist");
 
-                            if (waitlist) {
-                                waitlist.scrollIntoView({
-                                    behavior: "smooth",
-                                });
+                                    if (waitlist) {
+                                        waitlist.scrollIntoView({
+                                            behavior: "smooth",
+                                        });
 
-                                waitlist.focus();
-                            }
-                        }}
+                                        waitlist.focus();
+                                    }
+                                }}
+                            >
+                                <div class="hero-text-badges-badge-text">Get Notified</div>
+                                <div class="hero-text-badges-badge-icon">
+                                    <Icon name="bell" />
+                                </div>
+                            </a>
+                        }
                     >
-                        <div class="hero-text-badges-badge-text">Get Notified</div>
-                        <div class="hero-text-badges-badge-icon">
-                            <Icon name="bell" />
-                        </div>
-                    </a>
+                        <a class="hero-text-badges-badge highlight" href="/download">
+                            <div class="hero-text-badges-badge-text">Download</div>
+                            <div class="hero-text-badges-badge-icon">
+                                <Icon name="download" />
+                            </div>
+                        </a>
+                    </Show>
                     <a class="hero-text-badges-badge" href="https://producthunt.com/products/relagit" target="_blank">
                         <div class="hero-text-badges-badge-text">
                             <ProductHunt />
@@ -274,34 +332,42 @@ export default () => {
             <h1 class="hero-text inline" use:highlightOnScroll>
                 <span class="hero-text-highlight">Convinced?</span>
                 <div class="hero-text-badges">
-                    {/* <a class="hero-text-badges-badge highlight disabled" href="/download" aria-disabled target="_blank">
-                        <div class="hero-text-badges-badge-text">Download</div>
-                        <div class="hero-text-badges-badge-icon">
-                            <Icon name="download" />
-                        </div>
-                    </a> */}
-                    <a
-                        class="hero-text-badges-badge highlight"
-                        href="#waitlist"
-                        onClick={(e) => {
-                            e.preventDefault();
+                    <Show
+                        when={isReleased}
+                        fallback={
+                            <a
+                                class="hero-text-badges-badge highlight"
+                                href="#waitlist"
+                                onClick={(e) => {
+                                    e.preventDefault();
 
-                            const waitlist = document.getElementById("waitlist");
+                                    const waitlist = document.getElementById("waitlist");
 
-                            if (waitlist) {
-                                waitlist.scrollIntoView({
-                                    behavior: "smooth",
-                                });
+                                    if (waitlist) {
+                                        waitlist.scrollIntoView({
+                                            behavior: "smooth",
+                                        });
 
-                                waitlist.focus();
-                            }
-                        }}
+                                        waitlist.focus();
+                                    }
+                                }}
+                            >
+                                <div class="hero-text-badges-badge-text">Get Notified</div>
+                                <div class="hero-text-badges-badge-icon">
+                                    <Icon name="bell" />
+                                </div>
+                            </a>
+                        }
                     >
-                        <div class="hero-text-badges-badge-text">Get Notified</div>
-                        <div class="hero-text-badges-badge-icon">
-                            <Icon name="bell" />
-                        </div>
-                    </a>
+                        <Button href="/download" class="cta-button">
+                            Download
+                            <Icon name="download" />
+                        </Button>
+                        <Button href="/redirect/github" class="cta-button secondary">
+                            View on GitHub
+                            <Icon name="mark-github" />
+                        </Button>
+                    </Show>
                 </div>
             </h1>
             <Footer />

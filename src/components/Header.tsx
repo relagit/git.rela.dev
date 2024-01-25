@@ -2,8 +2,12 @@ import { renderDate } from "~/utils/time";
 import Icon from "./Icon";
 
 import "./header.scss";
+import { Show } from "solid-js";
 
 export default () => {
+    const isReleased = Date.now() > new Date("Sat Feb 10 2024 0:00:00 PST").getTime();
+    // const isReleased = true;
+
     return (
         <header class="header static">
             <div class="header__group">
@@ -41,10 +45,20 @@ export default () => {
                 </a>
                 <a href="/download" class="header__group__link">
                     Download
-                    <div class="tag">
-                        <Icon name="stopwatch" />
-                        <p style="width: 54px">{renderDate(new Date("Sat Feb 10 2024 0:00:00 PST").getTime())()}</p>
-                    </div>
+                    <Show
+                        when={isReleased}
+                        fallback={
+                            <div class="tag">
+                                <Icon name="stopwatch" />
+                                <p style="width: 54px">{renderDate(new Date("Sat Feb 10 2024 0:00:00 PST").getTime())()}</p>
+                            </div>
+                        }
+                    >
+                        <div class="tag">
+                            <Icon name="beaker" />
+                            <p>Beta</p>
+                        </div>
+                    </Show>
                 </a>
                 <a href="/enterprise" class="header__group__link">
                     Enterprise
