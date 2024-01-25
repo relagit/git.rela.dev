@@ -24,8 +24,8 @@ main.index {
         justify-content: center;
         align-items: center;
         border-radius: 50px;
-        border: 1px solid #0a84ff;
-        background: rgba(10, 132, 255, 0.1);
+        border: 1px solid #0a84ff99;
+        background: linear-gradient(180deg, rgba(10, 132, 255, 0.14) 0%, rgba(10, 132, 255, 0.04) 100%);
         position: absolute;
         top: 5rem;
         height: 42px;
@@ -86,7 +86,7 @@ main.index {
         &-sep {
             height: 100%;
             width: 1px;
-            background: #0a84ff;
+            background: #0a84ff50;
         }
 
         a {
