@@ -5,6 +5,8 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const node_modules = path.resolve(__dirname, "node_modules");
 
+console.log(fs.readdirSync("node_modules/typescript/lib"));
+
 if (!fs.existsSync(node_modules)) {
     fs.mkdirSync(node_modules);
 }
