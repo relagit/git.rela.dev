@@ -13,6 +13,7 @@ const __dirname = new URL(".", import.meta.url).pathname;
 try {
     twoslash = createTwoslasher({
         compilerOptions: {
+            lib: [],
             types: ["relagit"],
         },
         tsLibDirectory: __dirname.includes("components") ? __dirname + "../../node_modules/typescript/lib" : "/vercel/path0/node_modules/typescript/lib",
