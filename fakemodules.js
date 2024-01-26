@@ -17,9 +17,7 @@ if (!fs.existsSync(path.resolve(node_modules, "@types/relagit"))) {
     fs.mkdirSync(path.resolve(node_modules, "@types/relagit"));
 }
 
-if (!fs.existsSync(path.resolve(node_modules, "@types/relagit", "index.d.ts"))) {
-    fs.writeFileSync(path.resolve(node_modules, "@types/relagit", "index.d.ts"), fs.readFileSync(path.resolve(__dirname, "global.d.ts")));
-}
+fs.writeFileSync(path.resolve(node_modules, "@types/relagit", "index.d.ts"), fs.readFileSync(path.resolve(__dirname, "global.d.ts")));
 
 if (!fs.existsSync(path.resolve(node_modules, "@types/relagit", "package.json"))) {
     fs.writeFileSync(

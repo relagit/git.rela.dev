@@ -2,12 +2,14 @@
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     margin: 0;
-    color: var(--color-secondary);
+    color: rgba(255, 255, 245, 0.86);
     font-family: var(--font-body);
     font-size: 16px;
     font-weight: 400;
-    line-height: 1.25;
+    line-height: 1.5;
     word-wrap: break-word;
+    container-type: inline-size;
+    container-name: markdown;
 
     h1 {
         color: red;
@@ -79,21 +81,67 @@
 
     p {
         font-size: 1rem;
-        line-height: 1.5rem;
+        line-height: 1.75rem;
         letter-spacing: normal;
         font-weight: 400;
     }
 
     > * + * {
-        margin-top: 1rem;
+        margin-block: 1rem;
     }
 
     pre {
         font-size: 0.8rem;
-        padding: 1rem;
+        padding-block: 1rem;
         border-radius: 6px;
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: visible;
+
+        @container (width < 580px) {
+            overflow-y: auto !important;
+
+            .twoslash-popup-container {
+                display: none !important;
+            }
+        }
+
+        code {
+            display: block;
+            padding: 0 1rem;
+            width: fit-content;
+            min-width: 100%;
+        }
+
+        span:not(.twoslash-popup-container span) {
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .highlighted,
+        .add,
+        .remove {
+            margin: 0 -1rem;
+            padding: 0 1rem;
+            width: calc(100% + 2rem);
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .add {
+            background: rgba(99, 182, 99, 0.1);
+        }
+
+        .remove {
+            background: rgba(196, 95, 95, 0.1);
+        }
+    }
+
+    code:not(pre code) {
+        font-size: 0.8em;
+        padding: 0.25em 0.5em;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.1);
         overflow-x: auto;
     }
 
@@ -151,6 +199,16 @@
     b {
         font-weight: 500;
         color: var(--color-primary);
+    }
+
+    ul {
+        padding-inline-start: 1.25rem;
+    }
+
+    hr {
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 2rem 0;
     }
 
     .markdown-alert {

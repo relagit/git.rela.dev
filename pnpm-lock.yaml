@@ -109,6 +109,9 @@ devDependencies:
   shikiji:
     specifier: ^0.10.1
     version: 0.10.1
+  shikiji-transformers:
+    specifier: ^0.10.1
+    version: 0.10.1
   shikiji-twoslash:
     specifier: ^0.10.1
     version: 0.10.1(typescript@4.9.5)

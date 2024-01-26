@@ -3,7 +3,8 @@ import solid from "solid-start/vite";
 import { PluginOption, defineConfig } from "vite";
 
 import shikiji, { RehypeShikijiOptions } from "rehype-shikiji";
-import { transformerTwoslash } from "shikiji-twoslash";
+import { rendererRich, transformerTwoslash } from "shikiji-twoslash";
+import * as transformers from "shikiji-transformers";
 import { nodeTypes } from "@mdx-js/mdx";
 import rehypeImgFigure from "rehype-img-figure";
 import rehypeSlug from "rehype-slug";
@@ -31,11 +32,14 @@ export default defineConfig({
                         {
                             theme: "github-dark",
                             transformers: [
+                                transformers.transformerNotationHighlight({}),
+                                transformers.transformerNotationWordHighlight({}),
+                                transformers.transformerNotationDiff({}),
                                 transformerTwoslash({
-                                    langs: ["typescript", "javascript", "jsx", "tsx", "json"],
+                                    langs: ["typescript", "javascript", "jsx", "tsx", "ts"],
                                     twoslashOptions: {
                                         compilerOptions: {
-                                            types: ["relagit"],
+                                            types: ["relagit", "node"],
                                         },
                                     },
                                 }),

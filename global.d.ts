@@ -93,15 +93,49 @@ interface Context {
 }
 
 interface Repository {
+    /**
+     * Whether the repository is in an "unfetchable" state, meaning that information about the repository cannot be fetched.
+     */
     draft?: boolean;
+    /**
+     * A unique identifier for the repository
+     */
     id: string;
+    /**
+     * The path to the repository on disk
+     * @example
+     * /Users/username/Projects/my-repo
+     */
     path: string;
+    /**
+     * The name of the repository
+     */
     name: string;
+    /**
+     * The main (origin) remote for the repository
+     * @example
+     * https://github.com/relagit/test.git
+     */
     remote: string;
+    /**
+     * The current branch for the repository
+     */
     branch: string;
+    /**
+     * The current commit SHA for the repository
+     */
     commit: string;
+    /**
+     * A number representing the number of commits ahead the local branch is from the remote
+     */
     ahead: number;
+    /**
+     * A number representing the number of commits behind the local branch is from the remote
+     */
     behind: number;
+    /**
+     * The last time the repository was fetched in milliseconds since the epoch
+     */
     lastFetched?: number;
 }
 
@@ -159,9 +193,23 @@ type Branch = {
 };
 
 interface GitFile {
+    /**
+     * A unique identifier for the file
+     */
     id: string;
+    /**
+     * The name of the file
+     */
     name: string;
+    /**
+     * The path to the file on disk
+     * @example
+     * /Users/username/Projects/my-repo/src/
+     */
     path: string;
+    /**
+     * The status of the file
+     */
     status: "added" | "modified" | "deleted" | "untracked" | "unknown" | "unmerged" | "copied" | "renamed" | "type-changed";
 }
 
