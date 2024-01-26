@@ -1,7 +1,6 @@
 import { For, Show, createResource } from "solid-js";
 
 import * as shikiji from "shikiji";
-import { twoslash, transformerTwoslash } from "./twoslash";
 
 import "./codeblock.scss";
 import cn from "~/utils/cn";
@@ -65,7 +64,6 @@ export default (props: CodeblockProps) => {
             return highlighter.codeToHtml(props.code, {
                 lang: props.language,
                 theme: "github-dark",
-                transformers: props.language === "ts" ? [transformerTwoslash] : [],
             });
         } catch (e) {
             console.error(e);

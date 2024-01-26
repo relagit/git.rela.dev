@@ -5,10 +5,6 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const node_modules = path.resolve(__dirname, "node_modules");
 
-if (fs.existsSync("/vercel/path0/node_modules/typescript/lib")) {
-    console.log(fs.readdirSync("/vercel/path0/node_modules/typescript/lib"));
-}
-
 if (!fs.existsSync(node_modules)) {
     fs.mkdirSync(node_modules);
 }
