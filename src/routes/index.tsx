@@ -10,6 +10,7 @@ import Icon, { ProductHunt } from "~/components/Icon";
 import "./index.scss";
 import { renderDate } from "~/utils/time";
 import Button from "~/components/Button";
+import Codeblock from "~/components/Codeblock";
 
 const { confetti } = createConfetti(); // THIS VARIABLE IS USED BY THE use:confetti DIRECTIVE, DO NOT REMOVE IT
 
@@ -26,7 +27,7 @@ let _upvoteCount = 0; // value will be used for ssr
 export default () => {
     const [os, setOS] = createSignal<"mac" | "windows" | "linux" | "mobile">("mac");
     const [tag, setTag] = createSignal("v0.0.0");
-    const [upvoteCount, setUpvoteCount] = createSignal(_upvoteCount);
+    const [upvoteCount, setUpvoteCount] = createSignal<number>(_upvoteCount);
 
     const isReleased = Date.now() > new Date("Sat Feb 10 2024 0:00:00 PST").getTime();
     // const isReleased = true;
@@ -44,9 +45,11 @@ export default () => {
             } catch (e) {
                 console.log(e);
             }
+
+            return 0;
         })().then((res) => {
-            setUpvoteCount(res);
-            _upvoteCount = res;
+            setUpvoteCount(Number(res));
+            _upvoteCount = Number(res);
         });
 
         fetch(new URL("/api/release", location.href)).then(async (res) => {
@@ -221,7 +224,21 @@ export default () => {
                         <Icon name="arrow-up-right" />
                     </a>
                 </div>
-                <img loading="lazy" src="/assets/landing/codeblock.webp" alt="Codeblock showing a workflow that runs on commits"></img>
+                <Codeblock
+                    code={`import { Workflow, context } from "relagit:actions";
+
+export default new Workflow({
+    name: "My New Workflow",
+    description: "Does amazing things!",
+    hooks: {
+        commit: (_, repository) => {
+            console.log("Committing to repository", repository);
+        },
+    },
+});`}
+                    language="ts"
+                    filename=".relagit/workflows/action.ts"
+                />
             </div>
             <div class="feature" use:highlightOnScroll>
                 <div class="feature-window">

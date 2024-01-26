@@ -2,8 +2,7 @@ import vercel from "solid-start-vercel";
 import solid from "solid-start/vite";
 import { PluginOption, defineConfig } from "vite";
 
-import withShiki from "@stefanprobst/remark-shiki";
-import * as shiki from "shiki";
+import shikiji from "rehype-shikiji";
 import { nodeTypes } from "@mdx-js/mdx";
 import rehypeImgFigure from "rehype-img-figure";
 import rehypeSlug from "rehype-slug";
@@ -26,6 +25,13 @@ export default defineConfig({
                     [rehypeRaw, { passThrough: nodeTypes }],
                     [headings, { behavior: "wrap" }],
                     [
+                        // @ts-ignore
+                        shikiji,
+                        {
+                            theme: "github-dark",
+                        },
+                    ],
+                    [
                         rehypeGithubAlerts,
                         {
                             alerts: [
@@ -43,7 +49,7 @@ export default defineConfig({
                         } satisfies IOptions,
                     ],
                 ],
-                remarkPlugins: [remarkGfm, [withShiki, { highlighter: await shiki.getHighlighter({ theme: "css-variables" }) }]],
+                remarkPlugins: [remarkGfm],
             }),
             enforce: "pre",
         } as PluginOption,

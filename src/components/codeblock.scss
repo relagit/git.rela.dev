@@ -1,0 +1,90 @@
+.codeblock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    .codeblock-header {
+        display: flex;
+        padding: 0.75rem 1rem;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 135%;
+        user-select: none;
+
+        .codeblock-filename {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            .codeblock-icon {
+                width: 16px;
+                height: 16px;
+                opacity: 0.7;
+            }
+        }
+    }
+
+    .codeblock-content {
+        font-family: var(--font-mono);
+        display: flex;
+        padding: 16px 32px 32px 32px;
+        align-items: center;
+        gap: 24px;
+        background: rgba(255, 255, 255, 0.04);
+        width: 100%;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        font-size: 13px;
+
+        @media screen and (max-width: 600px) {
+            font-size: 12px;
+            padding: 16px;
+        }
+
+        &-lines {
+            color: #6a737d;
+            text-align: right;
+            font-weight: 400;
+            line-height: 130%;
+            white-space: pre;
+            user-select: none;
+
+            @media screen and (max-width: 600px) {
+                display: none;
+            }
+        }
+
+        &-inner {
+            white-space: pre;
+            color: #ffffffc3;
+        }
+    }
+}
+
+pre {
+    background-color: transparent !important;
+}
+
+// https://gist.github.com/anurag-roy/1dfaf64816524a80bb82c537a4a7b054
+:root {
+    --shiki-color-text: #c9d1d9;
+    --shiki-color-background: #161b22;
+    --shiki-token-constant: #79c0ff;
+    --shiki-token-string: #a5d6ff;
+    --shiki-token-comment: #8b949e;
+    --shiki-token-keyword: #ff7b72;
+    --shiki-token-parameter: #7ee787;
+    --shiki-token-function: #d2a8ff;
+    --shiki-token-string-expression: #a5d6ff;
+    --shiki-token-punctuation: #212121;
+    --shiki-token-link: #a5d6ff;
+}

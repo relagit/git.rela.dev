@@ -4,3 +4,17 @@ export const frontmatter = {
     date: "1/25/2024",
     description: "How to create workflows.",
 };
+
+```tsx
+import { Workflow, context } from "relagit:actions";
+
+export default new Workflow({
+    name: "My New Workflow",
+    description: "Does amazing things!",
+    hooks: {
+        commit: (_, repository) => {
+            console.log("Committing to repository", repository);
+        },
+    },
+});
+```

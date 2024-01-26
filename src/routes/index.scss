@@ -334,6 +334,7 @@ main.index {
                 left: 50%;
                 bottom: 0;
                 top: -9vw;
+                user-select: none;
 
                 @media screen and (max-width: 1000px) {
                     width: 166vw;
