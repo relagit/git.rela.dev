@@ -6,11 +6,14 @@ import { createTwoslasher } from "twoslash";
 export let twoslash: ReturnType<typeof createTwoslasher>;
 export let transformerTwoslash: ReturnType<ReturnType<typeof createTransformerFactory>>;
 
+const __dirname = new URL(".", import.meta.url).pathname;
+
 try {
     twoslash = createTwoslasher({
         compilerOptions: {
             types: ["relagit"],
         },
+        tsLibDirectory: __dirname + "/../../node_modules/typescript/lib",
     });
 
     transformerTwoslash = createTransformerFactory(twoslash)({
