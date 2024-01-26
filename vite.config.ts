@@ -2,7 +2,8 @@ import vercel from "solid-start-vercel";
 import solid from "solid-start/vite";
 import { PluginOption, defineConfig } from "vite";
 
-import shikiji from "rehype-shikiji";
+import shikiji, { RehypeShikijiOptions } from "rehype-shikiji";
+import { transformerTwoslash } from "shikiji-twoslash";
 import { nodeTypes } from "@mdx-js/mdx";
 import rehypeImgFigure from "rehype-img-figure";
 import rehypeSlug from "rehype-slug";
@@ -29,7 +30,17 @@ export default defineConfig({
                         shikiji,
                         {
                             theme: "github-dark",
-                        },
+                            transformers: [
+                                transformerTwoslash({
+                                    langs: ["typescript", "javascript", "jsx", "tsx", "json"],
+                                    twoslashOptions: {
+                                        compilerOptions: {
+                                            types: ["relagit"],
+                                        },
+                                    },
+                                }),
+                            ],
+                        } satisfies RehypeShikijiOptions,
                     ],
                     [
                         rehypeGithubAlerts,
