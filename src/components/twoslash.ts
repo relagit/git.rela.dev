@@ -15,7 +15,7 @@ try {
         compilerOptions: {
             types: ["relagit"],
         },
-        tsLibDirectory: __dirname.includes("components") ? __dirname + "../../node_modules/typescript/lib" : "/var/task/vercel/path0/node_modules/typescript/lib",
+        tsLibDirectory: __dirname.includes("components") ? __dirname + "../../node_modules/typescript/lib" : "/vercel/path0/node_modules/typescript/lib",
     });
 
     transformerTwoslash = createTransformerFactory(twoslash)({
