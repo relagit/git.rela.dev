@@ -15,7 +15,7 @@ try {
         compilerOptions: {
             types: ["relagit"],
         },
-        tsLibDirectory: __dirname.includes("components") ? __dirname + "../../node_modules/typescript/lib" : __dirname + "node_modules/typescript/lib",
+        tsLibDirectory: __dirname.includes("components") ? __dirname + "../../node_modules/typescript/lib" : __dirname + "../node_modules/typescript/lib",
     });
 
     transformerTwoslash = createTransformerFactory(twoslash)({
