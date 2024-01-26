@@ -225,14 +225,17 @@ export default () => {
                     </a>
                 </div>
                 <Codeblock
-                    code={`import { Workflow, context } from "relagit:actions";
+                    nooverflow
+                    code={`// @noErrors
+import { Workflow, context } from "relagit:actions";
 
 export default new Workflow({
     name: "My New Workflow",
     description: "Does amazing things!",
     hooks: {
-        commit: (_, repository) => {
-            console.log("Committing to repository", repository);
+        commit: (_, repository, commit) => {
+            repository.c
+                     // ^|
         },
     },
 });`}

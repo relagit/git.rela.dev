@@ -1,13 +1,16 @@
 import { For, Show, createResource } from "solid-js";
 
 import * as shikiji from "shikiji";
+import { twoslash, transformerTwoslash } from "./twoslash";
 
 import "./codeblock.scss";
+import cn from "~/utils/cn";
 
 interface CodeblockProps {
     code: string;
     language?: string;
     filename?: string;
+    nooverflow?: boolean;
 }
 
 const trim = (str: string) => {
@@ -62,6 +65,7 @@ export default (props: CodeblockProps) => {
             return highlighter.codeToHtml(props.code, {
                 lang: props.language,
                 theme: "github-dark",
+                transformers: props.language === "ts" ? [transformerTwoslash] : [],
             });
         } catch (e) {
             console.error(e);
@@ -70,7 +74,7 @@ export default (props: CodeblockProps) => {
     });
 
     return (
-        <div class="codeblock">
+        <div class={cn("codeblock", props.nooverflow && "nooverflow")}>
             <Show when={props.filename && props.language}>
                 <div class="codeblock-header">
                     <Show when={props.filename}>
@@ -89,16 +93,6 @@ export default (props: CodeblockProps) => {
             </Show>
             <div class="codeblock-content">
                 <Show when={code()} fallback={<div class="codeblock-content-inner">{trim(props.code)}</div>}>
-                    <div class="codeblock-content-lines">
-                        <For each={code()?.split("\n")}>
-                            {(_, i) => (
-                                <>
-                                    <span class="codeblock-content-line">{i() + 1}</span>
-                                    <br />
-                                </>
-                            )}
-                        </For>
-                    </div>
                     <div class="codeblock-content-inner" innerHTML={code()}></div>
                 </Show>
             </div>

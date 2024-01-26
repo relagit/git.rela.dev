@@ -3,7 +3,8 @@
     "scripts": {
         "dev": "solid-start dev",
         "build": "solid-start build",
-        "start": "solid-start start"
+        "start": "solid-start start",
+        "postinstall": "node ./fakemodules.js"
     },
     "type": "module",
     "devDependencies": {
@@ -17,6 +18,7 @@
         "@wooorm/starry-night": "^2.2.0",
         "esbuild": "^0.14.54",
         "hast-util-to-html": "^8.0.4",
+        "idb-keyval": "^6.2.1",
         "postcss": "^8.4.33",
         "rehype-autolink-headings": "^7.1.0",
         "rehype-github-alerts": "^2.0.0",
@@ -27,12 +29,15 @@
         "remark-gfm": "^3.0.1",
         "remark-shiki-twoslash": "^3.1.3",
         "shikiji": "^0.10.1",
+        "shikiji-twoslash": "^0.10.1",
         "solid-mdx": "^0.0.6",
         "solid-start-mdx": "^0.2.32",
         "solid-start-node": "^0.3.10",
         "solid-start-vercel": "^0.3.10",
         "solid-transition-group": "^0.2.3",
+        "twoslash-cdn": "^0.1.0",
         "typescript": "^4.9.5",
+        "unstorage": "^1.10.1",
         "vite": "^4.5.1"
     },
     "dependencies": {
@@ -45,6 +50,7 @@
         "shiki": "^0.14.7",
         "solid-js": "^1.8.12",
         "solid-start": "^0.3.10",
+        "twoslash": "^0.1.0",
         "vscode-oniguruma": "^2.0.1",
         "ws": "^8.16.0"
     },
