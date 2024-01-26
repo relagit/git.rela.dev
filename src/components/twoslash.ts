@@ -1,4 +1,5 @@
 import { createTransformerFactory, rendererRich } from "shikiji-twoslash/core";
+import { isDev } from "solid-js/web";
 import { createTwoslasher } from "twoslash";
 
 /// <reference types="@types/relagit" />
@@ -13,7 +14,7 @@ try {
         compilerOptions: {
             types: ["relagit"],
         },
-        tsLibDirectory: __dirname + "/../../node_modules/typescript/lib",
+        tsLibDirectory: isDev ? __dirname + "/../../node_modules/typescript/lib" : "node_modules/typescript/lib",
     });
 
     transformerTwoslash = createTransformerFactory(twoslash)({
