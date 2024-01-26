@@ -235,7 +235,7 @@ export default new Workflow({
     hooks: {
         commit: (_, repository, commit) => {
             repository.c
-                     // ^|
+                     
         },
     },
 });`}
