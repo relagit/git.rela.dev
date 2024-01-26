@@ -57,6 +57,8 @@ export default () => {
                 break;
         }
 
+        if (!isReleased) return;
+
         if (url()) window.open(url(), "_blank");
     });
 
