@@ -22,35 +22,20 @@ We'll start by scaffolding a new vite project to work in. We'll use pnpm as our 
 ```bash
 // [!filename Terminal]
 pnpm init
-pnpm add -D vite typescript
+pnpm add -D vite typescript @relagit/vite
 mdkir src
 touch src/index.ts
 touch src/native.ts
 touch vite.config.ts
 ```
 
-We'll then place the following code in `vite.config.ts`. This defines how vite will process our workflow.
+We'll then place the following code in `vite.config.ts`. This defines how vite will process our workflow. We're using the `@relagit/vite` plugin to allow us to not have to worry about vite's configuration.
 
 ```ts
 // [!filename vite.config.ts]
-import { defineConfig } from "vite";
-import { builtinModules } from "node:module";
+import { defineConfig } from "@relagit/vite";
 
-export default defineConfig({
-    build: {
-        target: "esnext",
-        outDir: "dist",
-        emptyOutDir: true,
-        lib: {
-            entry: ["src/index.ts", "src/native.ts"],
-            formats: ["es"],
-            fileName: (_, name) => `${name}.js`,
-        },
-        rollupOptions: {
-            external: builtinModules.concat("relagit:actions"),
-        },
-    },
-});
+export default defineConfig();
 ```
 
 Now, time to get onto the workflow itself.
@@ -171,18 +156,8 @@ Let's test our workflow out. We'll start by building it with vite.
 pnpm vite build
 ```
 
-This will create a `dist` folder with our workflow inside of it. But there's two last steps before we can test it out.
+This will create a `dist` folder with our workflow inside of it. But there's one last step before we can test it out.
 
-First, we'll need to create a `relagit.json` file in the `dist` folder. This file will tell RelaGit how to run our workflow.
+You'll need to add the filepath to your project's folder to `external.json` as described in the [Installing Workflows](/docs/workflows/installing-workflows#installing-from-the-filesystem) section.
 
-```json
-// [!filename relagit.json]
-{
-    "plugin": "dist/index.js",
-    "native": "dist/native.js"
-}
-```
-
-Then, you'll need to add the filepath to your project's folder to `external.json` as described in the [Installing Workflows](/docs/workflows/installing-workflows#installing-from-the-filesystem) section.
-
-Finally, open up RelaGit and check to see your workflow in Settings > Workflows. If it's there, you're good to go!
+At last, open up RelaGit and check to see your workflow in Settings > Workflows. If it's there, you're good to go!

@@ -12,6 +12,7 @@
         "@mdx-js/rollup": "^2.3.0",
         "@neoconfetti/solid": "^0.1.0",
         "@primer/octicons": "^19.8.0",
+        "@relagit/vite": "^1.0.0",
         "@types/node": "^18.19.6",
         "@types/primer__octicons": "^19.6.3",
         "@vercel/analytics": "^1.1.1",

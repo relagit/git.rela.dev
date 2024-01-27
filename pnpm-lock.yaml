@@ -58,6 +58,9 @@ devDependencies:
   '@primer/octicons':
     specifier: ^19.8.0
     version: 19.8.0
+  '@relagit/vite':
+    specifier: ^1.0.0
+    version: 1.0.0
   '@types/node':
     specifier: ^18.19.6
     version: 18.19.6
@@ -1899,6 +1902,10 @@ packages:
     resolution: {integrity: sha512-Imze/fyW41Io5fN+27T5EAeXJrgBjMbz6nzU+wYbRylXvIAjLPUvaJPVoStiFlgSU+TjTUJqg5A9rgMDzTyMCg==}
     dependencies:
       object-assign: 4.1.1
+    dev: true
+
+  /@relagit/vite@1.0.0:
+    resolution: {integrity: sha512-9dDbqDrfjfWsSw2Eoh/e0lbDfSayluvl6Es482+DRG+Dt5UL3PNmt5Db7OCx/dwg77gNGtV2oFWwIK2jdyJaCg==}
     dev: true
 
   /@rollup/plugin-commonjs@24.1.0(rollup@3.29.4):
