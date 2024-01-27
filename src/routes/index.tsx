@@ -104,8 +104,14 @@ export default () => {
             <Meta name="twitter:image" content="https://git.rela.dev/assets/opengraph.png" />
 
             {/* we are preloading our big above-the-fold images */}
-            <Link rel="preload" as="image" href="/assets/landing/blur.webp" />
             <Link rel="preload" as="image" href="/assets/client/dark.webp" />
+            <Link
+                rel="preload"
+                as="image"
+                href="/assets/landing/blur@0-75.webp"
+                imagesrcset="/assets/landing/blur@0-75.webp 600w, /assets/landing/blur.webp 1000w, /assets/landing/blur@2.webp 1600w"
+                imagesizes="140vw"
+            />
 
             <main class="index">
                 <Header />
@@ -228,7 +234,15 @@ export default () => {
                 </h1>
                 <div class="window-container" aria-label="Image of RelaGit in the diff view, multple added lines and files.">
                     <div class="window" use:highlightOnScroll></div>
-                    <img src="/assets/landing/blur.webp" width="140vw" height="40vw" alt="Blurry background gradient blobs" class="object" />
+                    <img
+                        src="/assets/landing/blur@0-75.webp"
+                        width="140vw"
+                        height="40vw"
+                        alt="Blurry background gradient blobs"
+                        class="object"
+                        srcset="/assets/landing/blur@0-75.webp 600w, /assets/landing/blur.webp 1000w, /assets/landing/blur@2.webp 1600w"
+                        sizes="140vw"
+                    />
                 </div>
                 <div class="separator" />
                 <div class="feature" use:highlightOnScroll>
