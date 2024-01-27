@@ -11,7 +11,7 @@ import "./index.scss";
 import { renderDate } from "~/utils/time";
 import Button from "~/components/Button";
 import Codeblock from "~/components/Codeblock";
-import { Meta, Title } from "solid-start";
+import { Link, Meta, Title } from "solid-start";
 
 const { confetti } = createConfetti(); // THIS VARIABLE IS USED BY THE use:confetti DIRECTIVE, DO NOT REMOVE IT
 
@@ -102,6 +102,10 @@ export default () => {
             <Meta name="twitter:title" content="RelaGit" />
             <Meta name="twitter:description" content="The elegant solution to graphical version control. Built by developers, for developers." />
             <Meta name="twitter:image" content="https://git.rela.dev/assets/opengraph.png" />
+
+            {/* we are preloading our big above-the-fold images */}
+            <Link rel="preload" as="image" href="/assets/landing/blur.webp" />
+            <Link rel="preload" as="image" href="/assets/client/dark.webp" />
 
             <main class="index">
                 <Header />
