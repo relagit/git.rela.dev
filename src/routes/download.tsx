@@ -10,7 +10,7 @@ export default () => {
     const [os, setOS] = createSignal<"mac" | "windows" | "linux" | "mobile" | "mac-arm">();
     const [url, setURL] = createSignal<string>();
 
-    const isReleased = Date.now() > new Date("Sat Feb 10 2024 0:00:00 PST").getTime();
+    const isReleased = Date.now() > new Date("Sat Feb 10 2024 0:01:00 PST").getTime();
     // const isReleased = true;
 
     onMount(() => {

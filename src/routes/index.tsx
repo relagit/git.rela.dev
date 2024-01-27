@@ -30,7 +30,7 @@ export default () => {
     const [tag, setTag] = createSignal("v0.0.0");
     const [upvoteCount, setUpvoteCount] = createSignal<number>(_upvoteCount);
 
-    const isReleased = Date.now() > new Date("Sat Feb 10 2024 0:00:00 PST").getTime();
+    const isReleased = Date.now() > new Date("Sat Feb 10 2024 0:01:00 PST").getTime();
     // const isReleased = true;
 
     onMount(() => {
@@ -133,7 +133,7 @@ export default () => {
                                 <>
                                     <p>✨</p> <p>RelaGit Public Beta</p>
                                     <div class="sep"></div>
-                                    <p style="width: 80px; color: var(--fill-secondary-vibrant);">{renderDate(new Date("Sat Feb 10 2024 0:00:00 PST").getTime())()}</p>
+                                    <p style="width: 80px; color: var(--fill-secondary-vibrant);">{renderDate(new Date("Sat Feb 10 2024 0:01:00 PST").getTime())()}</p>
                                 </>
                             }
                         >

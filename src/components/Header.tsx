@@ -5,7 +5,7 @@ import "./header.scss";
 import { Show } from "solid-js";
 
 export default () => {
-    const isReleased = Date.now() > new Date("Sat Feb 10 2024 0:00:00 PST").getTime();
+    const isReleased = Date.now() > new Date("Sat Feb 10 2024 0:01:00 PST").getTime();
     // const isReleased = true;
 
     return (
@@ -50,7 +50,7 @@ export default () => {
                         fallback={
                             <div class="tag">
                                 <Icon name="stopwatch" />
-                                <p style="width: 54px">{renderDate(new Date("Sat Feb 10 2024 0:00:00 PST").getTime())()}</p>
+                                <p style="width: 54px">{renderDate(new Date("Sat Feb 10 2024 0:01:00 PST").getTime())()}</p>
                             </div>
                         }
                     >
