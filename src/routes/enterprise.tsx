@@ -4,6 +4,7 @@ import Header from "~/components/Header";
 import Button from "~/components/Button";
 
 import "./subpage.scss";
+import { Meta } from "solid-start";
 
 export default () => {
     const [os, setOS] = createSignal<"mac" | "windows" | "linux" | "mobile">("mac");
@@ -26,6 +27,16 @@ export default () => {
 
     return (
         <>
+            <Meta property="og:title" content="RelaGit - Enterprise" />
+            <Meta property="og:description" content="The elegant solution to graphical version control. Built by developers, for developers." />
+            <Meta property="og:image" content="https://git.rela.dev/assets/opengraph.png" />
+            <Meta property="og:url" content="https://git.rela.dev/enterprise" />
+
+            <Meta name="twitter:card" content="summary_large_image" />
+            <Meta name="twitter:title" content="RelaGit - Enterprise" />
+            <Meta name="twitter:description" content="The elegant solution to graphical version control. Built by developers, for developers." />
+            <Meta name="twitter:image" content="https://git.rela.dev/assets/opengraph.png" />
+
             <Header />
             <div class="sub-page">
                 <div class="sub-page__text">

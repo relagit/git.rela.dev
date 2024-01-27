@@ -24,25 +24,37 @@ const Pages = (props: { blog: BlogArticleMap | undefined; pages: BlogArticleMap 
     console.log(props.pages);
 
     return (
-        <div class="post-grid">
-            <For each={Object.entries(props.pages).sort((a, b) => new Date((a[1] as BlogArticle).meta?.date).getTime() - new Date((b[1] as BlogArticle).meta?.date).getTime())}>
-                {([slug, item]) => {
-                    return (
-                        <>
-                            <a href={`/blog/${(item as BlogArticle).meta.slug}`} class="grid-item">
-                                <Show when={(item as BlogArticle).meta.image}>
-                                    <img src={(item as BlogArticle).meta.image} alt={(item as BlogArticle).meta.alt!} class="grid-item-image" />
-                                </Show>
-                                <div class="grid-item-text">
-                                    <div class="grid-item-text-title">{(item as BlogArticle).meta.title}</div>
-                                    <div class="grid-item-text-desc">{(item as BlogArticle).meta.description}</div>
-                                </div>
-                            </a>
-                        </>
-                    );
-                }}
-            </For>
-        </div>
+        <>
+            <Meta property="og:title" content="RelaGit - Blog" />
+            <Meta property="og:description" content="The elegant solution to graphical version control. Built by developers, for developers." />
+            <Meta property="og:image" content="https://git.rela.dev/assets/opengraph.png" />
+            <Meta property="og:url" content="https://git.rela.dev/blog" />
+
+            <Meta name="twitter:card" content="summary_large_image" />
+            <Meta name="twitter:title" content="RelaGit - Blog" />
+            <Meta name="twitter:description" content="The elegant solution to graphical version control. Built by developers, for developers." />
+            <Meta name="twitter:image" content="https://git.rela.dev/assets/opengraph.png" />
+
+            <div class="post-grid">
+                <For each={Object.entries(props.pages).sort((a, b) => new Date((a[1] as BlogArticle).meta?.date).getTime() - new Date((b[1] as BlogArticle).meta?.date).getTime())}>
+                    {([slug, item]) => {
+                        return (
+                            <>
+                                <a href={`/blog/${(item as BlogArticle).meta.slug}`} class="grid-item">
+                                    <Show when={(item as BlogArticle).meta.image}>
+                                        <img src={(item as BlogArticle).meta.image} alt={(item as BlogArticle).meta.alt!} class="grid-item-image" />
+                                    </Show>
+                                    <div class="grid-item-text">
+                                        <div class="grid-item-text-title">{(item as BlogArticle).meta.title}</div>
+                                        <div class="grid-item-text-desc">{(item as BlogArticle).meta.description}</div>
+                                    </div>
+                                </a>
+                            </>
+                        );
+                    }}
+                </For>
+            </div>
+        </>
     );
 };
 

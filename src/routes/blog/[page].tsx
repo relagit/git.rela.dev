@@ -66,9 +66,7 @@ export default () => {
 
             <Meta name="twitter:title" content={"RelaGit - " + (currentPost()?.meta.title || "Blog")} />
             <Meta name="twitter:description" content={currentPost()?.meta.description} />
-            <Meta name="twitter:card" content="summary" />
-            <Meta name="twitter:site" content="@withrela" />
-            <Meta name="twitter:creator" content="@withrela" />
+            <Meta name="twitter:card" content="summary_large_image" />
             <Meta name="twitter:image" content={currentPost()?.meta.image} />
 
             <Show

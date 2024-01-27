@@ -43,17 +43,11 @@ export default () => {
                     <Meta name="msapplication-navbutton-color" content="#1c84ec" />
                     <Meta name="apple-mobile-web-app-status-bar-style" content="#1c84ec" />
 
-                    <Meta property="og:title" content="RelaGit" />
-                    <Meta property="og:description" content="The elegant solution to graphical version control. Built by developers, for developers." />
-                    <Meta property="og:image" content="https://git.rela.dev/assets/opengraph.png" />
-                    <Meta property="og:url" content="https://git.rela.dev" />
                     <Meta property="og:type" content="website" />
-
-                    <Meta name="twitter:card" content="summary_large_image" />
-                    <Meta name="twitter:title" content="RelaGit" />
-                    <Meta name="twitter:description" content="The elegant solution to graphical version control. Built by developers, for developers." />
-                    <Meta name="twitter:image" content="https://git.rela.dev/assets/opengraph.png" />
                     <Meta name="twitter:url" content="https://git.rela.dev" />
+                    <Meta name="twitter:site" content="@withrela" />
+                    <Meta name="twitter:creator" content="@withrela" />
+                    {/* the rest of the meta tags are put on a page-by-page basis */}
                 </Head>
                 <Body>
                     <Suspense>

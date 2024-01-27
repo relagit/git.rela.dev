@@ -177,12 +177,16 @@ export default () => {
     return (
         <>
             <Title>{"RelaGit - " + (getPost(docs(), page())?.meta.title || "Documentation")}</Title>
+
             <Meta name="description" content={getPost(docs(), page())?.meta.description} />
             <Meta name="og:title" content={"RelaGit - " + (getPost(docs(), page())?.meta.title || "Documentation")} />
             <Meta name="og:description" content={getPost(docs(), page())?.meta.description} />
             <Meta name="og:type" content="article" />
+            <Meta name="og:image" content="https://git.rela.dev/assets/opengraph.png" />
+
             <Meta name="twitter:title" content={"RelaGit - " + (getPost(docs(), page())?.meta.title || "Documentation")} />
             <Meta name="twitter:description" content={getPost(docs(), page())?.meta.description} />
+
             <Show
                 when={docs()}
                 fallback={
