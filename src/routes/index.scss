@@ -115,6 +115,7 @@ main.index {
         a {
             color: #0a84ff;
             text-decoration: none;
+            transition: background-color 0.2s ease-in-out;
 
             &:hover {
                 background: rgba(10, 132, 255, 0.1);
@@ -197,7 +198,7 @@ main.index {
                 font-weight: 400;
                 line-height: 120%;
                 width: fit-content;
-                transition: background-image 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+                transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
 
                 @media screen and (max-width: 756px) {
                     font-size: 14px;
@@ -213,12 +214,12 @@ main.index {
                     background: linear-gradient(180deg, rgba(10, 132, 255, 0.12) 0%, rgba(10, 132, 255, 0.02) 100%);
 
                     &:hover {
-                        background: linear-gradient(180deg, rgba(10, 132, 255, 0.14) 0%, rgba(10, 132, 255, 0.04) 100%);
+                        background-color: rgba(10, 132, 255, 0.04);
                     }
                 }
 
                 &:hover {
-                    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+                    background-color: rgba(255, 255, 255, 0.02);
                 }
 
                 &-text {
@@ -763,16 +764,17 @@ main.index {
                     position: absolute;
                     content: "";
                     z-index: 2;
-                    width: 0%;
+                    width: 100%;
                     height: 100%;
                     left: 0px;
                     top: 0px;
                     background: #0000002a;
-                    transition: width 0.2s ease-out;
+                    transition: transform 0.2s ease-out;
+                    transform: translateX(-100%);
                 }
 
                 &:hover::after {
-                    width: 100% !important;
+                    transform: translateX(0%);
                 }
             }
         }
