@@ -8,8 +8,8 @@ export const relative = (ms: number) => {
 
     const seconds = Math.abs(Math.floor((diff / 1000) % 60));
     const minutes = Math.abs(Math.floor((diff / (1000 * 60)) % 60));
-    const hours = Math.abs(Math.floor((diff / (1000 * 60 * 60)) % 24));
-    const days = Math.abs(Math.floor(diff / (1000 * 60 * 60 * 24)));
+    const hours = Math.abs(Math.floor((diff / (1000 * 60 * 60)) % 24)) - 1; // no idea why
+    const days = Math.abs(Math.floor(diff / (1000 * 60 * 60 * 24))) - 1; // no idea why
 
     const secondsString = seconds.toString().padStart(2, "0");
     const minutesString = minutes.toString().padStart(2, "0");
