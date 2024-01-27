@@ -40,11 +40,11 @@ export default async (): Promise<BlogArticleMap> => {
             const article: BlogArticle = {
                 body: body.default,
                 meta: {
-                    image: body.frontmatter.image,
-                    title: body.frontmatter.title,
+                    image: body.meta.image,
+                    title: body.meta.title,
                     slug: slug || "",
-                    description: body.frontmatter.description,
-                    date: new Date(body.frontmatter.date).toLocaleString("en-US", {
+                    description: body.meta.description,
+                    date: new Date(body.meta.date).toLocaleString("en-US", {
                         month: "long",
                         day: "numeric",
                         year: "numeric",

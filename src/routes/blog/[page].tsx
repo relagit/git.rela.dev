@@ -1,14 +1,14 @@
 import { Meta, Title, useParams } from "solid-start";
 import { createEffect, createSignal, ErrorBoundary, For, JSX, lazy, onCleanup, onMount, Setter, Show } from "solid-js";
 
-import _assemble, { flat, type BlogArticle, type BlogArticleMap } from "~/utils/blog";
+import { type BlogArticle } from "~/utils/blog";
 import FourOhFour from "~/routes/[...404]";
 import Header from "~/components/Header";
 import Icon from "~/components/Icon";
 
 import "./blog.scss";
 
-const pages = _assemble();
+const pages = import.meta.glob("../../data/blog/**/*.mdx");
 
 const time = (mins: number) => {
     if (mins < 1) {
@@ -22,40 +22,32 @@ const time = (mins: number) => {
     return `${Math.ceil(mins)} min`;
 };
 
-const getPost = (pages: Awaited<ReturnType<typeof _assemble>> | undefined, slug: string): BlogArticle | null => {
-    if (!pages) {
-        return null;
-    }
-
-    const parts = slug.split("/");
-
-    let post = pages;
-
-    for (const part of parts) {
-        post = post[part] as unknown as BlogArticleMap; // i hate ts sometimes
-    }
-
-    if (!post) {
-        return null;
-    }
-
-    return post as unknown as BlogArticle;
-};
-
 export default () => {
     const params = useParams();
 
     const [innerText, setInnerText] = createSignal<number | null>(null);
-    const [page, setPage] = createSignal<string>(params.page);
-    const [blog, setBlog] = createSignal<BlogArticleMap>();
 
-    onMount(async () => {
-        setBlog(await pages);
-    });
+    const [currentPost, setCurrentPost] = createSignal<BlogArticle | null>(null);
+    const [done, setDone] = createSignal<boolean>(false);
+
+    for (let i = 0; i < Object.keys(pages).length; i++) {
+        (async () => {
+            const postFn = pages[Object.keys(pages)[i]];
+
+            // @ts-ignore
+            const post: any = await postFn();
+
+            if (post.meta.slug === params.post) {
+                setCurrentPost(post);
+            }
+
+            if (i === Object.keys(pages).length - 1) {
+                setDone(true);
+            }
+        })();
+    }
 
     createEffect(() => {
-        page();
-
         setTimeout(() => {
             setInnerText(document.querySelector<HTMLElement>(".markdown-body")?.innerText.split(" ").length || null);
         }, 100);
@@ -63,15 +55,24 @@ export default () => {
 
     return (
         <>
-            <Title>{"RelaGit - " + (getPost(blog(), page())?.meta.title || "Blog")}</Title>
-            <Meta name="description" content={getPost(blog(), page())?.meta.description} />
-            <Meta name="og:title" content={"RelaGit - " + (getPost(blog(), page())?.meta.title || "Blog")} />
-            <Meta name="og:description" content={getPost(blog(), page())?.meta.description} />
+            <Title>{"RelaGit - " + (currentPost()?.meta.title || "Blog")}</Title>
+
+            <Meta name="description" content={currentPost()?.meta.description} />
+            <Meta name="og:title" content={"RelaGit - " + (currentPost()?.meta.title || "Blog")} />
+            <Meta name="og:description" content={currentPost()?.meta.description} />
             <Meta name="og:type" content="article" />
-            <Meta name="twitter:title" content={"RelaGit - " + (getPost(blog(), page())?.meta.title || "Blog")} />
-            <Meta name="twitter:description" content={getPost(blog(), page())?.meta.description} />
+            <Meta name="og:image" content={currentPost()?.meta.image} />
+            <Meta name="og:url" content={`https://git.rela.dev/blog/${params.page}`} />
+
+            <Meta name="twitter:title" content={"RelaGit - " + (currentPost()?.meta.title || "Blog")} />
+            <Meta name="twitter:description" content={currentPost()?.meta.description} />
+            <Meta name="twitter:card" content="summary" />
+            <Meta name="twitter:site" content="@withrela" />
+            <Meta name="twitter:creator" content="@withrela" />
+            <Meta name="twitter:image" content={currentPost()?.meta.image} />
+
             <Show
-                when={blog()}
+                when={done()}
                 fallback={
                     <div class="blogpost-empty">
                         <Header />
@@ -93,30 +94,30 @@ export default () => {
                     </div>
                 }
             >
-                <Show when={getPost(blog(), page())} fallback={<FourOhFour />}>
+                <Show when={currentPost()} fallback={<FourOhFour />}>
                     <Header />
                     <div class="blogpost">
                         <div class="blogpost__content">
                             <h1 class="title">
-                                {getPost(blog(), page())?.meta.title}
+                                {currentPost()?.meta.title}
                                 <div class="read-time">
                                     <Icon name="clock" />
                                     {time((innerText() || 0) / 125)}
                                 </div>
                             </h1>
 
-                            <h2 class="description">{getPost(blog(), page())?.meta.description}</h2>
-                            <Show when={getPost(blog(), page())?.meta.image}>
-                                <img src={getPost(blog(), page())?.meta.image} alt={getPost(blog(), page())?.meta.alt!} class="blog-image" />
+                            <h2 class="description">{currentPost()?.meta.description}</h2>
+                            <Show when={currentPost()?.meta.image}>
+                                <img src={currentPost()?.meta.image} alt={currentPost()?.meta.alt!} class="blog-image" />
                             </Show>
-                            <Show when={getPost(blog(), page())?.body}>
+                            <Show when={currentPost()?.body}>
                                 <div class="markdown-body">
-                                    <ErrorBoundary fallback={"error"}>{getPost(blog(), page())?.body}</ErrorBoundary>
+                                    <ErrorBoundary fallback={"error"}>{currentPost()?.body}</ErrorBoundary>
                                 </div>
                             </Show>
                         </div>
                         <div class="byline">
-                            <span>Updated on {getPost(blog(), page())?.meta.date}</span>
+                            <span>Updated on {currentPost()?.meta.date}</span>
                             <a title="Edit on GitHub" target="_blank" href={`https://github.com/relagit/git.rela.dev/edit/main/src/data/blog/${params.page}.mdx`}>
                                 <Icon name="pencil" />
                             </a>
