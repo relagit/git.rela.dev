@@ -18,12 +18,14 @@ Workflows can come from a number of places, they could be cloned from GitHub, in
 Workflows can be installed through the [npm](https://npmjs.com) package manager. To install a workflow, start with the following command:
 
 ```bash
+// [!filename Terminal]
 npm install -g <workflow-package>
 ```
 
 You then need to locate where the package is installed. You can do this by running the following command:
 
 ```bash
+// [!filename Terminal]
 npm root -g # /Users/username/.nvm/versions/node/v20.9.0/lib/node_modules
 ```
 
@@ -32,6 +34,7 @@ Once you have the path to the global node modules, you can then navigate to the 
 You now can add something like the following to the `external.json` file:
 
 ```json
+// [!filename .relagit/external.json]
 // if you installed the workflow globally
 ["/Users/username/.nvm/versions/node/v20.9.0/lib/node_modules/<package-name>"]
 

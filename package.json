@@ -17,6 +17,7 @@
         "@vercel/analytics": "^1.1.1",
         "@wooorm/starry-night": "^2.2.0",
         "esbuild": "^0.14.54",
+        "hast-util-from-html": "^2.0.1",
         "hast-util-to-html": "^8.0.4",
         "idb-keyval": "^6.2.1",
         "postcss": "^8.4.33",

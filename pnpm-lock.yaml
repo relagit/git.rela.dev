@@ -73,6 +73,9 @@ devDependencies:
   esbuild:
     specifier: ^0.14.54
     version: 0.14.54
+  hast-util-from-html:
+    specifier: ^2.0.1
+    version: 2.0.1
   hast-util-to-html:
     specifier: ^8.0.4
     version: 8.0.4

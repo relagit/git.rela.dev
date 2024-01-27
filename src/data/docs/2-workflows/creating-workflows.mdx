@@ -19,7 +19,8 @@ This section will go over how to create a basic workflow using vite and TypeScri
 
 We'll start by scaffolding a new vite project to work in. We'll use pnpm as our package manager, but you can use npm or yarn if you prefer.
 
-```sh
+```bash
+// [!filename Terminal]
 pnpm init
 pnpm add -D vite typescript
 mdkir src
@@ -31,6 +32,7 @@ touch vite.config.ts
 We'll then place the following code in `vite.config.ts`. This defines how vite will process our workflow.
 
 ```ts
+// [!filename vite.config.ts]
 import { defineConfig } from "vite";
 import { builtinModules } from "node:module";
 
@@ -63,7 +65,8 @@ We'll use these inside of our workflow to interact with the user's repositories 
 
 Let's start by importing `Workflow` and `context` from actions.
 
-```ts
+```ts 
+// [!filename src/index.ts]
 // @noErrors
 import { Workflow, context } from "relagit:actions"; // [!code highlight]
 
@@ -73,7 +76,8 @@ export default new Workflow({
 
 We can now define some basic metadata that will identify our workflow.
 
-```ts
+```ts 
+// [!filename src/index.ts]
 import { Workflow, context } from "relagit:actions";
 // ---cut-before---
 export default new Workflow({
@@ -89,6 +93,7 @@ For example, the `navigate` hook is called when a user switches between a reposi
 Each hook has unique parameters that are passed to it. You can find the parameters for each hook in the workflow types.
 
 ```ts
+// [!filename src/index.ts]
 import { Workflow, context } from "relagit:actions";
 // ---cut-before---
 export default new Workflow({
@@ -113,7 +118,7 @@ But that brings up a new question: how do we interact with `fs` and other node m
 To run native (main process) code, we'll have to leverage the other file in our project: `native.ts`.
 
 ```ts
-// native.ts
+// [!filename src/native.ts]
 import * as fs from "node:fs";
 import * as path from "node:path";
 
@@ -140,6 +145,7 @@ Now how do we access this function from our workflow?
 We'll use the `native` global value. This value is automatically assigned when RelaGit runs your workflow.
 
 ```ts
+// [!filename src/index.ts]
 const native = {
     incrementCommitCount: async () => {},
 }
@@ -160,7 +166,8 @@ export default new Workflow({
 
 Let's test our workflow out. We'll start by building it with vite.
 
-```sh
+```bash
+// [!filename Terminal]
 pnpm vite build
 ```
 
@@ -169,6 +176,7 @@ This will create a `dist` folder with our workflow inside of it. But there's two
 First, we'll need to create a `relagit.json` file in the `dist` folder. This file will tell RelaGit how to run our workflow.
 
 ```json
+// [!filename relagit.json]
 {
     "plugin": "dist/index.js",
     "native": "dist/native.js"

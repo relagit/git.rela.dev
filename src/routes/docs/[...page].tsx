@@ -114,10 +114,24 @@ export default () => {
         }
     };
 
+    const clickListener = (e: MouseEvent) => {
+        console.log(e.target, (e.target as HTMLElement)?.tagName, (e.target as HTMLElement)?.dataset);
+        if ((e.target as HTMLElement)?.tagName === "BUTTON") {
+            if ((e.target as HTMLElement)?.dataset.code) {
+                e.preventDefault();
+
+                navigator.clipboard.writeText((e.target as HTMLElement)?.dataset.code || "");
+
+                (e.target as HTMLElement)?.classList.add("copied");
+            }
+        }
+    };
+
     onMount(async () => {
         setDocs(await pages);
 
         window.onkeydown = listener;
+        window.onclick = clickListener;
     });
 
     createEffect(() => {
