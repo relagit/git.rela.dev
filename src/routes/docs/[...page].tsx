@@ -1,13 +1,13 @@
 import { Meta, Title, useParams } from "solid-start";
 import { createEffect, createSignal, ErrorBoundary, For, JSX, lazy, onCleanup, onMount, Setter, Show } from "solid-js";
 
-import FourOhFour from "~/routes/[...404]";
 import _assemble, { flat, type Article, type ArticleMap } from "~/utils/docs";
-
-import "./docs.scss";
+import FourOhFour from "~/routes/[...404]";
 import Header from "~/components/Header";
 import Icon from "~/components/Icon";
 import cn from "~/utils/cn";
+
+import "./docs.scss";
 
 const pages = _assemble();
 

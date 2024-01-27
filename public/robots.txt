@@ -1,7 +1,5 @@
 # robots.txt
 
 User-agent: *
-Disallow: /docs/*
-Allow: /docs
 Disallow: /assets/*
 Disallow: /_assets/*

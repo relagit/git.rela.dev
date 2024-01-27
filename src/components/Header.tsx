@@ -66,6 +66,9 @@ export default () => {
                 <a href="/docs" class="header__group__link">
                     Docs
                 </a>
+                <a href="/blog" class="header__group__link">
+                    Blog
+                </a>
                 <a tabIndex={0} aria-label="Browse Workflows" aria-disabled="true" href="/workflows" class="header__group__link disabled">
                     Workflows
                 </a>

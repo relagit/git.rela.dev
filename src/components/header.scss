@@ -51,7 +51,22 @@
     width: 100%;
     height: fit-content;
 
-    @media screen and (max-width: 810px) {
+    @media screen and (max-width: 850px) {
+        a:nth-child(6),
+        a:nth-child(7) {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 750px) {
+        a:nth-child(5),
+        a:nth-child(6),
+        a:nth-child(7) {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 400px) {
         a:nth-child(4),
         a:nth-child(5),
         a:nth-child(6),
