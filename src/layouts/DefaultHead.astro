@@ -34,9 +34,25 @@ const { title, transitions } = Astro.props;
     <meta name="msapplication-navbutton-color" content="#1c84ec" />
     <meta name="apple-mobile-web-app-status-bar-style" content="#1c84ec" />
 
+    <meta
+        property="og:image"
+        content="https://git.rela.dev/assets/opengraph.png"
+    />
+    <meta property="og:url" content="https://git.rela.dev" />
     <meta property="og:title" content={title || "RelaGit"} />
     <meta property="og:type" content="website" />
+
     <meta name="twitter:url" content="https://git.rela.dev" />
     <meta name="twitter:site" content="@withrela" />
     <meta name="twitter:creator" content="@withrela" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="RelaGit" />
+    <meta
+        name="twitter:description"
+        content="The elegant solution to graphical version control. Built by developers, for developers."
+    />
+    <meta
+        name="twitter:image"
+        content="https://git.rela.dev/assets/opengraph.png"
+    />
 </head>

@@ -49,7 +49,17 @@ const upvoteCount = Number(
 </script>
 
 <Layout>
-    <DefaultHead slot="head" title="RelaGit " />
+    <DefaultHead slot="head" title="RelaGit">
+        <link rel="preload" as="image" href="/assets/client/dark.webp" />
+        <link
+            rel="preload"
+            as="image"
+            href="/assets/landing/blur@0-75.webp"
+            imagesrcset="/assets/landing/blur@0-75.webp 600w, /assets/landing/blur.webp 1000w, /assets/landing/blur@2.webp 1600w"
+            imagesizes="140vw"
+        />
+    </DefaultHead>
+
     <main class="index">
         <Header />
         <div class="hero-banner">
