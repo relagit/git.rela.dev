@@ -1,0 +1,8 @@
+---
+import Docs from "~/layouts/Docs.astro";
+import FourOhFour from "../[...404].astro";
+
+const { post } = Astro.params;
+---
+
+{post ? <Docs {post} /> : <FourOhFour />}

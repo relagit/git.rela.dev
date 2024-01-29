@@ -13,6 +13,8 @@
     font-weight: 500;
     line-height: 130%;
     text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
 
     &::after {
         position: absolute;

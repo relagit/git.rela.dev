@@ -1,0 +1,81 @@
+---
+import { getEntry } from "astro:content";
+
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import DefaultHead from "../../layouts/DefaultHead.astro";
+import Icon from "~/components/Icon";
+
+import { readTime } from "../../utils/time";
+
+const { post } = Astro.params;
+
+const entry = await getEntry("blog", post!);
+
+if (!entry) {
+    return Astro.redirect("/404");
+}
+
+const { Content, headings } = await entry.render();
+
+const time = readTime(entry.body.split(" ").length / 125);
+
+import "./_blog.scss";
+---
+
+<script>
+    window.addEventListener("click", (e) => {
+        if ((e.target as HTMLElement)?.tagName === "BUTTON") {
+            if ((e.target as HTMLElement)?.dataset.code) {
+                e.preventDefault();
+
+                navigator.clipboard.writeText(
+                    (e.target as HTMLElement)?.dataset.code || "",
+                );
+
+                (e.target as HTMLElement)?.classList.add("copied");
+            }
+        }
+    });
+</script>
+
+<Layout title={`RelaGit - ${entry.data.title}`} transitions>
+    <DefaultHead
+        slot="head"
+        title={`RelaGit - ${entry.data.title}`}
+        image={entry.data.image}
+    >
+        <meta name="description" content={entry.data.description} />
+        <meta name="og:description" content={entry.data.description} />
+        <meta name="og:type" content="article" />
+
+        <meta name="og:url" content={`https://git.rela.dev/blog/${post}`} />
+        <meta name="twitter:description" content={entry.data.description} />
+        <meta name="twitter:card" content="summary_large_image" />
+    </DefaultHead>
+    <Header />
+    <div class="blogpost">
+        <div class="blogpost-content">
+            <h1 class="title">
+                {entry.data.title}
+                <div class="read-time">
+                    <Icon name="clock" />
+                    <span>{time}</span>
+                </div>
+            </h1>
+            <div class="description">
+                {entry.data.description}
+            </div>
+            {
+                entry.data.image && (
+                    <div class="image">
+                        <img src={entry.data.image} alt={entry.data.alt} />
+                    </div>
+                )
+            }
+            <div class="markdown-body">
+                <Content />
+            </div>
+        </div>
+    </div>
+</Layout>

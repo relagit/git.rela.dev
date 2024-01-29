@@ -1,0 +1,44 @@
+---
+import type { getCollection } from "astro:content";
+
+interface Props {
+    docsMap: DocsMap;
+    slug: string;
+}
+
+export type DocsMap = (
+    | {
+          type: "doc";
+          slug: string;
+          data: Awaited<
+              ReturnType<typeof getCollection<"docs">>
+          >[number]["data"];
+      }
+    | { type: "folder"; name: string; items: DocsMap }
+)[];
+
+const { docsMap, slug } = Astro.props;
+---
+
+<nav>
+    {
+        docsMap.map((d) => {
+            if (d.type === "folder")
+                return (
+                    <>
+                        <div class="label">{d.name}</div>
+                        <Astro.self docsMap={d.items} slug={slug} />
+                    </>
+                );
+
+            return (
+                <a
+                    href={`/docs/${d.slug}`}
+                    class={slug === d.slug ? "active item" : "item"}
+                >
+                    {d.data.title}
+                </a>
+            );
+        })
+    }
+</nav>

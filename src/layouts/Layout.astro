@@ -1,0 +1,27 @@
+---
+import { ViewTransitions } from "astro:transitions";
+
+interface Props {
+    title?: string;
+    transitions?: boolean;
+}
+
+const { title, transitions } = Astro.props;
+
+import "./root.scss";
+---
+
+<script>
+    import { injectSpeedInsights } from "@vercel/speed-insights";
+
+    injectSpeedInsights({
+        framework: "astro",
+    });
+</script>
+
+<html lang="en">
+    <slot name="head" title={title} transitions={transitions} />
+    <body>
+        <slot />
+    </body>
+</html>

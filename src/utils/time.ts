@@ -1,5 +1,3 @@
-import { Accessor, createRenderEffect, from } from "solid-js";
-
 export const relative = (ms: number) => {
     const now = Date.now();
     const diff = now - ms;
@@ -7,7 +5,7 @@ export const relative = (ms: number) => {
     if (diff > 0) return "now";
 
     const seconds = Math.abs(Math.floor((diff / 1000) % 60));
-    const minutes = Math.abs(Math.floor((diff / (1000 * 60)) % 60));
+    const minutes = Math.abs(Math.floor((diff / (1000 * 60)) % 60)) - 1;
     const hours = Math.abs(Math.floor((diff / (1000 * 60 * 60)) % 24)) - 1; // no idea why
     const days = Math.abs(Math.floor(diff / (1000 * 60 * 60 * 24))) - 1; // no idea why
 
@@ -24,22 +22,14 @@ export const relative = (ms: number) => {
     return `${daysString}:${hoursString}:${minutesString}:${secondsString}`;
 };
 
-export const renderDate = (ms: number): Accessor<string | undefined> => {
-    return from((set) => {
-        const defer: (() => unknown)[] = [];
+export const readTime = (mins: number) => {
+    if (mins < 1) {
+        return `${Math.ceil(mins * 60)} sec`;
+    }
 
-        const listener = () => set(relative(ms));
-        defer.push(listener);
+    if (mins > 60) {
+        return `${Math.floor(mins / 60)} hr`;
+    }
 
-        const interval = setInterval(listener, 1000);
-        defer.push(() => clearInterval(interval));
-
-        createRenderEffect(() => set(relative(ms)));
-
-        return () => {
-            for (const cleanup of defer) {
-                cleanup();
-            }
-        };
-    });
+    return `${Math.ceil(mins)} min`;
 };

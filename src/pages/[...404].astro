@@ -1,0 +1,33 @@
+---
+import Header from "~/components/Header.astro";
+import Icon from "~/components/Icon";
+
+import Layout from "~/layouts/Layout.astro";
+import DefaultHead from "~/layouts/DefaultHead.astro";
+
+import "~/layouts/subpage.scss";
+import Button from "~/components/Button";
+---
+
+<Layout>
+    <DefaultHead slot="head" title="RelaGit - Enterprise" />
+    <Header />
+
+    <div class="sub-page">
+        <div class="sub-page__text">
+            <h1 class="sub-page__text__heading">404</h1>
+            <h2 class="sub-page__text__subheading">
+                Are you sure there's meant to be something here? Try again or go
+                back.
+            </h2>
+        </div>
+        <Button href="/"> Go back </Button>
+    </div>
+    <img
+        loading="lazy"
+        src="/assets/landing/beta-decorations.webp"
+        aria-hidden="true"
+        alt="Blurry background gradient blobs"
+        class="decorations"
+    />
+</Layout>
