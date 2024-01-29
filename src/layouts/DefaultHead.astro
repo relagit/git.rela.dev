@@ -4,9 +4,10 @@ import { ViewTransitions } from "astro:transitions";
 interface Props {
     title?: string;
     transitions?: boolean;
+    image?: string;
 }
 
-const { title, transitions } = Astro.props;
+const { title, transitions, image } = Astro.props;
 ---
 
 <head>
@@ -36,7 +37,7 @@ const { title, transitions } = Astro.props;
 
     <meta
         property="og:image"
-        content="https://git.rela.dev/assets/opengraph.png"
+        content={image || "https://git.rela.dev/assets/opengraph.png"}
     />
     <meta property="og:url" content="https://git.rela.dev" />
     <meta property="og:title" content={title || "RelaGit"} />
@@ -53,6 +54,6 @@ const { title, transitions } = Astro.props;
     />
     <meta
         name="twitter:image"
-        content="https://git.rela.dev/assets/opengraph.png"
+        content={image || "https://git.rela.dev/assets/opengraph.png"}
     />
 </head>

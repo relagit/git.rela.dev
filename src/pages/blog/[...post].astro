@@ -40,15 +40,18 @@ import "./_blog.scss";
 </script>
 
 <Layout title={`RelaGit - ${entry.data.title}`} transitions>
-    <DefaultHead slot="head" title={entry.data.title}>
+    <DefaultHead
+        slot="head"
+        title={`RelaGit - ${entry.data.title}`}
+        image={entry.data.image}
+    >
         <meta name="description" content={entry.data.description} />
         <meta name="og:description" content={entry.data.description} />
         <meta name="og:type" content="article" />
-        <meta name="og:image" content={entry.data.image} />
+
         <meta name="og:url" content={`https://git.rela.dev/blog/${post}`} />
         <meta name="twitter:description" content={entry.data.description} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content={entry.data.image} />
     </DefaultHead>
     <Header />
     <div class="blogpost">
