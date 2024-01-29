@@ -26,6 +26,12 @@
     }
 }
 
+_::-webkit-full-page-media,
+_:future,
+:root .header {
+    background: linear-gradient(rgba(0, 0, 0, 0.93), rgba(0, 0, 0, 0));
+}
+
 .header {
     inset: 0;
     display: flex;
@@ -97,20 +103,8 @@
 
         gap: 32px;
 
-        svg {
-            width: 24px;
-            height: 24px;
-        }
-
         @media screen and (max-width: 600px) {
             gap: 16px;
-        }
-
-        .icon {
-            svg {
-                width: 16px;
-                height: 16px;
-            }
         }
 
         &__link {

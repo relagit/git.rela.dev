@@ -1,0 +1,53 @@
+---
+import { getCollection, getEntry } from "astro:content";
+
+const allPosts = await getCollection("blog");
+
+import Header from "../../components/Header.astro";
+
+import Layout from "../../layouts/Layout.astro";
+import DefaultHead from "../../layouts/DefaultHead.astro";
+
+import "./_blog.scss";
+
+import { readTime } from "../../utils/time";
+import Icon from "~/components/Icon";
+---
+
+<Layout>
+    <DefaultHead slot="head" title="RelaGit - Blog" />
+    <Header />
+    <div class="post-grid">
+        {
+            allPosts.map((item) => {
+                return (
+                    <>
+                        <a href={`/blog/${item.slug}`} class="grid-item">
+                            {item.data.image && (
+                                <img
+                                    src={item.data.image}
+                                    alt={item.data.alt!}
+                                    class="grid-item-image"
+                                />
+                            )}
+                            <div class="grid-item-text">
+                                <div class="grid-item-text-title">
+                                    {item.data.title}
+                                </div>
+                                <div class="grid-item-text-desc">
+                                    {item.data.description}
+                                    <div class="read-time">
+                                        <Icon name="clock" />
+                                        {readTime(
+                                            item.body.split(" ").length / 125,
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </>
+                );
+            })
+        }
+    </div>
+</Layout>

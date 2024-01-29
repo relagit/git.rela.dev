@@ -1,0 +1,42 @@
+---
+import { ViewTransitions } from "astro:transitions";
+
+interface Props {
+    title?: string;
+    transitions?: boolean;
+}
+
+const { title, transitions } = Astro.props;
+---
+
+<head>
+    {transitions && <ViewTransitions />}
+    <slot />
+    <script
+        defer
+        src="https://eu.umami.is/script.js"
+        data-website-id="2cbb5a7f-ca34-49cd-8c74-03a9509e9964"></script>
+    <title>{title || "RelaGit"}</title>
+    <link rel="preload" href="https://rsms.me/inter/inter.css" as="style" />
+    <meta
+        name="description"
+        content="The elegant solution to graphical version control. Built by developers, for developers."
+    />
+    <meta charset="utf-8" />
+    <meta
+        name="keywords"
+        content="git, github, gitlab, git workflow, git management, git productivity, git tools, git desktop, git desktop app, git desktop application, git desktop client, git desktop software, git desktop tool, git desktop tools, git desktop utility, relagit"
+    />
+    <link rel="icon" href="https://git.rela.dev/assets/favicon.svg" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000" />
+    <meta name="msapplication-navbutton-color" content="#1c84ec" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#1c84ec" />
+
+    <meta property="og:title" content={title || "RelaGit"} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:url" content="https://git.rela.dev" />
+    <meta name="twitter:site" content="@withrela" />
+    <meta name="twitter:creator" content="@withrela" />
+</head>

@@ -23,16 +23,37 @@ export default (props: LogoImageProps) => {
             })}
         >
             <div class="btns">
-                <a class="btn" href={props.dark && props.light ? props[theme()] : props.light || props.dark} download>
+                <a
+                    class="btn"
+                    href={
+                        props.dark && props.light
+                            ? props[theme()]
+                            : props.light || props.dark
+                    }
+                    download
+                >
                     <Icon name="download" />
                 </a>
                 <Show when={props.light && props.dark}>
-                    <button class="btn" onClick={() => setTheme(theme() === "light" ? "dark" : "light")}>
+                    <button
+                        class="btn"
+                        onClick={() =>
+                            setTheme(theme() === "light" ? "dark" : "light")
+                        }
+                    >
                         <Icon name={theme() === "light" ? "moon" : "sun"} />
                     </button>
                 </Show>
             </div>
-            <img loading="lazy" src={props.dark && props.light ? props[theme()] : props.light || props.dark} alt={props.alt} />
+            <img
+                loading="lazy"
+                src={
+                    props.dark && props.light
+                        ? props[theme()]
+                        : props.light || props.dark
+                }
+                alt={props.alt}
+            />
         </figure>
     );
 };

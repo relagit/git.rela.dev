@@ -1,0 +1,212 @@
+---
+import { getCollection, getEntry } from "astro:content";
+
+import Layout from "./Layout.astro";
+import Header from "~/components/Header.astro";
+import RecursiveDocsMap, {
+    type DocsMap,
+} from "~/components/RecursiveDocsMap.astro";
+import DefaultHead from "~/layouts/DefaultHead.astro";
+import Icon from "~/components/Icon";
+
+import { readTime } from "~/utils/time";
+
+interface Props {
+    post: string;
+}
+
+const { post } = Astro.props;
+
+const allDocs = await getCollection("docs");
+
+const entry = await getEntry("docs", post);
+
+if (!entry) {
+    throw new Error(`Could not find entry for ${post}`);
+}
+
+const { Content, headings } = await entry.render();
+
+import "./docs.scss";
+import { isPostfixUnaryExpression } from "typescript";
+
+const time = readTime(entry.body.split(" ").length / 125);
+
+const docsMap: DocsMap = [];
+
+for (const doc of allDocs) {
+    const parts = doc.slug.split("/");
+
+    parts.pop();
+
+    // we want to generate an array of folders and docs for the sidebar
+
+    let current = docsMap;
+
+    for (const part of parts) {
+        const existing = current.find(
+            (item) =>
+                item.type === "folder" &&
+                item.name.replace(" ", "-").toLowerCase() === part,
+        );
+
+        if (existing && existing.type === "folder") {
+            current = existing.items;
+        } else {
+            const newFolder = {
+                type: "folder",
+                name: part
+                    .replace(/-/g, " ")
+                    .replace(/\b\w/g, (l) => l.toUpperCase()),
+                items: [] as DocsMap,
+            } as const;
+
+            current.push(newFolder);
+
+            current = newFolder.items;
+        }
+
+        current.push({
+            type: "doc",
+            slug: doc.slug,
+            data: doc.data,
+        });
+    }
+}
+
+const flat: {
+    type: "doc";
+    slug: string;
+    data: Awaited<ReturnType<typeof getCollection<"docs">>>[number]["data"];
+}[] = (() => {
+    const flat: {
+        type: "doc";
+        slug: string;
+        data: Awaited<ReturnType<typeof getCollection<"docs">>>[number]["data"];
+    }[] = [];
+
+    const recurse = (docsMap: DocsMap) => {
+        for (const item of docsMap) {
+            if (item.type === "doc") {
+                flat.push(item);
+            } else {
+                recurse(item.items);
+            }
+        }
+    };
+
+    recurse(docsMap);
+
+    return flat;
+})();
+
+const prev = () => {
+    const index = flat.findIndex((doc) => doc.slug === post);
+
+    if (index === 0) {
+        return null;
+    }
+
+    return `/docs/${flat[index - 1].slug}`;
+};
+
+const next = () => {
+    const index = flat.findIndex((doc) => doc.slug === post);
+
+    if (index === flat.length - 1) {
+        return null;
+    }
+
+    return `/docs/${flat[index + 1].slug}`;
+};
+---
+
+<script>
+    window.addEventListener("click", (e) => {
+        if ((e.target as HTMLElement)?.tagName === "BUTTON") {
+            if ((e.target as HTMLElement)?.dataset.code) {
+                e.preventDefault();
+
+                navigator.clipboard.writeText(
+                    (e.target as HTMLElement)?.dataset.code || "",
+                );
+
+                (e.target as HTMLElement)?.classList.add("copied");
+            }
+        }
+    });
+
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") {
+            const prev = document.querySelector(
+                ".nav-button:first-child",
+            ) as HTMLAnchorElement;
+
+            if (prev && !prev.getAttribute("aria-disabled")) {
+                prev.click();
+            }
+        } else if (e.key === "ArrowRight") {
+            const next = document.querySelector(
+                ".nav-button:last-child",
+            ) as HTMLAnchorElement;
+
+            if (next && !next.getAttribute("aria-disabled")) {
+                next.click();
+            }
+        }
+    });
+</script>
+
+<Layout title={`RelaGit - ${entry.data.title}`} transitions>
+    <DefaultHead slot="head" title={entry.data.title}>
+        <meta name="description" content={entry.data.description} />
+        <meta name="og:description" content={entry.data.description} />
+        <meta name="twitter:description" content={entry.data.description} />
+    </DefaultHead>
+    <Header />
+    <div class="docs-container">
+        <div class="docs-sidebar">
+            <RecursiveDocsMap docsMap={docsMap} slug={post} />
+        </div>
+        <div class="docs-content">
+            <h1 class="docs-content-title">
+                {entry.data.title}
+                <div class="read-time">
+                    <Icon name="clock" />
+                    <span>{time}</span>
+                </div>
+            </h1>
+            <div class="docs-content-description">
+                {entry.data.description}
+            </div>
+            <div class="markdown-body">
+                <Content />
+            </div>
+            <div class="byline">
+                <span>Updated on {entry.data.date}</span>
+                <a
+                    title="Edit on GitHub"
+                    target="_blank"
+                    href={`https://github.com/relagit/git.rela.dev/edit/main/src/data/docs/${post}.mdx`}
+                >
+                    <Icon name="pencil" />
+                </a>
+                <a
+                    title="View on GitHub"
+                    target="_blank"
+                    href={`https://github.com/relagit/git.rela.dev/tree/main/src/data/docs/${post}.mdx`}
+                >
+                    <Icon name="link-external" />
+                </a>
+                <div class="nav-buttons">
+                    <a class="nav-button" href={prev()} aria-disabled={!prev()}>
+                        <Icon name="arrow-left" />
+                    </a>
+                    <a class="nav-button" href={next()} aria-disabled={!next()}>
+                        <Icon name="arrow-right" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>

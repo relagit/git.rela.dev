@@ -34,17 +34,28 @@ export default () => {
     const [sentSignup, setSentSignup] = createSignal(false);
     const [waitlistEmail, setWaitlistEmail] = createSignal("");
     const [input, setInput] = createSignal<HTMLInputElement>();
-    const [status, setStatus] = createSignal<"operational" | "degraded" | "offline">("operational");
+    const [status, setStatus] = createSignal<
+        "operational" | "degraded" | "offline"
+    >("operational");
 
     onMount(() => {
-        fetch("https://status.rela.dev/status-page-api/overview/0e9b8a2d-cfcd-4306-b481-757cc462d49b", { method: "POST" }).then(async (res) => {
+        fetch(
+            "https://status.rela.dev/status-page-api/overview/0e9b8a2d-cfcd-4306-b481-757cc462d49b",
+            { method: "POST" },
+        ).then(async (res) => {
             const data = await res.json();
 
             if (!data) return;
 
-            const offline = data.monitorStatusTimelines.find((monitor: any) => monitor.monitorStatus.name === "Offline");
-            const degraded = data.monitorStatusTimelines.find((monitor: any) => monitor.monitorStatus.name === "Degraded");
-            const operational = data.monitorStatusTimelines.find((monitor: any) => monitor.monitorStatus.name === "Operational");
+            const offline = data.monitorStatusTimelines.find(
+                (monitor: any) => monitor.monitorStatus.name === "Offline",
+            );
+            const degraded = data.monitorStatusTimelines.find(
+                (monitor: any) => monitor.monitorStatus.name === "Degraded",
+            );
+            const operational = data.monitorStatusTimelines.find(
+                (monitor: any) => monitor.monitorStatus.name === "Operational",
+            );
 
             if (offline) {
                 setStatus("offline");
@@ -56,7 +67,10 @@ export default () => {
         });
 
         setTimeout(() => {
-            input()?.style.setProperty("background-size", "auto 16px !important");
+            input()?.style.setProperty(
+                "background-size",
+                "auto 16px !important",
+            );
         }, 10);
     });
 
@@ -64,7 +78,13 @@ export default () => {
         <footer class="footer">
             <div class="footer-group">
                 <div class="footer-brand">
-                    <svg width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                        width="35"
+                        height="40"
+                        viewBox="0 0 35 40"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
                         <g clip-path="url(#clip0_627_616)">
                             <path
                                 fill-rule="evenodd"
@@ -72,7 +92,15 @@ export default () => {
                                 d="M0.420532 0H6.45792V20.2723C9.40288 18.4576 13.2365 17.5403 17.7383 17.5403C22.0663 17.5403 24.5508 16.4996 25.9915 15.0411C27.4418 13.5728 28.3831 11.1272 28.3831 7.11093V0H34.4205V7.11093C34.4205 11.9439 33.2964 16.2141 30.2982 19.2494C27.2902 22.2945 22.943 23.5451 17.7383 23.5451C13.4126 23.5451 10.576 24.5697 8.8877 25.8991C7.27268 27.1708 6.45792 28.9076 6.45792 31.0511V40H0.420532V0Z"
                                 fill="currentColor"
                             />
-                            <mask id="mask0_627_616" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="7" y="20" width="28" height="20">
+                            <mask
+                                id="mask0_627_616"
+                                style="mask-type:alpha"
+                                maskUnits="userSpaceOnUse"
+                                x="7"
+                                y="20"
+                                width="28"
+                                height="20"
+                            >
                                 <path
                                     d="M31.1636 20.1343C27.7435 23.499 22.9789 24.7959 17.5794 24.7959C13.4516 24.7959 10.945 25.7748 9.56709 26.8598C8.29498 27.8615 7.64954 29.2004 7.64954 30.9587V40.0002H34.3411V20.1016L31.1636 20.1343Z"
                                     fill="black"
@@ -90,7 +118,12 @@ export default () => {
                         </g>
                         <defs>
                             <clipPath id="clip0_627_616">
-                                <rect width="34" height="40" fill="white" transform="translate(0.5)" />
+                                <rect
+                                    width="34"
+                                    height="40"
+                                    fill="white"
+                                    transform="translate(0.5)"
+                                />
                             </clipPath>
                         </defs>
                     </svg>
@@ -107,7 +140,10 @@ export default () => {
                         <a href="/redirect/github" aria-label="GitHub">
                             <Icon name="mark-github" />
                         </a>
-                        <a href="/redirect/producthunt" aria-label="Product Hunt">
+                        <a
+                            href="/redirect/producthunt"
+                            aria-label="Product Hunt"
+                        >
                             <ProductHunt />
                         </a>
                         <a href="/redirect/twitter" aria-label="X (Twitter)">
@@ -124,28 +160,53 @@ export default () => {
                         <a href="/docs" class="footer-col-item">
                             Documentation
                         </a>
-                        <a aria-disabled="true" href="/redirect/github" target="_blank" class="footer-col-item disabled">
+                        <a
+                            aria-disabled="true"
+                            href="/redirect/github"
+                            target="_blank"
+                            class="footer-col-item disabled"
+                        >
                             GitHub
                         </a>
                     </div>
                     <div class="footer-col">
                         <div class="footer-col-header">Organisation</div>
-                        <a href="https://rela.dev/oss" target="_blank" class="footer-col-item">
+                        <a
+                            href="https://rela.dev/oss"
+                            target="_blank"
+                            class="footer-col-item"
+                        >
                             Open Source
                         </a>
-                        <a href="/docs/press/branding" target="_blank" class="footer-col-item">
+                        <a
+                            href="/docs/press/branding"
+                            target="_blank"
+                            class="footer-col-item"
+                        >
                             Press Kit
                         </a>
-                        <a href="https://rela.dev" target="_blank" class="footer-col-item">
+                        <a
+                            href="https://rela.dev"
+                            target="_blank"
+                            class="footer-col-item"
+                        >
                             Website
                         </a>
                     </div>
                     <div class="footer-col">
                         <div class="footer-col-header">Resources</div>
-                        <a href="/workflows" target="_blank" class="footer-col-item disabled">
+                        <a
+                            href="https://www.npmjs.com/search?q=relagit"
+                            target="_blank"
+                            class="footer-col-item"
+                        >
                             Workflows
                         </a>
-                        <a href="/styles" target="_blank" class="footer-col-item disabled">
+                        <a
+                            href="/styles"
+                            target="_blank"
+                            class="footer-col-item disabled"
+                        >
                             Styles
                         </a>
                     </div>
@@ -154,17 +215,33 @@ export default () => {
             <div class="footer-item">
                 <div class="footer-item-text">
                     <h2 class="footer-item-text-header">Brought to you by.</h2>
-                    <p class="footer-item-text-paragraph">These wonderful individuals have sponsored or are sponsoring the organisation or its members.</p>
+                    <p class="footer-item-text-paragraph">
+                        These wonderful individuals have sponsored or are
+                        sponsoring the organisation or its members.
+                    </p>
                 </div>
                 <div class="footer-item-sponsors">
                     <For each={sponsors}>
                         {(sponsor) => (
-                            <a class="sponsor" href={`https://github.com/${sponsor.name}`} target="_blank">
-                                <img loading="lazy" class="pfp" src={sponsor.githubIcon} alt={`${sponsor.name}'s profile picture`} />
+                            <a
+                                class="sponsor"
+                                href={`https://github.com/${sponsor.name}`}
+                                target="_blank"
+                            >
+                                <img
+                                    loading="lazy"
+                                    class="pfp"
+                                    src={sponsor.githubIcon}
+                                    alt={sponsor.name}
+                                />
                             </a>
                         )}
                     </For>
-                    <a href="/redirect/sponsor" class="sponsor add" aria-label="Become a sponsor">
+                    <a
+                        href="/redirect/sponsor"
+                        class="sponsor add"
+                        aria-label="Become a sponsor"
+                    >
                         <div class="pfp">
                             <Icon name="plus" />
                         </div>
@@ -172,18 +249,28 @@ export default () => {
                 </div>
             </div>
             <div class="footer-sep"></div>
-            <div class="footer-item" id="waitlist" tabIndex={0}>
+            <section class="footer-item" id="waitlist" tabIndex={0}>
                 <div class="footer-item-text">
-                    <h2 class="footer-item-text-header">Don't miss a release.</h2>
-                    <p class="footer-item-text-paragraph">Be notified about updates and beta programs.</p>
+                    <h2 class="footer-item-text-header">
+                        Don't miss a release.
+                    </h2>
+                    <p class="footer-item-text-paragraph">
+                        Be notified about updates and beta programs.
+                    </p>
                 </div>
                 <div class="footer-item-input">
                     <input
                         ref={setInput}
                         type="email"
-                        placeholder={["tim.berners-lee", "elizabeth.feinler"][Math.floor(Math.random() * 2)] + "@rela.dev"}
+                        placeholder={
+                            ["tim.berners-lee", "elizabeth.feinler"][
+                                Math.floor(Math.random() * 2)
+                            ] + "@rela.dev"
+                        }
                         value={waitlistEmail()}
-                        onInput={(e) => setWaitlistEmail(e.currentTarget.value.trim())}
+                        onInput={(e) =>
+                            setWaitlistEmail(e.currentTarget.value.trim())
+                        }
                     />
                     <button
                         tabIndex={0}
@@ -200,15 +287,25 @@ export default () => {
                                 return;
                             }
 
-                            const res = await fetch(new URL("/api/waitlist/register", location.href), {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json",
+                            console.log("Sending waitlist signup request...");
+
+                            const res = await fetch(
+                                new URL(
+                                    "/api/waitlist/register",
+                                    location.href,
+                                ),
+                                {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify({
+                                        email: waitlistEmail(),
+                                    }),
                                 },
-                                body: JSON.stringify({
-                                    email: waitlistEmail(),
-                                }),
-                            });
+                            );
+
+                            console.log("Got response:", res);
 
                             const json = await res.json();
 
@@ -223,20 +320,36 @@ export default () => {
                             }
                         }}
                     >
-                        <Show when={!sentSignup()} fallback={<Icon name="check" />}>
-                            <Show when={!sentError()} fallback={<Icon name="x" />}>
+                        <Show
+                            when={!sentSignup()}
+                            fallback={<Icon name="check" />}
+                        >
+                            <Show
+                                when={!sentError()}
+                                fallback={<Icon name="x" />}
+                            >
                                 <Icon name="paper-airplane" />
                             </Show>
                         </Show>
                     </button>
                 </div>
-            </div>
+            </section>
             <div class="footer-sep"></div>
             <div class="footer-item last">
-                <a class="footer-item-status" href="https://status.rela.dev" target="_blank">
-                    <div classList={{ "status-dot": true, [status()]: true }}></div>
+                <a
+                    class="footer-item-status"
+                    href="https://status.rela.dev"
+                    target="_blank"
+                >
+                    <div
+                        classList={{ "status-dot": true, [status()]: true }}
+                    ></div>
                     <div class="status-text">
-                        {status() === "operational" ? "All systems normal." : status() === "degraded" ? "Some systems degraded." : "One or more systems offline."}
+                        {status() === "operational"
+                            ? "All systems normal."
+                            : status() === "degraded"
+                              ? "Some systems degraded."
+                              : "One or more systems offline."}
                         <Icon name="arrow-up-right" />
                     </div>
                 </a>

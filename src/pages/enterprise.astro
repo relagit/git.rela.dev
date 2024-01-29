@@ -1,0 +1,38 @@
+---
+import Header from "~/components/Header.astro";
+import Icon from "~/components/Icon";
+
+import Layout from "~/layouts/Layout.astro";
+import DefaultHead from "~/layouts/DefaultHead.astro";
+
+import "~/layouts/subpage.scss";
+---
+
+<Layout>
+    <DefaultHead slot="head" title="RelaGit - Enterprise" />
+    <Header />
+
+    <div class="sub-page">
+        <div class="sub-page__text">
+            <h1 class="sub-page__text__heading">RelaGit Enterprise Program.</h1>
+            <h2 class="sub-page__text__subheading">
+                If you or your company are interested in using RelaGit in the
+                workplace, consider paying for an Enterprise license to support
+                RelaGit's development and unlock tailored features.
+            </h2>
+            <div class="sub-page__text__subheading" style="margin-top: 2rem">
+                For enquiries, please contact <a
+                    href="mailto:RelaGit Business <enterprise@rela.dev>"
+                    >our business team</a
+                >.
+            </div>
+        </div>
+    </div>
+    <img
+        loading="lazy"
+        src="/assets/landing/beta-decorations.webp"
+        aria-hidden="true"
+        alt="Blurry background gradient blobs"
+        class="decorations"
+    />
+</Layout>

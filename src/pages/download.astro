@@ -1,0 +1,180 @@
+---
+import Header from "~/components/Header.astro";
+import Icon from "~/components/Icon";
+
+import Layout from "~/layouts/Layout.astro";
+import DefaultHead from "~/layouts/DefaultHead.astro";
+
+const isReleased =
+    Date.now() > new Date("Sat Feb 10 2024 0:01:00 PST").getTime();
+// const isReleased = true;
+
+import "~/layouts/subpage.scss";
+---
+
+<script>
+    const userAgent = window.navigator.userAgent.toLowerCase();
+
+    const isReleased =
+        Date.now() > new Date("Sat Feb 10 2024 0:01:00 PST").getTime();
+    // const isReleased = true;
+
+    let url = "";
+    let os = "";
+
+    if (
+        userAgent.includes("iPhone") ||
+        userAgent.includes("iPad") ||
+        userAgent.includes("android")
+    ) {
+        os = "mobile";
+    }
+
+    if (userAgent.includes("win")) {
+        os = "windows";
+    } else if (userAgent.includes("mac")) {
+        os = "mac";
+    } else if (userAgent.includes("linux")) {
+        os = "linux";
+    }
+
+    // https://stackoverflow.com/questions/65146751/detecting-apple-silicon-mac-in-javascript
+    const w = document.createElement("canvas").getContext("webgl");
+    const d = w?.getExtension("WEBGL_debug_renderer_info");
+    const g = (d && w?.getParameter(d.UNMASKED_RENDERER_WEBGL)) || "";
+
+    if (g.match(/Apple/) && !g.match(/Apple GPU/)) {
+        os = "mac-arm";
+    } else if (
+        g.match(/Apple GPU/) &&
+        w
+            ?.getSupportedExtensions()
+            ?.indexOf("WEBKIT_WEBGL_compressed_texture_pvrtc") !== -1
+    ) {
+        os = "mac-arm";
+    }
+
+    switch (os) {
+        case "mac":
+            url =
+                "https://github.com/relagit/relagit/releases/latest/download/RelaGit-mac-x64.dmg";
+
+            break;
+        case "mac-arm":
+            url =
+                "https://github.com/relagit/relagit/releases/latest/download/RelaGit-mac-arm64.dmg";
+
+            break;
+        case "windows":
+            url =
+                "https://github.com/relagit/relagit/releases/latest/download/RelaGit-win.zip";
+
+            break;
+        case "linux":
+            url = "https://github.com/relagit/relagit/releases/latest";
+
+            break;
+    }
+
+    if (isReleased) {
+        if (url) window.open(url, "_blank");
+
+        const osElements = document.querySelectorAll("[data-content-os]");
+
+        for (const osElement of osElements) {
+            osElement.textContent =
+                os === "mac"
+                    ? "macOS"
+                    : os === "mac-arm"
+                      ? "macOS (Apple Silicon)"
+                      : os === "windows"
+                        ? "Windows"
+                        : os === "linux"
+                          ? "Linux"
+                          : os === "mobile"
+                            ? "Unavailable on mobile"
+                            : "Unknown";
+        }
+
+        const linkElement = document.querySelector("[data-href-url]");
+
+        (linkElement as HTMLAnchorElement).href = url;
+    }
+</script>
+
+<Layout>
+    <DefaultHead slot="head" title="RelaGit - Download" />
+    <Header />
+    {
+        isReleased ? (
+            <div class="sub-page">
+                <div class="sub-page__header">
+                    <div class="sub-page__text">
+                        <h1 class="sub-page__text__heading">
+                            <div class="sub-page__text__heading__detail">
+                                You just levelled up!
+                            </div>
+                            Next Steps
+                        </h1>
+                    </div>
+                    <img
+                        class="sub-page__text__icon"
+                        src="/assets/client/icon.png"
+                        alt="RelaGit application icon"
+                        aria-hidden="true"
+                    />
+                </div>
+                <div class="sub-page__steps">
+                    <a href="/docs" class="sub-page__steps__step">
+                        Check out the RelaGit documentation to learn more about
+                        the client.
+                        <Icon name="book" />
+                    </a>
+                    <a
+                        href="https://www.npmjs.com/search?q=relagit"
+                        class="sub-page__steps__step"
+                    >
+                        Search for community Workflows on npm.
+                        <Icon name="workflow" />
+                    </a>
+                    <a href="/redirect/github" class="sub-page__steps__step">
+                        Check out relagit/relagit on GitHub.
+                        <Icon name="mark-github" />
+                    </a>
+                </div>
+                <div class="sub-page__note">
+                    <a
+                        class="sub-page__note__link"
+                        data-href-url
+                        target="_blank"
+                    >
+                        Didn't download?
+                    </a>
+                    <a
+                        class="sub-page__note__tag"
+                        href="https://github.com/relagit/relagit/releases/latest"
+                        data-content-os
+                    />
+                </div>
+            </div>
+        ) : (
+            <div class="sub-page">
+                <div class="sub-page__text">
+                    <h1 class="sub-page__text__heading">
+                        <div class="sub-page__text__heading__detail">
+                            We haven't released anything yet.
+                        </div>
+                        You're too early!
+                    </h1>
+                </div>
+            </div>
+        )
+    }
+    <img
+        loading="lazy"
+        src="/assets/landing/decorations.webp"
+        aria-hidden="true"
+        alt="Blurry background gradient blobs"
+        class="decorations"
+    />
+</Layout>
