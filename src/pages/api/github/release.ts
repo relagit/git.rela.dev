@@ -1,6 +1,8 @@
+"use server";
+
 import type { APIRoute } from "astro";
 
-import { json } from "./_shared";
+import { json } from "../_shared";
 
 let release: any;
 
@@ -14,8 +16,14 @@ export const GET: APIRoute = async () => {
         },
     ).then((res) => res.json());
 
-    return json({
-        tag: release.tag_name,
-        published: release.published_at,
-    });
+    return json(
+        {
+            tag: release.tag_name,
+            published: release.published_at,
+        },
+        {
+            "Cache-Control":
+                "max-age=0, s-maxage=86400, stale-while-revalidate",
+        },
+    );
 };
