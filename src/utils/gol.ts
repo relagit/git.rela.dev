@@ -9,7 +9,7 @@ export default (el: HTMLCanvasElement) => {
     const width = el.width;
     const height = el.height;
 
-    const cellSize = 24;
+    const cellSize = 12;
 
     const rows = Math.floor(height / cellSize);
     const cols = Math.floor(width / cellSize);
@@ -20,7 +20,7 @@ export default (el: HTMLCanvasElement) => {
         ctx.clearRect(0, 0, width, height);
 
         ctx.beginPath();
-        ctx.fillStyle = "#cccccc1a";
+        ctx.fillStyle = "#cccccc11";
 
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
@@ -69,7 +69,7 @@ export default (el: HTMLCanvasElement) => {
         next();
         draw();
 
-        if (!isPaused) setTimeout(update, 700);
+        if (!isPaused) setTimeout(update, 150);
     };
 
     update();
@@ -93,7 +93,7 @@ export default (el: HTMLCanvasElement) => {
             for (let i = 0; i < rows; i++) {
                 cells[i] = [];
                 for (let j = 0; j < cols; j++) {
-                    cells[i][j] = Math.random() > 0.7;
+                    cells[i][j] = Math.random() > 0.8;
                 }
             }
         },
