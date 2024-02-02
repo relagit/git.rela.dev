@@ -16,7 +16,7 @@ Astro.response.statusText = "Not found";
     <DefaultHead slot="head" title="RelaGit - Not Found" />
     <Header />
 
-    <div class="sub-page">
+    <div class="sub-page nopointer">
         <div class="sub-page__text">
             <h1 class="sub-page__text__heading">404</h1>
             <h2 class="sub-page__text__subheading">
@@ -26,11 +26,31 @@ Astro.response.statusText = "Not found";
         </div>
         <Button href="/"> Go back </Button>
     </div>
-    <img
-        loading="lazy"
-        src="/assets/landing/beta-decorations.webp"
-        aria-hidden="true"
-        alt="Blurry background gradient blobs"
-        class="decorations"
-    />
+    <div id="canvas-controls">
+        <button id="pause" class="control-button">
+            <Icon name="play" />
+        </button>
+    </div>
+    <canvas id="gol" aria-hidden="true" class="decorations"></canvas>
 </Layout>
+
+<script>
+    import initCanvas from "~/utils/gol";
+
+    const canvas = document.getElementById("gol") as HTMLCanvasElement;
+
+    if (
+        canvas &&
+        window.matchMedia("(prefers-reduced-motion: no-preference)").matches
+    ) {
+        const res = initCanvas(canvas);
+
+        res?.init();
+
+        const pauseButton = document.getElementById("pause");
+
+        pauseButton?.addEventListener("click", () => {
+            res?.toggle();
+        });
+    }
+</script>
