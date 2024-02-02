@@ -29,7 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
         });
     }
 
-    const { data, error } = await supabase.from("waitlist").insert({ email });
+    const { error } = await supabase.from("waitlist").insert({ email });
 
     if (error) {
         const knownError = error.message.includes("waitlist_email_key")

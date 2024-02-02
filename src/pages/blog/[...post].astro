@@ -16,7 +16,7 @@ if (!entry) {
     return Astro.redirect("/404");
 }
 
-const { Content, headings } = await entry.render();
+const { Content } = await entry.render();
 
 const time = readTime(entry.body.split(" ").length / 125);
 

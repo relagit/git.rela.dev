@@ -25,10 +25,9 @@ if (!entry) {
     throw new Error(`Could not find entry for ${post}`);
 }
 
-const { Content, headings } = await entry.render();
+const { Content } = await entry.render();
 
 import "./docs.scss";
-import { isPostfixUnaryExpression } from "typescript";
 
 const time = readTime(entry.body.split(" ").length / 125);
 

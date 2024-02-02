@@ -5,7 +5,6 @@ import { nodeTypes } from "@mdx-js/mdx";
 import rehypeImgFigure from "rehype-img-figure";
 import rehypeSlug from "rehype-slug";
 import rehypeRaw from "rehype-raw";
-import remarkGfm from "remark-gfm";
 import { rehypeGithubAlerts, type IOptions } from "rehype-github-alerts";
 import headings from "rehype-autolink-headings";
 
