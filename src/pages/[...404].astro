@@ -7,10 +7,13 @@ import DefaultHead from "~/layouts/DefaultHead.astro";
 
 import "~/layouts/subpage.scss";
 import Button from "~/components/Button";
+
+Astro.response.status = 404;
+Astro.response.statusText = "Not found";
 ---
 
 <Layout>
-    <DefaultHead slot="head" title="RelaGit - Enterprise" />
+    <DefaultHead slot="head" title="RelaGit - Not Found" />
     <Header />
 
     <div class="sub-page">
