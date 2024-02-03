@@ -113,6 +113,8 @@ export default (el: HTMLCanvasElement) => {
                     cells[i][j] = false;
                 }
             }
+
+            draw();
         },
     };
 };
