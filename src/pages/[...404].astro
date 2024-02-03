@@ -27,6 +27,9 @@ Astro.response.statusText = "Not found";
         <Button href="/"> Go back </Button>
     </div>
     <div id="canvas-controls">
+        <button id="clear" class="control-button">
+            <Icon name="trash" />
+        </button>
         <button id="pause" class="control-button">
             <Icon name="play" />
         </button>
@@ -51,6 +54,12 @@ Astro.response.statusText = "Not found";
 
         pauseButton?.addEventListener("click", () => {
             res?.toggle();
+        });
+
+        const clearButton = document.getElementById("clear");
+
+        clearButton?.addEventListener("click", () => {
+            res?.clear();
         });
     }
 </script>

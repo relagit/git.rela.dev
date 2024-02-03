@@ -50,13 +50,17 @@ export default (el: HTMLCanvasElement) => {
                     cells[i + 1]?.[j - 1],
                     cells[i + 1]?.[j],
                     cells[i + 1]?.[j + 1],
-                ].filter((c) => c).length;
+                ].filter(Boolean).length;
 
-                if (cell) {
-                    return neighbors === 2 || neighbors === 3;
-                } else {
+                if (!cell) {
                     return neighbors === 3;
                 }
+
+                if (neighbors < 2 || neighbors > 3) {
+                    return false;
+                }
+
+                return true;
             }),
         );
 
@@ -101,6 +105,14 @@ export default (el: HTMLCanvasElement) => {
             isPaused = !isPaused;
 
             if (!isPaused) update();
+        },
+        clear() {
+            for (let i = 0; i < rows; i++) {
+                cells[i] = [];
+                for (let j = 0; j < cols; j++) {
+                    cells[i][j] = false;
+                }
+            }
         },
     };
 };
