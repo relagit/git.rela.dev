@@ -23,7 +23,7 @@ We'll start by scaffolding a new vite project to work in. We'll use pnpm as our 
 pnpm init
 pnpm add -D vite typescript @relagit/vite relagit
 mkdir src
-touch src/index.ts
+touch src/plugin.ts
 touch src/native.ts
 touch vite.config.ts
 ```
@@ -50,7 +50,7 @@ We'll use these inside of our workflow to interact with the user's repositories 
 Let's start by importing `Workflow` and `context` from actions.
 
 ```ts
-// [!filename src/index.ts]
+// [!filename src/plugin.ts]
 // @noErrors
 import { Workflow, context } from "relagit:actions"; // [!code highlight]
 
@@ -60,7 +60,7 @@ export default new Workflow({});
 We can now define some basic metadata that will identify our workflow.
 
 ```ts
-// [!filename src/index.ts]
+// [!filename src/plugin.ts]
 import { Workflow, context } from "relagit:actions";
 // ---cut-before---
 export default new Workflow({
@@ -76,7 +76,7 @@ For example, the `navigate` hook is called when a user switches between a reposi
 Each hook has unique parameters that are passed to it. You can find the parameters for each hook in the workflow types.
 
 ```ts
-// [!filename src/index.ts]
+// [!filename src/plugin.ts]
 import { Workflow, context } from "relagit:actions";
 // ---cut-before---
 export default new Workflow({
@@ -129,7 +129,7 @@ We'll use the `native` global value. This value is automatically assigned when R
 
 ```ts
 // @noErrors
-// [!filename src/index.ts]
+// [!filename src/plugin.ts]
 const native = {
     incrementCommitCount: async () => {},
 };
