@@ -87,7 +87,19 @@ const time = new Date("Sun Feb 11 2024 0:01:00 PST").getTime();
                 ) : (
                     <div class="tag">
                         <Icon name="stopwatch" />
-                        <p style="width: 57px" data-content-countdown>
+                        <p
+                            style={{
+                                width:
+                                    relative(
+                                        new Date(
+                                            "Sun Feb 11 2024 0:01:00 PST",
+                                        ).getTime(),
+                                    ).length *
+                                        0.85 +
+                                    "ch",
+                            }}
+                            data-content-countdown
+                        >
                             {relative(time)}
                         </p>
                     </div>

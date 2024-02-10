@@ -76,7 +76,17 @@ const upvoteCount = Number(
                             <p>✨</p> <p>RelaGit Public Beta</p>
                             <div class="sep" />
                             <p
-                                style="width: 80px; color: var(--fill-secondary-vibrant);"
+                                style={{
+                                    color: "var(--fill-secondary-vibrant);",
+                                    width:
+                                        relative(
+                                            new Date(
+                                                "Sun Feb 11 2024 0:01:00 PST",
+                                            ).getTime(),
+                                        ).length *
+                                            0.75 +
+                                        "ch",
+                                }}
                                 data-content-countdown
                             >
                                 {relative(
@@ -146,7 +156,7 @@ const upvoteCount = Number(
                 >
                     <div class="hero-text-badges-badge-text">
                         <ProductHunt />
-                        Show Interest
+                        {isReleased ? "Upvote" : "Show Interest"}
                     </div>
                     <div class="hero-text-badges-badge-icon">
                         {upvoteCount > 0 && <div>{upvoteCount}</div>}
