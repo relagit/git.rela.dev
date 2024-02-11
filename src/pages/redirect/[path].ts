@@ -2,7 +2,7 @@ import { type APIRoute } from "astro";
 
 const redirects: Record<string, string> = {
     github: "https://github.com/relagit/relagit",
-    producthunt: "https://www.producthunt.com/products/relagit",
+    producthunt: "https://www.producthunt.com/posts/relagit",
     sponsor: "https://github.com/sponsors/TheCommieAxolotl",
     twitter: "https://twitter.com/withrela",
 };
