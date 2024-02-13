@@ -49,7 +49,7 @@ const upvoteCount = Number(
 </script>
 
 <Layout>
-    <DefaultHead slot="head" title="RelaGit">
+    <DefaultHead slot="head">
         <link rel="preload" as="image" href="/assets/client/dark.webp" />
         <link
             rel="preload"
@@ -349,7 +349,7 @@ export default new Workflow({
                 />
             </div>
         </div>
-        <h1 class="hero-text inline">
+        <h2 class="hero-text inline">
             <span class="hero-text-highlight">Convinced?</span>
             <div class="hero-text-badges">
                 {
@@ -386,7 +386,7 @@ export default new Workflow({
                     )
                 }
             </div>
-        </h1>
+        </h2>
         <Footer client:visible />
     </main>
 </Layout>
