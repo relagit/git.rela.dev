@@ -7,6 +7,16 @@
     }
 }
 
+@keyframes loading {
+    0% {
+        background-position-x: -200px;
+    }
+
+    100% {
+        background-position-x: 200px;
+    }
+}
+
 .cta-button {
     width: 100%;
     flex-shrink: 0;
@@ -622,13 +632,24 @@ main.index {
                         .line {
                             height: 1px;
                             width: 100%;
-                            border: 1px solid #fff;
-                            opacity: 0.2;
+                            background-color: rgba(255, 255, 255, 0.2);
+                            background-image: linear-gradient(
+                                to right,
+                                #fff0 10%,
+                                var(--color-blue-500) 50%,
+                                #fff0 80%
+                            );
+                            background-repeat: no-repeat;
+                            animation: loading 700ms linear infinite;
 
                             &.highlight {
                                 opacity: 0.8;
-                                border: 1px solid var(--color-blue-500);
+                                background: var(--color-blue-500);
                             }
+                        }
+
+                        .line ~ .line {
+                            animation-delay: 300ms;
                         }
                     }
                 }
