@@ -34,6 +34,10 @@ export const POST: APIRoute = async (request) => {
     )
         return json({ error: "Invalid prompt" });
 
+    const { totalTokens } = await model.countTokens(prompt);
+
+    if (totalTokens > 2048) return json({ error: "Prompt is too long" });
+
     try {
         const result = await model.generateContent(prompt);
 
