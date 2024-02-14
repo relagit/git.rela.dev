@@ -1,10 +1,29 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import {
+    GoogleGenerativeAI,
+    HarmBlockThreshold,
+    HarmCategory,
+} from "@google/generative-ai";
 import type { APIRoute } from "astro";
 import { json } from "../_shared";
 
 const genAI = new GoogleGenerativeAI(import.meta.env.GEMINI_API_KEY);
 
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+const safetySettings = [
+    {
+        category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+        threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+    },
+    {
+        category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+];
+
+const model = genAI.getGenerativeModel({ model: "gemini-pro", safetySettings });
 
 export const POST: APIRoute = async (request) => {
     const raw = await request.request.text();
@@ -36,7 +55,7 @@ export const POST: APIRoute = async (request) => {
 
     const { totalTokens } = await model.countTokens(prompt);
 
-    if (totalTokens > 2048) return json({ error: "Prompt is too long" });
+    if (totalTokens > 10000) return json({ error: "Prompt is too long" });
 
     try {
         const result = await model.generateContent(prompt);
