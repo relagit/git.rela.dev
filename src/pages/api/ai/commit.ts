@@ -39,8 +39,12 @@ export const POST: APIRoute = async (request) => {
 
         const text = result.response.text();
 
+        const message = text.split("\n")[0].trim();
+        const body = text.split("\n").slice(1).join("\n").trim();
+
         return json({
-            text,
+            message,
+            body,
         });
     } catch (e) {
         return json({ error: (e as Error).message || e });
