@@ -38,8 +38,10 @@ interface GithubUser {
     updated_at: string;
 }
 
-const getUser = (name: string): Promise<GithubUser> => {
-    return fetch(`https://api.github.com/users/${name}`).then((res) => res.json());
+const getUser = async (name: string): Promise<GithubUser> => {
+    const res = await fetch(`https://api.github.com/users/${name}`);
+
+    return await res.json();
 };
 
 type AtProps = {
@@ -53,16 +55,24 @@ export default (props: AtProps) => {
     getUser(props.name).then((data) => setUser(data));
 
     return (
-        <a href={`https://github.com/${props.name}`} class="at" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+        <a
+            href={`https://github.com/${props.name}`}
+            class="at"
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+        >
             @{props.name}
             <Transition
                 onEnter={(el, done) =>
                     (el.animate(
                         [
-                            { opacity: 0, translate: "-20px calc(-100% - 2em)" },
+                            {
+                                opacity: 0,
+                                translate: "-20px calc(-100% - 2em)",
+                            },
                             { opacity: 1, translate: "0 calc(-100% - 2em)" },
                         ],
-                        { duration: 200, easing: "ease-in-out" }
+                        { duration: 200, easing: "ease-in-out" },
                     ).onfinish = done)
                 }
                 onExit={(el, done) =>
@@ -71,7 +81,7 @@ export default (props: AtProps) => {
                             { opacity: 1, translate: "0 calc(-100% - 2em)" },
                             { opacity: 0, translate: "20px calc(-100% - 2em)" },
                         ],
-                        { duration: 200, easing: "ease-in-out" }
+                        { duration: 200, easing: "ease-in-out" },
                     ).onfinish = done)
                 }
             >
@@ -79,7 +89,9 @@ export default (props: AtProps) => {
                     <div class="at-hover">
                         <img src={user()!.avatar_url} alt={user()!.name} />
                         <div class="at-hover__info">
-                            <div class="at-hover__info__name">{user()!.name || user()!.login}</div>
+                            <div class="at-hover__info__name">
+                                {user()!.name || user()!.login}
+                            </div>
                             <div class="at-hover__info__bio">{user()!.bio}</div>
                         </div>
                     </div>

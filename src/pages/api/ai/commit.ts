@@ -43,7 +43,7 @@ export const POST: APIRoute = async (request) => {
             text,
         });
     } catch (e) {
-        return json({ error: e.message || e });
+        return json({ error: (e as Error).message || e });
     }
 };
 
