@@ -17,9 +17,13 @@ const isReleased =
 // const isReleased = true;
 
 const upvoteCount = Number(
-    (await (await fetch("https://producthunt.com/posts/relagit")).text()).match(
-        /Upvoted?(?:<!-- --> <!-- -->)?(\d+)/,
-    )?.[1] ?? 0,
+    (
+        await (
+            await fetch("https://producthunt.com/posts/relagit").catch(() => {
+                return new Response("<!-- Upvoted 0 times -->");
+            })
+        ).text()
+    ).match(/Upvoted?(?:<!-- --> <!-- -->)?(\d+)/)?.[1] ?? 0,
 );
 ---
 

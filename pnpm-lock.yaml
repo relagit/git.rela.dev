@@ -28,6 +28,9 @@ devDependencies:
   '@astrojs/vercel':
     specifier: ^7.0.2
     version: 7.0.2(astro@4.2.6)
+  '@google/generative-ai':
+    specifier: ^0.2.1
+    version: 0.2.1
   '@mdx-js/mdx':
     specifier: ^3.0.0
     version: 3.0.0
@@ -684,6 +687,11 @@ packages:
     os: [win32]
     requiresBuild: true
     optional: true
+
+  /@google/generative-ai@0.2.1:
+    resolution: {integrity: sha512-gNmMFadfwi7qf/6M9gImgyGJXY1jKQ/de8vGOqgJ0PPYgQ7WwzZDavbKrIuXS2zdqZZaYtxW3EFN6aG9x5wtFw==}
+    engines: {node: '>=18.0.0'}
+    dev: true
 
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
