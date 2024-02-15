@@ -1,0 +1,36 @@
+---
+import Layout from "~/layouts/Layout.astro";
+import DefaultHead from "~/layouts/DefaultHead.astro";
+import FakeApp from "./FakeApp";
+import ThemeButton from "./ThemeButton";
+
+import "./styles.scss";
+import "./app.css";
+
+import themes from "./themes";
+---
+
+<Layout>
+    <DefaultHead slot="head" title="RelaGit | Styles">
+        <link rel="preload" as="image" href="/assets/client/dark.webp" />
+        <link
+            rel="preload"
+            as="image"
+            href="/assets/landing/blur@0-75.webp"
+            imagesrcset="/assets/landing/blur@0-75.webp 600w, /assets/landing/blur.webp 1000w, /assets/landing/blur@2.webp 1600w"
+            imagesizes="140vw"
+        />
+    </DefaultHead>
+    <div class="styles">
+        <div class="styles-picker">
+            <FakeApp client:load />
+        </div>
+        <div class="styles-selector">
+            {
+                themes.map((t) => {
+                    return <ThemeButton client:load theme={t} />;
+                })
+            }
+        </div>
+    </div>
+</Layout>
