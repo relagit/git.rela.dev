@@ -161,10 +161,9 @@ export default () => {
                             Documentation
                         </a>
                         <a
-                            aria-disabled="true"
                             href="/redirect/github"
                             target="_blank"
-                            class="footer-col-item disabled"
+                            class="footer-col-item"
                         >
                             GitHub
                         </a>
@@ -205,7 +204,7 @@ export default () => {
                         <a
                             href="/styles"
                             target="_blank"
-                            class="footer-col-item disabled"
+                            class="footer-col-item"
                         >
                             Styles
                         </a>
