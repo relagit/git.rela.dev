@@ -185,58 +185,34 @@ const upvoteCount = Number(
             />
         </div>
         <div class="separator"></div>
-        <div class="feature">
-            <div class="feature-text">
-                <h2 class="feature-text-header">Creativity is the limit.</h2>
-                <p class="feature-text-paragraph">
-                    Create dynamic workflows to automate actions and perform
-                    awesome tasks when things happen in your repositories.
-                </p>
-                <a
-                    href="/docs/workflows/creating-workflows"
-                    target="_blank"
-                    class="feature-text-button"
-                >
-                    Learn More
-                    <Icon name="arrow-up-right" />
-                </a>
-            </div>
-            <Codeblock
-                code={`import { Workflow } from "relagit:actions";
-
-export default new Workflow({
-    name: "My New Workflow",
-    description: "Does amazing things!",
-    hooks: {
-        commit: (_, repository, commit) => {
-            console.log("New commit in", repository.name);
-        },
-    },
-});`}
-                language="ts"
-                filename=".relagit/workflows/action.ts"
-            />
-        </div>
-        <div class="feature">
-            <div class="feature-window">
-                <div class="feature-window-sidebar">
-                    <div class="feature-window-sidebar-header"></div>
+        <div class="comment">
+            <div class="comment-content">
+                <img
+                    src="https://ph-avatars.imgix.net/818113/06e1445d-d495-4aa1-b6a4-b0deb0ce2898.jpeg?auto=compress&codec=mozjpeg&cs=strip&auto=format&w=120&h=120&fit=crop&dpr=2"
+                    alt="Commentor"
+                    class="comment-content-image"
+                />
+                <div class="comment-content-text">
+                    <div class="comment-content-text-main">
+                        <span class="quotes">{"““"}</span>I've never been a fan
+                        of GUIs for source control, but I must say that this
+                        looks beautiful. I don't think I'd ever use it, as most
+                        of my work is on systems that don't even have a GUI, but
+                        it does. Look. Beautiful.
+                    </div>
+                    <a
+                        class="comment-content-link"
+                        href="https://www.producthunt.com/posts/relagit?comment=3214405"
+                        target="_blank"
+                    >
+                        View on ProductHunt <Icon name="link-external" />
+                    </a>
                 </div>
-                <div class="feature-window-header"></div>
-            </div>
-            <div class="feature-text">
-                <h2 class="feature-text-header">Recognisably Yours.</h2>
-                <p class="feature-text-paragraph">
-                    Re-imagine the look of the client, either through careful
-                    creation of a theme, or use of a community-made one.
-                </p>
-                <a href="/styles" target="_blank" class="feature-text-button">
-                    Browse Styles
-                    <Icon name="arrow-up-right" />
-                </a>
             </div>
         </div>
-        <div class="separator"></div>
+        <h2 class="hero-text inline stay-large" style="margin-bottom: -4rem">
+            <span class="hero-text-highlight">RelaGit is a git client...</span>
+        </h2>
         <div class="feature-grid">
             <div class="feature-grid-item">
                 <div class="feature-grid-item-text">
@@ -353,6 +329,59 @@ export default new Workflow({
                 />
             </div>
         </div>
+        <div class="feature">
+            <div class="feature-text">
+                <h2 class="feature-text-header">Creativity is the limit.</h2>
+                <p class="feature-text-paragraph">
+                    Create dynamic workflows to automate actions and perform
+                    awesome tasks when things happen in your repositories.
+                </p>
+                <a
+                    href="/docs/workflows/creating-workflows"
+                    target="_blank"
+                    class="feature-text-button"
+                >
+                    Learn More
+                    <Icon name="arrow-up-right" />
+                </a>
+            </div>
+            <Codeblock
+                code={`import { Workflow } from "relagit:actions";
+
+export default new Workflow({
+    name: "My New Workflow",
+    description: "Does amazing things!",
+    hooks: {
+        commit: (_, repository, commit) => {
+            console.log("New commit in", repository.name);
+        },
+    },
+});`}
+                language="ts"
+                filename=".relagit/workflows/action.ts"
+            />
+        </div>
+        <div class="separator"></div>
+        <div class="feature">
+            <div class="feature-window">
+                <div class="feature-window-sidebar">
+                    <div class="feature-window-sidebar-header"></div>
+                </div>
+                <div class="feature-window-header"></div>
+            </div>
+            <div class="feature-text">
+                <h2 class="feature-text-header">Recognisably Yours.</h2>
+                <p class="feature-text-paragraph">
+                    Re-imagine the look of the client, either through careful
+                    creation of a theme, or use of a community-made one.
+                </p>
+                <a href="/styles" target="_blank" class="feature-text-button">
+                    Browse Styles
+                    <Icon name="arrow-up-right" />
+                </a>
+            </div>
+        </div>
+        <div class="separator"></div>
         <h2 class="hero-text inline">
             <span class="hero-text-highlight">Convinced?</span>
             <div class="hero-text-badges">
