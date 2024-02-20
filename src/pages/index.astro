@@ -12,10 +12,6 @@ import Logo from "~/components/Logo.astro";
 
 import "./_index.scss";
 
-const isReleased =
-    Date.now() > new Date("Sun Feb 11 2024 0:01:00 PST").getTime();
-// const isReleased = true;
-
 const upvoteCount = Number(
     (
         await (
@@ -28,6 +24,30 @@ const upvoteCount = Number(
 ---
 
 <script>
+    import { createConfetti } from "@neoconfetti/solid";
+    import { createSignal } from "solid-js";
+
+    const confetti = createConfetti();
+
+    confetti.confetti(
+        document.querySelector(".hero-banner-confetti")!,
+        createSignal({
+            particleCount: 100,
+            particleSize: 4,
+            force: 0.7,
+            colors: [
+                "var(--color-blue-500)",
+                "var(--color-green-500)",
+                "var(--color-yellow-500)",
+                "var(--color-red-500)",
+                "var(--color-purple-500)",
+                "var(--color-pink-500)",
+                "var(--color-orange-500)",
+                "var(--color-cyan-500)",
+            ],
+        })[0],
+    );
+
     const children = document.querySelectorAll(
         "main.index > *, .feature-grid-item",
     );
@@ -66,56 +86,18 @@ const upvoteCount = Number(
 
     <main class="index">
         <Header />
+        <div class="hero-banner-confetti"></div>
         <div class="hero-banner">
-            {isReleased && <div class="hero-banner-confetti" />}
             <div class="hero-banner-text">
-                {
-                    isReleased ? (
-                        <>
-                            <p>✨</p>
-                            <p>RelaGit Public Beta now available!</p>
-                        </>
-                    ) : (
-                        <>
-                            <p>✨</p> <p>RelaGit Public Beta</p>
-                            <div class="sep" />
-                            <p
-                                style={{
-                                    color: "var(--fill-secondary-vibrant);",
-                                    width:
-                                        relative(
-                                            new Date(
-                                                "Sun Feb 11 2024 0:01:00 PST",
-                                            ).getTime(),
-                                        ).length *
-                                            0.75 +
-                                        "ch",
-                                }}
-                                data-content-countdown
-                            >
-                                {relative(
-                                    new Date(
-                                        "Sun Feb 11 2024 0:01:00 PST",
-                                    ).getTime(),
-                                )}
-                            </p>
-                        </>
-                    )
-                }
+                <p>✨</p>
+                <p>RelaGit Public Beta!</p>
             </div>
             <div class="hero-banner-sep"></div>
-            {
-                isReleased ? (
-                    <a class="hero-banner-text" href="/download">
-                        {" "}
-                        Download{" "}
-                    </a>
-                ) : (
-                    <a class="hero-banner-text" href="#waitlist">
-                        Get Notified
-                    </a>
-                )
-            }
+
+            <a class="hero-banner-text" href="/download">
+                {" "}
+                Download{" "}
+            </a>
         </div>
         <h1 class="hero-text">
             <span class="hero-text-highlight">
@@ -124,35 +106,12 @@ const upvoteCount = Number(
             <br />
             <span>Built by developers, for developers.</span>
             <div class="hero-text-badges">
-                {
-                    isReleased ? (
-                        <>
-                            <a
-                                class="hero-text-badges-badge highlight"
-                                href="/download"
-                            >
-                                <div class="hero-text-badges-badge-text">
-                                    Download
-                                </div>
-                                <div class="hero-text-badges-badge-icon">
-                                    <Icon name="download" />
-                                </div>
-                            </a>
-                        </>
-                    ) : (
-                        <a
-                            class="hero-text-badges-badge highlight"
-                            href="#waitlist"
-                        >
-                            <div class="hero-text-badges-badge-text">
-                                Get Notified
-                            </div>
-                            <div class="hero-text-badges-badge-icon">
-                                <Icon name="bell" />
-                            </div>
-                        </a>
-                    )
-                }
+                <a class="hero-text-badges-badge highlight" href="/download">
+                    <div class="hero-text-badges-badge-text">Download</div>
+                    <div class="hero-text-badges-badge-icon">
+                        <Icon name="download" />
+                    </div>
+                </a>
                 <a
                     class="hero-text-badges-badge"
                     href="https://producthunt.com/products/relagit"
@@ -363,12 +322,11 @@ export default new Workflow({
         </div>
         <div class="separator"></div>
         <div class="feature">
-            <div class="feature-window">
-                <div class="feature-window-sidebar">
-                    <div class="feature-window-sidebar-header"></div>
-                </div>
-                <div class="feature-window-header"></div>
-            </div>
+            <img
+                class="feature-window"
+                src="/assets/landing/window.webp"
+                alt="Nord-themed window of Relagit, there are three files pending commit."
+            />
             <div class="feature-text">
                 <h2 class="feature-text-header">Recognisably Yours.</h2>
                 <p class="feature-text-paragraph">
@@ -385,39 +343,14 @@ export default new Workflow({
         <h2 class="hero-text inline">
             <span class="hero-text-highlight">Convinced?</span>
             <div class="hero-text-badges">
-                {
-                    isReleased ? (
-                        <>
-                            <Button
-                                client:visible
-                                href="/download"
-                                class="cta-button"
-                            >
-                                Download
-                                <Icon name="download" />
-                            </Button>
-                            <Button
-                                href="/redirect/github"
-                                class="cta-button secondary"
-                            >
-                                View on GitHub
-                                <Icon name="mark-github" />
-                            </Button>
-                        </>
-                    ) : (
-                        <a
-                            class="hero-text-badges-badge highlight"
-                            href="#waitlist"
-                        >
-                            <div class="hero-text-badges-badge-text">
-                                Get Notified
-                            </div>
-                            <div class="hero-text-badges-badge-icon">
-                                <Icon name="bell" />
-                            </div>
-                        </a>
-                    )
-                }
+                <Button client:visible href="/download" class="cta-button">
+                    Download
+                    <Icon name="download" />
+                </Button>
+                <Button href="/redirect/github" class="cta-button secondary">
+                    View on GitHub
+                    <Icon name="mark-github" />
+                </Button>
             </div>
         </h2>
         <Footer client:visible />

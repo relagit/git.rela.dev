@@ -1,5 +1,5 @@
 import { Show } from "solid-js";
-import type themes from "./themes";
+import type themes from "./_themes";
 import Icon from "~/components/Icon";
 
 export default (props: { theme: (typeof themes)[number] }) => {

@@ -4,10 +4,6 @@ import Icon from "./Icon";
 
 import "./header.scss";
 
-const isReleased =
-    Date.now() > new Date("Sun Feb 11 2024 0:01:00 PST").getTime();
-// const isReleased = true;
-
 const time = new Date("Sun Feb 11 2024 0:01:00 PST").getTime();
 ---
 
@@ -78,33 +74,10 @@ const time = new Date("Sun Feb 11 2024 0:01:00 PST").getTime();
         </a>
         <a href="/download" class="header__group__link">
             Download
-            {
-                isReleased ? (
-                    <div class="tag">
-                        <Icon name="beaker" />
-                        <p>Beta</p>
-                    </div>
-                ) : (
-                    <div class="tag">
-                        <Icon name="stopwatch" />
-                        <p
-                            style={{
-                                width:
-                                    relative(
-                                        new Date(
-                                            "Sun Feb 11 2024 0:01:00 PST",
-                                        ).getTime(),
-                                    ).length *
-                                        0.85 +
-                                    "ch",
-                            }}
-                            data-content-countdown
-                        >
-                            {relative(time)}
-                        </p>
-                    </div>
-                )
-            }
+            <div class="tag">
+                <Icon name="beaker" />
+                <p>Beta</p>
+            </div>
         </a>
         <a href="/enterprise" class="header__group__link"> Enterprise </a>
         <a href="/docs" class="header__group__link"> Docs </a>
@@ -127,11 +100,8 @@ const time = new Date("Sun Feb 11 2024 0:01:00 PST").getTime();
     </div>
     <div class="header__group">
         <a
-            aria-disabled={!isReleased}
             href="/redirect/github"
-            class={isReleased
-                ? "header__group__link git"
-                : "header__group__link disabled git"}
+            class="header__group__link git"
             target="_blank"
         >
             <Icon name="mark-github" />

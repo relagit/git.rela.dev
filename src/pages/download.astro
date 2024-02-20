@@ -5,19 +5,11 @@ import Icon from "~/components/Icon";
 import Layout from "~/layouts/Layout.astro";
 import DefaultHead from "~/layouts/DefaultHead.astro";
 
-const isReleased =
-    Date.now() > new Date("Sun Feb 11 2024 0:01:00 PST").getTime();
-// const isReleased = true;
-
 import "~/layouts/subpage.scss";
 ---
 
 <script>
     const userAgent = window.navigator.userAgent.toLowerCase();
-
-    const isReleased =
-        Date.now() > new Date("Sun Feb 11 2024 0:01:00 PST").getTime();
-    // const isReleased = true;
 
     let url = "";
     let os = "";
@@ -76,105 +68,83 @@ import "~/layouts/subpage.scss";
             break;
     }
 
-    if (isReleased) {
-        if (url) window.open(url, "_blank");
+    if (url) window.open(url, "_blank");
 
-        const osElements = document.querySelectorAll("[data-content-os]");
+    const osElements = document.querySelectorAll("[data-content-os]");
 
-        for (const osElement of osElements) {
-            osElement.textContent =
-                os === "mac"
-                    ? "macOS"
-                    : os === "mac-arm"
-                      ? "macOS (Apple Silicon)"
-                      : os === "windows"
-                        ? "Windows"
-                        : os === "linux"
-                          ? "Linux"
-                          : os === "mobile"
-                            ? "Unavailable on mobile"
-                            : "Unknown";
-        }
-
-        const linkElement = document.querySelector("[data-href-url]");
-
-        (linkElement as HTMLAnchorElement).href = url;
+    for (const osElement of osElements) {
+        osElement.textContent =
+            os === "mac"
+                ? "macOS"
+                : os === "mac-arm"
+                  ? "macOS (Apple Silicon)"
+                  : os === "windows"
+                    ? "Windows"
+                    : os === "linux"
+                      ? "Linux"
+                      : os === "mobile"
+                        ? "Unavailable on mobile"
+                        : "Unknown";
     }
+
+    const linkElement = document.querySelector("[data-href-url]");
+
+    (linkElement as HTMLAnchorElement).href = url;
 </script>
 
 <Layout>
     <DefaultHead slot="head" title="RelaGit | Download" />
     <Header />
-    {
-        isReleased ? (
-            <div class="sub-page">
-                <div class="sub-page__header">
-                    <div class="sub-page__text">
-                        <h1 class="sub-page__text__heading">
-                            <div class="sub-page__text__heading__detail">
-                                You just levelled up!
-                            </div>
-                            Next Steps
-                        </h1>
+    <div class="sub-page">
+        <div class="sub-page__header">
+            <div class="sub-page__text">
+                <h1 class="sub-page__text__heading">
+                    <div class="sub-page__text__heading__detail">
+                        You just levelled up!
                     </div>
-                    <img
-                        class="sub-page__text__icon"
-                        src="/assets/client/icon.png"
-                        alt="RelaGit application icon"
-                        aria-hidden="true"
-                    />
-                </div>
-                <div class="sub-page__steps">
-                    <a href="/docs" class="sub-page__steps__step">
-                        Check out the RelaGit documentation to learn more about
-                        the client.
-                        <Icon name="book" />
-                    </a>
-                    <a
-                        href="https://www.npmjs.com/search?q=relagit"
-                        class="sub-page__steps__step"
-                    >
-                        Search for community Workflows on npm.
-                        <Icon name="workflow" />
-                    </a>
-                    <a href="/redirect/github" class="sub-page__steps__step">
-                        Check out relagit/relagit on GitHub.
-                        <Icon name="mark-github" />
-                    </a>
-                </div>
-                <div class="sub-page__note">
-                    <a
-                        class="sub-page__note__link"
-                        data-href-url
-                        target="_blank"
-                    >
-                        Didn't download?
-                    </a>
-                    <a
-                        class="sub-page__note__tag"
-                        href="https://github.com/relagit/relagit/releases/latest"
-                        data-content-os
-                    />
-                </div>
+                    Next Steps
+                </h1>
             </div>
-        ) : (
-            <div class="sub-page">
-                <div class="sub-page__text">
-                    <h1 class="sub-page__text__heading">
-                        <div class="sub-page__text__heading__detail">
-                            We haven't released anything yet.
-                        </div>
-                        You're too early!
-                    </h1>
-                </div>
-            </div>
-        )
-    }
-    <img
-        loading="lazy"
-        src="/assets/landing/decorations.webp"
-        aria-hidden="true"
-        alt="Blurry background gradient blobs"
-        class="decorations"
-    />
+            <img
+                class="sub-page__text__icon"
+                src="/assets/client/icon.png"
+                alt="RelaGit application icon"
+                aria-hidden="true"
+            />
+        </div>
+        <div class="sub-page__steps">
+            <a href="/docs" class="sub-page__steps__step">
+                Check out the RelaGit documentation to learn more about the
+                client.
+                <Icon name="book" />
+            </a>
+            <a
+                href="https://www.npmjs.com/search?q=relagit"
+                class="sub-page__steps__step"
+            >
+                Search for community Workflows on npm.
+                <Icon name="workflow" />
+            </a>
+            <a href="/redirect/github" class="sub-page__steps__step">
+                Check out relagit/relagit on GitHub.
+                <Icon name="mark-github" />
+            </a>
+        </div>
+        <div class="sub-page__note">
+            <a class="sub-page__note__link" data-href-url target="_blank">
+                Didn't download?
+            </a>
+            <a
+                class="sub-page__note__tag"
+                href="https://github.com/relagit/relagit/releases/latest"
+                data-content-os></a>
+        </div>
+        <img
+            loading="lazy"
+            src="/assets/landing/decorations.webp"
+            aria-hidden="true"
+            alt="Blurry background gradient blobs"
+            class="decorations"
+        />
+    </div>
 </Layout>

@@ -39,11 +39,8 @@ main.index {
     flex-direction: column;
     align-items: center;
     gap: 9rem;
-    background: radial-gradient(
-        180vh 180vh at 50% 100vh,
-        rgba(166, 137, 217, 0.2) 0%,
-        rgba(0, 0, 0, 0) 100%
-    );
+    background: radial-gradient(180vh 180vh at 50% 100vh, #a689d92b, #0000),
+        radial-gradient(180vh 180vh at 50% calc(100% - 200px), #a689d92b, #0000);
 
     @media screen and (max-width: 1000px) {
         gap: 6rem;
@@ -68,7 +65,7 @@ main.index {
 
         &-confetti {
             position: absolute;
-            top: -10%;
+            top: 10%;
             left: 50%;
             pointer-events: none;
             z-index: 99;
@@ -160,6 +157,7 @@ main.index {
 
             .hero-text-badges {
                 margin-bottom: 0;
+                margin-top: 32px;
             }
         }
 
@@ -846,12 +844,8 @@ main.index {
         }
 
         &-window {
-            height: 300px;
             width: 50%;
             display: flex;
-            border-radius: 8px;
-            border: 1px solid #8484844a;
-            background: rgba(209, 26, 255, 0.15);
             position: relative;
 
             &-sidebar {
