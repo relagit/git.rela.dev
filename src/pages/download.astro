@@ -68,7 +68,7 @@ import "~/layouts/subpage.scss";
             break;
     }
 
-    if (url) window.open(url, "_blank");
+    if (url) window.location.href = url;
 
     const osElements = document.querySelectorAll("[data-content-os]");
 
