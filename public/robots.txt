@@ -3,3 +3,4 @@
 User-agent: *
 Disallow: /assets/*
 Disallow: /_assets/*
+Allow: /assets/favicon.svg
