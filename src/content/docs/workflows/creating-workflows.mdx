@@ -4,7 +4,7 @@ date: "1/25/2024"
 description: "How to create workflows."
 ---
 
-Workflows can be written in TypeScript or JavaScript. They are stored in the `.relagit/workflows` directory of your repository.
+Workflows can be written in TypeScript or JavaScript. They are stored in the `~/.relagit/workflows` directory.
 If you create workflows directly inside of the workflows folder, they **must** be contained in single modules and **cannot** import other modules.
 
 However, we suggest you use a bundler like [vite](https://vitejs.dev) or [esbuild](https://esbuild.github.io) to bundle your workflows into a single module.
