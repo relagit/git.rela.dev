@@ -64,7 +64,7 @@ main.index {
         overflow: hidden;
 
         &-confetti {
-            position: absolute;
+            position: fixed;
             top: 10%;
             left: 50%;
             pointer-events: none;
@@ -645,8 +645,11 @@ main.index {
                     padding: 24px;
                 }
 
-                &-graphic {
+                img.feature-grid-item-graphic {
                     pointer-events: none;
+                }
+
+                &-graphic {
                     user-select: none;
 
                     &.popout {
@@ -671,17 +674,60 @@ main.index {
                         align-items: flex-start;
                         gap: 1rem;
                         width: 100%;
+                        font-family: "SF Pro Text", var(--font-primary);
+
+                        .inputbar {
+                            display: flex;
+                            align-items: center;
+                            gap: 0.5rem;
+                            width: 100%;
+                        }
+
+                        .inputbutton {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            aspect-ratio: 1/1;
+                            border-radius: 2rem;
+                            background: rgba(255 255 255 / 0.2);
+                            padding: 0.4rem;
+                            flex-shrink: 0;
+                            cursor: pointer;
+
+                            &.blue {
+                                background: var(--color-blue-500);
+
+                                &:hover {
+                                    background: var(--color-blue-500-a3);
+                                }
+                            }
+
+                            &:hover {
+                                background: #ffffff3a;
+                            }
+                        }
+
+                        .inputtext {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 2rem;
+                            border: 1px solid rgba(255 255 255 / 0.2);
+                            padding: 0.4rem 1rem;
+                            width: 100%;
+                            background: none;
+                        }
 
                         .message {
                             display: flex;
-                            padding: 0.75rem 1rem;
+                            padding: 0.5rem 0.75rem;
                             align-items: flex-start;
                             gap: 0.625rem;
                             color: var(--white);
-                            font-size: 1rem;
+                            font-size: 0.9rem;
                             font-weight: 400;
                             line-height: 120%;
-                            border-radius: 0.75rem;
+                            border-radius: 1rem;
                             background: var(
                                 --fills-tertiary-dark,
                                 rgba(255, 255, 255, 0.25)

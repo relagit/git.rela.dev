@@ -24,7 +24,7 @@ const upvoteCount = Number(
 ---
 
 <script>
-    import { createConfetti } from "@neoconfetti/solid";
+    import { createConfetti, type ConfettiOptions } from "@neoconfetti/solid";
     import { createSignal } from "solid-js";
 
     const confetti = createConfetti();
@@ -45,7 +45,7 @@ const upvoteCount = Number(
                 "var(--color-orange-500)",
                 "var(--color-cyan-500)",
             ],
-        })[0],
+        } satisfies ConfettiOptions)[0],
     );
 
     const children = document.querySelectorAll(
@@ -134,6 +134,7 @@ const upvoteCount = Number(
         >
             <div class="window"></div>
             <img
+                aria-hidden="true"
                 src="/assets/landing/blur@0-75.webp"
                 width="140vw"
                 height="40vw"
@@ -170,7 +171,9 @@ const upvoteCount = Number(
             </div>
         </div>
         <h2 class="hero-text inline stay-large" style="margin-bottom: -4rem">
-            <span class="hero-text-highlight">RelaGit is a git client...</span>
+            <span class="hero-text-highlight"
+                >RelaGit is a git client and more.</span
+            >
         </h2>
         <div class="feature-grid">
             <div class="feature-grid-item">
@@ -203,7 +206,10 @@ const upvoteCount = Number(
                         input and opinion from developers and users.
                     </div>
                 </div>
-                <div class="feature-grid-item-graphic open">
+                <div
+                    class="feature-grid-item-graphic open"
+                    aria-label="Chat messages between two contributors to RelaGit discussing naming of a label."
+                >
                     <div class="message">
                         Can we make the label more specific here?
                     </div>
@@ -215,6 +221,21 @@ const upvoteCount = Number(
                         I would suggest “fetch” instead of “update”.
                     </div>
                     <div class="message you">Sounds good 👍</div>
+                    <div class="inputbar">
+                        <div class="inputbutton">
+                            <Icon name="plus" />
+                        </div>
+                        <input
+                            aria-hidden="true"
+                            class="inputtext"
+                            type="text"
+                            placeholder="Type a message..."
+                            onkeydown="if (event.key === 'Enter') { event.target.value = '' }"
+                        />
+                        <div class="inputbutton blue">
+                            <Icon name="arrow-up" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="feature-grid-item full">
@@ -253,7 +274,10 @@ const upvoteCount = Number(
                         and performance.
                     </div>
                 </div>
-                <div class="feature-grid-item-graphic speed">
+                <div
+                    class="feature-grid-item-graphic speed"
+                    aria-label="Three boxes have connections between them, git, RelaGit, and you, the user. Moving blue lines indicate the speed of the connections."
+                >
                     <div class="box">
                         <Icon name="git-merge" />
                     </div>
@@ -325,7 +349,7 @@ export default new Workflow({
             <img
                 class="feature-window"
                 src="/assets/landing/window.webp"
-                alt="Nord-themed window of Relagit, there are three files pending commit."
+                alt="RelaGit app window, a theme in a pale blue color palette is applied."
             />
             <div class="feature-text">
                 <h2 class="feature-text-header">Recognisably Yours.</h2>
