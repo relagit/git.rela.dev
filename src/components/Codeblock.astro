@@ -24,7 +24,11 @@ const code = highlighter.codeToHtml(props.code, {
 });
 ---
 
-<div class={cn("codeblock", props.nooverflow && "nooverflow")}>
+<div
+    class={cn("codeblock", props.nooverflow && "nooverflow")}
+    aria-label={`Codeblock showing ${props.filename}`}
+    tabindex="0"
+>
     {
         props.filename && props.language && (
             <div class="codeblock-header">
@@ -32,6 +36,7 @@ const code = highlighter.codeToHtml(props.code, {
                     <div class="codeblock-filename">
                         {props.language === "ts" ? (
                             <svg
+                                aria-hidden="true"
                                 viewBox="0 0 15 16"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +85,11 @@ const code = highlighter.codeToHtml(props.code, {
             </div>
         )
     }
-    <div class="codeblock-content">
-        <div class="codeblock-content-inner" set:html={code} />
+    <div class="codeblock-content" aria-label={props.code} tabindex="0">
+        <div
+            class="codeblock-content-inner"
+            aria-hidden="true"
+            set:html={code}
+        />
     </div>
 </div>

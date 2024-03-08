@@ -49,6 +49,10 @@
         scrollbar-width: thin;
         font-size: 13px;
 
+        :focus {
+            outline: none;
+        }
+
         &::-webkit-scrollbar {
             width: 4px;
             height: 4px;
