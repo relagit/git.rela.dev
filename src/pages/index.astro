@@ -4,7 +4,6 @@ import DefaultHead from "~/layouts/DefaultHead.astro";
 import Header from "~/components/Header.astro";
 import Footer from "~/components/Footer";
 import Codeblock from "~/components/Codeblock.astro";
-import { relative } from "~/utils/time";
 
 import Icon, { ProductHunt } from "~/components/Icon";
 import Button from "~/components/Button";
@@ -15,12 +14,17 @@ import "./_index.scss";
 const upvoteCount = Number(
     (
         await (
-            await fetch("https://producthunt.com/posts/relagit").catch(() => {
-                return new Response("<!-- Upvoted 0 times -->");
-            })
+            await fetch("https://producthunt.com/products/relagit").catch(
+                (e) => {
+                    console.error("Failed to fetch ProductHunt upvote count");
+                    return new Response("<div ><b>300</b>followers</div>");
+                },
+            )
         ).text()
-    ).match(/Upvoted?(?:<!-- --> <!-- -->)?(\d+)/)?.[1] ?? 0,
+    ).match(/<b>(\d+)<\/b>followers</)?.[1],
 );
+
+console.log(upvoteCount);
 ---
 
 <script>
