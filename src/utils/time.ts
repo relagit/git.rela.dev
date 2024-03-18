@@ -1,25 +1,34 @@
-export const relative = (ms: number) => {
-    const now = Date.now();
-    const diff = now - ms;
+export const relative = (ms: number, useSeconds = false) => {
+    const seconds = Math.floor((Date.now() - ms) / 1000);
 
-    if (diff > 0) return "now";
+    const timeIntervals: {
+        interval: number;
+        label: string;
+    }[] = [
+        { interval: 31536000, label: "year" },
+        { interval: 2592000, label: "month" },
+        { interval: 86400, label: "day" },
+        { interval: 3600, label: "hour" },
+        { interval: 60, label: "minute" },
+    ];
 
-    const seconds = Math.abs(Math.floor((diff / 1000) % 60));
-    const minutes = Math.abs(Math.floor((diff / (1000 * 60)) % 60)) - 1;
-    const hours = Math.abs(Math.floor((diff / (1000 * 60 * 60)) % 24)) - 1; // no idea why
-    const days = Math.abs(Math.floor(diff / (1000 * 60 * 60 * 24))) - 1; // no idea why
+    for (let i = 0; i < timeIntervals.length; i++) {
+        const { interval, label } = timeIntervals[i];
+        const quotient = Math.floor(seconds / interval);
+        const negativeQuotient = Math.floor(seconds / (-1 * interval));
 
-    const secondsString = seconds.toString().padStart(2, "0");
-    const minutesString = minutes.toString().padStart(2, "0");
-    const hoursString = hours.toString().padStart(2, "0");
-    const daysString = days.toString().padStart(2, "0");
+        if (quotient > 0) {
+            return `${quotient} ${label}${quotient > 1 ? "s" : ""} ago`;
+        }
 
-    if (days < 1 && hours < 1 && minutes < 1 && seconds < 1) return "now";
-    if (days < 1 && hours < 1 && minutes < 1) return `${secondsString}s`;
-    if (days < 1 && hours < 1) return `${minutesString}:${secondsString}`;
-    if (days < 1) return `${hoursString}:${minutesString}:${secondsString}`;
+        if (negativeQuotient > 0) {
+            return `in ${Math.abs(quotient)} ${label}${Math.abs(quotient) > 1 ? "s" : ""}`;
+        }
+    }
 
-    return `${daysString}:${hoursString}:${minutesString}:${secondsString}`;
+    return useSeconds
+        ? `${Math.abs(seconds)} second${Math.abs(seconds) > 1 ? "s" : ""}`
+        : "now";
 };
 
 export const readTime = (mins: number) => {

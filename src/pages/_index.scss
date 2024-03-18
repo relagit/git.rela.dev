@@ -52,15 +52,15 @@ main.index {
         justify-content: center;
         align-items: center;
         border-radius: 50px;
-        border: 1px solid #0a84ff99;
+        border: 1px solid rgba(255 255 255 / 0.2);
         background: linear-gradient(
             180deg,
-            rgba(10, 132, 255, 0.14) 0%,
-            rgba(10, 132, 255, 0.04) 100%
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.04) 100%
         );
         position: absolute;
-        top: 5rem;
-        height: 42px;
+        top: 6rem;
+        height: 2.5rem;
         overflow: hidden;
 
         &-confetti {
@@ -71,71 +71,39 @@ main.index {
             z-index: 99;
         }
 
-        @media screen and (max-width: 600px) {
-            flex-direction: column;
-            height: fit-content;
-            border-radius: 8px;
-
-            .hero-banner-sep {
-                width: 100%;
-                height: 1px;
-                flex-shrink: 0;
-            }
-
-            .hero-banner-text {
-                padding-inline: 16px;
-                padding-block: 8px;
-                width: 100%;
-                justify-content: center;
-                align-items: center;
-                gap: 8px;
-                height: fit-content;
-
-                [style] {
-                    margin-inline-start: 16px;
-                    text-align: end;
-                }
-            }
-
-            .sep {
-                display: none;
-            }
-        }
-
         &-text {
-            padding-inline: 32px;
+            padding-inline: 20px;
             display: flex;
             gap: 16px;
             align-items: center;
             justify-content: center;
             height: 100%;
+            font-size: 0.8rem;
 
             &[style] {
                 font-size: 14px;
             }
-
-            .sep {
-                width: 4px;
-                height: 4px;
-                border-radius: 50%;
-                background: #0a84ff99;
-                flex-shrink: 0;
-            }
-        }
-
-        &-sep {
-            height: 100%;
-            width: 1px;
-            background: #0a84ff50;
         }
 
         a {
+            position: relative;
+            width: fit-content;
             color: #0a84ff;
             text-decoration: none;
-            transition: background-color 0.2s ease-in-out;
 
-            &:hover {
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 50px;
+                border: 1px solid #0a84ff;
                 background: rgba(10, 132, 255, 0.1);
+                transition: background-color 0.2s ease-in-out;
+                z-index: -1;
+            }
+
+            &:hover::before {
+                background: rgba(10, 132, 255, 0.2);
             }
         }
     }
@@ -225,7 +193,7 @@ main.index {
                     rgba(255, 255, 255, 0) 100%
                 );
                 text-decoration: none;
-                color: #969696;
+                color: var(--fill-secondary-vibrant);
                 text-align: center;
                 font-size: 16px;
                 font-style: normal;
@@ -234,7 +202,8 @@ main.index {
                 width: fit-content;
                 transition:
                     opacity 0.2s ease-in-out,
-                    background-color 0.2s ease-in-out;
+                    background-color 0.2s ease-in-out,
+                    color 0.2s ease-in-out;
 
                 @media screen and (max-width: 756px) {
                     font-size: 14px;
@@ -260,6 +229,7 @@ main.index {
 
                 &:hover {
                     background-color: rgba(255, 255, 255, 0.02);
+                    color: var(--color-primary);
                 }
 
                 &-text {

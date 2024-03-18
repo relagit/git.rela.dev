@@ -8,8 +8,10 @@ import Codeblock from "~/components/Codeblock.astro";
 import Icon, { ProductHunt } from "~/components/Icon";
 import Button from "~/components/Button";
 import Logo from "~/components/Logo.astro";
+import { getRelease } from "~/pages/api/github/release";
 
 import "./_index.scss";
+import { relative } from "~/utils/time";
 
 const upvoteCount = Number(
     (
@@ -23,6 +25,8 @@ const upvoteCount = Number(
         ).text()
     ).match(/<b>(\d+)<\/b>followers</)?.[1],
 );
+
+const version = await getRelease();
 ---
 
 <script>
@@ -89,18 +93,30 @@ const upvoteCount = Number(
     <main class="index">
         <Header />
         <div class="hero-banner-confetti"></div>
-        <div class="hero-banner">
-            <div class="hero-banner-text">
-                <p>✨</p>
-                <p>RelaGit Public Beta!</p>
-            </div>
-            <div class="hero-banner-sep"></div>
-
-            <a class="hero-banner-text" href="/download">
-                {" "}
-                Download{" "}
-            </a>
-        </div>
+        {
+            version &&
+                new Date(version?.published_at).getTime() >
+                    Date.now() - 12096e5 && (
+                    <div class="hero-banner">
+                        <div class="hero-banner-text">
+                            <p>
+                                {version?.tag_name}
+                                published
+                                {relative(
+                                    new Date(version?.published_at).getTime(),
+                                )}
+                            </p>
+                        </div>
+                        <a
+                            class="hero-banner-text"
+                            target="_blank"
+                            href={`https://github.com/relagit/relagit/releases/tag/${version?.tag_name}`}
+                        >
+                            View on GitHub <Icon name="link-external" />
+                        </a>
+                    </div>
+                )
+        }
         <h1 class="hero-text">
             <span class="hero-text-highlight">
                 The elegant solution to graphical version control.</span
@@ -251,9 +267,9 @@ const upvoteCount = Number(
                         </div>
                     </div>
                     <div class="feature-grid-item-text-paragraph">
-                        <span class="highlight">Goes anywhere you go.</span> Open
-                        out a native popout to view focused information about what
-                        you're working on.
+                        <span class="highlight">Goes anywhere you go.</span>
+                        Open out a native popout to view focused information about
+                        what you're working on.
                     </div>
                 </div>
                 <img
