@@ -8,7 +8,17 @@ import "~/layouts/subpage.scss";
 ---
 
 <Layout>
-    <DefaultHead slot="head" title="RelaGit - Enterprise" />
+    <DefaultHead slot="head" title="RelaGit - Enterprise">
+        <meta
+            name="description"
+            content="Enterprise program for RelaGit, the modern Git client."
+        />
+        <meta
+            property="og:description"
+            content="Enterprise program for RelaGit, the modern Git client."
+        />
+        <link rel="canonical" href="https://git.rela.dev/enterprise" />
+    </DefaultHead>
     <Header />
 
     <div class="sub-page">
