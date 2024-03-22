@@ -58,16 +58,26 @@ export const POST: APIRoute = async (request) => {
     if (totalTokens > 10000) return json({ error: "Prompt is too long" });
 
     try {
-        const result = await model.generateContent(prompt);
+        const result = await model.generateContentStream(prompt);
 
-        const text = result.response.text();
+        const stream = new ReadableStream({
+            start(controller) {
+                (async () => {
+                    for await (const chunk of result.stream) {
+                        controller.enqueue(chunk.text());
+                    }
 
-        const message = text.split("\n")[0].trim();
-        const body = text.split("\n").slice(1).join("\n").trim();
+                    controller.close();
+                })();
+            },
+        });
 
-        return json({
-            message,
-            body,
+        return new Response(stream, {
+            headers: {
+                "Content-Type": "application/json",
+                "Cache-Control": "no-cache",
+                "Access-Control-Allow-Origin": "*",
+            },
         });
     } catch (e) {
         return json({ error: (e as Error).message || e });
