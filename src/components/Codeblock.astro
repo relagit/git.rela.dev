@@ -86,10 +86,6 @@ const code = highlighter.codeToHtml(props.code, {
         )
     }
     <div class="codeblock-content" aria-label={props.code} tabindex="0">
-        <div
-            class="codeblock-content-inner"
-            aria-hidden="true"
-            set:html={code}
-        />
+        <div class="codeblock-content-inner" set:html={code} />
     </div>
 </div>
