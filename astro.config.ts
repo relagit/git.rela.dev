@@ -77,6 +77,7 @@ export default defineConfig({
                                                 tagName: "button",
                                                 properties: {
                                                     className: ["copy"],
+                                                    "aria-label": "Copy Code",
                                                     "data-code":
                                                         this.meta.twoslash?.code.replaceAll(
                                                             /\s+\/\/ \[\!.+\]/g,

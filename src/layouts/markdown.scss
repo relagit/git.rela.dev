@@ -154,6 +154,7 @@
             width: fit-content;
             min-width: 100%;
             background: rgba(255, 255, 255, 0.04);
+            font-family: var(--font-mono) !important;
         }
 
         span:not(.twoslash-popup-container span) {

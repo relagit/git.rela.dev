@@ -199,10 +199,20 @@ const next = () => {
                     <Icon name="link-external" />
                 </a>
                 <div class="nav-buttons">
-                    <a class="nav-button" href={prev()} aria-disabled={!prev()}>
+                    <a
+                        class="nav-button"
+                        aria-label="Previous"
+                        href={prev()}
+                        aria-disabled={!prev()}
+                    >
                         <Icon name="arrow-left" />
                     </a>
-                    <a class="nav-button" href={next()} aria-disabled={!next()}>
+                    <a
+                        class="nav-button"
+                        aria-label="Next"
+                        href={next()}
+                        aria-disabled={!next()}
+                    >
                         <Icon name="arrow-right" />
                     </a>
                 </div>
