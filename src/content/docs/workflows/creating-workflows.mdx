@@ -23,9 +23,7 @@ We'll start by scaffolding a new vite project to work in. We'll use pnpm as our 
 pnpm init
 pnpm add -D vite typescript @relagit/vite relagit
 mkdir src
-touch src/index.ts
-touch src/native.ts
-touch vite.config.ts
+touch src/index.ts src/native.ts vite.config.ts
 ```
 
 We'll then place the following code in `vite.config.ts`. This defines how vite will process our workflow. We're using the `@relagit/vite` plugin to allow us to not have to worry about vite's configuration.
