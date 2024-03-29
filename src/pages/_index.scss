@@ -105,6 +105,17 @@ main.index {
             &:hover::before {
                 background: rgba(10, 132, 255, 0.2);
             }
+
+            @media screen and (max-width: 400px) {
+                font-size: 0;
+
+                &::after {
+                    content: "GitHub";
+                    font-size: 0.8rem;
+                    order: -1;
+                    width: 20px;
+                }
+            }
         }
     }
 
