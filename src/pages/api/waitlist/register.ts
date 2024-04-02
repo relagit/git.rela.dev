@@ -1,16 +1,15 @@
+import { drizzle } from "drizzle-orm/postgres-js";
 import type { APIRoute } from "astro";
+import { waitlist } from "~/schema";
 import { json } from "../_shared";
+import postgres from "postgres";
 
-import { createClient } from "@supabase/supabase-js";
-
-if (!import.meta.env.SUPABASE_URL || !import.meta.env.SUPABASE_KEY) {
-    throw new Error("Missing SUPABASE_URL or SUPABASE_KEY");
+if (!import.meta.env.SUPABASE_URL) {
+    throw new Error("Missing SUPABASE_URL");
 }
 
-const supabase = createClient(
-    import.meta.env.SUPABASE_URL,
-    import.meta.env.SUPABASE_KEY,
-);
+const client = postgres(import.meta.env.SUPABASE_URL);
+const db = drizzle(client);
 
 export const GET: APIRoute = async () => {
     return json({
@@ -29,15 +28,26 @@ export const POST: APIRoute = async ({ request }) => {
         });
     }
 
-    const { error } = await supabase.from("waitlist").insert({ email });
+    let _error = null;
 
-    if (error) {
-        const knownError = error.message.includes("waitlist_email_key")
+    try {
+        await db.insert(waitlist).values({
+            email,
+        });
+    } catch (e) {
+        _error = e;
+    }
+
+    if (_error) {
+        const error = _error as Error;
+
+        const knownError = error.message?.includes("waitlist_email_key")
             ? "Email already registered"
             : null;
+
         return json({
             type: "error",
-            message: knownError || error.message,
+            message: knownError || error.message || "An error occurred",
         });
     }
 

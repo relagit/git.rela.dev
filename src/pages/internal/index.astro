@@ -1,0 +1,275 @@
+---
+import { getSession } from "auth-astro/server";
+
+import Layout from "~/layouts/Layout.astro";
+import Header from "~/components/Header.astro";
+import Icon from "~/components/Icon";
+import DefaultHead from "~/layouts/DefaultHead.astro";
+import { getReleases } from "../api/github/release";
+import { relative } from "~/utils/time";
+
+import { SignIn } from "auth-astro/components";
+
+import "./_index.scss";
+import "~/pages/_index.scss";
+import "~/layouts/subpage.scss";
+import "~/components/button.scss";
+
+// session.email is actually the user's role, this is a limitation of auth-astro
+const session = await getSession(Astro.request);
+
+let active = {
+    x: "?",
+};
+let page = {
+    pageviews: {
+        value: "????",
+    },
+};
+let quote: { text: string; author: string } = { text: "", author: "" };
+let releases: Awaited<ReturnType<typeof getReleases>> = [];
+let release = {
+    downloads: 0,
+};
+
+if (session && session.user?.email !== "user") {
+    const quotes = [
+        {
+            text: "The goal of the Web is to serve humanity. We build it now so that those who come to it later will be able to create things that we cannot ourselves imagine.",
+            author: "Tim Berners-Lee",
+        },
+        {
+            text: "When you understand things, there's no more magic.",
+            author: "Tim Berners-Lee",
+        },
+        {
+            text: "It's very easy to be different, but very difficult to be better.",
+            author: "Jonathan Ive",
+        },
+        {
+            text: "The best way to predict the future is to invent it.",
+            author: "Alan Kay",
+        },
+        {
+            text: "The best way to complain is to make things.",
+            author: "James Murphy",
+        },
+        {
+            text: "A beautiful product that doesn't work very well is ugly.",
+            author: "Jonathan Ive",
+        },
+    ];
+
+    quote = quotes[Math.floor(Math.random() * quotes.length)];
+
+    releases = await getReleases();
+
+    release = await (
+        await fetch(new URL("/api/github/release", Astro.url))
+    ).json();
+
+    const umamiHeaders = new Headers({
+        Accept: "application/json",
+        "x-umami-api-key": import.meta.env.UMAMI_KEY,
+    });
+
+    try {
+        active = await (
+            await fetch(
+                "https://api.umami.is/v1/websites/2cbb5a7f-ca34-49cd-8c74-03a9509e9964/active",
+                {
+                    headers: umamiHeaders,
+                },
+            )
+        ).json();
+
+        page = await (
+            await fetch(
+                `https://api.umami.is/v1/websites/2cbb5a7f-ca34-49cd-8c74-03a9509e9964/stats?startAt=${new Date("1/1/2024").getTime()}&endAt=${new Date().getTime()}`,
+                {
+                    headers: umamiHeaders,
+                },
+            )
+        ).json();
+    } catch (e) {
+        // silently fail
+    }
+}
+---
+
+<Layout>
+    {
+        session && session.user?.email !== "user" ? (
+            <>
+                <DefaultHead title="Internal" />
+                <div class="internal nopointer">
+                    <div class="panel large">
+                        <img
+                            src="/assets/decorations/pink.png"
+                            class="decoration tl pink"
+                        />
+                        <img
+                            src="/assets/decorations/blue.png"
+                            class="decoration br blue"
+                        />
+                        <h1>
+                            Welcome, {session.user?.name}
+                            <div class="role">
+                                <Icon
+                                    name={
+                                        session.user?.email === "admin"
+                                            ? "shield"
+                                            : "person"
+                                    }
+                                />
+                                {session.user?.email}
+                            </div>
+                        </h1>
+                        <div class="bento">
+                            <div class="card large">
+                                <div class="medtext">"{quote.text}"</div>
+                                <div class="subtext">{quote.author}</div>
+                            </div>
+
+                            <a
+                                class="card"
+                                href="https://github.com/relagit/relagit/releases"
+                            >
+                                <div class="largetext">{release.downloads}</div>
+                                <div class="subtext">all-time downloads.</div>
+                            </a>
+                            <div class="card fill">
+                                <div class="subtext">
+                                    Current Landing Banner
+                                </div>
+                                {releases && (
+                                    <div
+                                        class="hero-banner"
+                                        style="position: relative !important; width: fit-content !important; top: 0 !important;"
+                                    >
+                                        <div class="hero-banner-text">
+                                            <p>
+                                                {releases[0]?.tag_name}
+                                                published
+                                                {relative(
+                                                    new Date(
+                                                        releases[0]?.published_at,
+                                                    ).getTime(),
+                                                )}
+                                            </p>
+                                        </div>
+                                        <a
+                                            class="hero-banner-text"
+                                            target="_blank"
+                                            href={`https://github.com/relagit/relagit/releases/tag/${releases[0]?.tag_name}`}
+                                        >
+                                            View on GitHub{" "}
+                                            <Icon name="link-external" />
+                                        </a>
+                                    </div>
+                                )}
+                            </div>
+                            <div
+                                class={`card ${Number(active.x) > 0 ? "positive" : ""}`}
+                            >
+                                <div class="largetext">{active.x}</div>
+                                <div class="subtext">active page viewers.</div>
+                            </div>
+                            <div class="card large analytics">
+                                <div class="largetext">
+                                    {page.pageviews.value}
+                                </div>
+                                <div class="subtext">all-time page views.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel small">
+                        <img
+                            src="/assets/decorations/pink-b.png"
+                            class="decoration b pink"
+                        />
+                        <h1>
+                            Version {releases?.[0]?.tag_name}
+                            <div class="role">
+                                <Icon name="download" />
+                                {(releases?.[0].assets || []).reduce((a, c) => {
+                                    if (!c.name.includes("latest-")) {
+                                        return a + c.download_count;
+                                    }
+
+                                    return a;
+                                }, 0)}
+                            </div>
+                        </h1>
+                        <div class="object-outline">
+                            {Object.entries(releases?.[0] || {}).map(
+                                ([key, value]) => (
+                                    <div class="object">
+                                        <div class="key">{key}</div>
+                                        <div class="value">
+                                            {typeof value === "object"
+                                                ? Array.isArray(value)
+                                                    ? "[...]"
+                                                    : "{...}"
+                                                : value.toString()}
+                                        </div>
+                                    </div>
+                                ),
+                            )}
+                        </div>
+                    </div>
+                    <div class="panel small">
+                        <img
+                            src="/assets/decorations/blue-t.png"
+                            class="decoration t blue"
+                        />
+                        <h1>Email</h1>
+                        <div class="email-buttons">
+                            <div class="email-button">
+                                Contact<div class="address">@rela.dev</div>
+                            </div>
+                            <div class="email-button">
+                                Enterprise<div class="address">@rela.dev</div>
+                            </div>
+                            <div class="email-button">
+                                Support<div class="address">@rela.dev</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </>
+        ) : session ? (
+            <>
+                <DefaultHead title="Unauthorised" />
+                <Header />
+                <div class="sub-page nopointer">
+                    <div class="sub-page__text">
+                        <h1 class="sub-page__text__heading">Unauthorised</h1>
+                        <h2 class="sub-page__text__subheading">
+                            You do not have permission to access this page
+                        </h2>
+                    </div>
+                </div>
+            </>
+        ) : (
+            <>
+                <DefaultHead title="Unauthorised" />
+                <Header />
+                <div class="sub-page nopointer">
+                    <div class="sub-page__text">
+                        <h1 class="sub-page__text__heading">
+                            Authenticate with GitHub
+                        </h1>
+                        <h2 class="sub-page__text__subheading">
+                            You need permissison to access this page
+                        </h2>
+                    </div>
+                    <SignIn provider="github" class="button">
+                        <Icon name="mark-github" />
+                        Log in with GitHub
+                    </SignIn>
+                </div>
+            </>
+        )
+    }
+</Layout>

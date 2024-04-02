@@ -534,10 +534,14 @@ main.index {
             }
         }
 
-        @media screen and (max-width: 1350px) {
+        @media screen and (max-width: 1250px) {
             flex-direction: column;
             gap: 4rem;
             padding: 0 6rem;
+
+            img {
+                order: 2;
+            }
 
             & > * {
                 width: 100% !important;
@@ -560,6 +564,10 @@ main.index {
         img {
             width: 55%;
             pointer-events: none;
+
+            &.feature-window {
+                max-width: 600px;
+            }
         }
 
         &-grid {
@@ -964,7 +972,7 @@ main.index {
 
             &-header {
                 color: var(--white);
-                font-size: 50px;
+                font-size: 44px;
                 font-weight: 400;
                 line-height: 130%;
 

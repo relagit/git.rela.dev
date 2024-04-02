@@ -2,5 +2,6 @@
 
 User-agent: *
 Disallow: /assets/*
+Disallow: /internal/*
 Disallow: /_assets/*
 Allow: /assets/favicon.svg

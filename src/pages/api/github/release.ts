@@ -13,7 +13,7 @@ let release:
     | undefined;
 
 export const GET: APIRoute = async () => {
-    const release = await getRelease();
+    const release = await getReleases();
 
     const downloads = release?.reduce(
         (acc, curr) =>
@@ -45,7 +45,7 @@ export const GET: APIRoute = async () => {
     );
 };
 
-export const getRelease = async (): Promise<
+export const getReleases = async (): Promise<
     | {
           tag_name: string;
           published_at: string;

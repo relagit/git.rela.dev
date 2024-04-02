@@ -7,13 +7,11 @@ import rehypeSlug from "rehype-slug";
 import rehypeRaw from "rehype-raw";
 import { rehypeGithubAlerts, type IOptions } from "rehype-github-alerts";
 import headings from "rehype-autolink-headings";
-
 import { defineConfig } from "astro/config";
-
 import vercel from "@astrojs/vercel/serverless";
 import mdx from "@astrojs/mdx";
 import solidJs from "@astrojs/solid-js";
-
+import auth from "auth-astro";
 let filename = "";
 let code = "";
 
@@ -51,7 +49,6 @@ export default defineConfig({
                                         _code.match(
                                             /\/\/ \[!filename (.*)\]/,
                                         )?.[1] ?? "";
-
                                     code = _code;
                                     return _code.replace(
                                         /\/\/ \[!filename (.*)\]\n?/,
@@ -60,7 +57,6 @@ export default defineConfig({
                                 },
                                 root(hast) {
                                     if (!filename) return;
-
                                     (hast.children[0] as any).children.unshift({
                                         type: "element",
                                         tagName: "div",
@@ -176,5 +172,6 @@ export default defineConfig({
             // remarkPlugins: [[remarkGfm, {}]], // throws errors on single backticks
         }),
         solidJs(),
+        auth(),
     ],
 });
