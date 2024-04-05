@@ -53,9 +53,19 @@ export const POST: APIRoute = async (request) => {
     )
         return json({ error: "Invalid prompt" });
 
-    const { totalTokens } = await model.countTokens(prompt);
+    try {
+        const { totalTokens } = await model.countTokens(prompt);
 
-    if (totalTokens > 10000) return json({ error: "Prompt is too long" });
+        if (totalTokens > 10000) return json({ error: "Prompt is too long" });
+    } catch (e) {
+        return json(
+            {
+                error: "Could not fetch ai model",
+            },
+            undefined,
+            500,
+        );
+    }
 
     try {
         const result = await model.generateContentStream(prompt);
@@ -64,6 +74,7 @@ export const POST: APIRoute = async (request) => {
             start(controller) {
                 (async () => {
                     for await (const chunk of result.stream) {
+                        console.log("chunk", chunk.text());
                         controller.enqueue(chunk.text());
                     }
 
@@ -74,7 +85,6 @@ export const POST: APIRoute = async (request) => {
 
         return new Response(stream, {
             headers: {
-                "Content-Type": "application/json",
                 "Cache-Control": "no-cache",
                 "Access-Control-Allow-Origin": "*",
             },
