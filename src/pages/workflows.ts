@@ -4,7 +4,7 @@ export const GET: APIRoute = () => {
     return new Response(undefined, {
         status: 302,
         headers: {
-            location: "https://git.rela.dev/docs/workflows/creating-workflows",
+            location: "https://rela.dev/docs/workflows/creating-workflows",
         },
     });
 };
