@@ -5,3 +5,4 @@ Disallow: /assets/*
 Disallow: /internal/*
 Disallow: /_assets/*
 Allow: /assets/favicon.svg
+Allow: /assets/opengraph.png
