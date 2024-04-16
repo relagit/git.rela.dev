@@ -575,39 +575,36 @@ main.index {
             width: calc(100% - 200px);
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1px;
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.2);
 
             @media screen and (max-width: 950px) {
-                width: calc(100% - 8rem);
-                margin: 0 4rem;
+                width: 100%;
+                margin: 0;
                 grid-template-columns: 1fr;
+
+                .feature-grid-item {
+                    padding: calc(4rem + 32px) calc(4rem + 32px) 32px
+                        calc(4rem + 32px);
+                }
             }
 
             @media screen and (max-width: 600px) {
-                width: calc(100% - 4rem);
-                margin: 0 2rem;
+                .feature-grid-item {
+                    padding: calc(2rem + 24px) calc(2rem + 24px) 24px
+                        calc(2rem + 24px);
+                }
             }
 
             @media screen and (max-width: 500px) {
-                width: calc(100% - 2rem);
-                margin: 0 1rem;
-            }
-
-            &::after {
-                z-index: -1;
-                content: "";
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                left: 0px;
-                top: 0px;
-                background: rgba(255, 255, 255, 0.2);
+                .feature-grid-item {
+                    padding: calc(1rem + 24px) calc(1rem + 24px) 24px
+                        calc(1rem + 24px);
+                }
             }
 
             &-item {
-                background: #000;
+                border: 1px solid rgba(255, 255, 255, 0.2);
                 display: flex;
                 width: 100%;
                 padding: 48px;
@@ -655,12 +652,7 @@ main.index {
                 }
 
                 @media screen and (max-width: 950px) {
-                    padding: 32px;
                     height: auto; // safari moment
-                }
-
-                @media screen and (max-width: 600px) {
-                    padding: 24px;
                 }
 
                 img.feature-grid-item-graphic {
