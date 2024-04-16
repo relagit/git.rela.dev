@@ -130,7 +130,10 @@ export default () => {
                     <div class="footer-col-item">
                         <span>
                             <a href="/">RelaGit</a> is a product of{" "}
-                            <a target="_blank" href="https://rela.dev">
+                            <a
+                                target="_blank"
+                                href="https://github.com/relagit"
+                            >
                                 Rela
                             </a>
                             .
@@ -171,7 +174,7 @@ export default () => {
                     <div class="footer-col">
                         <div class="footer-col-header">Organisation</div>
                         <a
-                            href="https://rela.dev/oss"
+                            href="https://github.com/relagit"
                             target="_blank"
                             class="footer-col-item"
                         >
@@ -183,13 +186,6 @@ export default () => {
                             class="footer-col-item"
                         >
                             Press Kit
-                        </a>
-                        <a
-                            href="https://rela.dev"
-                            target="_blank"
-                            class="footer-col-item"
-                        >
-                            Website
                         </a>
                     </div>
                     <div class="footer-col">

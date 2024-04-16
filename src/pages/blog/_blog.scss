@@ -152,6 +152,10 @@
                 align-items: center;
                 justify-content: space-between;
                 gap: 16px;
+
+                .read-time {
+                    white-space: nowrap;
+                }
             }
         }
     }
@@ -227,7 +231,7 @@
         gap: 16px;
     }
 
-    img {
+    img:not(.markdown-body *) {
         width: 100%;
         height: auto;
         object-fit: cover;

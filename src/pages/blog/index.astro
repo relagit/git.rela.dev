@@ -21,35 +21,43 @@ import Icon from "~/components/Icon";
     <Header />
     <div class="post-grid">
         {
-            allPosts.map((item) => {
-                return (
-                    <>
-                        <a href={`/blog/${item.slug}`} class="grid-item">
-                            {item.data.image && (
-                                <img
-                                    src={item.data.image}
-                                    alt={item.data.alt!}
-                                    class="grid-item-image"
-                                />
-                            )}
-                            <div class="grid-item-text">
-                                <div class="grid-item-text-title">
-                                    {item.data.title}
-                                </div>
-                                <div class="grid-item-text-desc">
-                                    {item.data.description}
-                                    <div class="read-time">
-                                        <Icon name="clock" />
-                                        {readTime(
-                                            item.body.split(" ").length / 125,
-                                        )}
+            allPosts
+                .sort((a, b) => {
+                    return (
+                        new Date(b.data.date).getTime() -
+                        new Date(a.data.date).getTime()
+                    );
+                })
+                .map((item) => {
+                    return (
+                        <>
+                            <a href={`/blog/${item.slug}`} class="grid-item">
+                                {item.data.image && (
+                                    <img
+                                        src={item.data.image}
+                                        alt={item.data.alt!}
+                                        class="grid-item-image"
+                                    />
+                                )}
+                                <div class="grid-item-text">
+                                    <div class="grid-item-text-title">
+                                        {item.data.title}
+                                    </div>
+                                    <div class="grid-item-text-desc">
+                                        {item.data.description}
+                                        <div class="read-time">
+                                            <Icon name="clock" />
+                                            {readTime(
+                                                item.body.split(" ").length /
+                                                    125,
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </>
-                );
-            })
+                            </a>
+                        </>
+                    );
+                })
         }
     </div>
 </Layout>

@@ -308,4 +308,18 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         color: var(--color-secondary);
     }
+
+    .comparison {
+        display: flex;
+        gap: 1rem;
+
+        @media screen and (max-width: 468px) {
+            flex-direction: column;
+        }
+
+        figure {
+            width: 100%;
+            height: 100%;
+        }
+    }
 }
