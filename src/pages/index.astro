@@ -4,14 +4,18 @@ import DefaultHead from "~/layouts/DefaultHead.astro";
 import Header from "~/components/Header.astro";
 import Footer from "~/components/Footer";
 import Codeblock from "~/components/Codeblock.astro";
+import FakeApp from "~/pages/styles/_FakeApp";
+import ThemeButton from "~/pages/styles/_ThemeButton";
 
 import Icon, { ProductHunt } from "~/components/Icon";
 import Button from "~/components/Button";
 import Logo from "~/components/Logo.astro";
 import { getReleases } from "~/pages/api/github/release";
+import { relative } from "~/utils/time";
+import themes from "~/pages/styles/_themes";
 
 import "./_index.scss";
-import { relative } from "~/utils/time";
+import "./styles/_app.scss";
 
 const upvoteCount = Number(
     (
@@ -410,18 +414,22 @@ export default new Workflow({
         </div>
         <div class="separator"></div>
         <div class="feature">
-            <img
-                loading="lazy"
-                class="feature-window"
-                src="/assets/landing/window.webp"
-                alt="RelaGit app window, a theme in a pale blue color palette is applied."
-            />
+            <div class="feature-window">
+                <FakeApp vibrancy={false} theme="dark" />
+            </div>
             <div class="feature-text">
                 <h2 class="feature-text-header">Recognisably Yours.</h2>
                 <p class="feature-text-paragraph">
                     Re-imagine the look of the client, either through careful
                     creation of a theme, or use of a community-made one.
                 </p>
+                <div class="styles-selector">
+                    {
+                        themes.slice(0, 3).map((t) => {
+                            return <ThemeButton client:load theme={t} />;
+                        })
+                    }
+                </div>
                 <a href="/styles" target="_blank" class="feature-text-button">
                     Browse Styles
                     <Icon name="arrow-up-right" />
