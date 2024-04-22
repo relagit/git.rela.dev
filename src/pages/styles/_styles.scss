@@ -12,6 +12,10 @@ html:has(.styles) {
     width: 100vw;
     overflow: hidden;
 
+    .fakeapp {
+        aspect-ratio: 16 / 9;
+    }
+
     &-picker {
         background: var(
             --bg-url,
@@ -85,146 +89,5 @@ html:has(.styles) {
                 background: #ffffff3a;
             }
         }
-    }
-}
-
-.fakeapp {
-    backdrop-filter: blur(100px) saturate(120%);
-    background: #1e1e1e85;
-    height: 100%;
-    border-radius: 10px;
-    border: 1px solid #ffffff2a;
-    position: relative;
-    aspect-ratio: 16 / 9;
-
-    &:has(#app-container.theme-light) {
-        background: rgba(255, 255, 255, 0.7);
-    }
-
-    &:has(#app-container.theme-system) {
-        @media screen and (prefers-color-scheme: dark) {
-            background: #1e1e1e85;
-        }
-
-        @media screen and (prefers-color-scheme: light) {
-            background: rgba(255, 255, 255, 0.7);
-        }
-    }
-
-    .window-controls {
-        position: absolute;
-        z-index: 99;
-        top: 0;
-        left: 0;
-        display: flex;
-        align-items: center;
-        padding: 8px;
-        gap: 8px;
-        height: 28px;
-
-        .window-control {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ff5f56;
-        }
-
-        .window-control:nth-child(2) {
-            background: #ffbd2e;
-        }
-
-        .window-control:nth-child(3) {
-            background: #27c93f;
-        }
-    }
-
-    /**
-    <div class="preview-controls">
-                <div class="preview-control">
-                    <label for="vibrancy">Vibrancy</label>
-                    <input
-                        type="checkbox"
-                        id="vibrancy"
-                        checked={vibrancy()}
-                        onChange={(e) => setVibrancy(e.target.checked)}
-                    />
-                </div>
-                <div class="preview-control">
-                    <label for="theme">Theme</label>
-                    <select
-                        id="theme"
-                        value={theme()}
-                        onChange={(e) => setTheme(e.target.value)}
-                    >
-                        <option value="system">System</option>
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
-                    </select>
-                </div>
-            </div>*/
-
-    .preview-controls {
-        position: absolute;
-        z-index: 99;
-        bottom: 0;
-        right: 0;
-        display: flex;
-        align-items: center;
-        padding: 10px 24px;
-        gap: 8px;
-        background: var(--bg-primary);
-        border-top-left-radius: 8px;
-
-        .preview-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-
-            label {
-                color: var(--text-primary);
-            }
-
-            input[type="checkbox"] {
-                appearance: none;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                background: #ffffff2a;
-                position: relative;
-                cursor: pointer;
-
-                &:before {
-                    content: "";
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 10px;
-                    height: 10px;
-                    border-radius: 50%;
-                    background: #fff;
-                    transition: 0.3s;
-                }
-
-                &:checked {
-                    &:before {
-                        background: var(--text-primary);
-                        transform: translate(-50%, -50%) scale(0.5);
-                    }
-                }
-            }
-
-            select {
-                padding: 4px;
-                border-radius: 4px;
-                color: var(--text-primary);
-                cursor: pointer;
-            }
-        }
-    }
-
-    #root {
-        width: 100%;
-        height: 100%;
     }
 }

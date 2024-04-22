@@ -1,8 +1,11 @@
-import { Show, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
 
-export default () => {
-    const [vibrancy, setVibrancy] = createSignal(true);
-    const [theme, setTheme] = createSignal("system");
+export default (props: {
+    vibrancy?: boolean;
+    theme?: "system" | "light" | "dark";
+}) => {
+    const [vibrancy, setVibrancy] = createSignal(props.vibrancy ?? true);
+    const [theme, setTheme] = createSignal<string>(props.theme ?? "system");
 
     return (
         <div class="fakeapp">
@@ -112,6 +115,12 @@ export default () => {
                                     data-active="true"
                                     data-status="modified"
                                 >
+                                    <div class="sidebar__item__fileicon">
+                                        <img
+                                            src="/assets/vscode-material-icons/generated/icons/react_ts.svg"
+                                            alt="react_ts"
+                                        />
+                                    </div>
                                     <div class="sidebar__item__filename">
                                         <span
                                             class="sidebar__item__filename__path"
@@ -157,7 +166,7 @@ export default () => {
                                 ></textarea>
                                 <div class="textarea__footer">
                                     <button
-                                        class="sidebar__footer__textarea-button"
+                                        class="sidebar__footer__textarea__button"
                                         aria-label="Generate Commit Details"
                                         tabindex="0"
                                         aria-labeledby=""
@@ -175,25 +184,6 @@ export default () => {
                                             </svg>
                                         </span>
                                     </button>
-                                    <div class="contextmenu-wrapper">
-                                        <button
-                                            class="sidebar__footer__textarea-button"
-                                            aria-label="Add"
-                                        >
-                                            <span class="icon">
-                                                <svg
-                                                    version="1.1"
-                                                    width="16"
-                                                    height="16"
-                                                    viewBox="0 0 16 16"
-                                                    class="octicon octicon-plus"
-                                                    aria-hidden="true"
-                                                >
-                                                    <path d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z"></path>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                             <button
