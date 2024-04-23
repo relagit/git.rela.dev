@@ -4,6 +4,14 @@
     border-bottom: 1px dashed transparent;
 }
 
+.twoslash:hover .twoslash-hover {
+    border-color: color-mix(
+        in srgb,
+        var(--twoslash-underline-color),
+        transparent 60%
+    ) !important;
+}
+
 .twoslash-popup-container {
     max-width: 500px;
     overflow: auto hidden;
