@@ -2,9 +2,15 @@
 import Icon from "./Icon";
 
 import "./header.scss";
+
+interface Props {
+    embed?: boolean;
+}
+
+const props = Astro.props;
 ---
 
-<header class="header static">
+<header class={`header ${props.embed ? "embed" : ""}`}>
     <div class="header__group">
         <a aria-label="Home" href="/" class="header__group__link">
             <svg

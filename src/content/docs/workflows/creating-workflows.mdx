@@ -39,6 +39,8 @@ Now, time to get onto the workflow itself.
 
 ---
 
+### Creating a basic workflow
+
 > [!TIP]
 >
 > RelaGit's JavaScript runner defines a few custom modules that you can `import` or `require` from your workflow.
@@ -67,6 +69,8 @@ export default new Workflow({
 });
 ```
 
+### Workflow Hooks
+
 We can now start defining our workflow's hooks. Hooks are functions that are called at certain points in a repository's lifecycle.
 
 For example, the `navigate` hook is called when a user switches between a repository or file, while the `commit` hook is called after a user commits their changes.
@@ -92,6 +96,8 @@ export default new Workflow({
     },
 });
 ```
+
+### Native Modules
 
 Our workflow will be a simple one that counts how many times a user has commit via RelaGit.
 But that brings up a new question: how do we interact with `fs` and other node modules?

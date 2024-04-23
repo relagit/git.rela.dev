@@ -1,5 +1,9 @@
 @use "./markdown";
 
+:root:has(.docs-container) {
+    --black: #111112;
+}
+
 .markdown-body {
     color-scheme: dark;
     --shiki-token-comment: #8b949e;
@@ -73,9 +77,77 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    padding: 4rem 0 4rem 4rem;
+    padding: 2rem 0 6rem 4rem;
     scroll-behavior: smooth;
     overflow-y: auto;
+
+    &-headings {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        h2 {
+            color: var(--white);
+            font-size: 0.875rem;
+            font-weight: 400;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+
+            li {
+                &.l1 {
+                    padding-inline-start: 0;
+                }
+
+                &.l2 {
+                    padding-inline-start: 8px;
+                }
+
+                &.l3 {
+                    padding-inline-start: 16px;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: inherit;
+                    width: 100%;
+                    height: 24px;
+                }
+
+                font-size: 0.85rem;
+                color: var(--color-secondary, rgba(255, 255, 255, 0.55));
+                border-left: 1px solid rgb(255 255 255 / 10%);
+                font-weight: 400;
+                transition: 0.2s ease-out;
+                cursor: pointer;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                height: 24px;
+
+                &:hover {
+                    color: var(--color-primary);
+                }
+
+                &.active {
+                    border-left: 1px solid var(--color-blue-500);
+                    color: var(--color-blue-400);
+                }
+            }
+        }
+    }
+
+    .separator {
+        height: 1px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 32px 0;
+    }
 
     nav {
         display: flex;
@@ -140,11 +212,11 @@
         }
 
         &:hover {
-            color: var(--color-blue-500);
+            color: var(--color-blue-400);
         }
 
         &.active {
-            color: var(--color-blue-500);
+            color: var(--color-blue-400);
             background: rgb(255 255 255 / 8%);
         }
     }
@@ -156,16 +228,35 @@
 
 .docs-content {
     margin-left: 350px;
-    margin-top: 4.5rem;
     padding: 2rem 3rem 3rem 3rem;
     display: flex;
     flex-direction: column;
     font-size: 1rem;
     gap: 1rem;
-    min-height: calc(100vh - 4.5rem);
-    height: fit-content;
-    max-width: 900px;
+    height: calc(100vh - 4.5rem);
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255 255 255 / 20%) transparent;
+
     --color-secondary: rgb(161, 161, 161);
+    --content-width: 850px;
+
+    padding-inline-end: calc((100vw - 350px - var(--content-width)));
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgb(255 255 255 / 20%);
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
 
     @media screen and (max-width: 768px) {
         padding: 2rem;
@@ -180,7 +271,7 @@
         font-size: 2.5rem;
         font-weight: 600;
         margin-top: 0;
-        margin-bottom: 1.2rem;
+        margin-bottom: 0.25rem;
         padding-bottom: 0;
         border-bottom: none;
         display: flex;

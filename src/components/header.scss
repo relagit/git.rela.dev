@@ -50,6 +50,10 @@ _:future,
     background: none;
     border: none;
 
+    &.embed {
+        position: relative !important;
+    }
+
     top: 0;
     left: 0;
     padding: 24px 120px;

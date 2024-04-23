@@ -25,7 +25,7 @@ if (!entry) {
     throw new Error(`Could not find entry for ${post}`);
 }
 
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 
 import "./docs.scss";
 
@@ -121,6 +121,14 @@ const next = () => {
 ---
 
 <script>
+    const heading = document.querySelector(
+        `.heading[data-slug="${window.location.hash.slice(1)}"]`,
+    );
+
+    if (heading) {
+        heading.classList.add("active");
+    }
+
     window.addEventListener("click", (e) => {
         if ((e.target as HTMLElement)?.tagName === "BUTTON") {
             if ((e.target as HTMLElement)?.dataset.code) {
@@ -154,6 +162,22 @@ const next = () => {
             }
         }
     });
+
+    window.addEventListener("hashchange", () => {
+        const active = document.querySelector(".heading.active");
+
+        if (active) {
+            active.classList.remove("active");
+        }
+
+        const heading = document.querySelector(
+            `.heading[data-slug="${window.location.hash.slice(1)}"]`,
+        );
+
+        if (heading) {
+            heading.classList.add("active");
+        }
+    });
 </script>
 
 <Layout title={`RelaGit - ${entry.data.title}`} transitions>
@@ -163,9 +187,31 @@ const next = () => {
         <meta name="twitter:description" content={entry.data.description} />
         <link rel="canonical" href={`https://rela.dev/docs/${post}`} />
     </DefaultHead>
-    <Header />
+    <Header embed />
     <div class="docs-container">
         <div class="docs-sidebar">
+            {
+                headings.length ? (
+                    <>
+                        <div class="docs-sidebar-headings">
+                            <h2>On this page</h2>
+                            <ul>
+                                {headings.map((heading) => (
+                                    <li
+                                        class={`heading l${heading.depth}`}
+                                        data-slug={heading.slug}
+                                    >
+                                        <a href={`#${heading.slug}`}>
+                                            {heading.text}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div class="separator" />
+                    </>
+                ) : null
+            }
             <RecursiveDocsMap docsMap={docsMap} slug={post} />
         </div>
         <div class="docs-content">
