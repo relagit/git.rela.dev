@@ -10,6 +10,16 @@ If you create workflows directly inside of the workflows folder, they **must** b
 However, we suggest you use a bundler like [vite](https://vitejs.dev) or [esbuild](https://esbuild.github.io) to bundle your workflows into a single module.
 This allows you to leverage the full powers of TypeScript and import other modules and packages.
 
+
+## Using the CLI
+
+RelaGit provides a CLI to help you scaffold new workflows. You can use it to create a new workflow, install dependencies, and build your workflow.
+
+```bash
+// [!filename Using the CLI]
+pnpm create relagit
+```
+
 ## Building a workflow with Vite
 
 This section will go over how to create a basic workflow using vite and TypeScript. You'll learn about `relagit:` modules and how the hook system works.
