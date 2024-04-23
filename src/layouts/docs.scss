@@ -221,7 +221,7 @@
         }
     }
 
-    @media screen and (max-width: 620px) {
+    @media screen and (width < 780px) {
         display: none;
     }
 }
@@ -262,7 +262,7 @@
         padding: 2rem;
     }
 
-    @media screen and (max-width: 620px) {
+    @media screen and (width < 780px) {
         margin-left: 0;
     }
 
