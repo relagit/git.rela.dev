@@ -17,6 +17,8 @@ import themes from "~/pages/styles/_themes";
 import "./_index.scss";
 import "./styles/_app.scss";
 
+console.log(Astro.locals);
+
 const upvoteCount = Number(
     (
         await (
@@ -127,11 +129,21 @@ const version = await getReleases();
                 )
         }
         <h1 class="hero-text">
-            <span class="hero-text-highlight">
-                The elegant solution to graphical version control.</span
+            <span class="hero-text-highlight"
+                >{
+                    Astro.locals.abTestGroup === "A"
+                        ? "The elegant solution to graphical version control."
+                        : "Streamline your Git workflow."
+                }</span
             >
             <br />
-            <span>Built by developers, for developers.</span>
+            <span
+                >{
+                    Astro.locals.abTestGroup === "A"
+                        ? "Built by developers, for developers."
+                        : "Modern version control client for developers."
+                }</span
+            >
             <div class="hero-text-badges">
                 <a
                     class="hero-text-badges-badge highlight hide-small"
