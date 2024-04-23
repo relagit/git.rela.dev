@@ -227,37 +227,90 @@ const version = await getReleases();
         </h2>
         <div class="feature-grid">
             <div class="feature-grid-item">
-                <div class="feature-grid-item-text">
-                    <div class="feature-grid-item-text-label">
-                        <div class="icons">
-                            <Icon name="mark-github" />
-                        </div>
-                        GitHub, GitLab, and Codeberg Integrations
-                    </div>
-                    <div class="feature-grid-item-text-paragraph">
-                        <span class="highlight"
-                            >Your favourite developer platforms.</span
-                        > Directly integrated into the experience.
-                    </div>
-                </div>
                 <img
                     loading="lazy"
                     class="feature-grid-item-graphic github"
                     src="/assets/landing/vercel-next.webp"
                     alt="The GitHub vercel/next.js repository being cloned inside RelaGit"
                 />
-            </div>
-            <div class="feature-grid-item">
                 <div class="feature-grid-item-text">
                     <div class="feature-grid-item-text-label">
-                        <Icon name="code" />
-                        Open Source
+                        Your favourite developer platforms
                     </div>
                     <div class="feature-grid-item-text-paragraph">
-                        <span class="highlight">Community fueled.</span> Built with
-                        input and opinion from developers and users.
+                        GitHub, GitLab, and Codeberg. Directly integrated into
+                        the experience.
                     </div>
                 </div>
+                <svg
+                    class="blur"
+                    viewBox="0 0 668 515"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <g filter="url(#filter0_f_1448_2976)">
+                        <path
+                            d="M-47.9805 174.611C-85.3177 201.597 -8.30971 277.36 19.6932 304.889C46.7238 311.48 248.267 367.236 289.805 325.826C341.727 274.064 270.553 179.846 225.631 174.611C180.71 169.377 181.293 103.656 185.377 44.3338C189.461 -14.989 -1.30904 140.879 -47.9805 174.611Z"
+                            fill="url(#paint0_radial_1448_2976)"></path>
+                        <path
+                            d="M657.827 62.258C652.27 16.5259 548.71 47.2749 511.07 58.4666C492.226 78.9356 345.933 228.357 362.082 284.743C382.268 355.225 499.159 338.51 525.47 301.726C551.782 264.943 609.019 297.245 658.963 329.516C708.908 361.787 664.773 119.423 657.827 62.258Z"
+                            fill="url(#paint1_radial_1448_2976)"></path>
+                    </g>
+                    <defs>
+                        <filter
+                            id="filter0_f_1448_2976"
+                            x="-174"
+                            y="-52"
+                            width="885"
+                            height="667"
+                            filterUnits="userSpaceOnUse"
+                            color-interpolation-filters="sRGB"
+                        >
+                            <feFlood
+                                flood-opacity="0"
+                                result="BackgroundImageFix"></feFlood>
+                            <feBlend
+                                mode="normal"
+                                in="SourceGraphic"
+                                in2="BackgroundImageFix"
+                                result="shape"></feBlend>
+                            <feGaussianBlur
+                                stdDeviation="50"
+                                result="effect1_foregroundBlur_1448_2976"
+                            ></feGaussianBlur>
+                        </filter>
+                        <radialGradient
+                            id="paint0_radial_1448_2976"
+                            cx="0"
+                            cy="0"
+                            r="1"
+                            gradientUnits="userSpaceOnUse"
+                            gradientTransform="translate(-10.0597 208.344) rotate(18.2297) scale(277.014 281.73)"
+                        >
+                            <stop stop-color="#ED5F00"></stop>
+                            <stop offset="0.352239" stop-color="#C24112"></stop>
+                            <stop offset="0.635" stop-color="#841F19"></stop>
+                            <stop offset="0.78" stop-color="#561829"></stop>
+                            <stop offset="1" stop-color="#0C162A"></stop>
+                        </radialGradient>
+                        <radialGradient
+                            id="paint1_radial_1448_2976"
+                            cx="0"
+                            cy="0"
+                            r="1"
+                            gradientUnits="userSpaceOnUse"
+                            gradientTransform="translate(609.96 79.1291) rotate(137.16) scale(277.014 281.73)"
+                        >
+                            <stop stop-color="#ED5F00"></stop>
+                            <stop offset="0.352239" stop-color="#C24112"></stop>
+                            <stop offset="0.635" stop-color="#841F19"></stop>
+                            <stop offset="0.78" stop-color="#561829"></stop>
+                            <stop offset="1" stop-color="#0C162A"></stop>
+                        </radialGradient>
+                    </defs>
+                </svg>
+            </div>
+            <div class="feature-grid-item">
                 <div
                     class="feature-grid-item-graphic open"
                     aria-label="Chat messages between two contributors to RelaGit discussing naming of a label."
@@ -288,21 +341,26 @@ const version = await getReleases();
                         </div>
                     </div>
                 </div>
+                <div class="feature-grid-item-text">
+                    <div class="feature-grid-item-text-label">
+                        Community fueled
+                    </div>
+                    <div class="feature-grid-item-text-paragraph">
+                        Built with input and opinion from developers and users.
+                    </div>
+                </div>
             </div>
             <div class="feature-grid-item full">
                 <div class="feature-grid-item-text">
                     <div class="feature-grid-item-text-label">
-                        <Icon name="browser" />
-                        Contextual Popout <div
-                            class="feature-grid-item-text-label-badge"
-                        >
+                        Goes anywhere you go
+                        <div class="feature-grid-item-text-label-badge">
                             New
                         </div>
                     </div>
                     <div class="feature-grid-item-text-paragraph">
-                        <span class="highlight">Goes anywhere you go.</span>
-                        Open out a native popout to view focused information about
-                        what you're working on.
+                        Open out a native popout to view focused information
+                        about what you're working on.
                     </div>
                 </div>
                 <img
@@ -311,20 +369,77 @@ const version = await getReleases();
                     src="/assets/landing/popout.webp"
                     alt="A native popout window is open above a code editor. The popout shows modified files and commit history."
                 />
+
+                <svg
+                    class="blur"
+                    viewBox="0 0 1352 339"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style="scale: -1, 1;"
+                >
+                    <g filter="url(#filter0_f_1448_2980)">
+                        <path
+                            d="M1456.83 -16.7421C1451.27 -62.4743 1347.71 -31.7252 1310.07 -20.5336C1291.23 -0.0645449 1144.93 149.357 1161.08 205.743C1181.27 276.225 1298.16 259.51 1324.47 222.726C1350.78 185.943 1408.02 218.245 1457.96 250.516C1507.91 282.787 1463.77 40.4231 1456.83 -16.7421Z"
+                            fill="url(#paint0_radial_1448_2980)"></path>
+                        <path
+                            d="M-74.9805 191.611C-112.318 218.597 -35.3097 294.36 -7.30681 321.889C19.7238 328.48 456.462 363.298 498 321.889C549.922 270.127 243.553 196.846 198.631 191.611C153.71 186.377 154.293 120.656 158.377 61.3338C162.461 2.01102 -28.309 157.879 -74.9805 191.611Z"
+                            fill="url(#paint1_radial_1448_2980)"></path>
+                    </g>
+                    <defs>
+                        <filter
+                            id="filter0_f_1448_2980"
+                            x="-140"
+                            y="-131"
+                            width="1650"
+                            height="667"
+                            filterUnits="userSpaceOnUse"
+                            color-interpolation-filters="sRGB"
+                        >
+                            <feFlood
+                                flood-opacity="0"
+                                result="BackgroundImageFix"></feFlood>
+                            <feBlend
+                                mode="normal"
+                                in="SourceGraphic"
+                                in2="BackgroundImageFix"
+                                result="shape"></feBlend>
+                            <feGaussianBlur
+                                stdDeviation="50"
+                                result="effect1_foregroundBlur_1448_2980"
+                            ></feGaussianBlur>
+                        </filter>
+                        <radialGradient
+                            id="paint0_radial_1448_2980"
+                            cx="0"
+                            cy="0"
+                            r="1"
+                            gradientUnits="userSpaceOnUse"
+                            gradientTransform="translate(1408.96 0.128953) rotate(137.16) scale(277.014 281.73)"
+                        >
+                            <stop stop-color="#ED5F00"></stop>
+                            <stop offset="0.352239" stop-color="#C24112"></stop>
+                            <stop offset="0.635" stop-color="#841F19"></stop>
+                            <stop offset="0.78" stop-color="#561829"></stop>
+                            <stop offset="1" stop-color="#0C162A"></stop>
+                        </radialGradient>
+                        <radialGradient
+                            id="paint1_radial_1448_2980"
+                            cx="0"
+                            cy="0"
+                            r="1"
+                            gradientUnits="userSpaceOnUse"
+                            gradientTransform="translate(-31.5 293.5) rotate(3.72509) scale(492.541 500.926)"
+                        >
+                            <stop stop-color="#ED5F00"></stop>
+                            <stop offset="0.352239" stop-color="#C24112"></stop>
+                            <stop offset="0.635" stop-color="#841F19"></stop>
+                            <stop offset="0.78" stop-color="#561829"></stop>
+                            <stop offset="1" stop-color="#0C162A"></stop>
+                        </radialGradient>
+                    </defs>
+                </svg>
             </div>
             <div class="feature-grid-item">
-                <div class="feature-grid-item-text">
-                    <div class="feature-grid-item-text-label">
-                        <Icon name="stopwatch" />
-                        Speedy
-                    </div>
-                    <div class="feature-grid-item-text-paragraph">
-                        <span class="highlight"
-                            >Designed to move at your speed.</span
-                        > Next generation tooling enables lightning fast UI updates
-                        and performance.
-                    </div>
-                </div>
                 <div
                     class="feature-grid-item-graphic speed"
                     aria-label="Three boxes have connections between them, git, RelaGit, and you, the user. Moving blue lines indicate the speed of the connections."
@@ -357,26 +472,31 @@ const version = await getReleases();
                         <Icon name="person" variant={24} />
                     </div>
                 </div>
-            </div>
-            <div class="feature-grid-item">
                 <div class="feature-grid-item-text">
                     <div class="feature-grid-item-text-label">
-                        <Icon name="flame" />
-                        Elegantly Elegant
+                        Designed to move at your speed
                     </div>
                     <div class="feature-grid-item-text-paragraph">
-                        <span class="highlight"
-                            >Pixel perfect interface crafted for seamless
-                            navigation.</span
-                        > Blending form and function with beautiful design.
+                        Next generation tooling enables lightning fast UI
+                        updates and performance.
                     </div>
                 </div>
+            </div>
+            <div class="feature-grid-item">
                 <img
                     loading="lazy"
                     class="feature-grid-item-graphic design"
                     src="/assets/landing/elegant.webp"
                     alt="The Create or Add repository modal in RelaGit, with the curve of the window being emphasised"
                 />
+                <div class="feature-grid-item-text">
+                    <div class="feature-grid-item-text-label">
+                        Pixel perfect interfaces
+                    </div>
+                    <div class="feature-grid-item-text-paragraph">
+                        Blending form and function with beautiful design.
+                    </div>
+                </div>
             </div>
         </div>
         <div class="feature">
