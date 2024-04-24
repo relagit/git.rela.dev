@@ -47,9 +47,9 @@ export const POST: APIRoute = async (request) => {
 
     if (
         !prompt.toLowerCase().includes("commit") ||
-        !prompt.toLowerCase().includes("relagit") ||
         !prompt.toLowerCase().includes("file") ||
-        !prompt.toLowerCase().includes("git")
+        !prompt.toLowerCase().includes("git") ||
+        !prompt.toLowerCase().includes("diff")
     )
         return json({ error: "Invalid prompt" });
 
