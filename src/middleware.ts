@@ -1,6 +1,9 @@
 import type { MiddlewareHandler } from "astro";
 
 export const onRequest: MiddlewareHandler = (ctx, next) => {
+    if (ctx.url.pathname.includes("api"))
+        ctx.request.headers.set("Access-Control-Allow-Origin", "*");
+
     if (ctx.cookies.get("abTestGroup")) {
         ctx.locals.abTestGroup = ctx.cookies.get("abTestGroup")?.value;
     } else {
