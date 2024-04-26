@@ -74,7 +74,6 @@ export const POST: APIRoute = async (request) => {
             start(controller) {
                 (async () => {
                     for await (const chunk of result.stream) {
-                        console.log("chunk", chunk.text());
                         controller.enqueue(chunk.text());
                     }
 
