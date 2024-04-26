@@ -3,20 +3,22 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    border-radius: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.8rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 
     pre {
         background: transparent !important;
     }
 
     .codeblock-header {
+        font-family: var(--font-primary);
         display: flex;
         padding: 0.75rem 1rem;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         color: rgba(255, 255, 255, 0.6);
         font-size: 14px;
         font-weight: 400;
@@ -38,16 +40,13 @@
     }
 
     .codeblock-content {
-        font-family: var(--font-mono);
         display: flex;
-        padding: 16px 32px 32px 32px;
+        padding: 16px;
         align-items: center;
-        gap: 24px;
         background: rgba(255, 255, 255, 0.04);
         width: 100%;
         overflow-x: auto;
         scrollbar-width: thin;
-        font-size: 13px;
 
         :focus {
             outline: none;
@@ -62,14 +61,18 @@
             overflow: visible;
         }
 
-        @media screen and (max-width: 600px) {
-            font-size: 12px;
-            padding: 16px;
-        }
-
         &-inner {
             white-space: pre;
             color: #ffffffc3;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            font-size: 13px;
+
+            @media screen and (max-width: 600px) {
+                font-size: 12px;
+            }
         }
     }
 }

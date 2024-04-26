@@ -53,6 +53,10 @@ _:future,
     &.embed {
         position: relative !important;
         padding: 24px 4rem;
+
+        @media screen and (width < 780px) {
+            padding: 24px 2rem;
+        }
     }
 
     top: 0;

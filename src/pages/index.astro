@@ -130,20 +130,10 @@ const version = await getReleases();
         }
         <h1 class="hero-text">
             <span class="hero-text-highlight"
-                >{
-                    Astro.locals.abTestGroup === "A"
-                        ? "The elegant solution to graphical version control."
-                        : "Streamline your Git workflow."
-                }</span
+                >{"Streamline your Git workflow."}</span
             >
             <br />
-            <span
-                >{
-                    Astro.locals.abTestGroup === "A"
-                        ? "Built by developers, for developers."
-                        : "Modern version control client for developers."
-                }</span
-            >
+            <span>{"Modern version control client for developers."}</span>
             <div class="hero-text-badges">
                 <a
                     class="hero-text-badges-badge highlight hide-small"
@@ -155,7 +145,7 @@ const version = await getReleases();
                     </div>
                 </a>
                 <a
-                    class="hero-text-badges-badge hide-small"
+                    class="hero-text-badges-badge"
                     href="https://producthunt.com/products/relagit"
                     target="_blank"
                 >

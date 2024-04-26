@@ -68,6 +68,10 @@ main.index {
         height: 2.5rem;
         overflow: hidden;
 
+        @media screen and (max-width: 500px) {
+            display: none;
+        }
+
         &-confetti {
             position: fixed;
             top: 10%;
@@ -171,8 +175,10 @@ main.index {
             }
         }
 
-        @media screen and (max-width: 400px) {
-            font-size: 1.2rem;
+        @media screen and (max-width: 500px) {
+            padding-top: 6rem;
+            font-size: 1.5rem;
+            max-width: 85vw;
 
             &.stay-large {
                 font-size: 1.75rem;
@@ -192,7 +198,7 @@ main.index {
             align-items: center;
             justify-content: center;
 
-            @media screen and (max-width: 476px) {
+            @media screen and (max-width: 500px) {
                 flex-direction: column;
 
                 .hide-small {
@@ -777,6 +783,10 @@ main.index {
                                 rgba(255, 255, 255, 0.25)
                             );
 
+                            @media screen and (max-width: 950px) {
+                                font-size: 0.8rem;
+                            }
+
                             &.you {
                                 background: #0a84ff;
                                 max-width: 60%;
@@ -816,6 +826,11 @@ main.index {
                                 rgba(255, 255, 255, 0.06) 100%
                             );
 
+                            @media screen and (max-width: 950px) {
+                                width: 4rem;
+                                height: 4rem;
+                            }
+
                             svg:not(.logo, .highlight > svg) {
                                 width: 1.5rem;
                                 height: 1.5rem;
@@ -834,6 +849,16 @@ main.index {
                                 svg {
                                     color: var(--color-blue-500);
                                     opacity: 1 !important;
+                                }
+                            }
+
+                            @media screen and (max-width: 600px) {
+                                width: 3rem;
+                                height: 3rem;
+
+                                svg {
+                                    width: 1rem !important;
+                                    height: 1rem !important;
                                 }
                             }
                         }
