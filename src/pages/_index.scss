@@ -39,12 +39,15 @@ main.index {
     flex-direction: column;
     align-items: center;
     gap: 9rem;
-    background: radial-gradient(180vh 180vh at 50% 100vh, #a689d92b, #0000),
-        radial-gradient(180vh 180vh at 50% calc(100% - 400px), #a689d92b, #0000),
+    background: radial-gradient(
+            180vh 180vh at 50% 100vh,
+            rgba(166, 137, 217, 0.168627451),
+            rgba(0, 0, 0, 0)
+        ),
         radial-gradient(
             180vh 180vh at 50% 50%,
             rgba(166, 137, 217, 0.05),
-            #0000
+            rgba(0, 0, 0, 0)
         );
 
     @media screen and (max-width: 1000px) {
@@ -1038,10 +1041,6 @@ main.index {
                 font-weight: 400;
                 line-height: 130%;
 
-                @media screen and (max-width: 1000px) {
-                    font-size: 44px;
-                }
-
                 @media screen and (max-width: 600px) {
                     font-size: 40px;
                 }
@@ -1092,6 +1091,157 @@ main.index {
                 &:hover::after {
                     transform: translateX(0%);
                 }
+            }
+        }
+    }
+
+    .cta {
+        display: flex;
+        flex-direction: column;
+        gap: 64px;
+        padding: 128px 0 0 00;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        position: relative;
+
+        .circle {
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            pointer-events: none;
+        }
+
+        .info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+            width: 80%;
+
+            .app-icon {
+                width: 128px;
+                height: 128px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .body {
+                    position: absolute;
+                    left: 50%;
+                    top: 53.5%;
+                    transform: translate(-50%, -50%);
+                }
+
+                .logo {
+                    width: 40px;
+                    height: 58px;
+                    flex-shrink: 0;
+                    filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 0.6));
+
+                    g {
+                        opacity: 1 !important;
+                    }
+                }
+            }
+
+            &-header {
+                color: var(--white);
+                font-size: 44px;
+                font-weight: 400;
+                line-height: 130%;
+                text-align: center;
+                max-width: min(85%, 600px);
+
+                @media screen and (max-width: 800px) {
+                    font-size: 40px;
+                    text-wrap: balance;
+                }
+
+                @media screen and (max-width: 600px) {
+                    font-size: 32px;
+                }
+            }
+        }
+
+        .action {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+
+            .button.fancy.cta-button {
+                border-radius: 8px;
+                border: none;
+                background: rgb(166 137 217 / 0.1);
+                color: #fff;
+                position: relative;
+                width: min(379px, 80vw);
+
+                &::after {
+                    display: none;
+                }
+
+                &::before {
+                    content: "";
+                    width: 100%;
+                    height: 100%;
+                    inset: 0;
+                    position: absolute;
+                    transition: filter 400ms ease-out;
+                    background: linear-gradient(
+                        90deg,
+                        rgb(166 137 217 / 0),
+                        rgb(166 137 217 / 0.2),
+                        rgb(166 137 217 / 0)
+                    );
+                    mask-image: linear-gradient(
+                        to top,
+                        black 1px,
+                        rgba(0, 0, 0, 0) 1px calc(100% - 1px),
+                        black calc(100% - 1px) 100%
+                    );
+                    pointer-events: none;
+                }
+            }
+
+            .requirements {
+                color: var(--color-secondary);
+                font-size: 16px;
+                font-weight: 400;
+            }
+        }
+
+        &.final {
+            padding: 32px 0px 192px 0px;
+
+            &::after {
+                content: "";
+                width: 100vw;
+                height: 100vw;
+                position: absolute;
+                top: -50vw;
+                z-index: -1;
+                border-radius: 9999999px;
+                background: rgba(166, 137, 217, 0.06);
+                pointer-events: none;
+                filter: blur(200px);
+
+                @media screen and (max-width: 600px) {
+                    background: rgba(166, 137, 217, 0.1);
+                }
+            }
+
+            .circle {
+                top: auto;
+                bottom: 0;
+                overflow: hidden;
             }
         }
     }

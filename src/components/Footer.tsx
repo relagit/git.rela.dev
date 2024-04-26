@@ -29,7 +29,7 @@ const sponsors = [
     },
 ];
 
-export default () => {
+export default (props: { embed?: boolean }) => {
     const [sentError, setSentError] = createSignal(false);
     const [sentSignup, setSentSignup] = createSignal(false);
     const [waitlistEmail, setWaitlistEmail] = createSignal("");
@@ -75,7 +75,7 @@ export default () => {
     });
 
     return (
-        <footer class="footer">
+        <footer classList={{ footer: true, embed: props.embed }}>
             <div class="footer-group">
                 <div class="footer-brand">
                     <svg

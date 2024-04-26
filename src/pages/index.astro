@@ -17,8 +17,6 @@ import themes from "~/pages/styles/_themes";
 import "./_index.scss";
 import "./styles/_app.scss";
 
-console.log(Astro.locals);
-
 const upvoteCount = Number(
     (
         await (
@@ -36,29 +34,45 @@ const version = await getReleases();
 ---
 
 <script>
-    // import { createConfetti, type ConfettiOptions } from "@neoconfetti/solid";
-    // import { createSignal } from "solid-js";
+    const userAgent = window.navigator.userAgent.toLowerCase();
 
-    // const confetti = createConfetti();
+    let os = "";
 
-    // confetti.confetti(
-    //     document.querySelector(".hero-banner-confetti")!,
-    //     createSignal({
-    //         particleCount: 100,
-    //         particleSize: 4,
-    //         force: 0.7,
-    //         colors: [
-    //             "var(--color-blue-500)",
-    //             "var(--color-green-500)",
-    //             "var(--color-yellow-500)",
-    //             "var(--color-red-500)",
-    //             "var(--color-purple-500)",
-    //             "var(--color-pink-500)",
-    //             "var(--color-orange-500)",
-    //             "var(--color-cyan-500)",
-    //         ],
-    //     } satisfies ConfettiOptions)[0],
-    // );
+    if (userAgent.toLowerCase().includes("win")) {
+        os = "windows";
+    } else if (userAgent.toLowerCase().includes("mac")) {
+        os = "mac";
+    } else if (userAgent.toLowerCase().includes("linux")) {
+        os = "linux";
+    }
+
+    if (
+        userAgent.toLowerCase().includes("iphone") ||
+        userAgent.toLowerCase().includes("ipad") ||
+        userAgent.toLowerCase().includes("android")
+    ) {
+        os = "mobile";
+    }
+
+    const requirements = document.querySelector(".requirements");
+
+    if (requirements) {
+        switch (os) {
+            case "windows":
+                requirements.innerHTML = "Requires Windows 10 or later";
+                break;
+            case "mac":
+                requirements.innerHTML = "Requires macOS 10.14 or later";
+                break;
+            case "linux":
+                requirements.innerHTML = "Available as tarball, .deb, and .rpm";
+                break;
+            case "mobile":
+                requirements.innerHTML =
+                    "Download on your desktop to get started";
+                break;
+        }
+    }
 
     const children = document.querySelectorAll(
         "main.index > *, .feature-grid-item",
@@ -228,12 +242,65 @@ const version = await getReleases();
                 </div>
             </div>
         </div>
-        <div class="separator"></div>
-        <h2 class="hero-text inline stay-large" style="margin-bottom: -2rem">
-            <span class="hero-text-highlight"
-                >RelaGit is a git client and more.</span
+        <div class="cta">
+            <svg
+                class="circle"
+                viewBox="0 0 1512 1512"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
             >
-        </h2>
+                <g clip-path="url(#clip0_1483_3246)">
+                    <path
+                        d="M756 3326C1674.45 3326 2419 2581.45 2419 1663C2419 744.55 1674.45 0 756 0C-162.45 0 -907 744.55 -907 1663C-907 2581.45 -162.45 3326 756 3326Z"
+                        fill="url(#paint0_linear_1483_3246)"
+                        stroke="url(#paint1_linear_1483_3246)"
+                        stroke-width="4"></path>
+                </g>
+                <defs>
+                    <linearGradient
+                        id="paint0_linear_1483_3246"
+                        x1="756"
+                        y1="-2"
+                        x2="756"
+                        y2="3328"
+                        gradientUnits="userSpaceOnUse"
+                    >
+                        <stop
+                            offset="0.00311407"
+                            stop-color="#A689D9"
+                            stop-opacity="0.1"></stop>
+                        <stop
+                            offset="0.446786"
+                            stop-color="white"
+                            stop-opacity="0"></stop>
+                    </linearGradient>
+                    <linearGradient
+                        id="paint1_linear_1483_3246"
+                        x1="6.58981e-05"
+                        y1="-1.99999"
+                        x2="1512"
+                        y2="-1.99999"
+                        gradientUnits="userSpaceOnUse"
+                    >
+                        <stop stop-color="#A689D9" stop-opacity="0"></stop>
+                        <stop
+                            offset="0.474558"
+                            stop-color="#D3C3EE"
+                            stop-opacity="0.3"></stop>
+                        <stop offset="1" stop-color="#A689D9" stop-opacity="0"
+                        ></stop>
+                    </linearGradient>
+                    <clipPath id="clip0_1483_3246">
+                        <rect width="1512" height="1512" fill="white"></rect>
+                    </clipPath>
+                </defs>
+            </svg>
+            <div class="info">
+                <h2 class="info-header">
+                    Everything you expect from a git client, and more.
+                </h2>
+            </div>
+        </div>
         <div class="feature-grid">
             <div class="feature-grid-item">
                 <img
@@ -631,20 +698,161 @@ export default new Workflow({
                 </a>
             </div>
         </div>
-        <div class="separator"></div>
-        <h2 class="hero-text inline">
-            <span class="hero-text-highlight">Convinced?</span>
-            <div class="hero-text-badges">
-                <Button client:visible href="/download" class="cta-button">
+        <div class="cta final">
+            <svg
+                class="circle"
+                viewBox="0 -902 1512 1512"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <circle
+                    cx="756"
+                    cy="-1055"
+                    r="1663"
+                    fill="url(#paint0_linear_1472_794)"
+                    stroke="url(#paint1_linear_1472_794)"
+                    stroke-width="4"></circle>
+                <defs>
+                    <linearGradient
+                        id="paint0_linear_1472_794"
+                        x1="756"
+                        y1="-2720"
+                        x2="756"
+                        y2="610"
+                        gradientUnits="userSpaceOnUse"
+                    >
+                        <stop offset="0.725" stop-color="white" stop-opacity="0"
+                        ></stop>
+                        <stop offset="1" stop-color="#A689D9" stop-opacity="0.1"
+                        ></stop>
+                    </linearGradient>
+                    <linearGradient
+                        id="paint1_linear_1472_794"
+                        x1="7.06363e-05"
+                        y1="-2720"
+                        x2="1512"
+                        y2="-2720"
+                        gradientUnits="userSpaceOnUse"
+                    >
+                        <stop stop-color="#A689D9" stop-opacity="0"></stop>
+                        <stop
+                            offset="0.474558"
+                            stop-color="#D3C3EE"
+                            stop-opacity="0.3"></stop>
+                        <stop offset="1" stop-color="#A689D9" stop-opacity="0"
+                        ></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div class="info">
+                <div class="app-icon">
+                    <svg
+                        class="body"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="124"
+                        height="124"
+                        viewBox="0 0 124 124"
+                        fill="none"
+                    >
+                        <g filter="url(#filter0_d_1472_3234)">
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M113.5 37.3284C113.5 36.1056 113.5 34.8828 113.493 33.6599C113.487 32.6298 113.475 31.5999 113.447 30.5703C113.386 28.3262 113.254 26.0628 112.855 23.8437C112.45 21.5926 111.789 19.4974 110.748 17.4521C109.724 15.4417 108.386 13.6021 106.79 12.0072C105.194 10.4124 103.354 9.07561 101.343 8.05224C99.2957 7.01037 97.1984 6.34962 94.9447 5.945C92.7254 5.5465 90.4614 5.41437 88.2173 5.35375C87.1869 5.32587 86.1566 5.31412 85.1259 5.30775C83.9025 5.30025 82.679 5.30087 81.4555 5.30087L67.2496 5.25H56.6247L42.6701 5.30087C41.4443 5.30087 40.2184 5.30025 38.9925 5.30775C37.9598 5.31412 36.9276 5.32587 35.8952 5.35375C33.6458 5.41437 31.3767 5.54662 29.1521 5.94562C26.8955 6.35012 24.795 7.01062 22.7448 8.05174C20.7294 9.07524 18.8853 10.4121 17.2863 12.0072C15.6876 13.602 14.3475 15.4412 13.3216 17.4512C12.2771 19.4976 11.6149 21.5939 11.2091 23.8463C10.8096 26.0645 10.6772 28.3272 10.6164 30.5703C10.5886 31.6 10.5766 32.6299 10.5704 33.6599C10.5629 34.8829 10.5 36.402 10.5 37.6249L10.5004 51.3861L10.5 62.1248L10.5635 76.1784C10.5635 77.4029 10.563 78.6274 10.5704 79.8519C10.5766 80.8833 10.5886 81.9146 10.6165 82.9457C10.6772 85.1927 10.8099 87.4593 11.2097 89.6814C11.6154 91.9356 12.2775 94.0337 13.3211 96.0817C14.3471 98.0949 15.6875 99.9369 17.2863 101.534C18.8852 103.131 20.7288 104.47 22.7438 105.495C24.7953 106.538 26.8968 107.199 29.1547 107.604C31.3783 108.004 33.6467 108.136 35.8952 108.197C36.9276 108.224 37.9599 108.236 38.9927 108.243C40.2185 108.25 41.4443 108.25 42.6701 108.25L56.7508 108.25H67.4021L81.4555 108.249C82.679 108.249 83.9025 108.25 85.1259 108.243C86.1566 108.236 87.1869 108.224 88.2173 108.197C90.4623 108.136 92.727 108.003 94.9474 107.604C97.1996 107.199 99.296 106.538 101.342 105.495C103.354 104.47 105.194 103.131 106.79 101.534C108.386 99.9372 109.723 98.0954 110.747 96.0825C111.79 94.0335 112.45 91.9344 112.855 89.6788C113.254 87.4576 113.386 85.1918 113.447 82.9457C113.475 81.9145 113.487 80.8832 113.493 79.8519C113.501 78.6274 113.5 77.4029 113.5 76.1784C113.5 76.1784 113.499 62.3729 113.499 62.1248V51.3748C113.499 51.1916 113.5 37.3284 113.5 37.3284"
+                                fill="url(#paint0_linear_1472_3234)"
+                                shape-rendering="crispEdges"></path>
+                        </g>
+                        <mask
+                            id="mask0_1472_3234"
+                            style="mask-type:luminance"
+                            maskUnits="userSpaceOnUse"
+                            x="10"
+                            y="5"
+                            width="104"
+                            height="104"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M113.5 37.3284C113.5 36.1056 113.5 34.8828 113.493 33.6599C113.487 32.6298 113.475 31.5999 113.447 30.5703C113.386 28.3262 113.254 26.0628 112.855 23.8437C112.45 21.5926 111.789 19.4974 110.748 17.4521C109.724 15.4417 108.386 13.6021 106.79 12.0072C105.194 10.4124 103.354 9.07561 101.343 8.05224C99.2957 7.01037 97.1984 6.34962 94.9447 5.945C92.7254 5.5465 90.4614 5.41437 88.2173 5.35375C87.1869 5.32587 86.1566 5.31412 85.1259 5.30775C83.9025 5.30025 82.679 5.30087 81.4555 5.30087L67.2496 5.25H56.6247L42.6701 5.30087C41.4443 5.30087 40.2184 5.30025 38.9925 5.30775C37.9598 5.31412 36.9276 5.32587 35.8952 5.35375C33.6458 5.41437 31.3767 5.54662 29.1521 5.94562C26.8955 6.35012 24.795 7.01062 22.7448 8.05174C20.7294 9.07524 18.8853 10.4121 17.2863 12.0072C15.6876 13.602 14.3475 15.4412 13.3216 17.4512C12.2771 19.4976 11.6149 21.5939 11.2091 23.8463C10.8096 26.0645 10.6772 28.3272 10.6164 30.5703C10.5886 31.6 10.5766 32.6299 10.5704 33.6599C10.5629 34.8829 10.5 36.402 10.5 37.6249L10.5004 51.3861L10.5 62.1248L10.5635 76.1784C10.5635 77.4029 10.563 78.6274 10.5704 79.8519C10.5766 80.8833 10.5886 81.9146 10.6165 82.9457C10.6772 85.1927 10.8099 87.4593 11.2097 89.6814C11.6154 91.9356 12.2775 94.0337 13.3211 96.0817C14.3471 98.0949 15.6875 99.9369 17.2863 101.534C18.8852 103.131 20.7288 104.47 22.7438 105.495C24.7953 106.538 26.8968 107.199 29.1547 107.604C31.3783 108.004 33.6467 108.136 35.8952 108.197C36.9276 108.224 37.9599 108.236 38.9927 108.243C40.2185 108.25 41.4443 108.25 42.6701 108.25L56.7508 108.25H67.4021L81.4555 108.249C82.679 108.249 83.9025 108.25 85.1259 108.243C86.1566 108.236 87.1869 108.224 88.2173 108.197C90.4623 108.136 92.727 108.003 94.9474 107.604C97.1996 107.199 99.296 106.538 101.342 105.495C103.354 104.47 105.194 103.131 106.79 101.534C108.386 99.9372 109.723 98.0954 110.747 96.0825C111.79 94.0335 112.45 91.9344 112.855 89.6788C113.254 87.4576 113.386 85.1918 113.447 82.9457C113.475 81.9145 113.487 80.8832 113.493 79.8519C113.501 78.6274 113.5 77.4029 113.5 76.1784C113.5 76.1784 113.499 62.3729 113.499 62.1248V51.3748C113.499 51.1916 113.5 37.3284 113.5 37.3284"
+                                fill="white"></path>
+                        </mask>
+                        <g mask="url(#mask0_1472_3234)"> </g>
+                        <defs>
+                            <filter
+                                id="filter0_d_1472_3234"
+                                x="0.5"
+                                y="0.25"
+                                width="123"
+                                height="123"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                            >
+                                <feFlood
+                                    flood-opacity="0"
+                                    result="BackgroundImageFix"></feFlood>
+                                <feColorMatrix
+                                    in="SourceAlpha"
+                                    type="matrix"
+                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                    result="hardAlpha"></feColorMatrix>
+                                <feOffset dy="5"></feOffset>
+                                <feGaussianBlur stdDeviation="5"
+                                ></feGaussianBlur>
+                                <feComposite in2="hardAlpha" operator="out"
+                                ></feComposite>
+                                <feColorMatrix
+                                    type="matrix"
+                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
+                                ></feColorMatrix>
+                                <feBlend
+                                    mode="normal"
+                                    in2="BackgroundImageFix"
+                                    result="effect1_dropShadow_1472_3234"
+                                ></feBlend>
+                                <feBlend
+                                    mode="normal"
+                                    in="SourceGraphic"
+                                    in2="effect1_dropShadow_1472_3234"
+                                    result="shape"></feBlend>
+                            </filter>
+                            <linearGradient
+                                id="paint0_linear_1472_3234"
+                                x1="-24.6426"
+                                y1="5.25"
+                                x2="-24.6426"
+                                y2="178.535"
+                                gradientUnits="userSpaceOnUse"
+                            >
+                                <stop stop-color="white" stop-opacity="0.1"
+                                ></stop>
+                                <stop
+                                    offset="0.489516"
+                                    stop-color="#EFEFEF"
+                                    stop-opacity="0.1"></stop>
+                                <stop
+                                    offset="1"
+                                    stop-color="#C0C0C0"
+                                    stop-opacity="0.1"></stop>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <Logo />
+                </div>
+                <h2 class="info-header">Ready to level up?</h2>
+            </div>
+            <div class="action">
+                <Button
+                    client:visible
+                    href="/download"
+                    class="cta-button fancy"
+                >
                     Download
                     <Icon name="download" />
                 </Button>
-                <Button href="/redirect/github" class="cta-button secondary">
-                    View on GitHub
-                    <Icon name="mark-github" />
-                </Button>
+                <div class="requirements">Requires macOS 10.14 or later</div>
             </div>
-        </h2>
-        <Footer client:visible />
+        </div>
+        <Footer client:visible embed />
     </main>
 </Layout>

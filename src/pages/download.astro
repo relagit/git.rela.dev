@@ -14,20 +14,20 @@ import "~/layouts/subpage.scss";
     let url = "";
     let os = "";
 
-    if (
-        userAgent.includes("iPhone") ||
-        userAgent.includes("iPad") ||
-        userAgent.includes("android")
-    ) {
-        os = "mobile";
+    if (userAgent.toLowerCase().includes("win")) {
+        os = "windows";
+    } else if (userAgent.toLowerCase().includes("mac")) {
+        os = "mac";
+    } else if (userAgent.toLowerCase().includes("linux")) {
+        os = "linux";
     }
 
-    if (userAgent.includes("win")) {
-        os = "windows";
-    } else if (userAgent.includes("mac")) {
-        os = "mac";
-    } else if (userAgent.includes("linux")) {
-        os = "linux";
+    if (
+        userAgent.toLowerCase().includes("iphone") ||
+        userAgent.toLowerCase().includes("ipad") ||
+        userAgent.toLowerCase().includes("android")
+    ) {
+        os = "mobile";
     }
 
     // https://stackoverflow.com/questions/65146751/detecting-apple-silicon-mac-in-javascript

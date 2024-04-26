@@ -11,6 +11,16 @@
         rgba(255, 255, 255, 0) 100%
     );
 
+    &.embed {
+        border-top: none;
+        background: radial-gradient(
+            140.1% 165.91% at 50% 165.91%,
+            rgba(166, 137, 217, 0.1) 50%,
+            rgba(255, 255, 255, 0) 100%
+        );
+        padding-top: 0 !important;
+    }
+
     @media screen and (max-width: 1200px) {
         padding-inline: 120px;
     }
