@@ -59,6 +59,12 @@ _:future,
         }
     }
 
+    &.nobg {
+        background: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
     top: 0;
     left: 0;
     padding: 24px 120px;

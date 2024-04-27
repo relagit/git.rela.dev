@@ -5,12 +5,15 @@ import "./header.scss";
 
 interface Props {
     embed?: boolean;
+    nobg?: boolean;
 }
 
 const props = Astro.props;
 ---
 
-<header class={`header ${props.embed ? "embed" : ""}`}>
+<header
+    class={`header ${props.embed ? "embed" : ""} ${props.nobg ? "nobg" : ""}`}
+>
     <div class="header__group">
         <a aria-label="Home" href="/" class="header__group__link">
             <svg

@@ -269,10 +269,8 @@ const version = await getReleases();
                             offset="0.00311407"
                             stop-color="#A689D9"
                             stop-opacity="0.1"></stop>
-                        <stop
-                            offset="0.446786"
-                            stop-color="white"
-                            stop-opacity="0"></stop>
+                        <stop offset="0.27" stop-color="white" stop-opacity="0"
+                        ></stop>
                     </linearGradient>
                     <linearGradient
                         id="paint1_linear_1483_3246"
@@ -421,7 +419,6 @@ const version = await getReleases();
                     src="/assets/landing/popout.webp"
                     alt="A native popout window is open above a code editor. The popout shows modified files and commit history."
                 />
-
                 <svg
                     class="blur"
                     viewBox="0 0 1352 339"
@@ -721,7 +718,11 @@ export default new Workflow({
                 </defs>
             </svg>
             <div class="info">
-                <div class="app-icon">
+                <div
+                    class="app-icon"
+                    aria-label="RelaGit application icon"
+                    aria-hidden="true"
+                >
                     <svg
                         class="body"
                         xmlns="http://www.w3.org/2000/svg"
