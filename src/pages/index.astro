@@ -387,36 +387,12 @@ const version = await getReleases();
                 </svg>
             </div>
             <div class="feature-grid-item">
-                <div
+                <img
+                    loading="lazy"
+                    src="/assets/landing/open.webp"
                     class="feature-grid-item-graphic open"
                     aria-label="Chat messages between two contributors to RelaGit discussing naming of a label."
-                >
-                    <div class="message">
-                        Can we make the label more specific here?
-                    </div>
-                    <div class="message you">
-                        I agree, we're trying to be more open about the git
-                        terminology.
-                    </div>
-                    <div class="message">
-                        I would suggest “fetch” instead of “update”.
-                    </div>
-                    <div class="message you">Sounds good 👍</div>
-                    <div class="inputbar">
-                        <div class="inputbutton">
-                            <Icon name="plus" />
-                        </div>
-                        <input
-                            class="inputtext"
-                            type="text"
-                            placeholder="Type a message..."
-                            onkeydown="if (event.key === 'Enter') { event.target.value = '' }"
-                        />
-                        <div class="inputbutton blue">
-                            <Icon name="arrow-up" />
-                        </div>
-                    </div>
-                </div>
+                />
                 <div class="feature-grid-item-text">
                     <div class="feature-grid-item-text-label">
                         Community fueled
