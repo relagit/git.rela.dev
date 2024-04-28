@@ -178,6 +178,27 @@ const next = () => {
             heading.classList.add("active");
         }
     });
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                const id = entry.target.getAttribute("id");
+                if (entry.isIntersecting) {
+                    document
+                        .querySelector(`.heading.active`)
+                        ?.classList.remove("active");
+                    document
+                        .querySelector(`.heading[data-slug="${id}"]`)
+                        ?.classList.add("active");
+                }
+            });
+        },
+        { rootMargin: "0% 0% -60% 0%" },
+    );
+
+    document.querySelectorAll("h2, h3, h4, h5, h6").forEach((heading) => {
+        observer.observe(heading);
+    });
 </script>
 
 <Layout title={`RelaGit - ${entry.data.title}`} transitions>
