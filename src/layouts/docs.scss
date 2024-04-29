@@ -40,6 +40,14 @@
     --shiki-token-constant-other-reference-link: #a5d6ff;
 }
 
+.markdown-body .navigation {
+    border-radius: 4px;
+    background: rgb(255 255 255 / 10%);
+    color: rgb(255 255 255 / 50%);
+    padding: 2px 8px;
+    display: inline-block;
+}
+
 @keyframes skeletonBg {
     0%,
     100% {
@@ -80,6 +88,29 @@
     padding: 2rem 0 6rem 4rem;
     scroll-behavior: smooth;
     overflow-y: auto;
+    overscroll-behavior: contain;
+
+    &.right {
+        right: 0;
+        left: auto;
+        top: 4rem;
+        height: fit-content;
+
+        @media screen and (max-width: 1500px) {
+            display: none;
+        }
+    }
+
+    &.left {
+        .docs-sidebar-headings,
+        .docs-sidebar-headings + .separator {
+            display: none;
+
+            @media screen and (max-width: 1500px) {
+                display: flex;
+            }
+        }
+    }
 
     &-headings {
         display: flex;
@@ -176,6 +207,33 @@
 
         svg {
             transition: 0.2s ease-out;
+        }
+
+        &:hover {
+            .toggle {
+                color: var(--color-primary);
+            }
+        }
+
+        &[data-name="Api"] {
+            text-transform: uppercase;
+        }
+
+        .toggle {
+            background: none;
+            border: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--color-secondary, rgba(255, 255, 255, 0.55));
+
+            &.expanded {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
         }
 
         &:first-child,
@@ -363,6 +421,89 @@
                     border-left: none;
                 }
             }
+        }
+    }
+}
+
+.pagefind-ui {
+    --pagefind-ui-scale: 0.8;
+    --pagefind-ui-primary: #393939;
+    --pagefind-ui-text: var(--color-primary);
+    --pagefind-ui-background: #111112;
+    --pagefind-ui-border: rgb(255 255 255 / 10%);
+    --pagefind-ui-tag: var(--color-blue-400);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 4px;
+    --pagefind-ui-image-border-radius: 8px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: var(--font-body);
+
+    mark {
+        background: color-mix(
+            in srgb,
+            var(--color-blue-400) 50%,
+            transparent 50%
+        );
+        color: var(--color-primary);
+    }
+
+    &__form::before {
+        top: 10px !important;
+        background-color: var(--color-secondary) !important;
+    }
+
+    &__search-input {
+        padding: 8px 16px 8px 44px !important;
+        height: 32px !important;
+        font-weight: 400 !important;
+        font-size: 14px !important;
+    }
+
+    &__search-clear {
+        height: 28px !important;
+    }
+
+    &__drawer {
+        position: absolute;
+        right: 0;
+        background: var(--pagefind-ui-background);
+        padding: 16px;
+        max-height: 600px !important;
+        overflow: auto !important;
+        border: 1px solid var(--pagefind-ui-border) !important;
+        translate: 0 6px;
+    }
+
+    &__results-area {
+        margin-top: 0 !important;
+    }
+
+    &__message {
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        color: var(--color-secondary) !important;
+        padding-block: 8px 16px !important;
+    }
+
+    &__result {
+        padding-block: 16px !important;
+
+        &-title {
+            font-weight: 500 !important;
+            font-size: 16px !important;
+            color: var(--color-primary) !important;
+        }
+
+        &-tags {
+            gap: 4px !important;
+        }
+
+        &-tag {
+            background: none !important;
+            color: var(--color-secondary) !important;
+            font-size: 12px !important;
+            font-weight: 400 !important;
+            padding: 0 !important;
         }
     }
 }

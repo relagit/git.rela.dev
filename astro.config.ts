@@ -12,6 +12,9 @@ import vercel from "@astrojs/vercel/serverless";
 import mdx from "@astrojs/mdx";
 import solidJs from "@astrojs/solid-js";
 import auth from "auth-astro";
+import { fileURLToPath } from "url";
+import { dirname, relative } from "path";
+import { spawn } from "child_process";
 let filename = "";
 let code = "";
 

@@ -1,0 +1,8 @@
+---
+title: "Native Methods"
+date: "4/29/2024"
+description: "Learn how to interact with native modules and methods in a workflow."
+sortOrder: 0
+---
+
+A RelaGit workflow normally runs in a sandboxed environment in electron's [renderer process](https://www.electronjs.org/docs/latest/tutorial/quick-start#renderer-process). This means that you can't use node modules like `fs` or `path` in your workflow.

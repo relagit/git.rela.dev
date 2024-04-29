@@ -1,11 +1,10 @@
 ---
+import "@pagefind/default-ui/css/ui.css";
 import { getCollection, getEntry } from "astro:content";
 
 import Layout from "./Layout.astro";
 import Header from "~/components/Header.astro";
-import RecursiveDocsMap, {
-    type DocsMap,
-} from "~/components/RecursiveDocsMap.astro";
+import RecursiveDocsMap, { type DocsMap } from "~/components/RecursiveDocsMap";
 import DefaultHead from "~/layouts/DefaultHead.astro";
 import Icon from "~/components/Icon";
 
@@ -31,7 +30,7 @@ import "./docs.scss";
 
 const time = readTime(entry.body.split(" ").length / 125);
 
-const docsMap: DocsMap = [];
+let docsMap: DocsMap = [];
 
 for (const doc of allDocs) {
     const parts = doc.slug.split("/");
@@ -65,13 +64,48 @@ for (const doc of allDocs) {
             current = newFolder.items;
         }
 
-        current.push({
-            type: "doc",
-            slug: doc.slug,
-            data: doc.data,
-        });
+        if (part === parts[parts.length - 1])
+            current.push({
+                type: "doc",
+                slug: doc.slug,
+                data: doc.data,
+            });
     }
 }
+
+const sort = (level: DocsMap) => {
+    return level.sort((a, b) => {
+        if (a.type === "folder" && b.type === "doc") {
+            return -1;
+        }
+
+        if (a.type === "doc" && b.type === "folder") {
+            return 1;
+        }
+
+        if (a.type === "folder" && b.type === "folder") {
+            return a.name.localeCompare(b.name);
+        }
+
+        if (a.type === "doc" && b.type === "doc") {
+            return a.data.sortOrder - b.data.sortOrder;
+        }
+
+        return 0;
+    });
+};
+
+const recurse = (level: DocsMap): DocsMap => {
+    for (const item of level) {
+        if (item.type === "folder") {
+            item.items = sort(recurse(item.items));
+        }
+    }
+
+    return level;
+};
+
+docsMap = sort(recurse(docsMap));
 
 const flat: {
     type: "doc";
@@ -121,12 +155,14 @@ const next = () => {
 ---
 
 <script>
-    const heading = document.querySelector(
+    const headings = document.querySelectorAll(
         `.heading[data-slug="${window.location.hash.slice(1)}"]`,
     );
 
-    if (heading) {
-        heading.classList.add("active");
+    if (headings?.length) {
+        for (const heading of headings) {
+            heading.classList.add("active");
+        }
     }
 
     window.addEventListener("click", (e) => {
@@ -164,18 +200,22 @@ const next = () => {
     });
 
     window.addEventListener("hashchange", () => {
-        const active = document.querySelector(".heading.active");
+        const active = document.querySelectorAll(".heading.active");
 
-        if (active) {
-            active.classList.remove("active");
+        if (active?.length) {
+            for (const heading of active) {
+                heading.classList.remove("active");
+            }
         }
 
-        const heading = document.querySelector(
+        const headings = document.querySelectorAll(
             `.heading[data-slug="${window.location.hash.slice(1)}"]`,
         );
 
-        if (heading) {
-            heading.classList.add("active");
+        if (headings?.length) {
+            for (const heading of headings) {
+                heading.classList.add("active");
+            }
         }
     });
 
@@ -185,11 +225,15 @@ const next = () => {
                 const id = entry.target.getAttribute("id");
                 if (entry.isIntersecting) {
                     document
-                        .querySelector(`.heading.active`)
-                        ?.classList.remove("active");
+                        .querySelectorAll(`.heading.active`)
+                        ?.forEach((heading) => {
+                            heading.classList.remove("active");
+                        });
                     document
-                        .querySelector(`.heading[data-slug="${id}"]`)
-                        ?.classList.add("active");
+                        .querySelectorAll(`.heading[data-slug="${id}"]`)
+                        ?.forEach((heading) => {
+                            heading.classList.add("active");
+                        });
                 }
             });
         },
@@ -208,9 +252,37 @@ const next = () => {
         <meta name="twitter:description" content={entry.data.description} />
         <link rel="canonical" href={`https://rela.dev/docs/${post}`} />
     </DefaultHead>
-    <Header embed />
+    <Header embed>
+        <div slot="search">
+            <div id="search"></div>
+            <script>
+                window.addEventListener("keydown", (e) => {
+                    if (e.key === "/") {
+                        e.preventDefault();
+
+                        (
+                            document.querySelector(
+                                "#search input",
+                            ) as HTMLInputElement
+                        )?.focus();
+                    }
+                });
+
+                // @ts-ignore
+                const { PagefindUI } = await import("@pagefind/default-ui");
+
+                new PagefindUI({
+                    element: "#search",
+                    showSubResults: true,
+                    translations: {
+                        placeholder: "Type / to Search",
+                    },
+                });
+            </script>
+        </div>
+    </Header>
     <div class="docs-container">
-        <div class="docs-sidebar">
+        <div class="docs-sidebar left">
             {
                 headings.length ? (
                     <>
@@ -233,7 +305,12 @@ const next = () => {
                     </>
                 ) : null
             }
-            <RecursiveDocsMap docsMap={docsMap} slug={post} />
+            <RecursiveDocsMap
+                docsMap={docsMap}
+                slug={post}
+                level={0}
+                client:visible
+            />
         </div>
         <div class="docs-content">
             <h1 class="docs-content-title">
@@ -284,6 +361,29 @@ const next = () => {
                     </a>
                 </div>
             </div>
+        </div>
+        <div class="docs-sidebar right">
+            {
+                headings.length ? (
+                    <>
+                        <div class="docs-sidebar-headings">
+                            <h2>On this page</h2>
+                            <ul>
+                                {headings.map((heading) => (
+                                    <li
+                                        class={`heading l${heading.depth}`}
+                                        data-slug={heading.slug}
+                                    >
+                                        <a href={`#${heading.slug}`}>
+                                            {heading.text}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </>
+                ) : null
+            }
         </div>
     </div>
 </Layout>

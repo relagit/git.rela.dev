@@ -12,6 +12,7 @@ const docsSchema = z.object({
     title: z.string(),
     date: z.string(),
     description: z.string(),
+    sortOrder: z.number(),
 });
 
 const blog = defineCollection({
@@ -29,5 +30,5 @@ export const collections = {
     docs,
 };
 
-export type DocsSchema = z.infer<typeof blogSchema>;
+export type DocsSchema = z.infer<typeof docsSchema>;
 export type BlogSchema = z.infer<typeof blogSchema>;

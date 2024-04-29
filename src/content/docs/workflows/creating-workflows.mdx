@@ -2,6 +2,7 @@
 title: "Creating Workflows"
 date: "1/25/2024"
 description: "How to create workflows."
+sortOrder: 1
 ---
 
 Workflows can be written in TypeScript or JavaScript. They are stored in the `~/.relagit/workflows` directory.
@@ -46,8 +47,6 @@ export default defineConfig();
 ```
 
 Now, time to get onto the workflow itself.
-
----
 
 ### Creating a basic workflow
 
@@ -175,4 +174,4 @@ This will create a `dist` folder with our workflow inside of it. But there's one
 
 You'll need to add the filepath to your project's folder to `external.json` as described in the [Installing Workflows](/docs/workflows/installing-workflows#installing-from-the-filesystem) section.
 
-At last, open up RelaGit and check to see your workflow in Settings > Workflows. If it's there, you're good to go!
+At last, open up RelaGit and check to see your workflow in <span class="navigation">Settings > Workflows</span>. If it's there, you're good to go!

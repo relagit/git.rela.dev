@@ -229,17 +229,23 @@
     }
 
     .markdown-alert {
-        padding: 0 1.25em;
+        padding: 1.25em 1.5em;
         margin-bottom: 16px;
         display: flex;
         flex-direction: column;
         gap: 4px;
         position: relative;
+        background: color-mix(
+            in srgb,
+            var(--color, --color-blue-400) 20%,
+            transparent
+        );
+        border-radius: 4px;
 
         &::before {
             content: "";
             width: 0.25em;
-            border-radius: 10px;
+            border-radius: 4px 0 0 4px;
             height: 100%;
             position: absolute;
             top: 0;
@@ -255,6 +261,7 @@
             gap: 8px;
             font-weight: 500 !important;
         }
+
         &-tip {
             --color: var(--color-green-400);
         }
