@@ -30,6 +30,17 @@ export default defineConfig({
         syntaxHighlight: false,
     },
     integrations: [
+        {
+            name: "pagefind",
+            hooks: {
+                "astro:build:done": () => {
+                    spawn("pnpm", ["run", "postbuild"], {
+                        cwd: dirname(fileURLToPath(import.meta.url)),
+                        stdio: "inherit",
+                    });
+                },
+            },
+        },
         mdx({
             rehypePlugins: [
                 // @ts-expect-error - version mismatch
