@@ -1,7 +1,7 @@
 .tag {
     padding: 4px 6px;
-    background: #3b82f72a;
-    color: #3b82f7;
+    background: color-mix(in srgb, var(--color-blue-500) 20%, transparent);
+    color: var(--color-blue-500-alt);
     border-radius: 4px;
     font-size: 10px;
     margin-left: 4px;

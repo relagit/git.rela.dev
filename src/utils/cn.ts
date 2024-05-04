@@ -1,4 +1,12 @@
-export default (...classes: (string | number | boolean | undefined | Record<string, boolean | string | undefined>)[]): string => {
+export default (
+    ...classes: (
+        | string
+        | number
+        | boolean
+        | undefined
+        | Record<string, boolean | string | undefined>
+    )[]
+): string => {
     return classes
         .map((c) => {
             if (typeof c === "string" || typeof c === "number") {
