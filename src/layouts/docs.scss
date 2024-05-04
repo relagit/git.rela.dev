@@ -48,6 +48,32 @@
     display: inline-block;
 }
 
+.markdown-body .specimen {
+    background: rgb(255 255 255);
+    border-radius: 4px;
+    padding: 16px;
+    margin: 16px 0;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 400;
+
+    &.sf-pro {
+        font-family: "SF Pro";
+    }
+
+    &.sf-mono {
+        font-family: "SF Mono";
+    }
+
+    &.inter {
+        font-family: "Inter";
+    }
+
+    &.ibm-plex-mono {
+        font-family: "IBM Plex Mono";
+    }
+}
+
 @keyframes skeletonBg {
     0%,
     100% {
@@ -141,6 +167,10 @@
 
                 &.l3 {
                     padding-inline-start: 16px;
+                }
+
+                &.l4 {
+                    padding-inline-start: 24px;
                 }
 
                 a {
@@ -273,12 +303,16 @@
         }
 
         &:hover {
-            color: var(--color-blue-400);
+            color: var(--color-blue-500-alt);
         }
 
         &.active {
-            color: var(--color-blue-400);
-            background: rgb(255 255 255 / 8%);
+            color: var(--color-blue-500-alt);
+            background: color-mix(
+                in srgb,
+                var(--color-blue-500) 20%,
+                transparent
+            );
         }
     }
 
@@ -369,8 +403,16 @@
         gap: 16px;
     }
 
+    .separator {
+        height: 1px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 32px 0;
+        flex-shrink: 0;
+    }
+
     .byline {
-        color: rgba(255, 255, 245, 0.86);
+        color: var(--color-secondary-vibrant);
         display: flex;
         align-items: center;
         gap: 8px;

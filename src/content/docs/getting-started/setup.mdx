@@ -18,16 +18,16 @@ git --version
 
 If you want to use an editor integration, you must also have the editor in question installed and it's respective cli tool in your `PATH`. For example, if you want to use the VSCode integration, you must have [VSCode](https://code.visualstudio.com) installed and the `code` command in your `PATH`.
 
- You can check if you have the command in your `PATH` by running the below command(s). If you do not have the command in your `PATH`, you can add it by following the instructions [here](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line).
+You can check if you have the command in your `PATH` by running the below command(s) and replacing `<editor>` with either `code | code-insiders | atom | subl | codium | fleet | zed`. If you do not have the command in your `PATH`, you can add it by following the instructions given by the editor's documentation.
 
 ```bash
 // [!filename Check if code is in PATH]
-which code # Linux / macOS
-where code # Windows
+which <editor> # Linux / macOS
+where <editor> # Windows
 ```
 
 ## Committer
 
-RelaGit comes with an option to credit [RelaGit client](https://github.com/relagit-client) as the committer (not author!) of your commits. This helps *us* to get more visibility and doesn't impact your git history. 
+RelaGit comes with an option to credit [RelaGit client](https://github.com/relagit-client) as the committer (not author!) of your commits. This helps _us_ to get more visibility and doesn't impact your git history.
 
-If you want to enable this feature, you can head over to settings in RelaGit (`CmdOrCtrl + ,`) and enable the `Annotate Commits` option under the `Commits` tab.
+If you want to enable this feature, you can head over to settings <kbd>⌘,</kbd> in RelaGit and enable the `Annotate Commits` option under the `Commits` tab.

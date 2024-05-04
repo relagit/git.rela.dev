@@ -155,8 +155,10 @@ const next = () => {
 ---
 
 <script>
-    const headings = document.querySelectorAll(
-        `.heading[data-slug="${window.location.hash.slice(1)}"]`,
+    const headings = Array.from(
+        document.querySelectorAll(
+            `.heading[data-slug="${window.location.hash.slice(1)}"]`,
+        ),
     );
 
     if (headings?.length) {
@@ -200,7 +202,7 @@ const next = () => {
     });
 
     window.addEventListener("hashchange", () => {
-        const active = document.querySelectorAll(".heading.active");
+        const active = Array.from(document.querySelectorAll(".heading.active"));
 
         if (active?.length) {
             for (const heading of active) {
@@ -208,8 +210,10 @@ const next = () => {
             }
         }
 
-        const headings = document.querySelectorAll(
-            `.heading[data-slug="${window.location.hash.slice(1)}"]`,
+        const headings = Array.from(
+            document.querySelectorAll(
+                `.heading[data-slug="${window.location.hash.slice(1)}"]`,
+            ),
         );
 
         if (headings?.length) {
@@ -326,6 +330,7 @@ const next = () => {
             <div class="markdown-body">
                 <Content />
             </div>
+            <div class="separator"></div>
             <div class="byline">
                 <span>Updated on {entry.data.date}</span>
                 <a
