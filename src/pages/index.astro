@@ -74,8 +74,8 @@ const version = await getReleases();
         }
     }
 
-    const children = document.querySelectorAll(
-        "main.index > *, .feature-grid-item",
+    const children = Array.from(
+        document.querySelectorAll("main.index > *, .feature-grid-item"),
     );
 
     const observer = new IntersectionObserver(
@@ -113,7 +113,7 @@ const version = await getReleases();
 
     <main class="index">
         <Header />
-        {
+        <!-- {
             version &&
                 new Date(version[0]?.published_at).getTime() >
                     Date.now() - 12096e5 && (
@@ -141,7 +141,7 @@ const version = await getReleases();
                         </div>
                     </>
                 )
-        }
+        } -->
         <h1 class="hero-text">
             <span class="hero-text-highlight"
                 >{"Streamline your Git workflow."}</span
