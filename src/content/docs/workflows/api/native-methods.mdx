@@ -6,3 +6,47 @@ sortOrder: 0
 ---
 
 A RelaGit workflow normally runs in a sandboxed environment in electron's [renderer process](https://www.electronjs.org/docs/latest/tutorial/quick-start#renderer-process). This means that you can't use node modules like `fs` or `path` in your workflow.
+
+## The `native` global
+
+Any methods or variables you export from your native module will be available in your main workflow script via the `native` global value.
+
+RelaGit automatically loads your native module when it runs your workflow, so you don't need to worry about importing it. Simply use `native.methodName` to call your method.
+
+```ts
+// [!filename index.ts]
+const native = {
+    someMethod: async () => {},
+};
+
+// ---cut-before---
+import { Workflow } from "relagit:actions";
+
+export default new Workflow({
+    name: "My Workflow",
+    description: "A workflow that does something.",
+    hooks: {
+        commit() {
+            native.someMethod(); // [!code highlight]
+        },
+    },
+});
+```
+
+## TypeScript support
+
+As we recommend using TypeScript for your workflows, you can also define the types for your native methods alongside the [official types in the `relagit` package](https://npmjs.com/package/relagit).
+
+```ts
+// [!filename native.d.ts]
+// @noErrors
+import * as _native from "src/native.ts";
+
+declare global {
+    const native: typeof _native;
+}
+```
+
+> [!TIP]
+>
+> There is another global value defined by RelaGit, `options`, but you will hear more about that in the [options](/docs/workflows/api/options) section.
