@@ -23,27 +23,29 @@ type NotificationProps = {
 };
 
 export const GET: APIRoute = () => {
-    const notification: Partial<NotificationProps> = {
-        title: "Survey",
-        description:
-            "Support the project by completing a short survey about how you use RelaGit.",
-        level: "info",
-        actions: [
-            {
-                href: "",
-                label: "Complete Survey",
-                children: "Complete Survey",
-                dismiss: true,
-                type: "brand",
-            },
-            {
-                label: "No Thanks",
-                children: "No Thanks",
-                dismiss: true,
-                type: "default",
-            },
-        ],
-    };
+    const notification: Partial<NotificationProps>[] = [
+        {
+            title: "Survey",
+            description:
+                "Support the project by completing a short survey about how you use RelaGit.",
+            level: "info",
+            actions: [
+                {
+                    href: "",
+                    label: "Complete Survey",
+                    children: "Complete Survey",
+                    dismiss: true,
+                    type: "brand",
+                },
+                {
+                    label: "No Thanks",
+                    children: "No Thanks",
+                    dismiss: true,
+                    type: "default",
+                },
+            ],
+        },
+    ];
 
     return new Response(JSON.stringify(notification), {
         headers: {
