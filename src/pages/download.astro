@@ -71,7 +71,9 @@ import "~/layouts/subpage.scss";
 
     if (url) window.location.href = url;
 
-    const osElements = document.querySelectorAll("[data-content-os]");
+    const osElements = Array.from(
+        document.querySelectorAll("[data-content-os]"),
+    );
 
     for (const osElement of osElements) {
         osElement.textContent =

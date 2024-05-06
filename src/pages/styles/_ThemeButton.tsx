@@ -23,8 +23,8 @@ export default (props: { theme: (typeof themes)[number] }) => {
 
                 document.documentElement.appendChild(style);
 
-                for (const button of document.querySelectorAll(
-                    ".styles-selector-item",
+                for (const button of Array.from(
+                    document.querySelectorAll(".styles-selector-item"),
                 )) {
                     button.classList.remove("selected");
                 }
