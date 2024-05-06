@@ -31,7 +31,7 @@ export const GET: APIRoute = () => {
             level: "info",
             actions: [
                 {
-                    href: "",
+                    href: "https://docs.google.com/forms/d/e/1FAIpQLSff4-RyF36UjZD74gmOap0OU5Bcr-l6kVT356XQMmX_ALVy2w/viewform?usp=sf_link",
                     label: "Complete Survey",
                     children: "Complete Survey",
                     dismiss: true,
