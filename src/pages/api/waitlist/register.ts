@@ -41,9 +41,10 @@ export const POST: APIRoute = async ({ request }) => {
     if (_error) {
         const error = _error as Error;
 
-        const knownError = error.message?.includes("waitlist_email_key")
-            ? "Email already registered"
-            : null;
+        const knownError =
+            error.message?.includes("waitlist_email_key") ?
+                "Email already registered"
+            :   null;
 
         return json({
             type: "error",

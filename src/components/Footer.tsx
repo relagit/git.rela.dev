@@ -340,11 +340,11 @@ export default (props: { embed?: boolean }) => {
                         classList={{ "status-dot": true, [status()]: true }}
                     ></div>
                     <div class="status-text">
-                        {status() === "operational"
-                            ? "All systems normal."
-                            : status() === "degraded"
-                              ? "Some systems degraded."
-                              : "One or more systems offline."}
+                        {status() === "operational" ?
+                            "All systems normal."
+                        : status() === "degraded" ?
+                            "Some systems degraded."
+                        :   "One or more systems offline."}
                         <Icon name="arrow-up-right" />
                     </div>
                 </a>

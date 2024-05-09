@@ -288,7 +288,7 @@ const next = () => {
     <div class="docs-container">
         <div class="docs-sidebar left">
             {
-                headings.length ? (
+                headings.length ?
                     <>
                         <div class="docs-sidebar-headings">
                             <h2>On this page</h2>
@@ -307,7 +307,7 @@ const next = () => {
                         </div>
                         <div class="separator" />
                     </>
-                ) : null
+                :   null
             }
             <RecursiveDocsMap
                 docsMap={docsMap}
@@ -369,7 +369,7 @@ const next = () => {
         </div>
         <div class="docs-sidebar right">
             {
-                headings.length ? (
+                headings.length ?
                     <>
                         <div class="docs-sidebar-headings">
                             <h2>On this page</h2>
@@ -387,7 +387,7 @@ const next = () => {
                             </ul>
                         </div>
                     </>
-                ) : null
+                :   null
             }
         </div>
     </div>

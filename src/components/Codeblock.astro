@@ -34,7 +34,7 @@ const code = highlighter.codeToHtml(props.code, {
             <div class="codeblock-header">
                 {props.filename && (
                     <div class="codeblock-filename">
-                        {props.language === "ts" ? (
+                        {props.language === "ts" ?
                             <svg
                                 aria-hidden="true"
                                 viewBox="0 0 15 16"
@@ -74,7 +74,7 @@ const code = highlighter.codeToHtml(props.code, {
                                     </clipPath>
                                 </defs>
                             </svg>
-                        ) : null}
+                        :   null}
 
                         {props.filename}
                     </div>

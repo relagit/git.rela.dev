@@ -26,9 +26,9 @@ export const relative = (ms: number, useSeconds = false) => {
         }
     }
 
-    return useSeconds
-        ? `${Math.abs(seconds)} second${Math.abs(seconds) > 1 ? "s" : ""}`
-        : "now";
+    return useSeconds ?
+            `${Math.abs(seconds)} second${Math.abs(seconds) > 1 ? "s" : ""}`
+        :   "now";
 };
 
 export const readTime = (mins: number) => {

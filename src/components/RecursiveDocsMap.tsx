@@ -17,31 +17,31 @@ const RecursiveDocsMap = (props: {
     level: number;
 }) => {
     const [levelExpanded, setLevelExpanded] = createSignal<string[]>(
-        props.level === 0
-            ? [
-                  ...props.docsMap
-                      .filter((d) => d.type === "folder")
-                      // @ts-ignore
-                      .map((d) => d.name),
-                  props.docsMap.find(
-                      (d) =>
-                          d.type === "folder" &&
-                          d.items.find(
-                              (d) => d.type === "doc" && d.slug === props.slug,
-                          ),
-                      // @ts-expect-error
-                  )?.name,
-              ]
-            : [
-                  props.docsMap.find(
-                      (d) =>
-                          d.type === "folder" &&
-                          d.items.find(
-                              (d) => d.type === "doc" && d.slug === props.slug,
-                          ),
-                      // @ts-expect-error
-                  )?.name,
-              ],
+        props.level === 0 ?
+            [
+                ...props.docsMap
+                    .filter((d) => d.type === "folder")
+                    // @ts-ignore
+                    .map((d) => d.name),
+                props.docsMap.find(
+                    (d) =>
+                        d.type === "folder" &&
+                        d.items.find(
+                            (d) => d.type === "doc" && d.slug === props.slug,
+                        ),
+                    // @ts-expect-error
+                )?.name,
+            ]
+        :   [
+                props.docsMap.find(
+                    (d) =>
+                        d.type === "folder" &&
+                        d.items.find(
+                            (d) => d.type === "doc" && d.slug === props.slug,
+                        ),
+                    // @ts-expect-error
+                )?.name,
+            ],
     );
 
     return (
@@ -56,11 +56,11 @@ const RecursiveDocsMap = (props: {
                                     data-name={d.name}
                                     onClick={() =>
                                         setLevelExpanded(
-                                            levelExpanded().includes(d.name)
-                                                ? levelExpanded().filter(
-                                                      (n) => n !== d.name,
-                                                  )
-                                                : [...levelExpanded(), d.name],
+                                            levelExpanded().includes(d.name) ?
+                                                levelExpanded().filter(
+                                                    (n) => n !== d.name,
+                                                )
+                                            :   [...levelExpanded(), d.name],
                                         )
                                     }
                                 >
@@ -68,14 +68,18 @@ const RecursiveDocsMap = (props: {
                                     <div
                                         onClick={() =>
                                             setLevelExpanded(
-                                                levelExpanded().includes(d.name)
-                                                    ? levelExpanded().filter(
-                                                          (n) => n !== d.name,
-                                                      )
-                                                    : [
-                                                          ...levelExpanded(),
-                                                          d.name,
-                                                      ],
+                                                (
+                                                    levelExpanded().includes(
+                                                        d.name,
+                                                    )
+                                                ) ?
+                                                    levelExpanded().filter(
+                                                        (n) => n !== d.name,
+                                                    )
+                                                :   [
+                                                        ...levelExpanded(),
+                                                        d.name,
+                                                    ],
                                             )
                                         }
                                         classList={{

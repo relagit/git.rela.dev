@@ -26,9 +26,9 @@ export default (props: LogoImageProps) => {
                 <a
                     class="btn"
                     href={
-                        props.dark && props.light
-                            ? props[theme()]
-                            : props.light || props.dark
+                        props.dark && props.light ?
+                            props[theme()]
+                        :   props.light || props.dark
                     }
                     download
                 >
@@ -48,9 +48,9 @@ export default (props: LogoImageProps) => {
             <img
                 loading="lazy"
                 src={
-                    props.dark && props.light
-                        ? props[theme()]
-                        : props.light || props.dark
+                    props.dark && props.light ?
+                        props[theme()]
+                    :   props.light || props.dark
                 }
                 alt={props.alt}
             />

@@ -77,17 +77,12 @@ import "~/layouts/subpage.scss";
 
     for (const osElement of osElements) {
         osElement.textContent =
-            os === "mac"
-                ? "macOS"
-                : os === "mac-arm"
-                  ? "macOS (Apple Silicon)"
-                  : os === "windows"
-                    ? "Windows"
-                    : os === "linux"
-                      ? "Linux"
-                      : os === "mobile"
-                        ? "Unavailable on mobile"
-                        : "Unknown";
+            os === "mac" ? "macOS"
+            : os === "mac-arm" ? "macOS (Apple Silicon)"
+            : os === "windows" ? "Windows"
+            : os === "linux" ? "Linux"
+            : os === "mobile" ? "Unavailable on mobile"
+            : "Unknown";
     }
 
     const linkElement = document.querySelector("[data-href-url]");
