@@ -21,6 +21,9 @@ let code = "";
 // https://astro.build/config
 export default defineConfig({
     output: "server",
+    experimental: {
+        rewriting: true,
+    },
     adapter: vercel({
         webAnalytics: {
             enabled: true,

@@ -1,49 +1,33 @@
-import {
-    GoogleGenerativeAI,
-    HarmBlockThreshold,
-    HarmCategory,
-} from "@google/generative-ai";
 import type { APIRoute } from "astro";
+
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { streamText } from "ai";
+
 import { json } from "../_shared";
 
-const genAI = new GoogleGenerativeAI(import.meta.env.GEMINI_API_KEY);
+const google = createGoogleGenerativeAI({
+    apiKey: import.meta.env.GEMINI_API_KEY,
+});
 
-const safetySettings = [
-    {
-        category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-        threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
-    },
-    {
-        category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-];
-
-const model = genAI.getGenerativeModel({ model: "gemini-pro", safetySettings });
+const model = google("models/gemini-pro");
 
 export const POST: APIRoute = async (request) => {
-    const raw = await request.request.text();
+    const raw = await request.request.json().catch(() => undefined);
 
     if (
         request.request.headers.get("Authorization") !==
         `Bearer ${import.meta.env.API_PASSWORD}`
     )
-        return json({ error: "Invalid API key" });
+        return json({ error: "Invalid API key" }, undefined, 401);
 
     let prompt: string;
 
-    try {
-        const body = JSON.parse(raw);
-        prompt = body.prompt;
-    } catch (e) {
-        return json({ error: "Invalid JSON" });
-    }
+    if (!raw) return json({ error: "Invalid JSON" }, undefined, 400);
 
-    if (!prompt?.trim()) return json({ error: "Prompt is required" });
+    prompt = raw.prompt;
+
+    if (!prompt?.trim())
+        return json({ error: "Prompt is required" }, undefined, 400);
 
     if (
         !prompt.toLowerCase().includes("commit") ||
@@ -53,28 +37,23 @@ export const POST: APIRoute = async (request) => {
     )
         return json({ error: "Invalid prompt" });
 
-    try {
-        const { totalTokens } = await model.countTokens(prompt);
+    const estimateTokens = prompt.split(" ").length * 1.4;
 
-        if (totalTokens > 10000) return json({ error: "Prompt is too long" });
-    } catch (e) {
-        return json(
-            {
-                error: "Could not fetch ai model",
-            },
-            undefined,
-            500,
-        );
-    }
+    if (estimateTokens > 10000)
+        return json({ error: "Prompt is too long" }, undefined, 400);
 
     try {
-        const result = await model.generateContentStream(prompt);
+        const result = await streamText({
+            model,
+            prompt,
+            maxRetries: 1,
+        });
 
         const stream = new ReadableStream({
             start(controller) {
                 (async () => {
-                    for await (const chunk of result.stream) {
-                        controller.enqueue(chunk.text());
+                    for await (const chunk of result.textStream) {
+                        controller.enqueue(chunk);
                     }
 
                     controller.close();
@@ -89,10 +68,10 @@ export const POST: APIRoute = async (request) => {
             },
         });
     } catch (e) {
-        return json({ error: (e as Error).message || e });
+        return json({ error: (e as Error).message || e }, undefined, 500);
     }
 };
 
-export const GET: APIRoute = async () => {
-    return json({ error: "Invalid method" });
+export const GET: APIRoute = async ({ rewrite }) => {
+    return rewrite("/404");
 };
