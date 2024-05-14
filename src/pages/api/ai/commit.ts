@@ -1,18 +1,32 @@
+import {
+    GoogleGenerativeAI,
+    HarmBlockThreshold,
+    HarmCategory,
+} from "@google/generative-ai";
 import type { APIRoute } from "astro";
-
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
-import { streamText } from "ai";
-
 import { json } from "../_shared";
 
-const google = createGoogleGenerativeAI({
-    apiKey: import.meta.env.GEMINI_API_KEY,
-});
+const genAI = new GoogleGenerativeAI(import.meta.env.GEMINI_API_KEY);
 
-const model = google("models/gemini-pro");
+const safetySettings = [
+    {
+        category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+        threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+    },
+    {
+        category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+];
+
+const model = genAI.getGenerativeModel({ model: "gemini-pro", safetySettings });
 
 export const POST: APIRoute = async (request) => {
-    const raw = await request.request.json().catch(() => undefined);
+    const raw = await request.request.text();
 
     if (
         request.request.headers.get("Authorization") !==
@@ -22,9 +36,12 @@ export const POST: APIRoute = async (request) => {
 
     let prompt: string;
 
-    if (!raw) return json({ error: "Invalid JSON" }, undefined, 400);
-
-    prompt = raw.prompt;
+    try {
+        const body = JSON.parse(raw);
+        prompt = body.prompt;
+    } catch (e) {
+        return json({ error: "Invalid JSON" }, undefined, 400);
+    }
 
     if (!prompt?.trim())
         return json({ error: "Prompt is required" }, undefined, 400);
@@ -37,23 +54,29 @@ export const POST: APIRoute = async (request) => {
     )
         return json({ error: "Invalid prompt" });
 
-    const estimateTokens = prompt.split(" ").length * 1.4;
+    try {
+        const { totalTokens } = await model.countTokens(prompt);
 
-    if (estimateTokens > 10000)
-        return json({ error: "Prompt is too long" }, undefined, 400);
+        if (totalTokens > 10000)
+            return json({ error: "Prompt is too long" }, undefined, 400);
+    } catch (e) {
+        return json(
+            {
+                error: "Could not fetch ai model",
+            },
+            undefined,
+            500,
+        );
+    }
 
     try {
-        const result = await streamText({
-            model,
-            prompt,
-            maxRetries: 1,
-        });
+        const result = await model.generateContentStream(prompt);
 
         const stream = new ReadableStream({
             start(controller) {
                 (async () => {
-                    for await (const chunk of result.textStream) {
-                        controller.enqueue(chunk);
+                    for await (const chunk of result.stream) {
+                        controller.enqueue(chunk.text());
                     }
 
                     controller.close();
