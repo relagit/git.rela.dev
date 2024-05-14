@@ -1,34 +1,22 @@
 ---
-import Layout from "~/layouts/Layout.astro";
-import DefaultHead from "~/layouts/DefaultHead.astro";
-import Header from "~/components/Header.astro";
-import Footer from "~/components/Footer";
-import Codeblock from "~/components/Codeblock.astro";
-import FakeApp from "~/pages/styles/_FakeApp";
-import ThemeButton from "~/pages/styles/_ThemeButton";
+import { Image } from "astro:assets";
 
-import Icon, { ProductHunt } from "~/components/Icon";
-import Button from "~/components/Button";
-import Logo from "~/components/Logo.astro";
+import popout from "~/images/popout.png";
+import clone from "~/images/clone.png";
+import ventura from "~/images/ventura-dark.png";
+import decorations from "~/images/hero-decorations.png";
+
+import DefaultHead from "~/layouts/DefaultHead.astro";
+import Layout from "~/layouts/Layout.astro";
+
+import Header from "~/components/Header.astro";
+import Badge from "~/components/Badge.astro";
+import Icon from "~/components/Icon";
+
 import { getReleases } from "~/pages/api/github/release";
-import { relative } from "~/utils/time";
-import themes from "~/pages/styles/_themes";
 
 import "./_index.scss";
 import "./styles/_app.scss";
-
-const upvoteCount = Number(
-    (
-        await (
-            await fetch("https://producthunt.com/products/relagit").catch(
-                (e) => {
-                    console.error("Failed to fetch ProductHunt upvote count");
-                    return new Response("<div ><b>300</b>followers</div>");
-                },
-            )
-        ).text()
-    ).match(/<b>(\d+)<\/b>followers</)?.[1],
-);
 
 const version = await getReleases();
 ---
@@ -73,759 +61,127 @@ const version = await getReleases();
                 break;
         }
     }
-
-    const children = Array.from(
-        document.querySelectorAll("main.index > *, .feature-grid-item"),
-    );
-
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("highlighted");
-                } else {
-                    entry.target.classList.remove("highlighted");
-                }
-            });
-        },
-        {
-            threshold: 0.65,
-        },
-    );
-
-    for (const child of children) {
-        observer.observe(child);
-    }
 </script>
 
 <Layout>
     <DefaultHead slot="head">
         <link rel="canonical" href="https://rela.dev/" />
         <link rel="preload" as="image" href="/assets/client/dark.webp" />
-        <link
-            rel="preload"
-            as="image"
-            href="/assets/landing/blur@0-75.webp"
-            imagesrcset="/assets/landing/blur@0-75.webp 600w, /assets/landing/blur.webp 1000w, /assets/landing/blur@2.webp 1600w"
-            imagesizes="140vw"
-        />
     </DefaultHead>
-
+    <Header />
     <main class="index">
-        <Header />
-        <!-- {
-            version &&
-                new Date(version[0]?.published_at).getTime() >
-                    Date.now() - 12096e5 && (
-                    <>
-                        <div class="hero-banner-confetti" />
-                        <div class="hero-banner">
-                            <div class="hero-banner-text">
-                                <p>
-                                    {version[0]?.tag_name}
-                                    published
-                                    {relative(
-                                        new Date(
-                                            version[0]?.published_at,
-                                        ).getTime(),
-                                    )}
-                                </p>
-                            </div>
-                            <a
-                                class="hero-banner-text"
-                                target="_blank"
-                                href={`https://github.com/relagit/relagit/releases/tag/${version[0]?.tag_name}`}
-                            >
-                                View on GitHub <Icon name="link-external" />
-                            </a>
-                        </div>
-                    </>
-                )
-        } -->
-        <h1 class="hero-text">
-            <span class="hero-text-highlight"
-                >{"Streamline your Git workflow."}</span
-            >
-            <br />
-            <span>{"Modern version control client for developers."}</span>
-            <div class="hero-text-badges">
-                <a
-                    class="hero-text-badges-badge highlight hide-small"
-                    href="/download"
-                >
-                    <div class="hero-text-badges-badge-text">Download</div>
-                    <div class="hero-text-badges-badge-icon">
-                        <Icon name="download" />
-                    </div>
-                </a>
-                <a
-                    class="hero-text-badges-badge"
-                    href="/redirect/github"
-                    target="_blank"
-                >
-                    <div class="hero-text-badges-badge-text">Open Source</div>
-                    <div class="hero-text-badges-badge-icon">
-                        <Icon name="mark-github" />
-                    </div>
-                </a>
-            </div>
-        </h1>
-        <div
-            class="window-container"
-            aria-label="Image of RelaGit in the diff view, multple added lines and files."
-        >
-            <div class="window"></div>
-            <img
+        <div class="hero">
+            <!-- null alt on purpose -->
+            <Image
+                loading="eager"
+                src={decorations}
+                alt=""
                 aria-hidden="true"
-                src="/assets/landing/blur@0-75.webp"
-                width="140vw"
-                height="40vw"
-                alt="Blurry background gradient blobs"
-                class="object"
-                srcset="/assets/landing/blur@0-75.webp 600w, /assets/landing/blur.webp 1000w, /assets/landing/blur@2.webp 1600w"
-                sizes="140vw"
+                class="hero-decorations"
             />
-        </div>
-        <div class="separator with-content">
-            <a
-                href="https://www.producthunt.com/posts/relagit"
-                target="_blank"
-                aria-label="ProductHunt medal for top 4 product of the day."
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 122 37"
-                    height="4rem"
-                    class="medal"
-                >
-                    <defs>
-                        <linearGradient id="gradient">
-                            <stop offset="0%" stop-color="#FFD700"></stop>
-                            <stop offset="100%" stop-color="#FFA500"></stop>
-                        </linearGradient>
-                    </defs><path
-                        d="M104.953 36.286c-4.22 1.634-5.936.086-5.936-.891 1.495-.126 5.067-.331 5.936.891Zm5.356-1.336a5.486 5.486 0 0 1-7.083-.497c1.44-.4 5.372-.874 7.083.497Zm-7.139-3.176c.16 2.033-1.922 3.176-4.17 3.341.41-2.045 2.509-2.958 4.17-3.341Zm4.032-1.874c.238.869-.089 3.228-3.323 4.164.139-1.593.986-3.667 3.323-4.164Zm6.413 2.365a5.005 5.005 0 0 1-6.385.571c1.296-.668 4.408-1.57 6.385-.571Zm-3.417-4.706c.443.856.537 3.295-2.326 4.763-.166-1.57.465-4.255 2.326-4.763Zm7.083.948a4.389 4.389 0 0 1-2.657 2.217 4.243 4.243 0 0 1-3.39-.44c1.805-1.697 4.685-2.348 6.047-1.777Zm-4.28-4.547c1.284 2.24-.073 4.798-1.485 5.849-.628-2.082-.052-4.351 1.484-5.849Zm6.662-.097c.155 3.479-3.478 3.29-5.184 3.313.537-.731 3.522-3.381 5.184-3.313Zm-4.48-3.25c.675.743 1.688 3.599-.555 5.929-.703-1.685-.858-4.272.554-5.929Zm6.385-1.542c.116 2.81-2.249 4.232-4.53 4.21.686-1.354 2.52-3.964 4.53-4.21Zm-4.785-1.936c1.512.89 1.34 3.764.448 5.26-1.002-1.393-1.75-3.124-.448-5.26Zm4.884-2.633c.748 2.559-1.45 4.29-2.769 4.438.338-1.222.781-3.387 2.77-4.438Zm-4.607-.851c1.667.835 2.457 2.832 1.833 4.632-1.163-.937-2.564-2.919-1.833-4.632Zm4.685-3.096c1.03 3.113-1.335 4.13-2.215 4.38.105-1.324.947-3.963 2.215-4.38Zm-4.619-.817c.676.195 2.603 1.777 2.254 4.61-1.268-.714-2.808-2.074-2.254-4.61Zm3.921-3.9c1.152 3.826-.77 5.397-1.401 5.71-.1-1.21-.222-4.037 1.401-5.71Zm-4.264.096c1.207.337 2.73 2.553 2.658 4.684-1.196-.548-2.985-2.827-2.658-4.684Zm.36-5.934c2.802 2.896 3.195 5.18 2.376 7.996-1.269-1.142-2.282-4.569-2.376-7.996ZM17.047 36.286c4.22 1.634 5.936.086 5.936-.891-1.495-.126-5.067-.331-5.936.891ZM11.69 34.95a5.486 5.486 0 0 0 7.083-.497c-1.44-.4-5.372-.874-7.083.497Zm7.139-3.176c-.16 2.033 1.922 3.176 4.17 3.341-.41-2.045-2.509-2.958-4.17-3.341ZM14.798 29.9c-.238.869.089 3.228 3.323 4.164-.139-1.593-.986-3.667-3.323-4.164Zm-6.413 2.365a5.005 5.005 0 0 0 6.385.571c-1.296-.668-4.408-1.57-6.385-.571Zm3.417-4.706c-.443.856-.537 3.295 2.326 4.763.166-1.57-.465-4.255-2.326-4.763Zm-7.083.948a4.389 4.389 0 0 0 2.657 2.217 4.243 4.243 0 0 0 3.39-.44c-1.805-1.697-4.685-2.348-6.047-1.777Zm4.28-4.547c-1.284 2.24.073 4.798 1.485 5.849.628-2.082.052-4.351-1.484-5.849Zm-6.662-.097c-.155 3.479 3.478 3.29 5.184 3.313-.537-.731-3.522-3.381-5.184-3.313Zm4.48-3.25c-.675.743-1.688 3.599.555 5.929.703-1.685.858-4.272-.554-5.929ZM.433 19.071c-.116 2.81 2.249 4.232 4.53 4.21-.686-1.354-2.52-3.964-4.53-4.21Zm4.785-1.936c-1.512.89-1.34 3.764-.448 5.26 1.002-1.393 1.75-3.124.448-5.26ZM.333 14.502c-.748 2.559 1.45 4.29 2.769 4.438-.338-1.222-.781-3.387-2.77-4.438Zm4.607-.851c-1.667.835-2.457 2.832-1.833 4.632 1.163-.937 2.564-2.919 1.833-4.632ZM.255 10.555c-1.03 3.113 1.335 4.13 2.215 4.38-.105-1.324-.947-3.963-2.215-4.38Zm4.619-.817c-.676.195-2.603 1.777-2.254 4.61 1.268-.714 2.808-2.074 2.254-4.61Zm-3.921-3.9c-1.152 3.826.77 5.397 1.401 5.71.1-1.21.222-4.037-1.401-5.71Zm4.264.096c-1.207.337-2.73 2.553-2.658 4.684 1.196-.548 2.985-2.827 2.658-4.684ZM4.857 0C2.055 2.896 1.662 5.18 2.481 7.996 3.75 6.854 4.763 3.427 4.857 0Zm50.599 35c.162 0 .288-.108.288-.27v-2.016h1.062a.284.284 0 0 0 .288-.288v-1.71c0-.162-.126-.27-.288-.27h-1.062V22.67c0-.162-.108-.27-.27-.27h-2.268c-.144 0-.252.054-.324.18l-5.112 7.686a.71.71 0 0 0-.09.36v1.818c0 .162.108.27.27.27h5.04v2.016c0 .162.126.27.288.27h2.178Zm-2.466-8.532v3.978h-2.646l2.646-3.978Zm9.468 8.748c.612 0 1.584-.108 1.584-.558v-1.494c0-.18-.144-.27-.324-.252-.234.018-.396.018-.558.018-.45 0-.756-.252-.756-.738v-3.888h1.35c.162 0 .27-.108.27-.27V26.45c0-.162-.108-.27-.27-.27h-1.35v-2.07c0-.162-.126-.27-.288-.27h-2.214c-.162 0-.288.108-.288.27v2.07h-1.098c-.162 0-.27.108-.27.27v1.584c0 .162.108.27.27.27h1.098v4.194c0 2.052 1.386 2.718 2.844 2.718Zm8.37-9.252c-1.26 0-2.07.63-2.574 1.53V22.4c0-.162-.126-.27-.288-.27H65.77c-.162 0-.27.108-.27.27v12.33c0 .162.108.27.27.27h2.196c.162 0 .288-.108.288-.27v-4.464c0-1.17.576-1.782 1.53-1.782.972 0 1.476.612 1.476 1.782v4.464c0 .162.126.27.288.27h2.178c.162 0 .288-.108.288-.27v-5.112c0-2.304-1.35-3.654-3.186-3.654ZM20.72 15c.09 0 .15-.06.15-.15v-2.26h.72c1.69 0 2.49-.93 2.49-2.29 0-1.36-.8-2.3-2.49-2.3h-2.15c-.09 0-.15.06-.15.15v6.7c0 .09.06.15.15.15h1.28Zm.15-5.6h.68c.53 0 1.02.17 1.02.9 0 .72-.49.89-1.02.89h-.68V9.4Zm5.5 5.6c.09 0 .16-.06.16-.15v-2.36c0-.73.38-1.13 1.01-1.13.15 0 .26.02.36.05.14.03.21 0 .21-.13v-.97c0-.09-.02-.15-.09-.2-.08-.06-.21-.13-.45-.13-.57 0-.88.4-1.04.93l-.05-.65c0-.12-.06-.16-.15-.16h-1.18c-.09 0-.15.06-.15.15v4.6c0 .09.06.15.15.15h1.22Zm4.77.12c1.48 0 2.58-1.12 2.58-2.57 0-1.45-1.1-2.57-2.58-2.57s-2.57 1.12-2.57 2.57c0 1.45 1.09 2.57 2.57 2.57Zm0-1.4c-.62 0-1.1-.45-1.1-1.17s.48-1.17 1.1-1.17c.62 0 1.1.45 1.1 1.17s-.48 1.17-1.1 1.17Zm5.49 1.4c.7 0 1.2-.28 1.53-.75l.02.48c0 .09.07.15.16.15h1.1c.09 0 .17-.06.17-.15V8c0-.09-.07-.15-.16-.15h-1.23c-.09 0-.15.06-.15.15v2.59c-.33-.39-.8-.61-1.44-.61-1.36 0-2.3 1.12-2.3 2.57 0 1.46.94 2.57 2.3 2.57Zm.33-1.39c-.65 0-1.14-.46-1.14-1.18 0-.71.49-1.18 1.14-1.18.67 0 1.13.47 1.13 1.17 0 .72-.46 1.19-1.13 1.19Zm5.52 1.39c.71 0 1.16-.35 1.44-.85l.04.57c0 .12.07.16.16.16h1.17c.09 0 .16-.06.16-.15v-4.6c0-.09-.07-.15-.16-.15h-1.21c-.09 0-.16.06-.16.15v2.48c0 .65-.33.99-.85.99-.54 0-.82-.34-.82-.99v-2.48c0-.09-.07-.15-.16-.15h-1.22c-.09 0-.15.06-.15.15v2.84c0 1.28.74 2.03 1.76 2.03Zm6.44 0c.79 0 1.45-.35 1.87-.9.06-.07.05-.15-.01-.21l-.69-.66c-.08-.08-.19-.08-.26-.01-.27.25-.53.38-.86.38-.74 0-1.18-.56-1.18-1.2 0-.63.44-1.14 1.16-1.14.34 0 .6.12.86.38.08.07.19.07.27-.01l.69-.66c.06-.06.07-.15.01-.21-.42-.55-1.08-.9-1.9-.9-1.48 0-2.56 1.1-2.56 2.54 0 1.47 1.1 2.6 2.6 2.6Zm4.77 0c.34 0 .88-.06.88-.31v-.83c0-.1-.08-.15-.18-.14-.13.01-.22.01-.31.01-.25 0-.42-.14-.42-.41v-2.16h.75c.09 0 .15-.06.15-.15v-.88c0-.09-.06-.15-.15-.15h-.75V8.95c0-.09-.07-.15-.16-.15h-1.23c-.09 0-.16.06-.16.15v1.15h-.61c-.09 0-.15.06-.15.15v.88c0 .09.06.15.15.15h.61v2.33c0 1.14.77 1.51 1.58 1.51Zm5.95 0c1.48 0 2.58-1.12 2.58-2.57 0-1.45-1.1-2.57-2.58-2.57s-2.57 1.12-2.57 2.57c0 1.45 1.09 2.57 2.57 2.57Zm0-1.4c-.62 0-1.1-.45-1.1-1.17s.48-1.17 1.1-1.17c.62 0 1.1.45 1.1 1.17s-.48 1.17-1.1 1.17ZM64.79 15c.09 0 .16-.06.16-.15v-3.57h.98c.09 0 .15-.06.15-.15v-.88c0-.09-.06-.15-.15-.15h-.98v-.49c0-.33.11-.57.58-.57.11 0 .25.03.42.06.07.01.13 0 .13-.07V8.02c0-.06-.03-.13-.09-.16-.3-.15-.52-.17-.82-.17-1.09 0-1.76.52-1.76 1.72v.69h-.58c-.09 0-.15.06-.15.15v.88c0 .09.06.15.15.15h.58v3.57c0 .09.06.15.15.15h1.23Zm6.08.12c.34 0 .88-.06.88-.31v-.83c0-.1-.08-.15-.18-.14-.13.01-.22.01-.31.01-.25 0-.42-.14-.42-.41v-2.16h.75c.09 0 .15-.06.15-.15v-.88c0-.09-.06-.15-.15-.15h-.75V8.95c0-.09-.07-.15-.16-.15h-1.23c-.09 0-.16.06-.16.15v1.15h-.61c-.09 0-.15.06-.15.15v.88c0 .09.06.15.15.15h.61v2.33c0 1.14.77 1.51 1.58 1.51Zm4.65-5.14c-.7 0-1.15.35-1.43.85V8c0-.09-.07-.15-.16-.15h-1.22c-.09 0-.15.06-.15.15v6.85c0 .09.06.15.15.15h1.22c.09 0 .16-.06.16-.15v-2.48c0-.65.32-.99.85-.99.54 0 .82.34.82.99v2.48c0 .09.07.15.16.15h1.21c.09 0 .16-.06.16-.15v-2.84c0-1.28-.75-2.03-1.77-2.03Zm5.34 5.14c.69 0 1.32-.2 1.74-.62.09-.08.09-.16.05-.22l-.41-.58c-.06-.07-.1-.09-.18-.05-.41.23-.75.27-1.08.27-.7 0-1.16-.26-1.33-.79h2.82c.45 0 .58-.3.58-.8 0-1.26-.87-2.35-2.37-2.35-1.51 0-2.52 1.11-2.52 2.55 0 1.49 1.09 2.59 2.7 2.59Zm-1.23-3.05c.12-.58.55-.83 1.06-.83s.9.24 1 .83h-2.06Zm8.27 3.05c.7 0 1.2-.28 1.53-.75l.02.48c0 .09.07.15.16.15h1.1c.09 0 .17-.06.17-.15V8c0-.09-.07-.15-.16-.15h-1.23c-.09 0-.15.06-.15.15v2.59c-.33-.39-.8-.61-1.44-.61-1.36 0-2.3 1.12-2.3 2.57 0 1.46.94 2.57 2.3 2.57Zm.33-1.39c-.65 0-1.14-.46-1.14-1.18 0-.71.49-1.18 1.14-1.18.67 0 1.13.47 1.13 1.17 0 .72-.46 1.19-1.13 1.19Zm5.81 1.39c.7 0 1.2-.28 1.53-.75l.02.48c0 .09.07.15.16.15h1.1c.09 0 .17-.06.17-.15v-4.6c0-.09-.07-.15-.16-.15h-1.11c-.09 0-.16.06-.16.15l-.02.47c-.32-.46-.81-.74-1.53-.74-1.36 0-2.3 1.12-2.3 2.57 0 1.46.94 2.57 2.3 2.57Zm.33-1.39c-.65 0-1.14-.46-1.14-1.18 0-.71.49-1.18 1.14-1.18.67 0 1.13.47 1.13 1.17 0 .72-.46 1.19-1.13 1.19Zm5.96 3.17c.08 0 .15-.04.18-.12l2.6-6.51c.04-.11-.02-.17-.13-.17h-1.24c-.08 0-.16.04-.19.12l-1.08 3-1.08-3c-.03-.08-.11-.12-.19-.12h-1.24c-.11 0-.17.06-.13.17l1.9 4.74-.72 1.71c-.05.12.01.18.13.18h1.19Z"
-                        fill="url(#gradient)"></path></svg
-                >
-            </a>
-            <div class="separator vertical"></div>
-            <div class="social-proof">
-                Trusted by over 1,000 developers from world-class companies.
-            </div>
-        </div>
-        <div class="comment">
-            <div class="comment-content">
-                <img
-                    src="https://ph-avatars.imgix.net/818113/06e1445d-d495-4aa1-b6a4-b0deb0ce2898.jpeg?auto=compress&codec=mozjpeg&cs=strip&auto=format&w=64&h=64&fit=crop&dpr=2"
-                    alt="Commentor"
-                    class="comment-content-image"
-                />
-                <div class="comment-content-text">
-                    <div class="comment-content-text-main">
-                        <span class="quotes">{"““"}</span>I've never been a fan
-                        of GUIs for source control, but I must say that this
-                        looks beautiful. I don't think I'd ever use it, as most
-                        of my work is on systems that don't even have a GUI, but
-                        it does. Look. Beautiful.
-                    </div>
-                    <a
-                        class="comment-content-link"
-                        href="https://www.producthunt.com/posts/relagit?comment=3214405"
-                        target="_blank"
-                    >
-                        View on ProductHunt <Icon name="link-external" />
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="cta">
-            <svg
-                class="circle"
-                viewBox="0 0 1512 1512"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <g clip-path="url(#clip0_1483_3246)">
-                    <path
-                        d="M756 3326C1674.45 3326 2419 2581.45 2419 1663C2419 744.55 1674.45 0 756 0C-162.45 0 -907 744.55 -907 1663C-907 2581.45 -162.45 3326 756 3326Z"
-                        fill="url(#paint0_linear_1483_3246)"
-                        stroke="url(#paint1_linear_1483_3246)"
-                        stroke-width="4"></path>
-                </g>
-                <defs>
-                    <linearGradient
-                        id="paint0_linear_1483_3246"
-                        x1="756"
-                        y1="-2"
-                        x2="756"
-                        y2="3328"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop
-                            offset="0.00311407"
-                            stop-color="#A689D9"
-                            stop-opacity="0.1"></stop>
-                        <stop offset="0.27" stop-color="white" stop-opacity="0"
-                        ></stop>
-                    </linearGradient>
-                    <linearGradient
-                        id="paint1_linear_1483_3246"
-                        x1="6.58981e-05"
-                        y1="-1.99999"
-                        x2="1512"
-                        y2="-1.99999"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop stop-color="#A689D9" stop-opacity="0"></stop>
-                        <stop
-                            offset="0.474558"
-                            stop-color="#D3C3EE"
-                            stop-opacity="0.3"></stop>
-                        <stop offset="1" stop-color="#A689D9" stop-opacity="0"
-                        ></stop>
-                    </linearGradient>
-                    <clipPath id="clip0_1483_3246">
-                        <rect width="1512" height="1512" fill="white"></rect>
-                    </clipPath>
-                </defs>
-            </svg>
-            <div class="info">
-                <h2 class="info-header">
-                    Everything you expect from a git client, and more.
+            <div class="header">
+                <h1>Level up your git workflow.</h1>
+                <h2>
+                    The modern version control client for developers<span
+                        >, students, professionals, academics..</span
+                    >.
                 </h2>
             </div>
-        </div>
-        <div class="feature-grid">
-            <div class="feature-grid-item">
-                <img
-                    loading="lazy"
-                    class="feature-grid-item-graphic github"
-                    src="/assets/landing/vercel-next.webp"
-                    alt="The GitHub vercel/next.js repository being cloned inside RelaGit"
-                />
-                <div class="feature-grid-item-text">
-                    <div class="feature-grid-item-text-label">
-                        Your favourite developer platforms
-                    </div>
-                    <div class="feature-grid-item-text-paragraph">
-                        GitHub, GitLab, and Codeberg. Directly integrated into
-                        the experience.
-                    </div>
-                </div>
-                <svg
-                    class="blur"
-                    viewBox="0 0 668 515"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <g filter="url(#filter0_f_1448_2976)">
-                        <path
-                            d="M-47.9805 174.611C-85.3177 201.597 -8.30971 277.36 19.6932 304.889C46.7238 311.48 248.267 367.236 289.805 325.826C341.727 274.064 270.553 179.846 225.631 174.611C180.71 169.377 181.293 103.656 185.377 44.3338C189.461 -14.989 -1.30904 140.879 -47.9805 174.611Z"
-                            fill="url(#paint0_radial_1448_2976)"></path>
-                        <path
-                            d="M657.827 62.258C652.27 16.5259 548.71 47.2749 511.07 58.4666C492.226 78.9356 345.933 228.357 362.082 284.743C382.268 355.225 499.159 338.51 525.47 301.726C551.782 264.943 609.019 297.245 658.963 329.516C708.908 361.787 664.773 119.423 657.827 62.258Z"
-                            fill="url(#paint1_radial_1448_2976)"></path>
-                    </g>
-                    <defs>
-                        <filter
-                            id="filter0_f_1448_2976"
-                            x="-174"
-                            y="-52"
-                            width="885"
-                            height="667"
-                            filterUnits="userSpaceOnUse"
-                            color-interpolation-filters="sRGB"
-                        >
-                            <feFlood
-                                flood-opacity="0"
-                                result="BackgroundImageFix"></feFlood>
-                            <feBlend
-                                mode="normal"
-                                in="SourceGraphic"
-                                in2="BackgroundImageFix"
-                                result="shape"></feBlend>
-                            <feGaussianBlur
-                                stdDeviation="50"
-                                result="effect1_foregroundBlur_1448_2976"
-                            ></feGaussianBlur>
-                        </filter>
-                        <radialGradient
-                            id="paint0_radial_1448_2976"
-                            cx="0"
-                            cy="0"
-                            r="1"
-                            gradientUnits="userSpaceOnUse"
-                            gradientTransform="translate(-10.0597 208.344) rotate(18.2297) scale(277.014 281.73)"
-                        >
-                            <stop stop-color="#ED5F00"></stop>
-                            <stop offset="0.352239" stop-color="#C24112"></stop>
-                            <stop offset="0.635" stop-color="#841F19"></stop>
-                            <stop offset="0.78" stop-color="#561829"></stop>
-                            <stop offset="1" stop-color="#0C162A"></stop>
-                        </radialGradient>
-                        <radialGradient
-                            id="paint1_radial_1448_2976"
-                            cx="0"
-                            cy="0"
-                            r="1"
-                            gradientUnits="userSpaceOnUse"
-                            gradientTransform="translate(609.96 79.1291) rotate(137.16) scale(277.014 281.73)"
-                        >
-                            <stop stop-color="#ED5F00"></stop>
-                            <stop offset="0.352239" stop-color="#C24112"></stop>
-                            <stop offset="0.635" stop-color="#841F19"></stop>
-                            <stop offset="0.78" stop-color="#561829"></stop>
-                            <stop offset="1" stop-color="#0C162A"></stop>
-                        </radialGradient>
-                    </defs>
-                </svg>
-            </div>
-            <div class="feature-grid-item">
-                <img
-                    loading="lazy"
-                    src="/assets/landing/open.webp"
-                    class="feature-grid-item-graphic open"
-                    aria-label="Chat messages between two contributors to RelaGit discussing naming of a label."
-                />
-                <div class="feature-grid-item-text">
-                    <div class="feature-grid-item-text-label">
-                        Community fueled
-                    </div>
-                    <div class="feature-grid-item-text-paragraph">
-                        Built with input and opinion from developers and users.
-                    </div>
-                </div>
-            </div>
-            <div class="feature-grid-item full">
-                <div class="feature-grid-item-text">
-                    <div class="feature-grid-item-text-label">
-                        Goes anywhere you go
-                        <div class="feature-grid-item-text-label-badge">
-                            New
+            <div class="details">
+                <div class="cta">
+                    <div class="social-proof">
+                        <div class="badges">
+                            <Badge
+                                top="Product of the Day"
+                                bottom="4th"
+                                style="gold"
+                            />
+                            <Badge
+                                top="Featured on"
+                                bottom="ProductHunt"
+                                style="silver"
+                            />
+                        </div>
+                        <div class="separator"></div>
+                        <div class="copy">
+                            Trusted by students, freelance developers, and
+                            industry-leading professionals alike.
                         </div>
                     </div>
-                    <div class="feature-grid-item-text-paragraph">
-                        Open out a native popout to view focused information
-                        about what you're working on.
+                    <div class="buttons">
+                        <a class="primary" href="/download">
+                            Download
+                            <div class="subtext requirements">latest</div>
+                        </a>
+                        <div class="group">
+                            <a class="secondary" href="/redirect/github">
+                                View Source
+                                <div class="subtext">
+                                    <Icon name="mark-github" />
+                                    relagit/relagit
+                                </div>
+                            </a>
+                            <Badge
+                                top="Product of the Day"
+                                bottom="4th"
+                                style="gold"
+                            />
+                        </div>
                     </div>
                 </div>
-                <img
-                    loading="lazy"
-                    class="feature-grid-item-graphic popout"
-                    src="/assets/landing/popout.webp"
-                    alt="A native popout window is open above a code editor. The popout shows modified files and commit history."
-                />
-                <svg
-                    class="blur"
-                    viewBox="0 0 1352 339"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <g filter="url(#filter0_f_1448_2980)">
-                        <path
-                            d="M1456.83 -16.7421C1451.27 -62.4743 1347.71 -31.7252 1310.07 -20.5336C1291.23 -0.0645449 1144.93 149.357 1161.08 205.743C1181.27 276.225 1298.16 259.51 1324.47 222.726C1350.78 185.943 1408.02 218.245 1457.96 250.516C1507.91 282.787 1463.77 40.4231 1456.83 -16.7421Z"
-                            fill="url(#paint0_radial_1448_2980)"></path>
-                        <path
-                            d="M532 292C555.775 252.54 231.243 126.375 194.691 112.023C167.24 116.552 -82.5131 133.124 -104.5 187.5C-131.984 255.47 12.9018 325.374 56.2812 312.585C99.6606 299.796 124.879 360.488 144.371 416.666C163.862 472.844 502.281 341.325 532 292Z"
-                            fill="url(#paint1_radial_1448_2980)"></path>
-                    </g>
-                    <defs>
-                        <filter
-                            id="filter0_f_1448_2980"
-                            x="-140"
-                            y="-131"
-                            width="1650"
-                            height="667"
-                            filterUnits="userSpaceOnUse"
-                            color-interpolation-filters="sRGB"
-                        >
-                            <feFlood
-                                flood-opacity="0"
-                                result="BackgroundImageFix"></feFlood>
-                            <feBlend
-                                mode="normal"
-                                in="SourceGraphic"
-                                in2="BackgroundImageFix"
-                                result="shape"></feBlend>
-                            <feGaussianBlur
-                                stdDeviation="50"
-                                result="effect1_foregroundBlur_1448_2980"
-                            ></feGaussianBlur>
-                        </filter>
-                        <radialGradient
-                            id="paint0_radial_1448_2980"
-                            cx="0"
-                            cy="0"
-                            r="1"
-                            gradientUnits="userSpaceOnUse"
-                            gradientTransform="translate(1408.96 0.128953) rotate(137.16) scale(277.014 281.73)"
-                        >
-                            <stop stop-color="#ED5F00"></stop>
-                            <stop offset="0.352239" stop-color="#C24112"></stop>
-                            <stop offset="0.635" stop-color="#841F19"></stop>
-                            <stop offset="0.78" stop-color="#561829"></stop>
-                            <stop offset="1" stop-color="#0C162A"></stop>
-                        </radialGradient>
-                        <radialGradient
-                            id="paint1_radial_1448_2980"
-                            cx="0"
-                            cy="0"
-                            r="1"
-                            gradientUnits="userSpaceOnUse"
-                            gradientTransform="translate(259.9 189.185) rotate(175.157) scale(277.014 281.73)"
-                        >
-                            <stop stop-color="#1C84EC"></stop>
-                            <stop offset="0.352239" stop-color="#115EAA"></stop>
-                            <stop offset="0.635" stop-color="#751984"></stop>
-                            <stop offset="0.78" stop-color="#56183E"></stop>
-                            <stop offset="1" stop-color="#0C162A"></stop>
-                        </radialGradient>
-                    </defs>
-                </svg>
-            </div>
-            <div class="feature-grid-item">
                 <div
-                    class="feature-grid-item-graphic speed"
-                    aria-label="Three boxes have connections between them, git, RelaGit, and you, the user. Moving blue lines indicate the speed of the connections."
+                    class="frame"
+                    role="img"
+                    aria-label="The RelaGit client, open to the relagit repository with a file selected, vieewing changes. The window is floating above a blurry vibrant wallpaper."
                 >
-                    <div class="box">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 92 92"
-                        >
-                            <defs
-                                ><clipPath id="a"
-                                    ><path d="M0 .113h91.887V92H0Zm0 0"
-                                    ></path></clipPath
-                                ></defs
-                            >
-                            <g clip-path="url(#a)"
-                                ><path
-                                    style="stroke:none;fill-rule:nonzero;fill:currentColor;fill-opacity:1"
-                                    d="M90.156 41.965 50.036 1.848a5.918 5.918 0 0 0-8.372 0l-8.328 8.332 10.566 10.566a7.03 7.03 0 0 1 7.23 1.684 7.034 7.034 0 0 1 1.669 7.277l10.187 10.184a7.028 7.028 0 0 1 7.278 1.672 7.04 7.04 0 0 1 0 9.957 7.05 7.05 0 0 1-9.965 0 7.044 7.044 0 0 1-1.528-7.66l-9.5-9.497V59.36a7.04 7.04 0 0 1 1.86 11.29 7.04 7.04 0 0 1-9.957 0 7.04 7.04 0 0 1 0-9.958 7.06 7.06 0 0 1 2.304-1.539V33.926a7.049 7.049 0 0 1-3.82-9.234L29.242 14.272 1.73 41.777a5.925 5.925 0 0 0 0 8.371L41.852 90.27a5.925 5.925 0 0 0 8.37 0l39.934-39.934a5.925 5.925 0 0 0 0-8.371"
-                                ></path>
-                            </g>
-                        </svg>
-                    </div>
-                    <div class="line"></div>
-                    <div class="box">
-                        <Logo />
-                    </div>
-                    <div class="line"></div>
-                    <div class="box highlight">
-                        <Icon name="person" variant={24} />
-                    </div>
+                    <Image
+                        src={ventura}
+                        loading="eager"
+                        class="wallpaper"
+                        alt=""
+                    />
+                    <div class="window" role="img"></div>
                 </div>
-                <div class="feature-grid-item-text">
-                    <div class="feature-grid-item-text-label">
-                        Designed to move at your speed
-                    </div>
-                    <div class="feature-grid-item-text-paragraph">
-                        Next generation tooling enables lightning fast UI
-                        updates and performance.
-                    </div>
-                </div>
-            </div>
-            <div class="feature-grid-item">
-                <img
-                    loading="lazy"
-                    class="feature-grid-item-graphic design"
-                    src="/assets/landing/elegant.webp"
-                    alt="The Create or Add repository modal in RelaGit, with the curve of the window being emphasised"
-                />
-                <div class="feature-grid-item-text">
-                    <div class="feature-grid-item-text-label">
-                        Pixel perfect interfaces
-                    </div>
-                    <div class="feature-grid-item-text-paragraph">
-                        Blending form and function with beautiful design.
-                    </div>
-                </div>
-                <svg
-                    class="blur"
-                    viewBox="0 0 668 563"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <g filter="url(#filter0_f_1448_2983)">
-                        <path
-                            d="M637.332 290.608C668.587 256.763 578.102 197.748 545.203 176.309C517.402 175.201 308.81 160.456 276.294 209.27C235.649 270.288 324.07 348.548 369.138 344.784C414.206 341.02 426.647 405.555 434.391 464.512C442.134 523.469 598.264 332.913 637.332 290.608Z"
-                            fill="url(#paint0_radial_1448_2983)"></path>
-                        <path
-                            d="M-32.2548 540.49C-17.7526 584.216 77.6686 533.571 112.347 515.148C126.766 491.353 240.575 315.923 213.582 263.851C179.84 198.761 68.5727 238.29 50.0656 279.555C31.5585 320.821 -30.9413 300.491 -86.2868 278.748C-141.632 257.006 -50.3825 485.832 -32.2548 540.49Z"
-                            fill="url(#paint1_radial_1448_2983)"></path>
-                    </g>
-                    <defs>
-                        <filter
-                            id="filter0_f_1448_2983"
-                            x="-176"
-                            y="-148.194"
-                            width="963.906"
-                            height="793.387"
-                            filterUnits="userSpaceOnUse"
-                            color-interpolation-filters="sRGB"
-                        >
-                            <feFlood
-                                flood-opacity="0"
-                                result="BackgroundImageFix"></feFlood>
-                            <feBlend
-                                mode="normal"
-                                in="SourceGraphic"
-                                in2="BackgroundImageFix"
-                                result="shape"></feBlend>
-                            <feGaussianBlur
-                                stdDeviation="50"
-                                result="effect1_foregroundBlur_1448_2983"
-                            ></feGaussianBlur>
-                        </filter>
-                        <radialGradient
-                            id="paint0_radial_1448_2983"
-                            cx="0"
-                            cy="0"
-                            r="1"
-                            gradientUnits="userSpaceOnUse"
-                            gradientTransform="translate(593.483 265.052) rotate(-173.191) scale(277.014 281.73)"
-                        >
-                            <stop stop-color="#1C84EC"></stop>
-                            <stop offset="0.352239" stop-color="#115EAA"></stop>
-                            <stop offset="0.635" stop-color="#751984"></stop>
-                            <stop offset="0.78" stop-color="#56183E"></stop>
-                            <stop offset="1" stop-color="#0C162A"></stop>
-                        </radialGradient>
-                        <radialGradient
-                            id="paint1_radial_1448_2983"
-                            cx="0"
-                            cy="0"
-                            r="1"
-                            gradientUnits="userSpaceOnUse"
-                            gradientTransform="translate(11.3238 514.475) rotate(-54.2607) scale(277.014 281.73)"
-                        >
-                            <stop stop-color="#1C84EC"></stop>
-                            <stop offset="0.352239" stop-color="#115EAA"></stop>
-                            <stop offset="0.635" stop-color="#751984"></stop>
-                            <stop offset="0.78" stop-color="#56183E"></stop>
-                            <stop offset="1" stop-color="#0C162A"></stop>
-                        </radialGradient>
-                    </defs>
-                </svg>
             </div>
         </div>
-        <div class="feature">
-            <div class="feature-text">
-                <h2 class="feature-text-header">Creativity is the limit.</h2>
-                <p class="feature-text-paragraph">
-                    Create dynamic workflows to automate actions and perform
-                    awesome tasks when things happen in your repositories.
-                </p>
-                <a
-                    href="/docs/workflows/creating-workflows"
-                    target="_blank"
-                    class="feature-text-button"
-                    aria-label="Learn more about creating workflows"
-                >
-                    Learn More
-                    <Icon name="arrow-up-right" />
-                </a>
-            </div>
-            <Codeblock
-                code={`import { Workflow } from "relagit:actions";
-
-export default new Workflow({
-    name: "My New Workflow",
-    description: "Does amazing things!",
-    hooks: {
-        commit: (_, repository, commit) => {
-            console.log("New commit in", repository.name);
-        },
-    },
-});`}
-                language="ts"
-                filename=".relagit/workflows/action.ts"
-            />
-        </div>
-        <div class="separator"></div>
-        <div class="feature">
-            <div class="feature-window">
-                <FakeApp vibrancy={false} theme="dark" />
-            </div>
-            <div class="feature-text">
-                <h2 class="feature-text-header">Recognisably Yours.</h2>
-                <p class="feature-text-paragraph">
-                    Re-imagine the look of the client, either through careful
-                    creation of a theme, or use of a community-made one.
-                </p>
-                <div class="styles-selector">
-                    {
-                        themes.slice(0, 3).map((t) => {
-                            return <ThemeButton client:load theme={t} />;
-                        })
-                    }
-                </div>
-                <a href="/styles" target="_blank" class="feature-text-button">
-                    Browse Styles
-                    <Icon name="arrow-up-right" />
-                </a>
-            </div>
-        </div>
-        <div class="cta final">
-            <svg
-                class="circle"
-                viewBox="0 -902 1512 1512"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <circle
-                    cx="756"
-                    cy="-1055"
-                    r="1663"
-                    fill="url(#paint0_linear_1472_794)"
-                    stroke="url(#paint1_linear_1472_794)"
-                    stroke-width="4"></circle>
-                <defs>
-                    <linearGradient
-                        id="paint0_linear_1472_794"
-                        x1="756"
-                        y1="-2720"
-                        x2="756"
-                        y2="610"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop offset="0.725" stop-color="white" stop-opacity="0"
-                        ></stop>
-                        <stop offset="1" stop-color="#A689D9" stop-opacity="0.1"
-                        ></stop>
-                    </linearGradient>
-                    <linearGradient
-                        id="paint1_linear_1472_794"
-                        x1="7.06363e-05"
-                        y1="-2720"
-                        x2="1512"
-                        y2="-2720"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop stop-color="#A689D9" stop-opacity="0"></stop>
-                        <stop
-                            offset="0.474558"
-                            stop-color="#D3C3EE"
-                            stop-opacity="0.3"></stop>
-                        <stop offset="1" stop-color="#A689D9" stop-opacity="0"
-                        ></stop>
-                    </linearGradient>
-                </defs>
-            </svg>
+        <div class="section-separator"></div>
+        <section class="feature">
             <div class="info">
-                <div
-                    class="app-icon"
-                    aria-label="RelaGit application icon"
-                    aria-hidden="true"
-                >
-                    <svg
-                        class="body"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="124"
-                        height="124"
-                        viewBox="0 0 124 124"
-                        fill="none"
-                    >
-                        <g filter="url(#filter0_d_1472_3234)">
-                            <path
-                                fill-rule="evenodd"
-                                clip-rule="evenodd"
-                                d="M113.5 37.3284C113.5 36.1056 113.5 34.8828 113.493 33.6599C113.487 32.6298 113.475 31.5999 113.447 30.5703C113.386 28.3262 113.254 26.0628 112.855 23.8437C112.45 21.5926 111.789 19.4974 110.748 17.4521C109.724 15.4417 108.386 13.6021 106.79 12.0072C105.194 10.4124 103.354 9.07561 101.343 8.05224C99.2957 7.01037 97.1984 6.34962 94.9447 5.945C92.7254 5.5465 90.4614 5.41437 88.2173 5.35375C87.1869 5.32587 86.1566 5.31412 85.1259 5.30775C83.9025 5.30025 82.679 5.30087 81.4555 5.30087L67.2496 5.25H56.6247L42.6701 5.30087C41.4443 5.30087 40.2184 5.30025 38.9925 5.30775C37.9598 5.31412 36.9276 5.32587 35.8952 5.35375C33.6458 5.41437 31.3767 5.54662 29.1521 5.94562C26.8955 6.35012 24.795 7.01062 22.7448 8.05174C20.7294 9.07524 18.8853 10.4121 17.2863 12.0072C15.6876 13.602 14.3475 15.4412 13.3216 17.4512C12.2771 19.4976 11.6149 21.5939 11.2091 23.8463C10.8096 26.0645 10.6772 28.3272 10.6164 30.5703C10.5886 31.6 10.5766 32.6299 10.5704 33.6599C10.5629 34.8829 10.5 36.402 10.5 37.6249L10.5004 51.3861L10.5 62.1248L10.5635 76.1784C10.5635 77.4029 10.563 78.6274 10.5704 79.8519C10.5766 80.8833 10.5886 81.9146 10.6165 82.9457C10.6772 85.1927 10.8099 87.4593 11.2097 89.6814C11.6154 91.9356 12.2775 94.0337 13.3211 96.0817C14.3471 98.0949 15.6875 99.9369 17.2863 101.534C18.8852 103.131 20.7288 104.47 22.7438 105.495C24.7953 106.538 26.8968 107.199 29.1547 107.604C31.3783 108.004 33.6467 108.136 35.8952 108.197C36.9276 108.224 37.9599 108.236 38.9927 108.243C40.2185 108.25 41.4443 108.25 42.6701 108.25L56.7508 108.25H67.4021L81.4555 108.249C82.679 108.249 83.9025 108.25 85.1259 108.243C86.1566 108.236 87.1869 108.224 88.2173 108.197C90.4623 108.136 92.727 108.003 94.9474 107.604C97.1996 107.199 99.296 106.538 101.342 105.495C103.354 104.47 105.194 103.131 106.79 101.534C108.386 99.9372 109.723 98.0954 110.747 96.0825C111.79 94.0335 112.45 91.9344 112.855 89.6788C113.254 87.4576 113.386 85.1918 113.447 82.9457C113.475 81.9145 113.487 80.8832 113.493 79.8519C113.501 78.6274 113.5 77.4029 113.5 76.1784C113.5 76.1784 113.499 62.3729 113.499 62.1248V51.3748C113.499 51.1916 113.5 37.3284 113.5 37.3284"
-                                fill="url(#paint0_linear_1472_3234)"
-                                shape-rendering="crispEdges"></path>
-                        </g>
-                        <mask
-                            id="mask0_1472_3234"
-                            style="mask-type:luminance"
-                            maskUnits="userSpaceOnUse"
-                            x="10"
-                            y="5"
-                            width="104"
-                            height="104"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                clip-rule="evenodd"
-                                d="M113.5 37.3284C113.5 36.1056 113.5 34.8828 113.493 33.6599C113.487 32.6298 113.475 31.5999 113.447 30.5703C113.386 28.3262 113.254 26.0628 112.855 23.8437C112.45 21.5926 111.789 19.4974 110.748 17.4521C109.724 15.4417 108.386 13.6021 106.79 12.0072C105.194 10.4124 103.354 9.07561 101.343 8.05224C99.2957 7.01037 97.1984 6.34962 94.9447 5.945C92.7254 5.5465 90.4614 5.41437 88.2173 5.35375C87.1869 5.32587 86.1566 5.31412 85.1259 5.30775C83.9025 5.30025 82.679 5.30087 81.4555 5.30087L67.2496 5.25H56.6247L42.6701 5.30087C41.4443 5.30087 40.2184 5.30025 38.9925 5.30775C37.9598 5.31412 36.9276 5.32587 35.8952 5.35375C33.6458 5.41437 31.3767 5.54662 29.1521 5.94562C26.8955 6.35012 24.795 7.01062 22.7448 8.05174C20.7294 9.07524 18.8853 10.4121 17.2863 12.0072C15.6876 13.602 14.3475 15.4412 13.3216 17.4512C12.2771 19.4976 11.6149 21.5939 11.2091 23.8463C10.8096 26.0645 10.6772 28.3272 10.6164 30.5703C10.5886 31.6 10.5766 32.6299 10.5704 33.6599C10.5629 34.8829 10.5 36.402 10.5 37.6249L10.5004 51.3861L10.5 62.1248L10.5635 76.1784C10.5635 77.4029 10.563 78.6274 10.5704 79.8519C10.5766 80.8833 10.5886 81.9146 10.6165 82.9457C10.6772 85.1927 10.8099 87.4593 11.2097 89.6814C11.6154 91.9356 12.2775 94.0337 13.3211 96.0817C14.3471 98.0949 15.6875 99.9369 17.2863 101.534C18.8852 103.131 20.7288 104.47 22.7438 105.495C24.7953 106.538 26.8968 107.199 29.1547 107.604C31.3783 108.004 33.6467 108.136 35.8952 108.197C36.9276 108.224 37.9599 108.236 38.9927 108.243C40.2185 108.25 41.4443 108.25 42.6701 108.25L56.7508 108.25H67.4021L81.4555 108.249C82.679 108.249 83.9025 108.25 85.1259 108.243C86.1566 108.236 87.1869 108.224 88.2173 108.197C90.4623 108.136 92.727 108.003 94.9474 107.604C97.1996 107.199 99.296 106.538 101.342 105.495C103.354 104.47 105.194 103.131 106.79 101.534C108.386 99.9372 109.723 98.0954 110.747 96.0825C111.79 94.0335 112.45 91.9344 112.855 89.6788C113.254 87.4576 113.386 85.1918 113.447 82.9457C113.475 81.9145 113.487 80.8832 113.493 79.8519C113.501 78.6274 113.5 77.4029 113.5 76.1784C113.5 76.1784 113.499 62.3729 113.499 62.1248V51.3748C113.499 51.1916 113.5 37.3284 113.5 37.3284"
-                                fill="white"></path>
-                        </mask>
-                        <g mask="url(#mask0_1472_3234)"> </g>
-                        <defs>
-                            <filter
-                                id="filter0_d_1472_3234"
-                                x="0.5"
-                                y="0.25"
-                                width="123"
-                                height="123"
-                                filterUnits="userSpaceOnUse"
-                                color-interpolation-filters="sRGB"
-                            >
-                                <feFlood
-                                    flood-opacity="0"
-                                    result="BackgroundImageFix"></feFlood>
-                                <feColorMatrix
-                                    in="SourceAlpha"
-                                    type="matrix"
-                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                                    result="hardAlpha"></feColorMatrix>
-                                <feOffset dy="5"></feOffset>
-                                <feGaussianBlur stdDeviation="5"
-                                ></feGaussianBlur>
-                                <feComposite in2="hardAlpha" operator="out"
-                                ></feComposite>
-                                <feColorMatrix
-                                    type="matrix"
-                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
-                                ></feColorMatrix>
-                                <feBlend
-                                    mode="normal"
-                                    in2="BackgroundImageFix"
-                                    result="effect1_dropShadow_1472_3234"
-                                ></feBlend>
-                                <feBlend
-                                    mode="normal"
-                                    in="SourceGraphic"
-                                    in2="effect1_dropShadow_1472_3234"
-                                    result="shape"></feBlend>
-                            </filter>
-                            <linearGradient
-                                id="paint0_linear_1472_3234"
-                                x1="-24.6426"
-                                y1="5.25"
-                                x2="-24.6426"
-                                y2="178.535"
-                                gradientUnits="userSpaceOnUse"
-                            >
-                                <stop stop-color="white" stop-opacity="0.1"
-                                ></stop>
-                                <stop
-                                    offset="0.489516"
-                                    stop-color="#EFEFEF"
-                                    stop-opacity="0.1"></stop>
-                                <stop
-                                    offset="1"
-                                    stop-color="#C0C0C0"
-                                    stop-opacity="0.1"></stop>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                    <Logo />
-                </div>
-                <h2 class="info-header">Ready to level up?</h2>
+                <div class="decoration" style="--color: #EB31AB"></div>
+                <h2 class="header">
+                    <span style="--color: #F3ABFA" class="mono">status</span> at
+                    a glance
+                </h2>
+                <p class="description">
+                    The information you need, always accessible from the <span
+                        class="highlight">Popout</span
+                    >.
+                </p>
             </div>
-            <div class="action">
-                <Button
-                    client:visible
-                    href="/download"
-                    class="cta-button fancy"
-                >
-                    Download
-                    <Icon name="download" />
-                </Button>
-                <div class="requirements">Requires macOS 10.14 or later</div>
+            <Image
+                src={popout}
+                alt="A native popout window is open above a code editor. The popout shows modified files and commit history."
+                class="graphic"
+            />
+        </section>
+        <section class="feature">
+            <div class="info">
+                <div class="decoration" style="--color: #5B75F2"></div>
+                <h2 class="header">
+                    <span style="--color: #8D98CE" class="mono">clone</span> from
+                    anywhere
+                </h2>
+                <p class="description">
+                    Your <span class="highlight"
+                        >favourite developer platforms</span
+                    >, directly integrated into the experience.
+                </p>
             </div>
-        </div>
-        <Footer client:visible embed />
+            <Image
+                src={clone}
+                alt="The GitHub vercel/next.js repository being cloned inside RelaGit."
+                class="graphic"
+            />
+        </section>
     </main>
 </Layout>

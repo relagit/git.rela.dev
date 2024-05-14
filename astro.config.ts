@@ -1,3 +1,5 @@
+import { defineConfig, squooshImageService } from "astro/config";
+
 import shikiji, { type RehypeShikijiOptions } from "rehype-shikiji";
 import { transformerTwoslash } from "shikiji-twoslash";
 import * as transformers from "shikiji-transformers";
@@ -7,7 +9,6 @@ import rehypeSlug from "rehype-slug";
 import rehypeRaw from "rehype-raw";
 import { rehypeGithubAlerts, type IOptions } from "rehype-github-alerts";
 import headings from "rehype-autolink-headings";
-import { defineConfig } from "astro/config";
 import vercel from "@astrojs/vercel/serverless";
 import mdx from "@astrojs/mdx";
 import solidJs from "@astrojs/solid-js";
@@ -26,6 +27,12 @@ export default defineConfig({
             enabled: true,
         },
     }),
+    devToolbar: {
+        enabled: false,
+    },
+    image: {
+        service: squooshImageService(),
+    },
     markdown: {
         syntaxHighlight: false,
     },

@@ -3,7 +3,7 @@
     background: color-mix(in srgb, var(--color-blue-500) 20%, transparent);
     color: var(--color-blue-500-alt);
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 0.6rem;
     margin-left: 4px;
     display: flex;
     align-items: center;
@@ -28,34 +28,53 @@
 
 _::-webkit-full-page-media,
 _:future,
-:root .header {
+:root .nav {
     background: linear-gradient(rgba(0, 0, 0, 0.93), rgba(0, 0, 0, 0));
 }
 
-.header {
+:root:has(.docs-container) .nav {
+    .git {
+        display: none;
+    }
+
+    @media screen and (max-width: 700px) {
+        .hide-docs {
+            display: none;
+        }
+    }
+}
+
+.nav {
     inset: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     flex-shrink: 0;
     z-index: 9;
-    backdrop-filter: blur(30px) saturate(2);
-    -webkit-backdrop-filter: blur(30px) saturate(2);
+    backdrop-filter: blur(30px) saturate(120%);
+    -webkit-backdrop-filter: blur(30px) saturate(120%);
+    position: fixed;
+    background: none;
+    border: none;
+    top: 0;
+    left: 0;
+    padding: 20px 0;
+    transform: none;
+    width: 100%;
+    height: fit-content;
 
     @media screen and (max-width: 600px) {
         position: fixed !important;
     }
 
-    position: fixed;
-    background: none;
-    border: none;
-
     &.embed {
         position: relative !important;
-        padding: 24px 4rem;
+        padding: 0;
 
-        @media screen and (width < 780px) {
-            padding: 24px 2rem;
+        .nav__content {
+            padding: 20px 4rem;
+
+            @media screen and (width < 780px) {
+                padding: 20px 2rem;
+            }
         }
     }
 
@@ -65,89 +84,87 @@ _:future,
         -webkit-backdrop-filter: none;
     }
 
-    top: 0;
-    left: 0;
-    padding: 24px 120px;
-    transform: none;
-    width: 100%;
-    height: fit-content;
-
-    @media screen and (max-width: 850px) {
-        a:nth-child(6),
-        a:nth-child(7) {
-            display: none;
-        }
-    }
-
-    @media screen and (max-width: 750px) {
-        a:nth-child(5),
-        a:nth-child(6),
-        a:nth-child(7) {
-            display: none;
-        }
-    }
-
-    @media screen and (max-width: 400px) {
-        a:nth-child(4),
-        a:nth-child(5),
-        a:nth-child(6),
-        a:nth-child(7) {
-            display: none;
-        }
-    }
-
-    @media screen and (max-width: 1068px) {
-        padding: 24px 4rem;
-    }
-
-    @media screen and (max-width: 768px) {
-        padding: 24px 4rem;
-    }
-
-    @media screen and (max-width: 480px) {
-        padding: 24px 40px;
-    }
-
-    @media screen and (max-width: 420px) {
-        padding: 24px 20px;
-    }
-
-    &__group {
+    &__content {
+        position: relative;
+        max-width: 1480px;
+        margin: 0 auto;
         display: flex;
-        justify-content: center;
-
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0 64px;
         gap: 32px;
 
-        @media screen and (max-width: 600px) {
-            gap: 16px;
+        @media screen and (width < 1024px) {
+            padding: 0 32px;
         }
 
-        &__link {
+        &__group {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 8px;
-            color: var(--color-secondary);
-            text-align: center;
-            font-size: 14px;
-            font-weight: 400;
-            text-decoration: none;
-
-            transition: color 0.2s ease-in-out;
+            gap: 32px;
 
             @media screen and (max-width: 600px) {
-                &.git {
-                    font-size: 0;
+                gap: 16px;
+            }
+
+            &__separator {
+                background: rgba(255, 255, 255, 0.1);
+                width: 1px;
+                height: 20px;
+            }
+
+            &:nth-child(1) {
+                @media screen and (max-width: 716px) {
+                    & > :nth-last-child(1) {
+                        display: none;
+                    }
+                }
+
+                @media screen and (max-width: 640px) {
+                    & > :nth-last-child(2) {
+                        display: none;
+                    }
+
+                    .nav__content__group__separator {
+                        display: none;
+                    }
+                }
+
+                @media screen and (max-width: 545px) {
+                    .docs {
+                        display: none;
+                    }
                 }
             }
 
-            &.disabled {
-                pointer-events: none;
-                opacity: 0.5;
-            }
+            &__link {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                color: var(--color-secondary);
+                text-align: center;
+                font-size: 0.8rem;
+                font-weight: 400;
+                text-decoration: none;
 
-            &:hover {
-                color: var(--white);
+                transition: color 0.2s ease-in-out;
+
+                @media screen and (max-width: 800px) {
+                    &.git {
+                        font-size: 0;
+                    }
+                }
+
+                &.disabled {
+                    pointer-events: none;
+                    opacity: 0.5;
+                }
+
+                &:hover {
+                    color: var(--white);
+                }
             }
         }
     }
