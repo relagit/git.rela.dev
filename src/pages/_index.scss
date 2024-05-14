@@ -333,9 +333,11 @@ main.index {
                     height: 100%;
                     object-fit: cover;
                     border-radius: 18px;
+                    user-select: none;
                 }
 
                 .window {
+                    user-select: none;
                     height: calc(100% - 88px);
                     aspect-ratio: 60 / 39;
                     position: absolute;
