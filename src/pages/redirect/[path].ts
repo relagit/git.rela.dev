@@ -7,14 +7,8 @@ const redirects: Record<string, string> = {
     twitter: "https://twitter.com/withrela",
 };
 
-export const GET: APIRoute = ({ params }) => {
-    if (!params.path || !redirects[params.path])
-        new Response(undefined, {
-            status: 304,
-            headers: {
-                location: "/404",
-            },
-        });
+export const GET: APIRoute = ({ params, redirect }) => {
+    if (!params.path || !redirects[params.path]) return redirect("/404");
 
     return new Response(undefined, {
         status: 302,
