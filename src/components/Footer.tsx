@@ -282,8 +282,6 @@ export default (props: { embed?: boolean }) => {
                                 return;
                             }
 
-                            console.log("Sending waitlist signup request...");
-
                             const res = await fetch(
                                 new URL(
                                     "/api/waitlist/register",
@@ -299,8 +297,6 @@ export default (props: { embed?: boolean }) => {
                                     }),
                                 },
                             );
-
-                            console.log("Got response:", res);
 
                             const json = await res.json();
 
