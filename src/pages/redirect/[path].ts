@@ -5,6 +5,7 @@ const redirects: Record<string, string> = {
     producthunt: "https://www.producthunt.com/posts/relagit",
     sponsor: "https://github.com/sponsors/TheCommieAxolotl",
     twitter: "https://twitter.com/withrela",
+    discord: "https://discord.gg/ptc9nku6tD",
 };
 
 export const GET: APIRoute = ({ params, redirect }) => {
