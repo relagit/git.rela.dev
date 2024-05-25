@@ -1,7 +1,15 @@
+---
+interface Props {
+    size?: number;
+}
+
+const props = Astro.props;
+---
+
 <svg
     class="logo"
-    width="26"
-    height="32"
+    width={props.size || 26}
+    height={props.size || 32}
     viewBox="0 0 26 32"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
