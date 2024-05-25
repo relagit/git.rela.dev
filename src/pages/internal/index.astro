@@ -67,33 +67,6 @@ if (session && session.user?.email !== "user") {
     release = await (
         await fetch(new URL("/api/github/release", Astro.url))
     ).json();
-
-    const umamiHeaders = new Headers({
-        Accept: "application/json",
-        "x-umami-api-key": import.meta.env.UMAMI_KEY,
-    });
-
-    try {
-        active = await (
-            await fetch(
-                "https://api.umami.is/v1/websites/2cbb5a7f-ca34-49cd-8c74-03a9509e9964/active",
-                {
-                    headers: umamiHeaders,
-                },
-            )
-        ).json();
-
-        page = await (
-            await fetch(
-                `https://api.umami.is/v1/websites/2cbb5a7f-ca34-49cd-8c74-03a9509e9964/stats?startAt=${new Date("1/1/2024").getTime()}&endAt=${new Date().getTime()}`,
-                {
-                    headers: umamiHeaders,
-                },
-            )
-        ).json();
-    } catch (e) {
-        // silently fail
-    }
 }
 ---
 
