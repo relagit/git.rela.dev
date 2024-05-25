@@ -74,6 +74,7 @@ const version = await getReleases();
             <!-- null alt on purpose -->
             <Image
                 loading="eager"
+                decoding="sync"
                 src={decorations}
                 alt=""
                 aria-hidden="true"
@@ -144,12 +145,18 @@ const version = await getReleases();
                 </div>
             </div>
         </div>
-        <div class="section-separator"></div>
-        <section class="feature">
+        <section class="feature end">
+            <div class="graphic">
+                <Image
+                    quality="max"
+                    src={popout}
+                    alt="A native popout window is open above a code editor. The popout shows modified files and commit history."
+                />
+            </div>
             <div class="info">
-                <div class="decoration" style="--color: #EB31AB"></div>
+                <div class="decoration" style="--color: #F01262"></div>
                 <h2 class="header">
-                    <span style="--color: #F3ABFA" class="mono">status</span> at
+                    <span style="--color: #F01262" class="mono">status</span> at
                     a glance
                 </h2>
                 <p class="description">
@@ -158,17 +165,12 @@ const version = await getReleases();
                     >.
                 </p>
             </div>
-            <Image
-                src={popout}
-                alt="A native popout window is open above a code editor. The popout shows modified files and commit history."
-                class="graphic"
-            />
         </section>
         <section class="feature">
             <div class="info">
-                <div class="decoration" style="--color: #5B75F2"></div>
+                <div class="decoration" style="--color: #5AC8F5"></div>
                 <h2 class="header">
-                    <span style="--color: #8D98CE" class="mono">clone</span> from
+                    <span style="--color: #5AC8F5" class="mono">clone</span> from
                     anywhere
                 </h2>
                 <p class="description">
@@ -177,11 +179,14 @@ const version = await getReleases();
                     >, directly integrated into the experience.
                 </p>
             </div>
-            <Image
-                src={clone}
-                alt="The GitHub vercel/next.js repository being cloned inside RelaGit."
-                class="graphic"
-            />
+            <div class="graphic">
+                <Image
+                    quality="max"
+                    src={clone}
+                    alt="The GitHub vercel/next.js repository being cloned inside RelaGit."
+                    class="small"
+                />
+            </div>
         </section>
     </main>
 </Layout>
