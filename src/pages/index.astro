@@ -113,35 +113,6 @@ const version = await getReleases();
 
     <main class="index">
         <Header />
-        <!-- {
-            version &&
-                new Date(version[0]?.published_at).getTime() >
-                    Date.now() - 12096e5 && (
-                    <>
-                        <div class="hero-banner-confetti" />
-                        <div class="hero-banner">
-                            <div class="hero-banner-text">
-                                <p>
-                                    {version[0]?.tag_name}
-                                    published
-                                    {relative(
-                                        new Date(
-                                            version[0]?.published_at,
-                                        ).getTime(),
-                                    )}
-                                </p>
-                            </div>
-                            <a
-                                class="hero-banner-text"
-                                target="_blank"
-                                href={`https://github.com/relagit/relagit/releases/tag/${version[0]?.tag_name}`}
-                            >
-                                View on GitHub <Icon name="link-external" />
-                            </a>
-                        </div>
-                    </>
-                )
-        } -->
         <h1 class="hero-text">
             <span class="hero-text-highlight"
                 >{"Streamline your Git workflow."}</span
