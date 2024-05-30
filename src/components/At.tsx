@@ -49,10 +49,12 @@ type AtProps = {
 };
 
 export default (props: AtProps) => {
-    const [user, setUser] = createSignal<GithubUser>();
+    const [user, setUser] = createSignal<GithubUser | null>();
     const [hover, setHover] = createSignal(false);
 
-    getUser(props.name).then((data) => setUser(data));
+    getUser(props.name)
+        .then((data) => setUser(data))
+        .catch(() => setUser(null));
 
     return (
         <a
