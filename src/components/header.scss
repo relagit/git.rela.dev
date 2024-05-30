@@ -26,12 +26,6 @@
     }
 }
 
-_::-webkit-full-page-media,
-_:future,
-:root .nav {
-    background: linear-gradient(rgba(0, 0, 0, 0.93), rgba(0, 0, 0, 0));
-}
-
 :root:has(.docs-container) .nav {
     .git {
         display: none;
