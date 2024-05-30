@@ -60,12 +60,12 @@ export default (props: {
                     ></div>
                     <div
                         class="sidebar sidebar-active"
-                        aria-role="sidebar"
+                        role="sidebar"
                         aria-hidden="true"
                     >
                         <div class="contextmenu-wrapper">
                             <div
-                                aria-role="button"
+                                role="button"
                                 tabindex="0"
                                 class="sidebar__header"
                                 aria-label="Open Repository Drawer"
@@ -106,7 +106,7 @@ export default (props: {
                         >
                             <div class="contextmenu-wrapper">
                                 <div
-                                    aria-role="button"
+                                    role="button"
                                     class="sidebar__item active"
                                     tabindex="0"
                                     aria-label="Open packages/app/src/ui/Notification/index.tsx"
@@ -136,7 +136,7 @@ export default (props: {
                                         </span>
                                     </div>
                                     <button
-                                        aria-role="button"
+                                        role="button"
                                         aria-label="Unstage Changes"
                                         class="sidebar__item__status modified staged"
                                     >
@@ -169,7 +169,7 @@ export default (props: {
                                         class="sidebar__footer__textarea__button"
                                         aria-label="Generate Commit Details"
                                         tabindex="0"
-                                        aria-labeledby=""
+                                        aria-labelledby=""
                                     >
                                         <span class="icon">
                                             <svg
@@ -188,8 +188,8 @@ export default (props: {
                             </div>
                             <button
                                 tabindex="0"
-                                aria-labeledby=""
-                                aria-role="button"
+                                aria-labelledby=""
+                                role="button"
                                 aria-label="Commit to main"
                                 aria-disabled="true"
                                 class="button brand"
@@ -201,12 +201,12 @@ export default (props: {
                     <div class="workspace sidebar-active">
                         <div class="workspace__header">
                             <button
-                                aria-role="button"
+                                role="button"
                                 aria-label="Sync"
                                 class="workspace__header__panelbutton"
                                 id="workspace-fetch-changes-and-remote"
                                 tabindex="0"
-                                aria-labeledby=""
+                                aria-labelledby=""
                             >
                                 <span class="icon">
                                     <svg
@@ -230,13 +230,13 @@ export default (props: {
                             </button>
                             <div class="contextmenu-wrapper">
                                 <button
-                                    aria-role="button"
+                                    role="button"
                                     aria-label="No Changes"
                                     disabled
                                     class="workspace__header__panelbutton disabled"
                                     id="workspace-pull"
                                     tabindex="0"
-                                    aria-labeledby=""
+                                    aria-labelledby=""
                                 >
                                     <span class="icon">
                                         <svg
@@ -262,13 +262,13 @@ export default (props: {
                             </div>
                             <div class="workspace__header__spacer"></div>
                             <button
-                                aria-role="button"
+                                role="button"
                                 aria-label="Switch branch"
                                 aria-selected="false"
                                 class="workspace__header__panelbutton"
                                 id="workspace-branch"
                                 tabindex="0"
-                                aria-labeledby=""
+                                aria-labelledby=""
                             >
                                 <span class="icon">
                                     <svg
@@ -285,13 +285,13 @@ export default (props: {
                                 </span>
                             </button>
                             <button
-                                aria-role="button"
+                                role="button"
                                 aria-label="Toggle blame view"
                                 aria-selected="true"
                                 class="workspace__header__panelbutton active"
                                 id="workspace-blame"
                                 tabindex="0"
-                                aria-labeledby=""
+                                aria-labelledby=""
                             >
                                 <span class="icon">
                                     <svg
@@ -306,13 +306,13 @@ export default (props: {
                                 </span>
                             </button>
                             <button
-                                aria-role="button"
+                                role="button"
                                 aria-label="Toggle history"
                                 aria-selected="false"
                                 class="workspace__header__panelbutton"
                                 id="workspace-history"
                                 tabindex="0"
-                                aria-labeledby=""
+                                aria-labelledby=""
                             >
                                 <span class="icon">
                                     <svg
