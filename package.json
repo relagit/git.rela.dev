@@ -30,7 +30,6 @@
     "devDependencies": {
         "@astrojs/vercel": "^7.0.2",
         "@auth/drizzle-adapter": "^0.8.1",
-        "@google/generative-ai": "^0.2.1",
         "@mdx-js/mdx": "^3.0.0",
         "@neoconfetti/solid": "^0.1.0",
         "@primer/octicons": "^19.8.0",
