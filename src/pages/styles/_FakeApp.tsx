@@ -60,7 +60,7 @@ export default (props: {
                     ></div>
                     <div
                         class="sidebar sidebar-active"
-                        role="sidebar"
+                        role="complementary"
                         aria-hidden="true"
                     >
                         <div class="contextmenu-wrapper">
