@@ -1,0 +1,57 @@
+---
+title: "Generative AI"
+date: "5/30/2024"
+description: "How to set up RelaGit to use generative AI features."
+sortOrder: 1
+---
+
+import settingsImage from "./genai-settings_ai.png";
+import apiImage from "./genai-api_key.png";
+import footerImage from "./genai-footer.png";
+import { Image } from "astro:assets";
+
+You may not know it, but RelaGit can generate commit messages for you based on the changes you've made. This can be done through a number of AI models from [OpenAI](https://openai.com), [Google Gemini](https://gemini.google.com/), or [Anthropic's Claude](https://claude.ai).
+
+> [!NOTE]
+>
+> While the flagship models from each provider are made available, we do not recommend picking them as they may have higher costs per request. On average each completion from RelaGit is around 500-1000 tokens.
+
+## Picking a provider
+
+To get started, you'll need to pick a provider to use. Head to <span class="navigation">Settings > AI > Provider</span>
+
+<figure>
+    <Image
+        src={settingsImage}
+        alt="RelaGit settings, AI tab with Gemini 1.5 Pro selected."
+    />
+    <figcaption>
+        RelaGit settings, AI tab with Gemini 1.5 Pro selected.
+    </figcaption>
+</figure>
+
+You can then scroll down and paste in your API key for the provider you've chosen.
+
+<figure>
+    <Image
+        src={apiImage}
+        alt="RelaGit settings, AI tab with API key input field."
+    />
+    <figcaption>RelaGit settings, AI tab with API key input field.</figcaption>
+</figure>
+
+## Generating a commit message
+
+Once you've set up your provider, you can generate a commit message by clicking the "Generate Commit Details" button in the commit message input field.
+
+<figure>
+    <Image
+        src={footerImage}
+        quality="high"
+        alt="RelaGit commit message input field with 'Generate Commit Details' button hovered."
+    />
+    <figcaption>
+        RelaGit commit message input field with "Generate Commit Details" button
+        hovered.
+    </figcaption>
+</figure>
