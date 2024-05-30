@@ -61,9 +61,6 @@ devDependencies:
   '@auth/drizzle-adapter':
     specifier: ^0.8.1
     version: 0.8.1
-  '@google/generative-ai':
-    specifier: ^0.2.1
-    version: 0.2.1
   '@mdx-js/mdx':
     specifier: ^3.0.0
     version: 3.0.0
@@ -1006,11 +1003,6 @@ packages:
     os: [win32]
     requiresBuild: true
     optional: true
-
-  /@google/generative-ai@0.2.1:
-    resolution: {integrity: sha512-gNmMFadfwi7qf/6M9gImgyGJXY1jKQ/de8vGOqgJ0PPYgQ7WwzZDavbKrIuXS2zdqZZaYtxW3EFN6aG9x5wtFw==}
-    engines: {node: '>=18.0.0'}
-    dev: true
 
   /@img/sharp-darwin-arm64@0.33.3:
     resolution: {integrity: sha512-FaNiGX1MrOuJ3hxuNzWgsT/mg5OHG/Izh59WW2mk1UwYHUwtfbhk5QNKYZgxf0pLOhx9ctGiGa2OykD71vOnSw==}
