@@ -59,6 +59,7 @@ main.index {
             z-index: 0;
             pointer-events: none;
             z-index: -1;
+            filter: blur(40px);
         }
 
         .header {
@@ -373,6 +374,14 @@ main.index {
         overflow: visible;
         justify-content: flex-start;
 
+        @media screen and (width < 1224px) {
+            padding-inline: 64px;
+        }
+
+        @media screen and (width < 1024px) {
+            flex-direction: column;
+        }
+
         &:first-child {
             padding-top: 104px;
         }
@@ -386,8 +395,12 @@ main.index {
             }
 
             img {
-                right: 0 !important;
+                right: -100px !important;
                 left: auto !important;
+
+                @media screen and (width < 1306px) {
+                    right: -175px !important;
+                }
             }
         }
 
@@ -461,8 +474,17 @@ main.index {
                 position: absolute;
                 left: 0;
 
+                @media screen and (width < 1306px) {
+                    left: -120px;
+                }
+
                 &.small {
-                    height: 300px;
+                    height: 280px;
+                    mask-image: linear-gradient(
+                        to top,
+                        transparent 0%,
+                        #fff 40px
+                    );
                 }
             }
         }
