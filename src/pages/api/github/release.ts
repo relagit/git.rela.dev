@@ -61,7 +61,9 @@ export const getReleases = async (): Promise<
                     Authorization: `token ${import.meta.env.GITHUB_TOKEN}`,
                 },
             },
-        ).then((res) => res.json());
+        )
+            .then((res) => res.json())
+            .catch(() => undefined);
     }
 
     return release;

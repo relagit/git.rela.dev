@@ -39,7 +39,11 @@ interface GithubUser {
 }
 
 const getUser = async (name: string): Promise<GithubUser> => {
-    const res = await fetch(`https://api.github.com/users/${name}`);
+    const res = await fetch(`https://api.github.com/users/${name}`).catch(
+        () => ({
+            json: async () => null,
+        }),
+    );
 
     return await res.json();
 };

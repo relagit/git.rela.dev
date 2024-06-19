@@ -64,9 +64,13 @@ if (session && session.user?.email !== "user") {
 
     releases = await getReleases();
 
-    release = await (
-        await fetch(new URL("/api/github/release", Astro.url))
-    ).json();
+    const res = await fetch(new URL("/api/github/release", Astro.url)).catch(
+        () => ({
+            json: async () => ({ downloads: 0 }),
+        }),
+    );
+
+    releases = await res.json();
 }
 ---
 

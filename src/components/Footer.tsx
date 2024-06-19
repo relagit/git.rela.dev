@@ -42,29 +42,34 @@ export default (props: { embed?: boolean }) => {
         fetch(
             "https://status.rela.dev/status-page-api/overview/0e9b8a2d-cfcd-4306-b481-757cc462d49b",
             { method: "POST" },
-        ).then(async (res) => {
-            const data = await res.json();
+        )
+            .then(async (res) => {
+                const data = await res.json();
 
-            if (!data) return;
+                if (!data) return;
 
-            const offline = data.monitorStatusTimelines.find(
-                (monitor: any) => monitor.monitorStatus.name === "Offline",
-            );
-            const degraded = data.monitorStatusTimelines.find(
-                (monitor: any) => monitor.monitorStatus.name === "Degraded",
-            );
-            const operational = data.monitorStatusTimelines.find(
-                (monitor: any) => monitor.monitorStatus.name === "Operational",
-            );
+                const offline = data.monitorStatusTimelines.find(
+                    (monitor: any) => monitor.monitorStatus.name === "Offline",
+                );
+                const degraded = data.monitorStatusTimelines.find(
+                    (monitor: any) => monitor.monitorStatus.name === "Degraded",
+                );
+                const operational = data.monitorStatusTimelines.find(
+                    (monitor: any) =>
+                        monitor.monitorStatus.name === "Operational",
+                );
 
-            if (offline) {
-                setStatus("offline");
-            } else if (degraded) {
-                setStatus("degraded");
-            } else if (operational) {
-                setStatus("operational");
-            }
-        });
+                if (offline) {
+                    setStatus("offline");
+                } else if (degraded) {
+                    setStatus("degraded");
+                } else if (operational) {
+                    setStatus("operational");
+                }
+            })
+            .catch(() => {
+                console.error("Failed to fetch status data.");
+            });
 
         setTimeout(() => {
             input()?.style.setProperty(
