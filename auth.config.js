@@ -8,6 +8,8 @@ if (!import.meta.env.SUPABASE_URL) {
     throw new Error("Missing SUPABASE_URL");
 }
 
+//
+
 const client = postgres(import.meta.env.SUPABASE_URL);
 const db = drizzle(client);
 
