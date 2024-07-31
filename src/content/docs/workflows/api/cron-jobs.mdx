@@ -1,0 +1,40 @@
+---
+title: "Scheduling Jobs"
+date: "31/7/2024"
+description: "Learn how to schedule tasks from your workflows."
+sortOrder: 1
+---
+
+A relagit workflow begins runingn when the app is opened. You've already learnt how to run actions on certain events, but what if you want to run a task at a specific time? This is where cron jobs come in.
+
+## Setting up a cron job
+
+`relagit:workflows` provides a helpful `cron` export to accomplish this. You can use it to schedule a task to run at a specific interval.
+
+```ts
+// @errors: 2328 1005
+// [!filename Scheduling a cron job]
+import { OptionsType } from "relagit:actions";
+let options: OptionsType<any> = {
+    _listener: (cb: (options: OptionsType<any>) => {}) => {};
+}
+// ---cut-before---
+import { cron } from "relagit:actions";
+
+let duration: number;
+
+duration = cron(5).hours;
+duration = cron`5 hours`; // also works
+
+cron.schedule(
+    duration,
+    () => {
+        console.log("It's been 5 hours!");
+    },
+    options,
+);
+```
+
+If you want to run a task every 5 hours, you can use the `cron` function to get the duration in milliseconds. You can then pass this duration to `cron.schedule` along with a callback function to run.
+
+If the app is closed and the cron job is scheduled to run, it will run the next time the app is opened.
