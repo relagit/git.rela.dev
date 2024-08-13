@@ -7,7 +7,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeRaw from "rehype-raw";
 import { rehypeGithubAlerts, type IOptions } from "rehype-github-alerts";
 import headings from "rehype-autolink-headings";
-import { defineConfig } from "astro/config";
+import { defineConfig, squooshImageService } from "astro/config";
 import vercel from "@astrojs/vercel/serverless";
 import mdx from "@astrojs/mdx";
 import solidJs from "@astrojs/solid-js";
@@ -20,6 +20,9 @@ let code = "";
 
 // https://astro.build/config
 export default defineConfig({
+    image: {
+        service: squooshImageService(),
+    },
     output: "server",
     experimental: {
         rewriting: true,
