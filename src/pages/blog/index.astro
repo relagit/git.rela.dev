@@ -31,7 +31,7 @@ import Icon from "~/components/Icon";
                 .map((item) => {
                     return (
                         <>
-                            <a href={`/blog/${item.slug}`} class="grid-item">
+                            <a href={`/blog/${item.id}`} class="grid-item">
                                 {item.data.image && (
                                     <img
                                         src={item.data.image}
@@ -48,7 +48,8 @@ import Icon from "~/components/Icon";
                                         <div class="read-time">
                                             <Icon name="clock" />
                                             {readTime(
-                                                item.body.split(" ").length /
+                                                (item.body ?? "").split(" ")
+                                                    .length /
                                                     125,
                                             )}
                                         </div>

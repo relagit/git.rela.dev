@@ -30,7 +30,7 @@ export default (props: LogoImageProps) => {
                             props[theme()]
                         :   props.light || props.dark
                     }
-                    download
+                    download=""
                 >
                     <Icon name="download" />
                 </a>

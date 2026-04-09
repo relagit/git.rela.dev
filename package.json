@@ -2,6 +2,9 @@
     "name": "rela.dev",
     "type": "module",
     "version": "1.0.0",
+    "engines": {
+        "node": "24.x"
+    },
     "scripts": {
         "dev": "node ./pagefind.js && astro dev",
         "start": "astro dev",
@@ -11,12 +14,12 @@
         "astro": "astro"
     },
     "dependencies": {
-        "@astrojs/check": "^0.4.1",
-        "@astrojs/mdx": "^2.1.0",
-        "@astrojs/solid-js": "^4.0.1",
+        "@astrojs/check": "^0.9.8",
+        "@astrojs/mdx": "^5.0.3",
+        "@astrojs/solid-js": "^6.0.1",
         "@auth/core": "^0.18.6",
         "@pagefind/default-ui": "^1.1.0",
-        "astro": "^4.8.3",
+        "astro": "^6.1.5",
         "auth-astro": "^4.1.1",
         "cookie": "^0.6.0",
         "drizzle-orm": "^0.30.6",
@@ -24,11 +27,12 @@
         "pagefind": "^1.1.0",
         "pg": "^8.11.4",
         "postgres": "^3.4.4",
+        "sharp": "^0.34.5",
         "solid-js": "^1.8.12",
         "typescript": "^5.3.3"
     },
     "devDependencies": {
-        "@astrojs/vercel": "^7.0.2",
+        "@astrojs/vercel": "^10.0.4",
         "@auth/drizzle-adapter": "^0.8.1",
         "@mdx-js/mdx": "^3.0.0",
         "@neoconfetti/solid": "^0.1.0",

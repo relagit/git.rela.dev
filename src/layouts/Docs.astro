@@ -1,6 +1,6 @@
 ---
 import "@pagefind/default-ui/css/ui.css";
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
 
 import Layout from "./Layout.astro";
 import Header from "~/components/Header.astro";
@@ -24,16 +24,16 @@ if (!entry) {
     throw new Error(`Could not find entry for ${post}`);
 }
 
-const { Content, headings } = await entry.render();
+const { Content, headings } = await render(entry);
 
 import "./docs.scss";
 
-const time = readTime(entry.body.split(" ").length / 125);
+const time = readTime((entry.body ?? "").split(" ").length / 125);
 
 let docsMap: DocsMap = [];
 
 for (const doc of allDocs) {
-    const parts = doc.slug.split("/");
+    const parts = doc.id.split("/");
 
     parts.pop();
 
@@ -55,7 +55,7 @@ for (const doc of allDocs) {
                 type: "folder",
                 name: part
                     .replace(/-/g, " ")
-                    .replace(/\b\w/g, (l) => l.toUpperCase()),
+                    .replace(/\b\w/g, (l: string) => l.toUpperCase()),
                 items: [] as DocsMap,
             } as const;
 
@@ -67,7 +67,7 @@ for (const doc of allDocs) {
         if (part === parts[parts.length - 1])
             current.push({
                 type: "doc",
-                slug: doc.slug,
+                slug: doc.id,
                 data: doc.data,
             });
     }
@@ -110,12 +110,12 @@ docsMap = sort(recurse(docsMap));
 const flat: {
     type: "doc";
     slug: string;
-    data: Awaited<ReturnType<typeof getCollection<"docs">>>[number]["data"];
+    data: CollectionEntry<"docs">["data"];
 }[] = (() => {
     const flat: {
         type: "doc";
         slug: string;
-        data: Awaited<ReturnType<typeof getCollection<"docs">>>[number]["data"];
+        data: CollectionEntry<"docs">["data"];
     }[] = [];
 
     const recurse = (docsMap: DocsMap) => {
@@ -250,7 +250,7 @@ const next = () => {
 </script>
 
 <Layout title={`RelaGit - ${entry.data.title}`} transitions>
-    <DefaultHead slot="head" title={`RelaGit - ${entry.data.title}`}>
+    <DefaultHead slot="head" title={`RelaGit - ${entry.data.title}`} transitions>
         <meta name="description" content={entry.data.description} />
         <meta name="og:description" content={entry.data.description} />
         <meta name="twitter:description" content={entry.data.description} />
@@ -293,7 +293,7 @@ const next = () => {
                         <div class="docs-sidebar-headings">
                             <h2>On this page</h2>
                             <ul>
-                                {headings.map((heading) => (
+                                {headings.map((heading: (typeof headings)[number]) => (
                                     <li
                                         class={`heading l${heading.depth}`}
                                         data-slug={heading.slug}
@@ -374,7 +374,7 @@ const next = () => {
                         <div class="docs-sidebar-headings">
                             <h2>On this page</h2>
                             <ul>
-                                {headings.map((heading) => (
+                                {headings.map((heading: (typeof headings)[number]) => (
                                     <li
                                         class={`heading l${heading.depth}`}
                                         data-slug={heading.slug}

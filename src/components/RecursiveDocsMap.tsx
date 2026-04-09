@@ -1,5 +1,5 @@
 import { createSignal, For, Show } from "solid-js";
-import type { DocsSchema } from "~/content/config";
+import type { DocsSchema } from "~/content.config";
 import Icon from "./Icon";
 
 export type DocsMap = (

@@ -1,5 +1,3 @@
-"use server";
-
 import type { APIRoute } from "astro";
 
 import { json } from "../_shared";
@@ -13,6 +11,8 @@ let release:
     | undefined;
 
 export const GET: APIRoute = async () => {
+    "use server";
+
     const release = await getReleases();
 
     const downloads = release?.reduce(
@@ -53,6 +53,8 @@ export const getReleases = async (): Promise<
       }[]
     | undefined
 > => {
+    "use server";
+
     if (!release) {
         release = await fetch(
             "https://api.github.com/repos/relagit/relagit/releases",

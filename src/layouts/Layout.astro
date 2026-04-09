@@ -4,8 +4,6 @@ interface Props {
     transitions?: boolean;
 }
 
-const { title, transitions } = Astro.props;
-
 import "./root.scss";
 ---
 
@@ -18,7 +16,7 @@ import "./root.scss";
 </script>
 
 <html lang="en">
-    <slot name="head" title={title} transitions={transitions} />
+    <slot name="head" />
     <body>
         <slot />
     </body>

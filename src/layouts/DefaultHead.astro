@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
     title?: string;
@@ -11,7 +11,7 @@ const { title, transitions, image } = Astro.props;
 ---
 
 <head>
-    {transitions && <ViewTransitions />}
+    {transitions && <ClientRouter />}
     <slot />
     <title>{title || "RelaGit"}</title>
     <link rel="preload" href="https://rsms.me/inter/inter.css" as="style" />

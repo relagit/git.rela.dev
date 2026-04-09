@@ -1,5 +1,5 @@
 ---
-import { getEntry } from "astro:content";
+import { getEntry, render } from "astro:content";
 
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
@@ -16,9 +16,9 @@ if (!entry) {
     return Astro.redirect("/404");
 }
 
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
-const time = readTime(entry.body.split(" ").length / 125);
+const time = readTime((entry.body ?? "").split(" ").length / 125);
 
 import "./_blog.scss";
 ---
@@ -43,6 +43,7 @@ import "./_blog.scss";
     <DefaultHead
         slot="head"
         title={`RelaGit - ${entry.data.title}`}
+        transitions
         image={entry.data.image}
     >
         <link rel="canonical" href={`https://rela.dev/blog/${post}`} />

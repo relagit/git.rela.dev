@@ -1,4 +1,4 @@
-import { Transition } from "solid-transition-group";
+
 import { Show, createSignal } from "solid-js";
 
 import "./at.scss";
@@ -64,29 +64,6 @@ export default (props: AtProps) => {
             onMouseLeave={() => setHover(false)}
         >
             @{props.name}
-            <Transition
-                onEnter={(el, done) =>
-                    (el.animate(
-                        [
-                            {
-                                opacity: 0,
-                                translate: "-20px calc(-100% - 2em)",
-                            },
-                            { opacity: 1, translate: "0 calc(-100% - 2em)" },
-                        ],
-                        { duration: 200, easing: "ease-in-out" },
-                    ).onfinish = done)
-                }
-                onExit={(el, done) =>
-                    (el.animate(
-                        [
-                            { opacity: 1, translate: "0 calc(-100% - 2em)" },
-                            { opacity: 0, translate: "20px calc(-100% - 2em)" },
-                        ],
-                        { duration: 200, easing: "ease-in-out" },
-                    ).onfinish = done)
-                }
-            >
                 <Show when={user() && hover()}>
                     <div class="at-hover">
                         <img src={user()!.avatar_url} alt={user()!.name} />
@@ -98,7 +75,7 @@ export default (props: AtProps) => {
                         </div>
                     </div>
                 </Show>
-            </Transition>
+
         </a>
     );
 };
