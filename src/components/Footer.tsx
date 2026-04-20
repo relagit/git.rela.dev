@@ -32,7 +32,6 @@ const sponsors = [
 export default (props: { embed?: boolean }) => {
     const [sentError, setSentError] = createSignal(false);
     const [sentSignup, setSentSignup] = createSignal(false);
-    const [waitlistEmail, setWaitlistEmail] = createSignal("");
     const [input, setInput] = createSignal<HTMLInputElement>();
     const [status, setStatus] = createSignal<
         "operational" | "degraded" | "offline"
@@ -248,88 +247,6 @@ export default (props: { embed?: boolean }) => {
                     </a>
                 </div>
             </div>
-            <div class="footer-sep"></div>
-            <section class="footer-item" id="waitlist" tabIndex={0}>
-                <div class="footer-item-text">
-                    <h2 class="footer-item-text-header">
-                        Don't miss a release.
-                    </h2>
-                    <p class="footer-item-text-paragraph">
-                        Be notified about updates and beta programs.
-                    </p>
-                </div>
-                <div class="footer-item-input">
-                    <input
-                        ref={setInput}
-                        type="email"
-                        placeholder={
-                            ["tim.berners-lee", "elizabeth.feinler"][
-                                Math.floor(Math.random() * 2)
-                            ] + "@rela.dev"
-                        }
-                        value={waitlistEmail()}
-                        onInput={(e) =>
-                            setWaitlistEmail(e.currentTarget.value.trim())
-                        }
-                    />
-                    <button
-                        tabIndex={0}
-                        aria-label="Join Waitlist"
-                        disabled={!waitlistEmail() || sentSignup()}
-                        classList={{
-                            "feature-text-input-button": true,
-                            success: sentSignup(),
-                            error: sentError(),
-                        }}
-                        onClick={async () => {
-                            if (!waitlistEmail().includes("@")) {
-                                alert("Please enter a valid email address.");
-                                return;
-                            }
-
-                            const res = await fetch(
-                                new URL(
-                                    "/api/waitlist/register",
-                                    location.href,
-                                ),
-                                {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                    },
-                                    body: JSON.stringify({
-                                        email: waitlistEmail(),
-                                    }),
-                                },
-                            );
-
-                            const json = await res.json();
-
-                            if (json.type === "success") {
-                                setSentSignup(true);
-                            } else if (json.type === "error") {
-                                alert(json.message);
-
-                                console.error(json);
-
-                                setSentError(true);
-                            }
-                        }}
-                    >
-                        <Show
-                            when={!sentSignup()}
-                            fallback={<Icon name="check" />}
-                        >
-                            <Show
-                                when={!sentError()}
-                                fallback={<Icon name="x" />}
-                            >
-                                <Icon name="paper-airplane" />
-                            </Show>
-                        </Show>
-                    </button>
-                </div>
-            </section>
             <div class="footer-sep"></div>
             <div class="footer-item last">
                 <a
