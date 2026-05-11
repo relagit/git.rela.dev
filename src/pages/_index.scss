@@ -73,6 +73,10 @@ main.index {
         text-decoration: none;
         color: var(--color-secondary);
 
+        @media screen and (max-width: 500px) {
+            width: min(400px, 90vw);
+        }
+
         img {
             width: 100%;
             height: auto;
