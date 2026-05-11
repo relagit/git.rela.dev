@@ -39,7 +39,8 @@ main.index {
     flex-direction: column;
     align-items: center;
     gap: 9rem;
-    background: radial-gradient(
+    background:
+        radial-gradient(
             180vh 180vh at 50% 100vh,
             rgba(166, 137, 217, 0.168627451),
             rgba(0, 0, 0, 0)
@@ -52,6 +53,38 @@ main.index {
 
     @media screen and (max-width: 1000px) {
         gap: 6rem;
+    }
+
+    .barstool {
+        z-index: 8;
+        border-radius: 16px;
+        overflow: hidden;
+        position: fixed;
+        left: 20px;
+        backdrop-filter: blur(15px);
+        bottom: 20px;
+        width: 400px;
+        border: 1px solid rgba(255 255 255 / 0.2);
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.04) 100%
+        );
+        text-decoration: none;
+        color: var(--color-secondary);
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 2rem;
+            padding-inline: 16px;
+        }
     }
 
     .hero-banner {
